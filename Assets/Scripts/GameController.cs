@@ -10,8 +10,10 @@ public class GameController : MonoBehaviour {
 	public Text questionDisplayText;
 	public Text scoreDisplayText;
 	public Text timeRemainingDisplayText;
+	public Text highScoreDisplayText;
 	public SimpleObjectPool answerButtonObjectPool;
 	public Transform answerButtonParent;
+
 	public GameObject questionDisplay;
 	public GameObject roundEndDisplay;
 
@@ -27,7 +29,7 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		dataController = FindObjectOfType<DataController> ();
+		dataController = FindObjectOfType<DataController> (); // store a ref to data controller
 		currentRoundData = dataController.GetCurrentRoundData ();
 		questionPool = currentRoundData.questions;
 		timeRemaining = currentRoundData.timeLimitInSeconds;
@@ -76,11 +78,14 @@ public class GameController : MonoBehaviour {
 			ShowQuestion ();
 		} else {
 			EndRound ();
+			print ("end this round");
 		}
 	}
 
 	public void EndRound() {
 		isRoundActive = false;
+		dataController.SubmitNewPlayerScore (playerScore);
+		highScoreDisplayText.text = dataController.GetHighestPlayerScore ().ToString ();
 
 		questionDisplay.SetActive (false); // deactivate the question display
 		roundEndDisplay.SetActive (true); // activate (show) the round end display
