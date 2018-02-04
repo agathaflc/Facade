@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour {
 	public GameObject questionDisplay;
 	public GameObject roundEndDisplay;
 
+    public Camera PlayerCamera;
+
 	private DataController dataController;
 	private RoundData currentRoundData;
 	private QuestionData[] questionPool;
@@ -29,7 +31,7 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		dataController = FindObjectOfType<DataController> (); // store a ref to data controller
-		currentRoundData = dataController.GetCurrentRoundData ();
+		currentRoundData = dataController.GetCurrentRoundData();
 		questionPool = currentRoundData.questions;
 		timeRemaining = currentRoundData.timeLimitInSeconds;
 		UpdateTimeRemainingDisplay ();
@@ -40,6 +42,12 @@ public class GameController : MonoBehaviour {
 		ShowQuestion ();
 		isRoundActive = true;
 	}
+
+    private void BeginQuestions() {
+        questionDisplay.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+
+    }
 
 	private void ShowQuestion() {
 		RemoveAnswerButtons ();
@@ -100,7 +108,7 @@ public class GameController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (isRoundActive) {
+		if (isRoundActive && questionDisplay.activeSelf == true) {
 			timeRemaining -= Time.deltaTime;
 			UpdateTimeRemainingDisplay ();
 
@@ -108,5 +116,9 @@ public class GameController : MonoBehaviour {
 				EndRound ();
 			}
 		}
+
+        if (Input.GetKeyDown("e")) {
+            BeginQuestions();
+        }
 	}
 }
