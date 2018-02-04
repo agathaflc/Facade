@@ -1,0 +1,168 @@
+fileFormatVersion: 2
+guid: 63797b4287aa7e346a37d79852034c3e
+timeCreated: 1517729756
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Board Pin 1
+    100002: Board Pin 2
+    100004: Board Pin 3
+    100006: Carpet
+    100008: ChloroformBottle
+    100010: Door
+    100012: DoorHandle
+    100014: DoorWindow
+    100016: Lamp
+    100018: Lightbulb
+    100020: Notice Board
+    100022: Paper 1
+    100024: Paper 2
+    100026: Paper 3
+    100028: //RootNode
+    100030: Room Frame
+    100032: Table
+    400000: Board Pin 1
+    400002: Board Pin 2
+    400004: Board Pin 3
+    400006: Carpet
+    400008: ChloroformBottle
+    400010: Door
+    400012: DoorHandle
+    400014: DoorWindow
+    400016: Lamp
+    400018: Lightbulb
+    400020: Notice Board
+    400022: Paper 1
+    400024: Paper 2
+    400026: Paper 3
+    400028: //RootNode
+    400030: Room Frame
+    400032: Table
+    2100000: No Name
+    2300000: Board Pin 1
+    2300002: Board Pin 2
+    2300004: Board Pin 3
+    2300006: Carpet
+    2300008: ChloroformBottle
+    2300010: Door
+    2300012: DoorHandle
+    2300014: DoorWindow
+    2300016: Lightbulb
+    2300018: Notice Board
+    2300020: Paper 1
+    2300022: Paper 2
+    2300024: Paper 3
+    2300026: Room Frame
+    2300028: Table
+    3300000: Board Pin 1
+    3300002: Board Pin 2
+    3300004: Board Pin 3
+    3300006: Carpet
+    3300008: ChloroformBottle
+    3300010: Door
+    3300012: DoorHandle
+    3300014: DoorWindow
+    3300016: Lightbulb
+    3300018: Notice Board
+    3300020: Paper 1
+    3300022: Paper 2
+    3300024: Paper 3
+    3300026: Room Frame
+    3300028: Table
+    4300000: ChloroformBottle
+    4300002: DoorHandle
+    4300004: DoorWindow
+    4300006: Table
+    4300008: Lightbulb
+    4300010: Carpet
+    4300012: Door
+    4300014: Board Pin 3
+    4300016: Board Pin 2
+    4300018: Board Pin 1
+    4300020: Paper 3
+    4300022: Paper 2
+    4300024: Paper 1
+    4300026: Notice Board
+    4300028: Room Frame
+    10800000: Lamp
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
