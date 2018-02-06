@@ -1,7 +1,7 @@
 {
   "questions": [
     {
-    	"question_desc": "asks what happened to player's sister",
+      "question_desc": "asks what happened to player's sister",
       "question_id": "24601",
       "expression_weight": 0.3,
       "consistency_weight": 0.7,
