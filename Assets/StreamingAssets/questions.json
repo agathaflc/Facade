@@ -1,7 +1,7 @@
 {
   "questions": [
     {
-      "question_text": "What happened to your sister?",
+    	"question_desc": "asks what happened to player's sister",
       "question_id": "24601",
       "expression_weight": 0.3,
       "consistency_weight": 0.7,
@@ -56,6 +56,41 @@
               "answer_id": "246013",
               "text": "I guess not?",
               "expected_expression": "surprised"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question_desc": "asks the player who came out of the door",
+      "question_id": "24602",
+      "expression_weight": 0,
+      "consistency_weight": 1,
+      "no_of_variations": 1,
+      "variations": [
+        {
+          "text": "Who did you see coming out of the door?",
+          "variation_no": 0,
+          "answers": [
+            {
+              "answer_id": "246020",
+              "text": "I don't know",
+              "expected_expression": "none"
+            },
+            {
+              "answer_id": "246021",
+              "text": "Donald Trump",
+              "expected_expression": "none"
+            },
+            {
+              "answer_id": "246022",
+              "text": "Putin",
+              "expected_expression": "none"
+            },
+            {
+              "answer_id": "246023",
+              "text": "Stalin",
+              "expected_expression": "none"
             }
           ]
         }
