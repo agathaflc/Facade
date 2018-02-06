@@ -1,0 +1,65 @@
+{
+  "questions": [
+    {
+      "question_text": "What happened to your sister?",
+      "question_id": "24601",
+      "expression_weight": 0.3,
+      "consistency_weight": 0.7,
+      "no_of_variations": 2,
+      "variations": [
+        {
+          "text": "What happened to your sister?",
+          "variation_no": 1,
+          "answers": [
+            {
+              "answer_id": "246010",
+              "text": "I don't know",
+              "expected_expression": "neutral"
+            },
+            {
+              "answer_id": "246011",
+              "text": "She died",
+              "expected_expression": "sad"
+            },
+            {
+              "answer_id": "246012",
+              "text": "She's okay",
+              "expected_expression": "happy"
+            },
+            {
+              "answer_id": "246013",
+              "text": "Something happened to her?",
+              "expected_expression": "surprised"
+            }
+          ]
+        },
+        {
+          "text": "Did anything happen your sister?",
+          "variation_no": 0,
+          "answers": [
+            {
+              "answer_id": "246010",
+              "text": "I don't know",
+              "expected_expression": "neutral"
+            },
+            {
+              "answer_id": "246011",
+              "text": "She died",
+              "expected_expression": "sad"
+            },
+            {
+              "answer_id": "246012",
+              "text": "She's alright",
+              "expected_expression": "happy"
+            },
+            {
+              "answer_id": "246013",
+              "text": "I guess not?",
+              "expected_expression": "surprised"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
