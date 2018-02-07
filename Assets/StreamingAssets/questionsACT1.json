@@ -1,0 +1,212 @@
+{
+  "questions":[
+    {
+      "question_desc" : "get player's name",
+      "question_id" : "00",
+      "expression_weight" : 0,
+      "consistency_weight" : 1,
+      "no_of_variations" : 2,
+      "variations" : [
+        {
+          "question_text" : "Please state your full name for the record.",
+          "variation_no" : 1,
+          "answers" : [
+            {
+              "answer_id" : "000",
+              "answer_text" : "Christine  Tse",
+              "expected_expression" : ["none"],
+              "fact_emotion" : ["fact"]
+            },
+            {
+              "answer_id" : "001",
+              "answer_text" : "Eugene Cheong",
+              "expected_expression" : ["none"],
+              "fact_emotion" : ["fact"]
+            },
+            {
+              "answer_id" : "002",
+              "answer_text" : "Felicia Agatha",
+              "expected_expression" : ["none"],
+              "fact_emotion" : ["fact"]
+            },
+            {
+              "answer_id" : "003",
+              "answer_text" : "Vivian Rajkumar",
+              "expected_expression" : ["none"],
+              "fact_emotion" : ["fact"]
+            }
+          ]
+        },
+        {
+          "question_text" : "What is your name?",
+          "variation_no" : 2,
+          "answers" : [
+            {
+              "answer_id" : "000",
+              "answer_text" : "Christine  Tse",
+              "expected_expression" : ["none"],
+              "fact_emotion" : ["fact"]
+            },
+            {
+              "answer_id" : "001",
+              "answer_text" : "Eugene Cheong",
+              "expected_expression" : ["none"],
+              "fact_emotion" : ["fact"]
+            },
+            {
+              "answer_id" : "002",
+              "answer_text" : "Felicia Agatha",
+              "expected_expression" : ["none"],
+              "fact_emotion" : ["fact"]
+            },
+            {
+              "answer_id" : "003",
+              "answer_text" : "Vivian Rajkumar",
+              "expected_expression" : ["none"],
+              "fact_emotion" : ["fact"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question_desc" : "get player's age",
+      "question_id" : "01",
+      "expression_weight" : 0,
+      "consistency_weight" : 1,
+      "no_of_variations" : 2,
+      "variations" : [
+        {
+          "question_text" : "Please state your age for the record.",
+          "variation_no" : 1,
+          "answers" : [
+            {
+              "answer_id" : "010",
+              "answer_text" : "18",
+              "expected_expression" : ["none"],
+              "fact_emotion" : ["fact"]
+            },
+            {
+              "answer_id" : "011",
+              "answer_text" : "26",
+              "expected_expression" : ["none"],
+              "fact_emotion" : ["fact"]
+            },
+            {
+              "answer_id" : "012",
+              "answer_text" : "30",
+              "expected_expression" : ["none"],
+              "fact_emotion" : ["fact"]
+            },
+            {
+              "answer_id" : "013",
+              "answer_text" : "45",
+              "expected_expression" : ["none"],
+              "fact_emotion" : ["fact"]
+            }
+          ]
+        },
+        {
+          "question_text" : "How old are you?",
+          "variation_no" : 2,
+          "answers" : [
+            {
+              "answer_id" : "010",
+              "answer_text" : "18",
+              "expected_expression" : ["none"],
+              "fact_emotion" : ["fact"]
+            },
+            {
+              "answer_id" : "011",
+              "answer_text" : "26",
+              "expected_expression" : ["none"],
+              "fact_emotion" : ["fact"]
+            },
+            {
+              "answer_id" : "012",
+              "answer_text" : "30",
+              "expected_expression" : ["none"],
+              "fact_emotion" : ["fact"]
+            },
+            {
+              "answer_id" : "013",
+              "answer_text" : "45",
+              "expected_expression" : ["none"],
+              "fact_emotion" : ["fact"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question_desc" : "ask how player is feeling",
+      "question_id" : "02",
+      "expression_weight" : 1,
+      "consistency_weight" : 0,
+      "no_of_variations" : 2,
+      "variations" : [
+        {
+          "question_text" : "How are you feeling today?",
+          "variation_no" : 1,
+          "answers" : [
+            {
+              "answer_id" : "020",
+              "answer_text" : "Great!",
+              "expected_expression" : ["happy"],
+              "fact_emotion" : ["emotion", 1]
+            },
+            {
+              "answer_id" : "021",
+              "answer_text" : "Alright",
+              "expected_expression" : ["neutral"],
+              "fact_emotion" : ["emotion", 3]
+            },
+            {
+              "answer_id" : "022",
+              "answer_text" : "Teribble!",
+              "expected_expression" : ["anger","sad"],
+              "fact_emotion" : ["emotion", 2]
+            },
+            {
+              "answer_id" : "023",
+              "answer_text" : "I'm scared!",
+              "expected_expression" : ["fear", "surprised"],
+              "fact_emotion" : ["emotion", 2]
+            }
+          ]
+        },
+        {
+          "question_text" : "How are you doing?",
+          "variation_no" : 2,
+          "answers" : [
+            {
+              "answer_id" : "020",
+              "answer_text" : "Great!",
+              "expected_expression" : ["happy"],
+              "fact_emotion" : ["emotion", 1]
+            },
+            {
+              "answer_id" : "021",
+              "answer_text" : "Alright",
+              "expected_expression" : ["neutral"],
+              "fact_emotion" : ["emotion", 3]
+            },
+            {
+              "answer_id" : "022",
+              "answer_text" : "Teribble!",
+              "expected_expression" : ["anger", "sad"],
+              "fact_emotion" : ["emotion", 2]
+            },
+            {
+              "answer_id" : "023",
+              "answer_text" : "I'm scared!",
+              "expected_expression" : ["fear", "surprised"],
+              "fact_emotion" : ["emotion", 2]
+            }
+          ]
+        }
+      ]
+    },
+
+  ]
+}
