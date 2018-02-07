@@ -5,13 +5,11 @@
       "questionId": "00",
       "expressionWeight": 0,
       "consistencyWeight": 1,
-      "noOfVariations": 2,
       "considersEmotion": false,
       "considersFact": true,
       "variations": [
         {
           "questionText": "Please state your full name for the record.",
-          "variationNo": 1,
           "answers": [
             {
               "answerId": "000",
@@ -33,7 +31,6 @@
         },
         {
           "questionText": "What is your name?",
-          "variationNo": 2,
           "answers": [
             {
               "answerId": "000",
@@ -60,13 +57,11 @@
       "questionId": "01",
       "expressionWeight": 0,
       "consistencyWeight": 1,
-      "noOfVariations": 2,
       "considersEmotion": false,
       "considersFact": true,
       "variations": [
         {
           "questionText": "Please state your age for the record.",
-          "variationNo": 1,
           "answers": [
             {
               "answerId": "010",
@@ -88,7 +83,6 @@
         },
         {
           "questionText": "How old are you?",
-          "variationNo": 2,
           "answers": [
             {
               "answerId": "010",
@@ -115,13 +109,11 @@
       "questionId": "02",
       "expressionWeight": 1,
       "consistencyWeight": 0,
-      "noOfVariations": 2,
       "considersEmotion": true,
       "considersFact": true,
       "variations": [
         {
           "questionText": "How are you feeling today?",
-          "variationNo": 1,
           "answers": [
             {
               "answerId": "020",
@@ -161,7 +153,6 @@
         },
         {
           "questionText": "How are you doing?",
-          "variationNo": 2,
           "answers": [
             {
               "answerId": "020",
