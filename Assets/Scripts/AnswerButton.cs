@@ -22,4 +22,21 @@ public class AnswerButton : MonoBehaviour {
 	public void HandleClick() {
 		gameController.AnswerButtonClicked (answerData.isCorrect);
 	}
+
+    public void Bold()
+    {
+        answerText.text = "<b>" + answerData.answerText + "</b>";
+    }
+
+    public void UnBold()
+    {
+        answerText.text = answerData.answerText;
+    }
+
+    public void HandleOnMouseEnter()
+    {
+        gameController.SelectedBoldAnswer.UnBold();
+        gameController.SelectedBoldAnswer = this;
+        this.Bold();
+    }
 }

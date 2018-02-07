@@ -2191,6 +2191,7 @@ MonoBehaviour:
   questionDisplay: {fileID: 1657683118}
   roundEndDisplay: {fileID: 194698319}
   PlayerCamera: {fileID: 1267432956}
+  Player: {fileID: 30381813}
 --- !u!1 &1736630318
 GameObject:
   m_ObjectHideFlags: 0

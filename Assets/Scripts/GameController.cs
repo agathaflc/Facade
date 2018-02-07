@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour {
 	public GameObject roundEndDisplay;
 
     public Camera PlayerCamera;
+    public GameObject Player;
 
 	private DataController dataController;
 	private RoundData currentRoundData;
@@ -27,6 +28,7 @@ public class GameController : MonoBehaviour {
 	private int questionIndex;
 	private int playerScore;
 	private List<GameObject> answerButtonGameObjects = new List<GameObject> ();
+    public AnswerButton SelectedBoldAnswer;
 
 	// Use this for initialization
 	void Start () {
@@ -46,10 +48,12 @@ public class GameController : MonoBehaviour {
     private void BeginQuestions() {
         questionDisplay.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
-
+        PlayerCamera.GetComponent<PlayerLook>().enabled = false;
+        Player.transform.rotation = Quaternion.Euler(new Vector3(0,90,0));
+        PlayerCamera.transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
     }
 
-	private void ShowQuestion() {
+    private void ShowQuestion() {
 		RemoveAnswerButtons ();
 		QuestionData questionData = questionPool [questionIndex];
 		questionDisplayText.text = questionData.questionText;
@@ -61,6 +65,11 @@ public class GameController : MonoBehaviour {
 
 			AnswerButton answerButton = answerButtonGameObject.GetComponent<AnswerButton> ();
 			answerButton.Setup (questionData.answers [i]);
+            if (i == 0)
+            {
+                SelectedBoldAnswer = answerButton;
+                SelectedBoldAnswer.Bold();
+            }
 		}
 	}
 
