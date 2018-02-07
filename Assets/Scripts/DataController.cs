@@ -6,18 +6,24 @@ using System.IO;
 
 public class DataController : MonoBehaviour {
 
-	private RoundData[] allRoundData;
+	private List<RoundData> allRoundData = new List<RoundData>();
 
 	private PlayerProgress playerProgress;
 	private string gameDataFileName = "data.json";
 
+	private const string MENU_SCREEN = "MenuScreen";
+	private const string HIGHEST_SCORE_KEY = "highestScore";
+
+	private const string ACT_ONE_QUESTIONS_FILE_NAME = "questionsACT1.json";
+
+
 	// Use this for initialization
 	void Start () {
 		DontDestroyOnLoad (gameObject); // prevent destroy objects in previous scene that has been unloaded
-		LoadGameData();
+		LoadGameData(ACT_ONE_QUESTIONS_FILE_NAME);
 		LoadPlayerProgress();
 
-		SceneManager.LoadScene ("MenuScreen");
+		SceneManager.LoadScene (MENU_SCREEN);
 	}
 
 	public RoundData GetCurrentRoundData() {
@@ -38,23 +44,25 @@ public class DataController : MonoBehaviour {
 	private void LoadPlayerProgress() {
 		playerProgress = new PlayerProgress ();
 
-		if (PlayerPrefs.HasKey ("highestScore")) { // if we already stored a highest score
-			playerProgress.highestScore = PlayerPrefs.GetInt("highestScore");
+		if (PlayerPrefs.HasKey (HIGHEST_SCORE_KEY)) { // if we already stored a highest score
+			playerProgress.highestScore = PlayerPrefs.GetInt(HIGHEST_SCORE_KEY);
 		}
 	}
 
 	private void SavePlayerProgress() {
-		PlayerPrefs.SetInt ("highestScore", playerProgress.highestScore);
+		PlayerPrefs.SetInt (HIGHEST_SCORE_KEY, playerProgress.highestScore);
 	}
 
-	private void LoadGameData(){
-		string filePath = Path.Combine (Application.streamingAssetsPath, gameDataFileName); // streamingAssetsPath is the folder that stores the json
+	private void LoadGameData(string fileName){
+		string filePath = Path.Combine (Application.streamingAssetsPath, fileName); // streamingAssetsPath is the folder that stores the json
 
 		if (File.Exists (filePath)) {
 			string dataAsJson = File.ReadAllText (filePath);
-			GameData loadedData = JsonUtility.FromJson<GameData> (dataAsJson); // turn from json to an object
+			GameData loadedQuestions = JsonUtility.FromJson<GameData> (dataAsJson);
+			RoundData roundData = new RoundData ();
 
-			allRoundData = loadedData.allRoundData;
+			roundData.questions = loadedQuestions.questions;
+			allRoundData.Add (roundData);
 		} else {
 			Debug.LogError ("Cannot load game data!");
 		}

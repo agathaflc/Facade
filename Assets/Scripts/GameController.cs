@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour {
 	private RoundData currentRoundData;
 	private QuestionData[] questionPool;
 
-	private bool isRoundActive;
+	private bool isTimerActive;
 	private float timeRemaining;
 	private int questionIndex;
 	private int playerScore;
@@ -35,18 +35,18 @@ public class GameController : MonoBehaviour {
 		dataController = FindObjectOfType<DataController> (); // store a ref to data controller
 		currentRoundData = dataController.GetCurrentRoundData();
 		questionPool = currentRoundData.questions;
-		timeRemaining = currentRoundData.timeLimitInSeconds;
+		timeRemaining = 10;
 		UpdateTimeRemainingDisplay ();
 
 		playerScore = 0;
 		questionIndex = 0;
 
-		ShowQuestion ();
-		isRoundActive = true;
+		isTimerActive = false;
 	}
 
     private void BeginQuestions() {
         questionDisplay.SetActive(true);
+		ShowQuestion ();
         Cursor.lockState = CursorLockMode.None;
         PlayerCamera.GetComponent<PlayerLook>().enabled = false;
         Player.transform.rotation = Quaternion.Euler(new Vector3(0,90,0));
@@ -55,22 +55,27 @@ public class GameController : MonoBehaviour {
 
     private void ShowQuestion() {
 		RemoveAnswerButtons ();
-		QuestionData questionData = questionPool [questionIndex];
-		questionDisplayText.text = questionData.questionText;
+		QuestionData question = questionPool [questionIndex];
+		QVariationData variation = question.variations [0]; // TODO determine which variation
+		questionDisplayText.text = variation.questionText;
 
-		for (int i = 0; i < questionData.answers.Length; i++) {
+		for (int i = 0; i < variation.answers.Length; i++) {
 			GameObject answerButtonGameObject = answerButtonObjectPool.GetObject ();
 			answerButtonGameObjects.Add (answerButtonGameObject); // add the current answer button to the list of ACTIVE answer buttonsso we can keep track of it
 			answerButtonGameObject.transform.SetParent (answerButtonParent);
 
 			AnswerButton answerButton = answerButtonGameObject.GetComponent<AnswerButton> ();
-			answerButton.Setup (questionData.answers [i]);
+			answerButton.Setup (variation.answers [i]);
             if (i == 0)
             {
                 SelectedBoldAnswer = answerButton;
                 SelectedBoldAnswer.Bold();
             }
 		}
+
+		isTimerActive = true;
+		timeRemaining = question.timeLimitInSeconds;
+		UpdateTimeRemainingDisplay ();
 	}
 
 	// remove the existing answer buttons
@@ -82,11 +87,13 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	public void AnswerButtonClicked(bool isCorrect) {
-		if (isCorrect) { // add score if answer is correct
-			playerScore += currentRoundData.pointsAddedForCorrectAnswer;
-			scoreDisplayText.text = "Score: " + playerScore.ToString ();
-		}
+	public void AnswerButtonClicked() {
+
+		// TODO read expression, check consistency, set timeRemaining to null
+		// TODO save the answer??
+
+		playerScore += 1; // JUST ADD ONE FOR NOW???
+		scoreDisplayText.text = "Score: " + playerScore.ToString ();
 
 		// show another question if there are still questions to ask
 		if (questionPool.Length > questionIndex + 1) {
@@ -99,7 +106,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void EndRound() {
-		isRoundActive = false;
+		isTimerActive = false;
 		dataController.SubmitNewPlayerScore (playerScore);
 		highScoreDisplayText.text = dataController.GetHighestPlayerScore ().ToString ();
 
@@ -112,17 +119,21 @@ public class GameController : MonoBehaviour {
 	}
 
 	private void UpdateTimeRemainingDisplay() {
-		timeRemainingDisplayText.text = "Time: " + Mathf.Round (timeRemaining).ToString ();
+		if (isTimerActive) {
+			timeRemainingDisplayText.text = "Time: " + Mathf.Round (timeRemaining).ToString ();
+		} else {
+			timeRemainingDisplayText.text = "Time: -";
+		}
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (isRoundActive && questionDisplay.activeSelf == true) {
+		if (isTimerActive && questionDisplay.activeSelf == true) {
 			timeRemaining -= Time.deltaTime;
 			UpdateTimeRemainingDisplay ();
 
 			if (timeRemaining <= 0f) {
-				EndRound ();
+				EndRound (); // TODO what do we again here?
 			}
 		}
 
