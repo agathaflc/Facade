@@ -1,201 +1,201 @@
 {
   "questions": [
     {
-      "question_desc": "get player's name",
-      "question_id": "00",
-      "expression_weight": 0,
-      "consistency_weight": 1,
-      "no_of_variations": 2,
-      "considers_emotion": false,
-      "considers_fact": true,
+      "questionDesc": "get player's name",
+      "questionId": "00",
+      "expressionWeight": 0,
+      "consistencyWeight": 1,
+      "noOfVariations": 2,
+      "considersEmotion": false,
+      "considersFact": true,
       "variations": [
         {
-          "question_text": "Please state your full name for the record.",
-          "variation_no": 1,
+          "questionText": "Please state your full name for the record.",
+          "variationNo": 1,
           "answers": [
             {
-              "answer_id": "000",
-              "answer_text": "Christine  Tse"
+              "answerId": "000",
+              "answerText": "Christine  Tse"
             },
             {
-              "answer_id": "001",
-              "answer_text": "Eugene Cheong"
+              "answerId": "001",
+              "answerText": "Eugene Cheong"
             },
             {
-              "answer_id": "002",
-              "answer_text": "Felicia Agatha"
+              "answerId": "002",
+              "answerText": "Felicia Agatha"
             },
             {
-              "answer_id": "003",
-              "answer_text": "Vivian Rajkumar"
+              "answerId": "003",
+              "answerText": "Vivian Rajkumar"
             }
           ]
         },
         {
-          "question_text": "What is your name?",
-          "variation_no": 2,
+          "questionText": "What is your name?",
+          "variationNo": 2,
           "answers": [
             {
-              "answer_id": "000",
-              "answer_text": "Christine  Tse"
+              "answerId": "000",
+              "answerText": "Christine  Tse"
             },
             {
-              "answer_id": "001",
-              "answer_text": "Eugene Cheong"
+              "answerId": "001",
+              "answerText": "Eugene Cheong"
             },
             {
-              "answer_id": "002",
-              "answer_text": "Felicia Agatha"
+              "answerId": "002",
+              "answerText": "Felicia Agatha"
             },
             {
-              "answer_id": "003",
-              "answer_text": "Vivian Rajkumar"
+              "answerId": "003",
+              "answerText": "Vivian Rajkumar"
             }
           ]
         }
       ]
     },
     {
-      "question_desc": "get player's age",
-      "question_id": "01",
-      "expression_weight": 0,
-      "consistency_weight": 1,
-      "no_of_variations": 2,
-      "considers_emotion": false,
-      "considers_fact": true,
+      "questionDesc": "get player's age",
+      "questionId": "01",
+      "expressionWeight": 0,
+      "consistencyWeight": 1,
+      "noOfVariations": 2,
+      "considersEmotion": false,
+      "considersFact": true,
       "variations": [
         {
-          "question_text": "Please state your age for the record.",
-          "variation_no": 1,
+          "questionText": "Please state your age for the record.",
+          "variationNo": 1,
           "answers": [
             {
-              "answer_id": "010",
-              "answer_text": "18"
+              "answerId": "010",
+              "answerText": "18"
             },
             {
-              "answer_id": "011",
-              "answer_text": "26"
+              "answerId": "011",
+              "answerText": "26"
             },
             {
-              "answer_id": "012",
-              "answer_text": "30"
+              "answerId": "012",
+              "answerText": "30"
             },
             {
-              "answer_id": "013",
-              "answer_text": "45"
+              "answerId": "013",
+              "answerText": "45"
             }
           ]
         },
         {
-          "question_text": "How old are you?",
-          "variation_no": 2,
+          "questionText": "How old are you?",
+          "variationNo": 2,
           "answers": [
             {
-              "answer_id": "010",
-              "answer_text": "18"
+              "answerId": "010",
+              "answerText": "18"
             },
             {
-              "answer_id": "011",
-              "answer_text": "26"
+              "answerId": "011",
+              "answerText": "26"
             },
             {
-              "answer_id": "012",
-              "answer_text": "30"
+              "answerId": "012",
+              "answerText": "30"
             },
             {
-              "answer_id": "013",
-              "answer_text": "45"
+              "answerId": "013",
+              "answerText": "45"
             }
           ]
         }
       ]
     },
     {
-      "question_desc": "ask how player is feeling",
-      "question_id": "02",
-      "expression_weight": 1,
-      "consistency_weight": 0,
-      "no_of_variations": 2,
-      "considers_emotion": true,
-      "considers_fact": true,
+      "questionDesc": "ask how player is feeling",
+      "questionId": "02",
+      "expressionWeight": 1,
+      "consistencyWeight": 0,
+      "noOfVariations": 2,
+      "considersEmotion": true,
+      "considersFact": true,
       "variations": [
         {
-          "question_text": "How are you feeling today?",
-          "variation_no": 1,
+          "questionText": "How are you feeling today?",
+          "variationNo": 1,
           "answers": [
             {
-              "answer_id": "020",
-              "answer_text": "Great!",
-              "expected_expression": [
+              "answerId": "020",
+              "answerText": "Great!",
+              "expectedExpression": [
                 "happy"
               ],
-              "detective_response": "positive"
+              "detectiveResponse": "positive"
             },
             {
-              "answer_id": "021",
-              "answer_text": "Alright",
-              "expected_expression": [
+              "answerId": "021",
+              "answerText": "Alright",
+              "expectedExpression": [
                 "neutral"
               ],
-              "detective_response": "unsure"
+              "detectiveResponse": "unsure"
             },
             {
-              "answer_id": "022",
-              "answer_text": "Teribble!",
-              "expected_expression": [
-                "anger",
+              "answerId": "022",
+              "answerText": "Teribble!",
+              "expectedExpression": [
+                "angry",
                 "sad"
               ],
-              "detective_response": "negative"
+              "detectiveResponse": "negative"
             },
             {
-              "answer_id": "023",
-              "answer_text": "I'm scared!",
-              "expected_expression": [
+              "answerId": "023",
+              "answerText": "I'm scared!",
+              "expectedExpression": [
                 "fear",
                 "surprised"
               ],
-              "detective_response": "negative"
+              "detectiveResponse": "negative"
             }
           ]
         },
         {
-          "question_text": "How are you doing?",
-          "variation_no": 2,
+          "questionText": "How are you doing?",
+          "variationNo": 2,
           "answers": [
             {
-              "answer_id": "020",
-              "answer_text": "Great!",
-              "expected_expression": [
+              "answerId": "020",
+              "answerText": "Great!",
+              "expectedExpression": [
                 "happy"
               ],
-              "detective_response": "positive"
+              "detectiveResponse": "positive"
             },
             {
-              "answer_id": "021",
-              "answer_text": "Alright",
-              "expected_expression": [
+              "answerId": "021",
+              "answerText": "Alright",
+              "expectedExpression": [
                 "neutral"
               ],
-              "detective_response": "unsure"
+              "detectiveResponse": "unsure"
             },
             {
-              "answer_id": "022",
-              "answer_text": "Teribble!",
-              "expected_expression": [
-                "anger",
+              "answerId": "022",
+              "answerText": "Teribble!",
+              "expectedExpression": [
+                "angry",
                 "sad"
               ],
-              "detective_response": "negative"
+              "detectiveResponse": "negative"
             },
             {
-              "answer_id": "023",
-              "answer_text": "I'm scared!",
-              "expected_expression": [
+              "answerId": "023",
+              "answerText": "I'm scared!",
+              "expectedExpression": [
                 "fear",
                 "surprised"
               ],
-              "detective_response": "negative"
+              "detectiveResponse": "negative"
             }
           ]
         }
