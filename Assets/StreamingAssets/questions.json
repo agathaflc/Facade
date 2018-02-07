@@ -14,7 +14,13 @@
             {
               "answer_id": "246010",
               "text": "I don't know",
-              "expected_expression": "neutral"
+              "expected_expression": "neutral",
+              "detective_reactions": {
+                "suspicious": "hm",
+                "happy": "nice",
+                "normal": "okay",
+                "angry": "WHAT"
+              }
             },
             {
               "answer_id": "246011",
