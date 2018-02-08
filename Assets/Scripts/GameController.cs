@@ -35,6 +35,8 @@ public class GameController : MonoBehaviour {
 
 	private const int CORRECT_ANSWER_MULTIPLIER = -1;
 	private const int WRONG_ANSWER_MULTIPLIER = 1;
+	private const int CORRECT_EXPRESSION_MULTIPLIER = -1;
+	private const int WRONG_EXPRESSION_MULTIPLIER = 1;
 
 	// Use this for initialization
 	void Start () {
@@ -116,11 +118,22 @@ public class GameController : MonoBehaviour {
 		}
 
 		if (currentQuestion.considersEmotion) {
-			
+			Debug.Log ("considers emotion");
+			float emotionDistance = dataController.ComputeEmotionDistance (answerData.expectedExpression, 
+				dataController.ReadPlayerEmotion (questionIndex));
+			if (Mathf.Approximately (emotionDistance, 0f)) { // expression matches
+				// TODO give 'right expression' reaction?
+				Debug.Log("correct expression");
+				suspicionScore += currentQuestion.expressionWeight * CORRECT_ANSWER_MULTIPLIER;
+			} else {
+				// TODO give 'wrong expression' detective reaction
+				Debug.Log("wrong expression");
+				suspicionScore += NormalizeExpressionScore(emotionDistance) * currentQuestion.expressionWeight * WRONG_ANSWER_MULTIPLIER;
+			}
 		}
 
 		playerScore += suspicionScore;
-		scoreDisplayText.text = "Score: " + playerScore.ToString ();
+		scoreDisplayText.text = "Suspicion: " + playerScore.ToString ();
 
 		// show another question if there are still questions to ask
 		if (questionPool.Length > questionIndex + 1) {
@@ -129,6 +142,11 @@ public class GameController : MonoBehaviour {
 		} else {
 			EndRound ();
 		}
+	}
+
+	private float NormalizeExpressionScore(float rawDistance) {
+		// TODO HOW TO NORMALIZE
+		return rawDistance/10f;
 	}
 
 	public void EndRound() {

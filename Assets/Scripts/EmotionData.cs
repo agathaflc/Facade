@@ -7,4 +7,5 @@ public class EmotionData {
 
 	public int questionNo;
 	public string emotion;
+	public float emotionScore;
 }

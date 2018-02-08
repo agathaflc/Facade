@@ -82,6 +82,11 @@ public class DataController : MonoBehaviour {
 		}
 	}
 
+	public float ComputeEmotionDistance(string[] expected, string actual) {
+		// TODO how to do this lol
+		return 1;
+	}
+
 	public string ReadPlayerEmotion(int questionIndex) {
 		string filePath = Path.Combine (Application.streamingAssetsPath, EXPRESSION_DATA_FILE_NAME); // streamingAssetsPath is the folder that stores the json
 
