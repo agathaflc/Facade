@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour {
 	private bool isTimerActive;
 	private float timeRemaining;
 	private int questionIndex;
-	private int playerScore;
+	private float playerScore;
 	private List<GameObject> answerButtonGameObjects = new List<GameObject> ();
     public AnswerButton SelectedBoldAnswer;
 
@@ -115,6 +115,10 @@ public class GameController : MonoBehaviour {
 			}
 		}
 
+		if (currentQuestion.considersEmotion) {
+			
+		}
+
 		playerScore += suspicionScore;
 		scoreDisplayText.text = "Score: " + playerScore.ToString ();
 
@@ -124,7 +128,6 @@ public class GameController : MonoBehaviour {
 			ShowQuestion ();
 		} else {
 			EndRound ();
-			print ("end this round");
 		}
 	}
 

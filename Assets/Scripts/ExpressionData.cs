@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerProgress {
+[System.Serializable]
+public class ExpressionData {
 
-	public float highestScore;
+	public EmotionData[] emotions;
 }
