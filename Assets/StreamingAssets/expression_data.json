@@ -1,6 +1,11 @@
 {
   "expressionData": [
     {
+      "questionNo": "0",
+      "emotion": "happy",
+      "emotionScore": 27.5
+    },
+    {
       "questionNo": "1",
       "emotion": "happy",
       "emotionScore": 57.5
