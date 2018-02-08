@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour {
 	private DataController dataController;
 	private RoundData currentRoundData;
 	private QuestionData[] questionPool;
+	private Dictionary<string, AnswerData> playerAnswers = new Dictionary<string, AnswerData> ();
 
 	private bool isTimerActive;
 	private float timeRemaining;
@@ -29,6 +30,11 @@ public class GameController : MonoBehaviour {
 	private int playerScore;
 	private List<GameObject> answerButtonGameObjects = new List<GameObject> ();
     public AnswerButton SelectedBoldAnswer;
+
+	private static QuestionData currentQuestion;
+
+	private const int CORRECT_ANSWER_MULTIPLIER = -1;
+	private const int WRONG_ANSWER_MULTIPLIER = 1;
 
 	// Use this for initialization
 	void Start () {
@@ -55,8 +61,8 @@ public class GameController : MonoBehaviour {
 
     private void ShowQuestion() {
 		RemoveAnswerButtons ();
-		QuestionData question = questionPool [questionIndex];
-		QVariationData variation = question.variations [0]; // TODO determine which variation
+		currentQuestion = questionPool [questionIndex];
+		QVariationData variation = currentQuestion.variations [0]; // TODO determine which variation
 		questionDisplayText.text = variation.questionText;
 
 		for (int i = 0; i < variation.answers.Length; i++) {
@@ -74,7 +80,7 @@ public class GameController : MonoBehaviour {
 		}
 
 		isTimerActive = true;
-		timeRemaining = question.timeLimitInSeconds;
+		timeRemaining = currentQuestion.timeLimitInSeconds;
 		UpdateTimeRemainingDisplay ();
 	}
 
@@ -87,12 +93,29 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	public void AnswerButtonClicked() {
+	public void AnswerButtonClicked(AnswerData answerData) {
 
-		// TODO read expression, check consistency, set timeRemaining to null
+		// TODO read expression
 		// TODO save the answer??
 
-		playerScore += 1; // JUST ADD ONE FOR NOW???
+		float suspicionScore = 0;
+		isTimerActive = false;
+
+		// check consistency if question considers fact
+		if (currentQuestion.considersFact) {
+			if (playerAnswers.ContainsKey (currentQuestion.questionId)) { // if prior answer was stored
+				if (answerData.answerId.Equals (playerAnswers [currentQuestion.questionId])) { // answer is consistent
+					suspicionScore += CORRECT_ANSWER_MULTIPLIER * currentQuestion.consistencyWeight;
+				} else { // wrong answer
+					// TODO ask question again
+					suspicionScore += WRONG_ANSWER_MULTIPLIER * currentQuestion.consistencyWeight;
+				}
+			} else { // this is the first time that particular question was asked
+				playerAnswers.Add(currentQuestion.questionId, answerData); // store the answer
+			}
+		}
+
+		playerScore += suspicionScore;
 		scoreDisplayText.text = "Score: " + playerScore.ToString ();
 
 		// show another question if there are still questions to ask

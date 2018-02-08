@@ -9,7 +9,6 @@ public class DataController : MonoBehaviour {
 	private List<RoundData> allRoundData = new List<RoundData>();
 
 	private PlayerProgress playerProgress;
-	private string gameDataFileName = "data.json";
 
 	private const string MENU_SCREEN = "MenuScreen";
 	private const string HIGHEST_SCORE_KEY = "highestScore";
