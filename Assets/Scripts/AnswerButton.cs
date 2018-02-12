@@ -20,7 +20,7 @@ public class AnswerButton : MonoBehaviour {
 	}
 
 	public void HandleClick() {
-		gameController.AnswerButtonClicked (answerData.isCorrect);
+		gameController.AnswerButtonClicked (answerData);
 	}
 
     public void Bold()

@@ -9,6 +9,7 @@
           "questionText": "Lions are carnivores: true or false?",
           "answers": [
             {
+              "answerText": "True",
               "isCorrect": true
             },
             {

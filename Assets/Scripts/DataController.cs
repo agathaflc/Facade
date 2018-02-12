@@ -6,57 +6,109 @@ using System.IO;
 
 public class DataController : MonoBehaviour {
 
-	private RoundData[] allRoundData;
+	private List<RoundData> allRoundData = new List<RoundData>();
+
+	private DistanceMapData distanceMap;
 
 	private PlayerProgress playerProgress;
-	private string gameDataFileName = "data.json";
+
+	private const string MENU_SCREEN = "MenuScreen";
+	private const string HIGHEST_SCORE_KEY = "highestScore";
+
+	private const string ACT_ONE_QUESTIONS_FILE_NAME = "questionsACT1.json";
+	private const string EXPRESSION_DATA_FILE_NAME = "expression_data.json";
+	private const string DISTANCEMAP_DATA_FILE_NAME = "distances.json";
 
 	// Use this for initialization
 	void Start () {
 		DontDestroyOnLoad (gameObject); // prevent destroy objects in previous scene that has been unloaded
-		LoadGameData();
+		LoadGameData(ACT_ONE_QUESTIONS_FILE_NAME);
 		LoadPlayerProgress();
+		ReadDistanceMap ();
 
-		SceneManager.LoadScene ("MenuScreen");
+		SceneManager.LoadScene (MENU_SCREEN);
 	}
 
 	public RoundData GetCurrentRoundData() {
 		return allRoundData [0];
 	}
 
-	public void SubmitNewPlayerScore(int newScore) {
+	public void SubmitNewPlayerScore(float newScore) {
 		if (newScore > playerProgress.highestScore) {
 			playerProgress.highestScore = newScore;
 			SavePlayerProgress();
 		}
 	}
 
-	public int GetHighestPlayerScore() {
+	public float GetHighestPlayerScore() {
 		return playerProgress.highestScore;
 	}
 	
 	private void LoadPlayerProgress() {
 		playerProgress = new PlayerProgress ();
 
-		if (PlayerPrefs.HasKey ("highestScore")) { // if we already stored a highest score
-			playerProgress.highestScore = PlayerPrefs.GetInt("highestScore");
+		if (PlayerPrefs.HasKey (HIGHEST_SCORE_KEY)) { // if we already stored a highest score
+			playerProgress.highestScore = PlayerPrefs.GetFloat(HIGHEST_SCORE_KEY);
 		}
 	}
 
 	private void SavePlayerProgress() {
-		PlayerPrefs.SetInt ("highestScore", playerProgress.highestScore);
+		PlayerPrefs.SetFloat (HIGHEST_SCORE_KEY, playerProgress.highestScore);
 	}
 
-	private void LoadGameData(){
-		string filePath = Path.Combine (Application.streamingAssetsPath, gameDataFileName); // streamingAssetsPath is the folder that stores the json
+	private void LoadGameData(string fileName){
+		string filePath = Path.Combine (Application.streamingAssetsPath, fileName); // streamingAssetsPath is the folder that stores the json
 
 		if (File.Exists (filePath)) {
 			string dataAsJson = File.ReadAllText (filePath);
-			GameData loadedData = JsonUtility.FromJson<GameData> (dataAsJson); // turn from json to an object
+			GameData loadedQuestions = JsonUtility.FromJson<GameData> (dataAsJson);
+			RoundData roundData = new RoundData ();
 
-			allRoundData = loadedData.allRoundData;
+			roundData.questions = loadedQuestions.questions;
+			allRoundData.Add (roundData);
 		} else {
 			Debug.LogError ("Cannot load game data!");
 		}
+	}
+
+	private void ReadDistanceMap() {
+		string filePath = Path.Combine (Application.streamingAssetsPath, DISTANCEMAP_DATA_FILE_NAME); // streamingAssetsPath is the folder that stores the json
+
+		if (File.Exists (filePath)) {
+			string dataAsJson = File.ReadAllText (filePath);
+			distanceMap = JsonUtility.FromJson<DistanceMapData> (dataAsJson);
+		} else {
+			Debug.LogError ("Cannot load distance data!");
+		}
+	}
+
+	public float ComputeEmotionDistance(string[] expected, string actual) {
+		// TODO how to do this lol
+		return 1;
+	}
+
+	public string ReadPlayerEmotion(int questionIndex) {
+		string filePath = Path.Combine (Application.streamingAssetsPath, EXPRESSION_DATA_FILE_NAME); // streamingAssetsPath is the folder that stores the json
+
+		if (File.Exists (filePath)) {
+			string dataAsJson = File.ReadAllText (filePath);
+			ExpressionData loadedExpressions = JsonUtility.FromJson<ExpressionData> (dataAsJson);
+
+			if (loadedExpressions.emotions.Length < questionIndex + 1) { // index out of bounds???
+				Debug.LogError("Expression data for this question does not exist!");
+			}
+
+			EmotionData correspondingEmotion = loadedExpressions.emotions [questionIndex];
+
+			if (correspondingEmotion.questionNo == questionIndex) {
+				return correspondingEmotion.emotion;
+			} else {
+				Debug.LogError ("Question index does not match!");
+			}
+		} else {
+			Debug.LogError ("Cannot load expression data!");
+		}
+
+		return Constants.EMOTION_NEUTRAL; // return default???
 	}
 }

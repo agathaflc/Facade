@@ -1,0 +1,39 @@
+{
+  "emotions": [
+    {
+      "questionNo": 0,
+      "emotion": "happy",
+      "emotionScore": 27.5
+    },
+    {
+      "questionNo": 1,
+      "emotion": "happy",
+      "emotionScore": 57.5
+    },
+    {
+      "questionNo": 2,
+      "emotion": "angry",
+      "emotionScore": 27.2
+    },
+    {
+      "questionNo": 3,
+      "emotion": "neutral",
+      "emotionScore": 40.6
+    },
+    {
+      "questionNo": 4,
+      "emotion": "surprised",
+      "emotionScore": 57.5
+    },
+    {
+      "questionNo": 5,
+      "emotion": "scared",
+      "emotionScore": 33.9
+    },
+    {
+      "questionNo": 6,
+      "emotion": "sad",
+      "emotionScore": 45.8
+    }
+  ]
+}

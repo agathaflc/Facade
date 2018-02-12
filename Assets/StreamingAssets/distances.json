@@ -1,0 +1,50 @@
+{
+	"happy": {
+		"sad": 10,
+		"neutral": 5,
+		"surprised": 2,
+		"happy": 0,
+		"angry": 8,
+		"scared": 7
+	},
+	"sad": {
+		"sad": 0,
+		"neutral": 5,
+		"surprised": 2,
+		"happy": 10,
+		"angry": 8,
+		"scared": 7
+	},
+	"neutral": {
+		"sad": 5,
+		"neutral": 0,
+		"surprised": 2,
+		"happy": 5,
+		"angry": 8,
+		"scared": 7
+	},
+	"angry": {
+		"sad": 10,
+		"neutral": 5,
+		"surprised": 2,
+		"happy": 8,
+		"angry": 0,
+		"scared": 7
+	},
+	"surprised": {
+		"sad": 10,
+		"neutral": 5,
+		"surprised": 0,
+		"happy": 3,
+		"angry": 8,
+		"scared": 7
+	},
+	"scared": {
+		"sad": 10,
+		"neutral": 5,
+		"surprised": 2,
+		"happy": 8,
+		"angry": 8,
+		"scared": 0
+	}
+}

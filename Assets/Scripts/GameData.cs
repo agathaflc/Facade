@@ -4,5 +4,5 @@ using UnityEngine;
 
 [System.Serializable]
 public class GameData {
-	public RoundData[] allRoundData;
+	public QuestionData[] questions;
 }
