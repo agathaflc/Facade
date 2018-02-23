@@ -111,6 +111,7 @@
       "consistencyWeight": 0,
       "considersEmotion": true,
       "considersFact": true,
+      "pictureFileName": "02.jpg",
       "variations": [
         {
           "questionText": "How are you feeling today?",

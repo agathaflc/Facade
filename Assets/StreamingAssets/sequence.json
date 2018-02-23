@@ -1,0 +1,19 @@
+{
+	"sequence":
+	[
+		{
+			"sequenceType": "dialog",
+			"fileName": "sentence1.wav",
+			"subtitleScript": "In the hole in the ground there lived a hobbit."
+		},
+		{
+			"sequenceType": "question",
+			"fileName": "questions1.json"
+		},
+		{
+			"sequenceType": "dialog",
+			"fileName": "sentence2.wav",
+			"subtitleScript": "In the hole in the ground there lived another hobbit."
+		}
+	]
+}

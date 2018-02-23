@@ -111,4 +111,20 @@ public class DataController : MonoBehaviour {
 
 		return Constants.EMOTION_NEUTRAL; // return default???
 	}
+
+	public Texture2D LoadImage(string fileName) {
+		Texture2D tex = null;
+		byte[] fileData;
+
+		string filePath = Path.Combine (Application.streamingAssetsPath, fileName); // streamingAssetsPath is the folder that stores the json
+
+		print ("Loading image: " + filePath);
+
+		if (File.Exists(filePath)) {
+			fileData = File.ReadAllBytes(filePath);
+			tex = new Texture2D(2, 2);
+			tex.LoadImage(fileData); //..this will auto-resize the texture dimensions.
+		}
+		return tex;
+	}
 }

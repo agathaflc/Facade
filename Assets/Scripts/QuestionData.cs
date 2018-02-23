@@ -11,6 +11,7 @@ public class QuestionData {
 	public float consistencyWeight;
 	public bool considersEmotion;
 	public bool considersFact;
+	public string pictureFileName;
 	public QVariationData[] variations;
 	public int timeLimitInSeconds = 10;
 }

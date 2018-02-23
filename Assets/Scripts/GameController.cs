@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour {
 
 	public GameObject questionDisplay;
 	public GameObject roundEndDisplay;
+	public GameObject questionPictureDisplay;
 
     public GameObject Room;
     public Camera PlayerCamera;
@@ -81,6 +82,16 @@ public class GameController : MonoBehaviour {
                 SelectedBoldAnswer = answerButton;
                 SelectedBoldAnswer.Bold();
             }
+		}
+
+		// show picture if any
+		if (currentQuestion.pictureFileName != null) {
+			questionPictureDisplay.SetActive (true);
+			ImageLoader imageLoader = questionPictureDisplay.GetComponent<ImageLoader> ();
+			if (imageLoader != null) {
+				print ("ImageLoader is found");
+				imageLoader.LoadImage (dataController.LoadImage (currentQuestion.pictureFileName));
+			}
 		}
 
 		isTimerActive = true;
