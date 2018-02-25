@@ -146,7 +146,13 @@ public class GameController : MonoBehaviour {
 		}
 
 		playerScore += suspicionScore;
-		scoreDisplayText.text = "Suspicion: " + playerScore.ToString ();
+		print ("playerScore: " + playerScore);
+		scoreDisplayText.text = "Suspicion: " + playerScore.ToString ("F2");
+
+		if (questionPictureDisplay.activeSelf) {
+			questionPictureDisplay.GetComponent<ImageLoader> ().DestroyMaterial ();
+			questionPictureDisplay.SetActive (false);
+		}
 
 		// show another question if there are still questions to ask
 		if (questionPool.Length > questionIndex + 1) {

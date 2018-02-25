@@ -18,7 +18,11 @@ public class ImageLoader : MonoBehaviour {
 	}
 
 	public void LoadImage(Texture2D tex) {
-		material = GetComponent<Image> ().material;
+		material = this.GetComponent<Image> ().material;
 		material.mainTexture = tex;
+	}
+
+	public void DestroyMaterial() {
+		Destroy (material.mainTexture);
 	}
 }

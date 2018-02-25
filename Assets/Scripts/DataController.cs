@@ -8,7 +8,7 @@ public class DataController : MonoBehaviour {
 
 	private List<RoundData> allRoundData = new List<RoundData>();
 
-	private DistanceMapData distanceMap;
+	private DistanceData distanceMap;
 
 	private PlayerProgress playerProgress;
 
@@ -18,6 +18,7 @@ public class DataController : MonoBehaviour {
 	private const string ACT_ONE_QUESTIONS_FILE_NAME = "questionsACT1.json";
 	private const string EXPRESSION_DATA_FILE_NAME = "expression_data.json";
 	private const string DISTANCEMAP_DATA_FILE_NAME = "distances.json";
+	private const string DISTANCE_MAPPING_FILE_NAME = "distances_2d_mapping.json";
 
 	// Use this for initialization
 	void Start () {
@@ -72,22 +73,22 @@ public class DataController : MonoBehaviour {
 	}
 
 	private void ReadDistanceMap() {
-		string filePath = Path.Combine (Application.streamingAssetsPath, DISTANCEMAP_DATA_FILE_NAME); // streamingAssetsPath is the folder that stores the json
+		string filePath = Path.Combine (Application.streamingAssetsPath, DISTANCE_MAPPING_FILE_NAME); // streamingAssetsPath is the folder that stores the json
 
 		if (File.Exists (filePath)) {
 			string dataAsJson = File.ReadAllText (filePath);
-			distanceMap = JsonUtility.FromJson<DistanceMapData> (dataAsJson);
+			distanceMap = JsonUtility.FromJson<DistanceData> (dataAsJson);
 		} else {
 			Debug.LogError ("Cannot load distance data!");
 		}
 	}
 
-	public float ComputeEmotionDistance(string[] expected, string actual) {
-		// TODO how to do this lol
-		return 1;
+	public float ComputeEmotionDistance(string[] expected, EmotionData actual) {
+		return ScoreCalculator.ComputeEmotionDistance (distanceMap, expected, actual);
 	}
 
-	public string ReadPlayerEmotion(int questionIndex) {
+
+	public EmotionData ReadPlayerEmotion(int questionIndex) {
 		string filePath = Path.Combine (Application.streamingAssetsPath, EXPRESSION_DATA_FILE_NAME); // streamingAssetsPath is the folder that stores the json
 
 		if (File.Exists (filePath)) {
@@ -101,7 +102,8 @@ public class DataController : MonoBehaviour {
 			EmotionData correspondingEmotion = loadedExpressions.emotions [questionIndex];
 
 			if (correspondingEmotion.questionNo == questionIndex) {
-				return correspondingEmotion.emotion;
+				print ("expression data loaded successfully");
+				return correspondingEmotion;
 			} else {
 				Debug.LogError ("Question index does not match!");
 			}
@@ -109,7 +111,7 @@ public class DataController : MonoBehaviour {
 			Debug.LogError ("Cannot load expression data!");
 		}
 
-		return Constants.EMOTION_NEUTRAL; // return default???
+		return null;
 	}
 
 	public Texture2D LoadImage(string fileName) {
@@ -122,7 +124,7 @@ public class DataController : MonoBehaviour {
 
 		if (File.Exists(filePath)) {
 			fileData = File.ReadAllBytes(filePath);
-			tex = new Texture2D(2, 2);
+			tex = new Texture2D(2, 2, TextureFormat.DXT1, false);
 			tex.LoadImage(fileData); //..this will auto-resize the texture dimensions.
 		}
 		return tex;

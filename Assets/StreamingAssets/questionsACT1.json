@@ -7,6 +7,7 @@
       "consistencyWeight": 1,
       "considersEmotion": false,
       "considersFact": true,
+      "pictureFileName": "wojak.jpg",
       "variations": [
         {
           "questionText": "Please state your full name for the record.",
@@ -59,6 +60,7 @@
       "consistencyWeight": 1,
       "considersEmotion": false,
       "considersFact": true,
+      "pictureFileName": "02.jpg",
       "variations": [
         {
           "questionText": "Please state your age for the record.",
@@ -111,7 +113,6 @@
       "consistencyWeight": 0,
       "considersEmotion": true,
       "considersFact": true,
-      "pictureFileName": "02.jpg",
       "variations": [
         {
           "questionText": "How are you feeling today?",
@@ -145,7 +146,7 @@
               "answerId": "023",
               "answerText": "I'm scared!",
               "expectedExpression": [
-                "fear",
+                "scared",
                 "surprised"
               ],
               "detectiveResponse": "negative"
@@ -184,7 +185,7 @@
               "answerId": "023",
               "answerText": "I'm scared!",
               "expectedExpression": [
-                "fear",
+                "scared",
                 "surprised"
               ],
               "detectiveResponse": "negative"
