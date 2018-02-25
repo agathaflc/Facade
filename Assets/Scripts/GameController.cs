@@ -36,11 +36,6 @@ public class GameController : MonoBehaviour {
 
 	private static QuestionData currentQuestion;
 
-	private const int CORRECT_ANSWER_MULTIPLIER = -1;
-	private const int WRONG_ANSWER_MULTIPLIER = 1;
-	private const int CORRECT_EXPRESSION_MULTIPLIER = -1;
-	private const int WRONG_EXPRESSION_MULTIPLIER = 1;
-
 	// Use this for initialization
 	void Start () {
 		dataController = FindObjectOfType<DataController> (); // store a ref to data controller
@@ -110,7 +105,7 @@ public class GameController : MonoBehaviour {
 
 	public void AnswerButtonClicked(AnswerData answerData) {
 
-		// TODO read expression
+		// TODO tell model to read expression (?)
 		// TODO save the answer??
 
 		float suspicionScore = 0;
@@ -120,10 +115,10 @@ public class GameController : MonoBehaviour {
 		if (currentQuestion.considersFact) {
 			if (playerAnswers.ContainsKey (currentQuestion.questionId)) { // if prior answer was stored
 				if (answerData.answerId.Equals (playerAnswers [currentQuestion.questionId])) { // answer is consistent
-					suspicionScore += CORRECT_ANSWER_MULTIPLIER * currentQuestion.consistencyWeight;
+					suspicionScore += ScoreCalculator.CalculateConsistencyScore(true, currentQuestion.consistencyWeight);
 				} else { // wrong answer
 					// TODO ask question again
-					suspicionScore += WRONG_ANSWER_MULTIPLIER * currentQuestion.consistencyWeight;
+					suspicionScore += ScoreCalculator.CalculateConsistencyScore(false, currentQuestion.consistencyWeight);
 				}
 			} else { // this is the first time that particular question was asked
 				playerAnswers.Add(currentQuestion.questionId, answerData); // store the answer
@@ -134,19 +129,12 @@ public class GameController : MonoBehaviour {
 			Debug.Log ("considers emotion");
 			float emotionDistance = dataController.ComputeEmotionDistance (answerData.expectedExpression, 
 				dataController.ReadPlayerEmotion (questionIndex));
-			if (Mathf.Approximately (emotionDistance, 0f)) { // expression matches
-				// TODO give 'right expression' reaction?
-				Debug.Log("correct expression");
-				suspicionScore += currentQuestion.expressionWeight * CORRECT_ANSWER_MULTIPLIER;
-			} else {
-				// TODO give 'wrong expression' detective reaction
-				Debug.Log("wrong expression");
-				suspicionScore += NormalizeExpressionScore(emotionDistance) * currentQuestion.expressionWeight * WRONG_ANSWER_MULTIPLIER;
-			}
+
+			// Debug.Log ("emotion distance: " + emotionDistance.ToString());
+			suspicionScore += ScoreCalculator.CalculateExpressionScore (emotionDistance, currentQuestion.expressionWeight);
 		}
 
 		playerScore += suspicionScore;
-		print ("playerScore: " + playerScore);
 		scoreDisplayText.text = "Suspicion: " + playerScore.ToString ("F2");
 
 		if (questionPictureDisplay.activeSelf) {
@@ -161,11 +149,6 @@ public class GameController : MonoBehaviour {
 		} else {
 			EndRound ();
 		}
-	}
-
-	private float NormalizeExpressionScore(float rawDistance) {
-		// TODO HOW TO NORMALIZE
-		return rawDistance/10f;
 	}
 
 	public void EndRound() {
