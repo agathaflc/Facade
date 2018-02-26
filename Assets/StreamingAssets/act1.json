@@ -1,4 +1,30 @@
 {
+  "sequence": [
+    {
+      "sequenceType": "dialog",
+      "filePath": "seq0_000",
+      "subtitleText": "It began... well, it began as you might expect."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "seq0_001.wav",
+      "subtitleText": "In a hole in the ground, there lived a hobbit."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "seq0_002.wav",
+      "subtitleText": "Not a nasty, dirty, wet hole full of worms and oozy smells; this was a hobbit hole."
+    },
+    {
+      "sequenceType": "question",
+      "filePath": "questionsACT1.json"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "sentence2.wav",
+      "subtitleText": "In a hole in the ground there lived another hobbit."
+    }
+  ],
   "questions": [
     {
       "questionDesc": "get player's name",

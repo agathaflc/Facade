@@ -16,6 +16,9 @@ public class GameController : MonoBehaviour {
 
 	public GameObject questionDisplay;
 	public GameObject roundEndDisplay;
+	public GameObject questionPictureDisplay;
+	public GameObject subtitleDisplay;
+	public GameObject detectiveObject;
 
     public GameObject Room;
     public Camera PlayerCamera;
@@ -23,6 +26,8 @@ public class GameController : MonoBehaviour {
 	public PostProcessingProfile VignetteEffect;
 	public PostProcessingProfile BloomEffect;
     public GameObject Player;
+
+	private AudioSource detectiveAudioSource;
 
 	private DataController dataController;
 	private RoundData currentRoundData;
@@ -32,38 +37,67 @@ public class GameController : MonoBehaviour {
 	private bool isTimerActive;
 	private float timeRemaining;
 	private int questionIndex;
+	private int sequenceIndex;
 	private float playerScore;
 	private List<GameObject> answerButtonGameObjects = new List<GameObject> ();
     public AnswerButton SelectedBoldAnswer;
 
 	private static QuestionData currentQuestion;
-
-	private const int CORRECT_ANSWER_MULTIPLIER = -1;
-	private const int WRONG_ANSWER_MULTIPLIER = 1;
-	private const int CORRECT_EXPRESSION_MULTIPLIER = -1;
-	private const int WRONG_EXPRESSION_MULTIPLIER = 1;
+	private static SequenceData currentSequence;
 
 	// Use this for initialization
 	void Start () {
 		dataController = FindObjectOfType<DataController> (); // store a ref to data controller
 		currentRoundData = dataController.GetCurrentRoundData();
 		questionPool = currentRoundData.questions;
+		detectiveAudioSource = detectiveObject.GetComponent<AudioSource> ();
 		timeRemaining = 10;
 		UpdateTimeRemainingDisplay ();
 
 		playerScore = 0;
 		questionIndex = 0;
+		sequenceIndex = 0;
 
 		isTimerActive = false;
+
+		RunSequence ();
+	}
+
+	/**
+	 * Should only be called after the previous sequence is completed
+	 **/
+	private void RunSequence() {
+		if (sequenceIndex >= currentRoundData.sequence.Length) {
+			EndRound ();
+			return;
+		}
+
+		currentSequence = currentRoundData.sequence [sequenceIndex];
+			
+		if (currentSequence.sequenceType.Equals ("question")) {
+			BeginQuestions ();
+		} else if (currentSequence.sequenceType.Equals ("dialog")) {
+			// TODO play audio, show subtitle
+			Debug.Log("current sequence is dialog");
+			AudioClip clip = dataController.LoadAudioFile (currentSequence.filePath);
+
+			if (detectiveAudioSource == null) {
+				Debug.LogError ("audio source not found!");
+			} else if (clip == null) {
+				Debug.LogError ("clip is empty!");
+			} else {
+				detectiveAudioSource.clip = clip;
+				detectiveAudioSource.Play ();
+			}
+		}
+
+		sequenceIndex++;
 	}
 
     private void BeginQuestions() {
         questionDisplay.SetActive(true);
 		ShowQuestion ();
         Cursor.lockState = CursorLockMode.None;
-        //PlayerCamera.GetComponent<PlayerLook>().enabled = false;
-        //Player.transform.rotation = Quaternion.Euler(new Vector3(0,90,0));
-        //PlayerCamera.transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
     }
 
     private void ShowQuestion() {
@@ -86,6 +120,16 @@ public class GameController : MonoBehaviour {
             }
 		}
 
+		// show picture if any
+		if (currentQuestion.pictureFileName != null) {
+			questionPictureDisplay.SetActive (true);
+			ImageLoader imageLoader = questionPictureDisplay.GetComponent<ImageLoader> ();
+			if (imageLoader != null) {
+				print ("ImageLoader is found");
+				imageLoader.LoadImage (dataController.LoadImage (currentQuestion.pictureFileName));
+			}
+		}
+
 		isTimerActive = true;
 		timeRemaining = currentQuestion.timeLimitInSeconds;
 		UpdateTimeRemainingDisplay ();
@@ -101,8 +145,8 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void AnswerButtonClicked(AnswerData answerData) {
-
-		// TODO read expression
+		Debug.Log ("answer button clicked");
+		// TODO tell model to read expression (?)
 		// TODO save the answer??
 
 		float suspicionScore = 0;
@@ -112,10 +156,10 @@ public class GameController : MonoBehaviour {
 		if (currentQuestion.considersFact) {
 			if (playerAnswers.ContainsKey (currentQuestion.questionId)) { // if prior answer was stored
 				if (answerData.answerId.Equals (playerAnswers [currentQuestion.questionId])) { // answer is consistent
-					suspicionScore += CORRECT_ANSWER_MULTIPLIER * currentQuestion.consistencyWeight;
+					suspicionScore += ScoreCalculator.CalculateConsistencyScore(true, currentQuestion.consistencyWeight);
 				} else { // wrong answer
 					// TODO ask question again
-					suspicionScore += WRONG_ANSWER_MULTIPLIER * currentQuestion.consistencyWeight;
+					suspicionScore += ScoreCalculator.CalculateConsistencyScore(false, currentQuestion.consistencyWeight);
 				}
 			} else { // this is the first time that particular question was asked
 				playerAnswers.Add(currentQuestion.questionId, answerData); // store the answer
@@ -126,19 +170,18 @@ public class GameController : MonoBehaviour {
 			Debug.Log ("considers emotion");
 			float emotionDistance = dataController.ComputeEmotionDistance (answerData.expectedExpression, 
 				dataController.ReadPlayerEmotion (questionIndex));
-			if (Mathf.Approximately (emotionDistance, 0f)) { // expression matches
-				// TODO give 'right expression' reaction?
-				Debug.Log("correct expression");
-				suspicionScore += currentQuestion.expressionWeight * CORRECT_ANSWER_MULTIPLIER;
-			} else {
-				// TODO give 'wrong expression' detective reaction
-				Debug.Log("wrong expression");
-				suspicionScore += NormalizeExpressionScore(emotionDistance) * currentQuestion.expressionWeight * WRONG_ANSWER_MULTIPLIER;
-			}
+
+			// Debug.Log ("emotion distance: " + emotionDistance.ToString());
+			suspicionScore += ScoreCalculator.CalculateExpressionScore (emotionDistance, currentQuestion.expressionWeight);
 		}
 
 		playerScore += suspicionScore;
-		scoreDisplayText.text = "Suspicion: " + playerScore.ToString ();
+		scoreDisplayText.text = "Suspicion: " + playerScore.ToString ("F2");
+
+		if (questionPictureDisplay.activeSelf) {
+			questionPictureDisplay.GetComponent<ImageLoader> ().DestroyMaterial ();
+			questionPictureDisplay.SetActive (false);
+		}
 
 		// show another question if there are still questions to ask
 		if (questionPool.Length > questionIndex + 1) {
@@ -147,11 +190,6 @@ public class GameController : MonoBehaviour {
 		} else {
 			EndRound ();
 		}
-	}
-
-	private float NormalizeExpressionScore(float rawDistance) {
-		// TODO HOW TO NORMALIZE
-		return rawDistance/10f;
 	}
 
 	public void EndRound() {
