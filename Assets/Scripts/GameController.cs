@@ -7,10 +7,13 @@ using UnityEngine.PostProcessing;
 
 public class GameController : MonoBehaviour {
 
+	private const string SEQUENCE_TYPE_DIALOG = "dialog";
+
 	public Text questionDisplayText;
 	public Text scoreDisplayText;
 	public Text timeRemainingDisplayText;
 	public Text highScoreDisplayText;
+	public Text subtitleDisplayText;
 	public SimpleObjectPool answerButtonObjectPool;
 	public Transform answerButtonParent;
 
@@ -72,8 +75,9 @@ public class GameController : MonoBehaviour {
 		currentSequence = currentRoundData.sequence [sequenceIndex];
 			
 		if (currentSequence.sequenceType.Equals ("question")) {
+			subtitleDisplay.SetActive (false);
 			BeginQuestions ();
-		} else if (currentSequence.sequenceType.Equals ("dialog")) {
+		} else if (currentSequence.sequenceType.Equals (SEQUENCE_TYPE_DIALOG)) {
 			// TODO play audio, show subtitle
 			Debug.Log("current sequence is dialog");
 			AudioClip clip = dataController.LoadAudioFile (currentSequence.filePath);
@@ -85,6 +89,9 @@ public class GameController : MonoBehaviour {
 			} else {
 				detectiveAudioSource.clip = clip;
 				detectiveAudioSource.Play ();
+
+				subtitleDisplay.SetActive (true);
+				subtitleDisplayText.text = currentSequence.subtitleText;
 			}
 		}
 
@@ -227,6 +234,7 @@ public class GameController : MonoBehaviour {
     {
         PlayerCamera.GetComponent<PostProcessingBehaviour>().enabled = !PlayerCamera.GetComponent<PostProcessingBehaviour>().enabled;
     }
+
 	// Update is called once per frame
 	void Update () {
 		if (isTimerActive && questionDisplay.activeSelf == true) {
@@ -236,6 +244,12 @@ public class GameController : MonoBehaviour {
 			if (timeRemaining <= 0f) {
 				EndRound (); // TODO what do we again here?
 			}
+		}
+
+		// handle the sequence thing
+		if (currentSequence.sequenceType.Equals (SEQUENCE_TYPE_DIALOG) && !detectiveAudioSource.isPlaying) {
+			subtitleDisplay.SetActive (false);
+			RunSequence ();
 		}
 
         if (Input.GetKeyDown("e")) {
