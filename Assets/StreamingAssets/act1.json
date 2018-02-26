@@ -16,6 +16,11 @@
       "subtitleText": "Not a nasty, dirty, wet hole full of worms and oozy smells; this was a hobbit hole."
     },
     {
+      "sequenceType": "dialog",
+      "filePath": "seq0_003",
+      "subtitleText": "And that means good food, a warm hearth, and all the comforts of home."
+    },
+    {
       "sequenceType": "question",
       "filePath": "questionsACT1.json"
     },
