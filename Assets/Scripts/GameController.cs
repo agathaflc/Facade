@@ -19,6 +19,9 @@ public class GameController : MonoBehaviour {
 
     public GameObject Room;
     public Camera PlayerCamera;
+	public PostProcessingProfile MotionBlurEffect;
+	public PostProcessingProfile VignetteEffect;
+	public PostProcessingProfile BloomEffect;
     public GameObject Player;
 
 	private DataController dataController;
@@ -187,8 +190,17 @@ public class GameController : MonoBehaviour {
 
     public void MotionBlur()
     {
-        PlayerCamera.GetComponent<PostProcessingBehaviour>().enabled = !PlayerCamera.GetComponent<PostProcessingBehaviour>().enabled;
+		PlayerCamera.GetComponent<PostProcessingBehaviour>().profile = MotionBlurEffect;
     }
+
+	public void Vignette(){
+		PlayerCamera.GetComponent<PostProcessingBehaviour>().profile = VignetteEffect;
+	}
+
+	public void Bloom(){
+		PlayerCamera.GetComponent<PostProcessingBehaviour>().profile = BloomEffect;
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (isTimerActive && questionDisplay.activeSelf == true) {
@@ -210,7 +222,20 @@ public class GameController : MonoBehaviour {
 
         if (Input.GetKeyDown("t"))
         {
-            MotionBlur();
+			MotionBlur();
+			PlayerCamera.GetComponent<PostProcessingBehaviour>().enabled = !PlayerCamera.GetComponent<PostProcessingBehaviour>().enabled;
         }
+
+		if (Input.GetKeyDown("y"))
+		{
+			Vignette();
+			PlayerCamera.GetComponent<PostProcessingBehaviour>().enabled = !PlayerCamera.GetComponent<PostProcessingBehaviour>().enabled;
+		}
+
+		if (Input.GetKeyDown("u"))
+		{
+			Bloom();
+			PlayerCamera.GetComponent<PostProcessingBehaviour>().enabled = !PlayerCamera.GetComponent<PostProcessingBehaviour>().enabled;
+		}
     }
 }
