@@ -7,4 +7,5 @@ public class RoundData {
 
 	public float suspicionLevel = 0;
 	public QuestionData[] questions;
+	public SequenceData[] sequence;
 }

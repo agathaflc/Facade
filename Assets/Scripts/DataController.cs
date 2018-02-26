@@ -16,6 +16,7 @@ public class DataController : MonoBehaviour {
 	private const string HIGHEST_SCORE_KEY = "highestScore";
 
 	private const string ACT_ONE_QUESTIONS_FILE_NAME = "questionsACT1.json";
+	private const string ACT_ONE_DATA_FILE_NAME = "act1.json";
 	private const string EXPRESSION_DATA_FILE_NAME = "expression_data.json";
 	private const string DISTANCEMAP_DATA_FILE_NAME = "distances.json";
 	private const string DISTANCE_MAPPING_FILE_NAME = "distances_2d_mapping.json";
@@ -23,7 +24,8 @@ public class DataController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		DontDestroyOnLoad (gameObject); // prevent destroy objects in previous scene that has been unloaded
-		LoadGameData(ACT_ONE_QUESTIONS_FILE_NAME);
+		//LoadGameData(ACT_ONE_QUESTIONS_FILE_NAME);
+		LoadRoundData(ACT_ONE_DATA_FILE_NAME);
 		LoadPlayerProgress();
 		ReadDistanceMap ();
 
@@ -57,19 +59,31 @@ public class DataController : MonoBehaviour {
 		PlayerPrefs.SetFloat (HIGHEST_SCORE_KEY, playerProgress.highestScore);
 	}
 
-	private void LoadGameData(string fileName){
+	private void LoadRoundData(string fileName){
 		string filePath = Path.Combine (Application.streamingAssetsPath, fileName); // streamingAssetsPath is the folder that stores the json
 
 		if (File.Exists (filePath)) {
 			string dataAsJson = File.ReadAllText (filePath);
-			GameData loadedQuestions = JsonUtility.FromJson<GameData> (dataAsJson);
-			RoundData roundData = new RoundData ();
+			RoundData roundData = JsonUtility.FromJson<RoundData> (dataAsJson);
 
-			roundData.questions = loadedQuestions.questions;
 			allRoundData.Add (roundData);
 		} else {
 			Debug.LogError ("Cannot load game data!");
 		}
+	}
+
+	public AudioClip LoadAudioFile(string path) {
+		/*string filePath = Path.Combine (Application.streamingAssetsPath, path); // streamingAssetsPath is the folder that stores the json
+		Debug.Log("loading audio: " + filePath);
+
+		/*if (File.Exists (filePath)) {
+			return Resources.Load<AudioClip> (filePath);
+		} else {
+			Debug.LogError ("Audio file not found!");
+			return null;
+		}*/
+
+		return Resources.Load<AudioClip> (path);
 	}
 
 	private void ReadDistanceMap() {
@@ -119,8 +133,6 @@ public class DataController : MonoBehaviour {
 		byte[] fileData;
 
 		string filePath = Path.Combine (Application.streamingAssetsPath, fileName); // streamingAssetsPath is the folder that stores the json
-
-		print ("Loading image: " + filePath);
 
 		if (File.Exists(filePath)) {
 			fileData = File.ReadAllBytes(filePath);

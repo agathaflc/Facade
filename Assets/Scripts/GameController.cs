@@ -17,10 +17,14 @@ public class GameController : MonoBehaviour {
 	public GameObject questionDisplay;
 	public GameObject roundEndDisplay;
 	public GameObject questionPictureDisplay;
+	public GameObject subtitleDisplay;
+	public GameObject detectiveObject;
 
     public GameObject Room;
     public Camera PlayerCamera;
     public GameObject Player;
+
+	private AudioSource detectiveAudioSource;
 
 	private DataController dataController;
 	private RoundData currentRoundData;
@@ -30,33 +34,67 @@ public class GameController : MonoBehaviour {
 	private bool isTimerActive;
 	private float timeRemaining;
 	private int questionIndex;
+	private int sequenceIndex;
 	private float playerScore;
 	private List<GameObject> answerButtonGameObjects = new List<GameObject> ();
     public AnswerButton SelectedBoldAnswer;
 
 	private static QuestionData currentQuestion;
+	private static SequenceData currentSequence;
 
 	// Use this for initialization
 	void Start () {
 		dataController = FindObjectOfType<DataController> (); // store a ref to data controller
 		currentRoundData = dataController.GetCurrentRoundData();
 		questionPool = currentRoundData.questions;
+		detectiveAudioSource = detectiveObject.GetComponent<AudioSource> ();
 		timeRemaining = 10;
 		UpdateTimeRemainingDisplay ();
 
 		playerScore = 0;
 		questionIndex = 0;
+		sequenceIndex = 0;
 
 		isTimerActive = false;
+
+		RunSequence ();
+	}
+
+	/**
+	 * Should only be called after the previous sequence is completed
+	 **/
+	private void RunSequence() {
+		if (sequenceIndex >= currentRoundData.sequence.Length) {
+			EndRound ();
+			return;
+		}
+
+		currentSequence = currentRoundData.sequence [sequenceIndex];
+			
+		if (currentSequence.sequenceType.Equals ("question")) {
+			BeginQuestions ();
+		} else if (currentSequence.sequenceType.Equals ("dialog")) {
+			// TODO play audio, show subtitle
+			Debug.Log("current sequence is dialog");
+			AudioClip clip = dataController.LoadAudioFile (currentSequence.filePath);
+
+			if (detectiveAudioSource == null) {
+				Debug.LogError ("audio source not found!");
+			} else if (clip == null) {
+				Debug.LogError ("clip is empty!");
+			} else {
+				detectiveAudioSource.clip = clip;
+				detectiveAudioSource.Play ();
+			}
+		}
+
+		sequenceIndex++;
 	}
 
     private void BeginQuestions() {
         questionDisplay.SetActive(true);
 		ShowQuestion ();
         Cursor.lockState = CursorLockMode.None;
-        //PlayerCamera.GetComponent<PlayerLook>().enabled = false;
-        //Player.transform.rotation = Quaternion.Euler(new Vector3(0,90,0));
-        //PlayerCamera.transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
     }
 
     private void ShowQuestion() {
@@ -104,7 +142,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void AnswerButtonClicked(AnswerData answerData) {
-
+		Debug.Log ("answer button clicked");
 		// TODO tell model to read expression (?)
 		// TODO save the answer??
 
