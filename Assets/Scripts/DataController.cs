@@ -111,10 +111,16 @@ public class DataController : MonoBehaviour
 		Debug.Log (responseData);
 		int index = Random.Range (0, responseData.Length);
 
-		clip = Resources.Load<AudioClip> (responseData [index].soundFilePath);
-		subtitle = responseData [index].text;
+		if (responseData [index].clip != null) {
+			Debug.Log ("LoadDetectiveRespClip: clip has been saved before");
+			clip = responseData [index].clip;
+		} else {
+			Debug.Log ("LoadDetectiveRespClip: clip has NOT been saved before");
+			clip = Resources.Load<AudioClip> (responseData [index].soundFilePath);
+			responseData [index].clip = clip;
+		}
 
-		// TODO THE LAZY SAVE THING
+		subtitle = responseData [index].text;
 	}
 
 	private void LoadAllDetectiveResponses (string fileName)
