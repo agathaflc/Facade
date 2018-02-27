@@ -2,61 +2,61 @@
   "suspiciousPositive": [
     {
       "text": "That's good, although I think you're hiding something.",
-      "soundFile": "susp_pos_0"
+      "soundFilePath": "audio/susp_pos_0"
     },
     {
       "text": "O..kay, great.",
-      "soundFile": "susp_pos_1"
+      "soundFilePath": "audio/susp_pos_1"
     }
   ],
   "suspiciousNeutral": [
     {
       "text": "(a neutral-suspicious response 0)",
-      "soundFile": "susp_neut_0"
+      "soundFilePath": "audio/susp_neut_0"
     },
     {
       "text": "(a neutral-suspicious response 1)",
-      "soundFile": "susp_neut_0"
+      "soundFilePath": "audio/susp_neut_0"
     }
   ],
   "suspiciousNegative": [
     {
       "text": "Oh, that's bad. Are you sure, though?",
-      "soundFile": "susp_neg_0"
+      "soundFilePath": "audio/susp_neg_0"
     },
     {
       "text": "That's awful, but you need to tell me the truth.",
-      "soundFile": "susp_neg_0"
+      "soundFilePath": "audio/susp_neg_0"
     }
   ],
   "notSuspiciousPositive": [
     {
       "text": "That's good to hear.",
-      "soundFile": "n_susp_pos_0"
+      "soundFilePath": "audio/n_susp_pos_0"
     },
     {
       "text": "Good for you.",
-      "soundFile": "n_susp_pos_1"
+      "soundFilePath": "audio/n_susp_pos_1"
     }
   ],
   "notSuspiciousNegative": [
     {
       "text": "That's too bad.",
-      "soundFile": "n_susp_neg_0"
+      "soundFilePath": "audio/n_susp_neg_0"
     },
     {
       "text": "Oh, don't worry.",
-      "soundFile": "n_susp_neg_1"
+      "soundFilePath": "audio/n_susp_neg_1"
     }
   ],
   "notSuspiciousNeutral": [
     {
-      "text": "(a neutral-not suspicious response 0)",
-      "soundFile": "n_susp_neut_0"
+      "text": "I see.",
+      "soundFilePath": "audio/n_susp_neut_0"
     },
     {
-      "text": "(a neutral-not suspicious response 0)",
-      "soundFile": "n_susp_neut_1"
+      "text": "Got it.",
+      "soundFilePath": "audio/n_susp_neut_1"
     }
   ]
 }
