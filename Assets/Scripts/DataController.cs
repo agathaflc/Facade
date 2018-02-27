@@ -9,7 +9,6 @@ public class DataController : MonoBehaviour
 
 	private RoundData currentRound;
 	private DistanceData distanceMap;
-	private DetectiveResponses detectiveResponses;
 
 	private PlayerProgress playerProgress;
 
@@ -78,7 +77,7 @@ public class DataController : MonoBehaviour
 			string dataAsJson = File.ReadAllText (filePath);
 			currentRound = JsonUtility.FromJson<RoundData> (dataAsJson);
 
-			LoadDetectiveResponses (currentRound.responsesPath);
+			LoadAllDetectiveResponses (currentRound.responsesPath);
 		} else {
 			Debug.LogError ("Cannot load game data!");
 		}
@@ -89,31 +88,42 @@ public class DataController : MonoBehaviour
 		return Resources.Load<AudioClip> (relativeResourcePath);
 	}
 
-	public AudioClip LoadDetectiveRespClip (bool suspicious, string responseType)
+	public void LoadDetectiveRespClip (bool suspicious, out AudioClip clip, out string subtitle, string responseType = DETECTIVE_RESPONSE_NEUTRAL)
 	{
 		ResponseData[] responseData;
 
-		if (responseType.Equals (DETECTIVE_RESPONSE_POSITIVE)) {
-			responseData = suspicious ? currentRound.detectiveResponses.suspiciousPositive 
+		if (responseType == null) {
+			responseData = currentRound.detectiveResponses.notSuspiciousNeutral;
+		} else {
+			if (responseType.Equals (DETECTIVE_RESPONSE_POSITIVE)) {
+				responseData = suspicious ? currentRound.detectiveResponses.suspiciousPositive 
 				: currentRound.detectiveResponses.notSuspiciousPositive;
-		} else if (responseType.Equals (DETECTIVE_RESPONSE_NEGATIVE)) {
-			responseData = suspicious ? currentRound.detectiveResponses.suspiciousNegative 
+			} else if (responseType.Equals (DETECTIVE_RESPONSE_NEGATIVE)) {
+				responseData = suspicious ? currentRound.detectiveResponses.suspiciousNegative 
 				: currentRound.detectiveResponses.notSuspiciousNegative;
-		} else if (responseType.Equals (DETECTIVE_RESPONSE_NEUTRAL)) {
-			responseData = suspicious ? currentRound.detectiveResponses.suspiciousNeutral
+			} else if (responseType.Equals (DETECTIVE_RESPONSE_NEUTRAL)) {
+				responseData = suspicious ? currentRound.detectiveResponses.suspiciousNeutral
 				: currentRound.detectiveResponses.notSuspiciousNeutral;
+			} else {
+				responseData = currentRound.detectiveResponses.notSuspiciousNeutral;
+			}
 		}
+		Debug.Log (responseData);
+		int index = Random.Range (0, responseData.Length);
 
-		// TODO WHAT IF RESPONSDATA IS NULL
+		clip = Resources.Load<AudioClip> (responseData [index].soundFilePath);
+		subtitle = responseData [index].text;
+
+		// TODO THE LAZY SAVE THING
 	}
 
-	private void LoadDetectiveResponses (string fileName)
+	private void LoadAllDetectiveResponses (string fileName)
 	{
 		string filePath = Path.Combine (Application.streamingAssetsPath, fileName);
-
+		Debug.Log ("responses path: " + filePath);
 		if (File.Exists (filePath)) {
 			string dataAsJson = File.ReadAllText (filePath);
-			detectiveResponses = JsonUtility.FromJson<DetectiveResponses> (dataAsJson);
+			currentRound.detectiveResponses = JsonUtility.FromJson<DetectiveResponses> (dataAsJson);
 		} else {
 			Debug.LogError ("Cannot load game data: detective responses");
 		}

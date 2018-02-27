@@ -52,11 +52,11 @@
   "notSuspiciousNeutral": [
     {
       "text": "I see.",
-      "soundFilePath": "audio/n_susp_neut_0"
+      "soundFilePath": "audio/seq0_001"
     },
     {
       "text": "Got it.",
-      "soundFilePath": "audio/n_susp_neut_1"
+      "soundFilePath": "audio/seq0_001"
     }
   ]
 }
