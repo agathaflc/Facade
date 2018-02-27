@@ -1,4 +1,5 @@
 {
+  "responsesPath": "detective_responses_act1.json",
   "sequence": [
     {
       "sequenceType": "dialog",

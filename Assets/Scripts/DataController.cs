@@ -4,16 +4,21 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 
-public class DataController : MonoBehaviour {
+public class DataController : MonoBehaviour
+{
 
-	private List<RoundData> allRoundData = new List<RoundData>();
-
+	private RoundData currentRound;
 	private DistanceData distanceMap;
+	private DetectiveResponses detectiveResponses;
 
 	private PlayerProgress playerProgress;
 
 	private const string MENU_SCREEN = "MenuScreen";
 	private const string HIGHEST_SCORE_KEY = "highestScore";
+
+	private const string DETECTIVE_RESPONSE_NEUTRAL = "neutral";
+	private const string DETECTIVE_RESPONSE_POSITIVE = "positive";
+	private const string DETECTIVE_RESPONSE_NEGATIVE = "negative";
 
 	private const string ACT_ONE_QUESTIONS_FILE_NAME = "questionsACT1.json";
 	private const string ACT_ONE_DATA_FILE_NAME = "act1.json";
@@ -22,71 +27,100 @@ public class DataController : MonoBehaviour {
 	private const string DISTANCE_MAPPING_FILE_NAME = "distances_2d_mapping.json";
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		DontDestroyOnLoad (gameObject); // prevent destroy objects in previous scene that has been unloaded
 		//LoadGameData(ACT_ONE_QUESTIONS_FILE_NAME);
-		LoadRoundData(ACT_ONE_DATA_FILE_NAME);
-		LoadPlayerProgress();
+		LoadRoundData (ACT_ONE_DATA_FILE_NAME);
+		LoadPlayerProgress ();
 		ReadDistanceMap ();
 
 		SceneManager.LoadScene (MENU_SCREEN);
 	}
 
-	public RoundData GetCurrentRoundData() {
-		return allRoundData [0];
+	public RoundData GetCurrentRoundData ()
+	{
+		return currentRound;
 	}
 
-	public void SubmitNewPlayerScore(float newScore) {
+	public void SubmitNewPlayerScore (float newScore)
+	{
 		if (newScore > playerProgress.highestScore) {
 			playerProgress.highestScore = newScore;
-			SavePlayerProgress();
+			SavePlayerProgress ();
 		}
 	}
 
-	public float GetHighestPlayerScore() {
+	public float GetHighestPlayerScore ()
+	{
 		return playerProgress.highestScore;
 	}
-	
-	private void LoadPlayerProgress() {
+
+	private void LoadPlayerProgress ()
+	{
 		playerProgress = new PlayerProgress ();
 
 		if (PlayerPrefs.HasKey (HIGHEST_SCORE_KEY)) { // if we already stored a highest score
-			playerProgress.highestScore = PlayerPrefs.GetFloat(HIGHEST_SCORE_KEY);
+			playerProgress.highestScore = PlayerPrefs.GetFloat (HIGHEST_SCORE_KEY);
 		}
 	}
 
-	private void SavePlayerProgress() {
+	private void SavePlayerProgress ()
+	{
 		PlayerPrefs.SetFloat (HIGHEST_SCORE_KEY, playerProgress.highestScore);
 	}
 
-	private void LoadRoundData(string fileName){
+	private void LoadRoundData (string fileName)
+	{
 		string filePath = Path.Combine (Application.streamingAssetsPath, fileName); // streamingAssetsPath is the folder that stores the json
 
 		if (File.Exists (filePath)) {
 			string dataAsJson = File.ReadAllText (filePath);
-			RoundData roundData = JsonUtility.FromJson<RoundData> (dataAsJson);
+			currentRound = JsonUtility.FromJson<RoundData> (dataAsJson);
 
-			allRoundData.Add (roundData);
+			LoadDetectiveResponses (currentRound.responsesPath);
 		} else {
 			Debug.LogError ("Cannot load game data!");
 		}
 	}
 
-	public AudioClip LoadAudioFile(string path) {
-		/*string filePath = Path.Combine (Application.streamingAssetsPath, path); // streamingAssetsPath is the folder that stores the json
-		Debug.Log("loading audio: " + filePath);
-
-		/*if (File.Exists (filePath)) {
-			return Resources.Load<AudioClip> (filePath);
-		} else {
-			Debug.LogError ("Audio file not found!");
-			return null;
-		}*/
-
-		return Resources.Load<AudioClip> (path);
+	public AudioClip LoadAudioFile (string relativeResourcePath)
+	{
+		return Resources.Load<AudioClip> (relativeResourcePath);
 	}
 
-	private void ReadDistanceMap() {
+	public AudioClip LoadDetectiveRespClip (bool suspicious, string responseType)
+	{
+		ResponseData[] responseData;
+
+		if (responseType.Equals (DETECTIVE_RESPONSE_POSITIVE)) {
+			responseData = suspicious ? currentRound.detectiveResponses.suspiciousPositive 
+				: currentRound.detectiveResponses.notSuspiciousPositive;
+		} else if (responseType.Equals (DETECTIVE_RESPONSE_NEGATIVE)) {
+			responseData = suspicious ? currentRound.detectiveResponses.suspiciousNegative 
+				: currentRound.detectiveResponses.notSuspiciousNegative;
+		} else if (responseType.Equals (DETECTIVE_RESPONSE_NEUTRAL)) {
+			responseData = suspicious ? currentRound.detectiveResponses.suspiciousNeutral
+				: currentRound.detectiveResponses.notSuspiciousNeutral;
+		}
+
+		// TODO WHAT IF RESPONSDATA IS NULL
+	}
+
+	private void LoadDetectiveResponses (string fileName)
+	{
+		string filePath = Path.Combine (Application.streamingAssetsPath, fileName);
+
+		if (File.Exists (filePath)) {
+			string dataAsJson = File.ReadAllText (filePath);
+			detectiveResponses = JsonUtility.FromJson<DetectiveResponses> (dataAsJson);
+		} else {
+			Debug.LogError ("Cannot load game data: detective responses");
+		}
+	}
+
+	private void ReadDistanceMap ()
+	{
 		string filePath = Path.Combine (Application.streamingAssetsPath, DISTANCE_MAPPING_FILE_NAME); // streamingAssetsPath is the folder that stores the json
 
 		if (File.Exists (filePath)) {
@@ -97,12 +131,14 @@ public class DataController : MonoBehaviour {
 		}
 	}
 
-	public float ComputeEmotionDistance(string[] expected, EmotionData actual) {
+	public float ComputeEmotionDistance (string[] expected, EmotionData actual)
+	{
 		return ScoreCalculator.ComputeEmotionDistance (distanceMap, expected, actual);
 	}
 
 
-	public EmotionData ReadPlayerEmotion(int questionIndex) {
+	public EmotionData ReadPlayerEmotion (int questionIndex)
+	{
 		string filePath = Path.Combine (Application.streamingAssetsPath, EXPRESSION_DATA_FILE_NAME); // streamingAssetsPath is the folder that stores the json
 
 		if (File.Exists (filePath)) {
@@ -110,7 +146,7 @@ public class DataController : MonoBehaviour {
 			ExpressionData loadedExpressions = JsonUtility.FromJson<ExpressionData> (dataAsJson);
 
 			if (loadedExpressions.emotions.Length < questionIndex + 1) { // index out of bounds???
-				Debug.LogError("Expression data for this question does not exist!");
+				Debug.LogError ("Expression data for this question does not exist!");
 			}
 
 			EmotionData correspondingEmotion = loadedExpressions.emotions [questionIndex];
@@ -128,16 +164,17 @@ public class DataController : MonoBehaviour {
 		return null;
 	}
 
-	public Texture2D LoadImage(string fileName) {
+	public Texture2D LoadImage (string fileName)
+	{
 		Texture2D tex = null;
 		byte[] fileData;
 
 		string filePath = Path.Combine (Application.streamingAssetsPath, fileName); // streamingAssetsPath is the folder that stores the json
 
-		if (File.Exists(filePath)) {
-			fileData = File.ReadAllBytes(filePath);
-			tex = new Texture2D(2, 2, TextureFormat.DXT1, false);
-			tex.LoadImage(fileData); //..this will auto-resize the texture dimensions.
+		if (File.Exists (filePath)) {
+			fileData = File.ReadAllBytes (filePath);
+			tex = new Texture2D (2, 2, TextureFormat.DXT1, false);
+			tex.LoadImage (fileData); //..this will auto-resize the texture dimensions.
 		}
 		return tex;
 	}

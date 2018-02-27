@@ -7,4 +7,5 @@ public class ResponseData {
 
 	public string text;
 	public string soundFilePath;
+	public AudioClip clip;
 }
