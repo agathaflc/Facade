@@ -2,22 +2,22 @@
   "sequence": [
     {
       "sequenceType": "dialog",
-      "filePath": "seq0_000",
+      "filePath": "audio/seq0_000",
       "subtitleText": "It began... well, it began as you might expect."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "seq0_001",
+      "filePath": "audio/seq0_001",
       "subtitleText": "In a hole in the ground, there lived a hobbit."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "seq0_002",
+      "filePath": "audio/seq0_002",
       "subtitleText": "Not a nasty, dirty, wet hole full of worms and oozy smells; this was a hobbit hole."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "seq0_003",
+      "filePath": "audio/seq0_003",
       "subtitleText": "And that means good food, a warm hearth, and all the comforts of home."
     },
     {
@@ -162,7 +162,7 @@
               "expectedExpression": [
                 "neutral"
               ],
-              "detectiveResponse": "unsure"
+              "detectiveResponse": "neutral"
             },
             {
               "answerId": "022",
@@ -201,7 +201,7 @@
               "expectedExpression": [
                 "neutral"
               ],
-              "detectiveResponse": "unsure"
+              "detectiveResponse": "neutral"
             },
             {
               "answerId": "022",
