@@ -10,4 +10,12 @@ public class RoundData {
 	public SequenceData[] sequence;
 	public string responsesPath;
 	public DetectiveResponses detectiveResponses;
+
+	public string bgmPositive;
+	public string bgmNegative;
+	public string bgmNormal;
+
+	public AudioClip positiveClip;
+	public AudioClip negativeClip;
+	public AudioClip normalClip;
 }

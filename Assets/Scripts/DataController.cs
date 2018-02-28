@@ -78,9 +78,21 @@ public class DataController : MonoBehaviour
 			currentRound = JsonUtility.FromJson<RoundData> (dataAsJson);
 
 			LoadAllDetectiveResponses (currentRound.responsesPath);
+			LoadBgms ();
 		} else {
 			Debug.LogError ("Cannot load game data!");
 		}
+	}
+
+	public void LoadBgms() {
+		if (currentRound == null) {
+			Debug.LogError ("current round is null!");
+			return;
+		}
+
+		currentRound.positiveClip = LoadAudioFile (currentRound.bgmPositive);
+		currentRound.negativeClip = LoadAudioFile (currentRound.bgmNegative);
+		currentRound.normalClip = LoadAudioFile (currentRound.bgmNormal);
 	}
 
 	public AudioClip LoadAudioFile (string relativeResourcePath)

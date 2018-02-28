@@ -62,6 +62,12 @@ public class GameController : MonoBehaviour
 		detectiveAudioSource = detectiveObject.GetComponent<AudioSource> ();
 		bgmAudioSource = player.GetComponent<AudioSource> ();
 
+		bgmAudioSource.clip = currentRoundData.normalClip;
+		if (bgmAudioSource.clip == null) {
+			Debug.LogError ("Clip is empty!");
+		}
+		bgmAudioSource.Play ();
+
 		playerScore = 0;
 		questionIndex = 0;
 		sequenceIndex = 0;
