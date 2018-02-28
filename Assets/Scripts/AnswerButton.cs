@@ -19,8 +19,12 @@ public class AnswerButton : MonoBehaviour {
 		answerText.text = answerData.answerText;
 	}
 
+	public AnswerData GetAnswerData() {
+		return answerData;
+	}
+
 	public void HandleClick() {
-		gameController.AnswerButtonClicked (answerData);
+		gameController.AnswerButtonClicked (this);
 	}
 
     public void Bold()
@@ -35,8 +39,8 @@ public class AnswerButton : MonoBehaviour {
 
     public void HandleOnMouseEnter()
     {
-        gameController.SelectedBoldAnswer.UnBold();
-        gameController.SelectedBoldAnswer = this;
+        gameController.selectedBoldAnswer.UnBold();
+        gameController.selectedBoldAnswer = this;
         this.Bold();
     }
 }

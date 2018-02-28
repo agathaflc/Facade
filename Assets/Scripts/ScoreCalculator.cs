@@ -20,14 +20,14 @@ public class ScoreCalculator {
 
 		if (actual == null) {
 			// assume neutral expression
-			Debug.Log("actual expression is null");
+			// Debug.Log("actual expression is null");
 			observedEmotionvector = distanceMap.emotions.FirstOrDefault (e => e.type.Equals(EMOTION_NEUTRAL));
 		} else {
 			EmotionMapping raw = distanceMap.emotions.FirstOrDefault (e => e.type.Equals (actual.emotion));
 			observedEmotionvector = new EmotionMapping ();
 			observedEmotionvector.x = raw.x * actual.emotionScore / 100.0f;
 			observedEmotionvector.y = raw.y * actual.emotionScore / 100.0f;
-			Debug.Log ("after multiplied: " + observedEmotionvector.x.ToString() + ", " + observedEmotionvector.y.ToString());
+			// Debug.Log ("after multiplied: " + observedEmotionvector.x.ToString() + ", " + observedEmotionvector.y.ToString());
 		}
 
 		float minDistance = 9999f;
@@ -37,8 +37,7 @@ public class ScoreCalculator {
 		for (int i = 0; i < expected.Length; i++) {
 			expectedMapping = distanceMap.emotions.FirstOrDefault (e => e.type.Equals (expected [i]));
 			float currentDistance = ComputeDistanceBetweenTwoPoints (observedEmotionvector.x, observedEmotionvector.y, expectedMapping.x, expectedMapping.y);
-			Debug.Log (observedEmotionvector.x.ToString() + " " + observedEmotionvector.y.ToString() + " " +
-				expectedMapping.x + " " + expectedMapping.y + ": " +  currentDistance.ToString());
+			// Debug.Log (observedEmotionvector.x.ToString() + " " + observedEmotionvector.y.ToString() + " " +	expectedMapping.x + " " + expectedMapping.y + ": " +  currentDistance.ToString());
 			if (currentDistance < minDistance) {
 				minDistance = currentDistance;
 			}

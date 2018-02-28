@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
 
 	private const string SEQUENCE_TYPE_DIALOG = "dialog";
 	private const string SEQUENCE_TYPE_QUESTION = "question";
+	private const string DEFAULT_EMOTION = "neutral";
 
 	public Text questionDisplayText;
 	public Text scoreDisplayText;
@@ -25,14 +26,15 @@ public class GameController : MonoBehaviour
 	public GameObject subtitleDisplay;
 	public GameObject detectiveObject;
 
-	public GameObject Room;
-	public Camera PlayerCamera;
-	public PostProcessingProfile MotionBlurEffect;
-	public PostProcessingProfile VignetteEffect;
-	public PostProcessingProfile BloomEffect;
-	public GameObject Player;
+	public GameObject room;
+	public Camera playerCamera;
+	public PostProcessingProfile motionBlurEffect;
+	public PostProcessingProfile vignetteEffect;
+	public PostProcessingProfile bloomEffect;
+	public GameObject player;
 
 	private AudioSource detectiveAudioSource;
+	private AudioSource bgmAudioSource;
 
 	private DataController dataController;
 	private RoundData currentRoundData;
@@ -46,7 +48,7 @@ public class GameController : MonoBehaviour
 	private int sequenceIndex;
 	private float playerScore;
 	private List<GameObject> answerButtonGameObjects = new List<GameObject> ();
-	public AnswerButton SelectedBoldAnswer;
+	public AnswerButton selectedBoldAnswer;
 
 	private static QuestionData currentQuestion;
 	private static SequenceData currentSequence;
@@ -58,8 +60,7 @@ public class GameController : MonoBehaviour
 		currentRoundData = dataController.GetCurrentRoundData ();
 		questionPool = currentRoundData.questions;
 		detectiveAudioSource = detectiveObject.GetComponent<AudioSource> ();
-		timeRemaining = 10;
-		UpdateTimeRemainingDisplay ();
+		bgmAudioSource = player.GetComponent<AudioSource> ();
 
 		playerScore = 0;
 		questionIndex = 0;
@@ -83,11 +84,11 @@ public class GameController : MonoBehaviour
 		currentSequence = currentRoundData.sequence [sequenceIndex];
 			
 		if (currentSequence.sequenceType.Equals (SEQUENCE_TYPE_QUESTION)) {
-			Debug.Log ("RunSequence: current sequence is question");
+			// Debug.Log ("RunSequence: current sequence is question");
 			subtitleDisplay.SetActive (false);
 			BeginQuestions ();
 		} else if (currentSequence.sequenceType.Equals (SEQUENCE_TYPE_DIALOG)) {
-			Debug.Log ("RunSequence: current sequence is dialog");
+			// Debug.Log ("RunSequence: current sequence is dialog");
 			isDetectiveTalking = true;
 			ShowAndPlayDialog (dataController.LoadAudioFile (currentSequence.filePath), currentSequence.subtitleText);
 		}
@@ -133,8 +134,8 @@ public class GameController : MonoBehaviour
 			AnswerButton answerButton = answerButtonGameObject.GetComponent<AnswerButton> ();
 			answerButton.Setup (variation.answers [i]);
 			if (i == 0) {
-				SelectedBoldAnswer = answerButton;
-				SelectedBoldAnswer.Bold ();
+				selectedBoldAnswer = answerButton;
+				selectedBoldAnswer.Bold (); // TODO also shade it maybe?
 			}
 		}
 
@@ -143,7 +144,7 @@ public class GameController : MonoBehaviour
 			questionPictureDisplay.SetActive (true);
 			ImageLoader imageLoader = questionPictureDisplay.GetComponent<ImageLoader> ();
 			if (imageLoader != null) {
-				print ("ImageLoader is found");
+				// Debug.Log ("ImageLoader is found");
 				imageLoader.LoadImage (dataController.LoadImage (currentQuestion.pictureFileName));
 			}
 		}
@@ -163,14 +164,16 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-	public void AnswerButtonClicked (AnswerData answerData)
+	public void AnswerButtonClicked (AnswerButton answerButton)
 	{
-		Debug.Log ("answer button clicked");
+		// Debug.Log ("Selected answer: " + answerButton.GetAnswerData().answerText);
 		// TODO tell model to read expression (?)
 		// TODO save the answer??
 
 		float suspicionScore = 0;
 		isTimerActive = false;
+
+		AnswerData answerData = answerButton.GetAnswerData ();
 
 		// check consistency if question considers fact
 		if (currentQuestion.considersFact) {
@@ -187,7 +190,7 @@ public class GameController : MonoBehaviour
 		}
 
 		if (currentQuestion.considersEmotion) {
-			Debug.Log ("considers emotion");
+			// Debug.Log ("considers emotion");
 			float emotionDistance = dataController.ComputeEmotionDistance (answerData.expectedExpression, 
 				                        dataController.ReadPlayerEmotion (questionIndex));
 
@@ -208,10 +211,36 @@ public class GameController : MonoBehaviour
 		string subtitle;
 
 		dataController.LoadDetectiveRespClip ((suspicionScore > 0), out clip, out subtitle, answerData.detectiveResponse);
-		Debug.Log ("response subtitle: " + subtitle);
+		// Debug.Log ("response subtitle: " + subtitle);
 		isDetectiveTalking = true;
 		ShowAndPlayDialog (clip, subtitle);
 		questionDisplay.SetActive (false);
+	}
+
+	/**
+	 * follows the algorithm here: https://trello.com/c/TDz6Ixgb/31-dream-building-algorithm
+	 * */
+	private void AdaptMusicAndLighting(bool considerConsistency, bool considerEmotion, bool consistent = true, 
+		bool correctExpression = true, string emotion = DEFAULT_EMOTION) {
+		if (considerConsistency) {
+			if (!consistent) {
+				// TODO make scarier
+				return;
+			}
+		}
+
+		if (considerEmotion) {
+			if (!correctExpression) {
+				// TODO make scarier
+				return;
+			} else {
+				// TODO follow emotion
+				return;
+			}
+		}
+
+		// don't change anything if it gets to this point: doesn't consider emotion
+		return;
 	}
 
 	public void EndRound ()
@@ -222,6 +251,8 @@ public class GameController : MonoBehaviour
 
 		questionDisplay.SetActive (false); // deactivate the question display
 		roundEndDisplay.SetActive (true); // activate (show) the round end display
+
+		questionPictureDisplay.GetComponent<ImageLoader> ().DestroyMaterial ();
 	}
 
 	public void ReturnToMenu ()
@@ -240,12 +271,12 @@ public class GameController : MonoBehaviour
 
 	public void LightsCameraAction ()
 	{
-		GameObject Lightsbulb = Room.transform.Find ("Lightbulb").gameObject;
+		GameObject Lightsbulb = room.transform.Find ("Lightbulb").gameObject;
 		GameObject Lights = Lightsbulb.transform.Find ("Lamp").gameObject;
 		Lights.GetComponent<Light> ().enabled = !Lights.GetComponent<Light> ().enabled;
 
-		GameObject SpotLight1 = Room.transform.Find ("Spot light 1").gameObject;
-		GameObject SpotLight2 = Room.transform.Find ("Spot light 2").gameObject;
+		GameObject SpotLight1 = room.transform.Find ("Spot light 1").gameObject;
+		GameObject SpotLight2 = room.transform.Find ("Spot light 2").gameObject;
 
 		SpotLight1.GetComponent<Light> ().enabled = !Lights.GetComponent<Light> ().enabled;
 		SpotLight2.GetComponent<Light> ().enabled = !Lights.GetComponent<Light> ().enabled;
@@ -253,17 +284,17 @@ public class GameController : MonoBehaviour
 
 	public void MotionBlur ()
 	{
-		PlayerCamera.GetComponent<PostProcessingBehaviour> ().profile = MotionBlurEffect;
+		playerCamera.GetComponent<PostProcessingBehaviour> ().profile = motionBlurEffect;
 	}
 
 	public void Vignette ()
 	{
-		PlayerCamera.GetComponent<PostProcessingBehaviour> ().profile = VignetteEffect;
+		playerCamera.GetComponent<PostProcessingBehaviour> ().profile = vignetteEffect;
 	}
 
 	public void Bloom ()
 	{
-		PlayerCamera.GetComponent<PostProcessingBehaviour> ().profile = BloomEffect;
+		playerCamera.GetComponent<PostProcessingBehaviour> ().profile = bloomEffect;
 	}
 
 	// Update is called once per frame
@@ -271,12 +302,14 @@ public class GameController : MonoBehaviour
 	{
 		if (isTimerActive && questionDisplay.activeSelf == true) {
 			timeRemaining -= Time.deltaTime;
-			UpdateTimeRemainingDisplay ();
 
 			if (timeRemaining <= 0f) {
-				EndRound (); // TODO what do we again here?
+				// pick whichever answer is selected right now
+				AnswerButtonClicked(selectedBoldAnswer);
 			}
 		}
+
+		UpdateTimeRemainingDisplay ();
 
 		// handle the sequence thing
 		if (isDetectiveTalking && !detectiveAudioSource.isPlaying) {
@@ -284,14 +317,14 @@ public class GameController : MonoBehaviour
 			subtitleDisplay.SetActive (false);
 
 			if (currentSequence.sequenceType.Equals (SEQUENCE_TYPE_QUESTION)) {
-				Debug.Log ("Update: current sequence is question");
+				// Debug.Log ("Update: current sequence is question");
 				// show another question if there are still questions to ask
 				if (questionPool.Length > questionIndex + 1) {
-					Debug.Log ("show another question");
+					// Debug.Log ("show another question");
 					questionIndex++;
 					ShowQuestion ();
 				} else {
-					Debug.Log ("end of questions");
+					// Debug.Log ("end of questions");
 					RunSequence ();
 				}
 			} else {
@@ -305,17 +338,17 @@ public class GameController : MonoBehaviour
 
 		if (Input.GetKeyDown ("t")) {
 			MotionBlur ();
-			PlayerCamera.GetComponent<PostProcessingBehaviour> ().enabled = !PlayerCamera.GetComponent<PostProcessingBehaviour> ().enabled;
+			playerCamera.GetComponent<PostProcessingBehaviour> ().enabled = !playerCamera.GetComponent<PostProcessingBehaviour> ().enabled;
 		}
 
 		if (Input.GetKeyDown ("y")) {
 			Vignette ();
-			PlayerCamera.GetComponent<PostProcessingBehaviour> ().enabled = !PlayerCamera.GetComponent<PostProcessingBehaviour> ().enabled;
+			playerCamera.GetComponent<PostProcessingBehaviour> ().enabled = !playerCamera.GetComponent<PostProcessingBehaviour> ().enabled;
 		}
 
 		if (Input.GetKeyDown ("u")) {
 			Bloom ();
-			PlayerCamera.GetComponent<PostProcessingBehaviour> ().enabled = !PlayerCamera.GetComponent<PostProcessingBehaviour> ().enabled;
+			playerCamera.GetComponent<PostProcessingBehaviour> ().enabled = !playerCamera.GetComponent<PostProcessingBehaviour> ().enabled;
 		}
 	}
 }

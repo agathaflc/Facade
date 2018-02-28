@@ -108,14 +108,15 @@ public class DataController : MonoBehaviour
 				responseData = currentRound.detectiveResponses.notSuspiciousNeutral;
 			}
 		}
-		Debug.Log (responseData);
+
+		// Debug.Log (responseData);
 		int index = Random.Range (0, responseData.Length);
 
 		if (responseData [index].clip != null) {
-			Debug.Log ("LoadDetectiveRespClip: clip has been saved before");
+			Debug.Log ("LoadDetectiveRespClip: clip HAS been saved before");
 			clip = responseData [index].clip;
 		} else {
-			Debug.Log ("LoadDetectiveRespClip: clip has NOT been saved before");
+			// Debug.Log ("LoadDetectiveRespClip: clip has NOT been saved before");
 			clip = Resources.Load<AudioClip> (responseData [index].soundFilePath);
 			responseData [index].clip = clip;
 		}
@@ -126,7 +127,7 @@ public class DataController : MonoBehaviour
 	private void LoadAllDetectiveResponses (string fileName)
 	{
 		string filePath = Path.Combine (Application.streamingAssetsPath, fileName);
-		Debug.Log ("responses path: " + filePath);
+		// Debug.Log ("responses path: " + filePath);
 		if (File.Exists (filePath)) {
 			string dataAsJson = File.ReadAllText (filePath);
 			currentRound.detectiveResponses = JsonUtility.FromJson<DetectiveResponses> (dataAsJson);
@@ -168,7 +169,7 @@ public class DataController : MonoBehaviour
 			EmotionData correspondingEmotion = loadedExpressions.emotions [questionIndex];
 
 			if (correspondingEmotion.questionNo == questionIndex) {
-				print ("expression data loaded successfully");
+				// Debug.Log ("expression data loaded successfully");
 				return correspondingEmotion;
 			} else {
 				Debug.LogError ("Question index does not match!");
