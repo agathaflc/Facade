@@ -2532,9 +2532,9 @@ MonoBehaviour:
   detectiveObject: {fileID: 1864898968}
   room: {fileID: 1440310381}
   playerCamera: {fileID: 1267432956}
-  motionBlurEffect: {fileID: 0}
-  vignetteEffect: {fileID: 0}
-  bloomEffect: {fileID: 0}
+  motionBlurEffect: {fileID: 11400000, guid: 1d576b4f9b60cae4f82b38009d0b3138, type: 2}
+  vignetteEffect: {fileID: 11400000, guid: fad07c4624af9aa4cb21a9eaf4cf912c, type: 2}
+  bloomEffect: {fileID: 11400000, guid: 2476016b9db4793459c550e08e6d4857, type: 2}
   player: {fileID: 30381813}
   selectedBoldAnswer: {fileID: 0}
 --- !u!1 &1736630318
