@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
 	public Text questionDisplayText;
 	public Text scoreDisplayText;
 	public Text timeRemainingDisplayText;
+	public Slider timeRemainingDisplaySlider;
 	public Text highScoreDisplayText;
 	public Text subtitleDisplayText;
 	public SimpleObjectPool answerButtonObjectPool;
@@ -270,6 +271,8 @@ public class GameController : MonoBehaviour
 	{
 		if (isTimerActive) {
 			timeRemainingDisplayText.text = "Time: " + Mathf.Round (timeRemaining).ToString ();
+			timeRemainingDisplaySlider.value = (timeRemaining / 10);//TODO how to obtain different time limit for different questions?
+
 		} else {
 			timeRemainingDisplayText.text = "Time: -";
 		}
