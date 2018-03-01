@@ -11,11 +11,11 @@ public class RoundData {
 	public string responsesPath;
 	public DetectiveResponses detectiveResponses;
 
-	public string bgmPositive;
-	public string bgmNegative;
-	public string bgmNormal;
+	public string bgmPositiveFile;
+	public string bgmNegativeFile;
+	public string bgmNormalFile;
 
-	public AudioClip positiveClip;
-	public AudioClip negativeClip;
-	public AudioClip normalClip;
+	public AudioClip bgmPositiveClip;
+	public AudioClip bgmNegativeClip;
+	public AudioClip bgmNormalClip;
 }

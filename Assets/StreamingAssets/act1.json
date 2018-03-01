@@ -1,8 +1,8 @@
 {
   "responsesPath": "detective_responses_act1.json",
-  "bgmPositive" : "audio/bgm_fast",
-  "bgmNegative" : "audio/bgm_slow",
-  "bgmNormal" : "audio/bgm_normal",
+  "bgmPositiveFile" : "audio/bgm_fast",
+  "bgmNegativeFile" : "audio/bgm_slow",
+  "bgmNormalFile" : "audio/bgm_normal",
   "sequence": [
     {
       "sequenceType": "dialog",

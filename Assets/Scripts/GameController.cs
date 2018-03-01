@@ -11,6 +11,11 @@ public class GameController : MonoBehaviour
 	private const string SEQUENCE_TYPE_DIALOG = "dialog";
 	private const string SEQUENCE_TYPE_QUESTION = "question";
 	private const string DEFAULT_EMOTION = "neutral";
+	private const string HAPPY_EMOTION = "happy";
+	private const string SAD_EMOTION = "sad";
+	private const string SCARED_EMOTION = "scared";
+	private const string SURPRISED_EMOTION = "surprised";
+	private const string ANGRY_EMOTION = "angry";
 
 	public Text questionDisplayText;
 	public Text scoreDisplayText;
@@ -62,11 +67,7 @@ public class GameController : MonoBehaviour
 		detectiveAudioSource = detectiveObject.GetComponent<AudioSource> ();
 		bgmAudioSource = player.GetComponent<AudioSource> ();
 
-		bgmAudioSource.clip = currentRoundData.normalClip;
-		if (bgmAudioSource.clip == null) {
-			Debug.LogError ("Clip is empty!");
-		}
-		bgmAudioSource.Play ();
+		PlayBgm (currentRoundData.bgmNormalClip);
 
 		playerScore = 0;
 		questionIndex = 0;
@@ -75,6 +76,16 @@ public class GameController : MonoBehaviour
 		isTimerActive = false;
 
 		RunSequence ();
+	}
+
+	private void PlayBgm(AudioClip clip) {
+		if (clip == null) {
+			Debug.LogError ("Clip is empty!");
+			return;
+		}
+
+		bgmAudioSource.clip = clip;
+		bgmAudioSource.Play ();
 	}
 
 	/**
@@ -107,7 +118,7 @@ public class GameController : MonoBehaviour
 		if (detectiveAudioSource == null) {
 			Debug.LogError ("audio source not found!");
 		} else if (audioClip == null) {
-			Debug.LogError ("clip is empty!");
+			Debug.LogError ("clip is empty for " + subtitle);
 		} else {
 			detectiveAudioSource.clip = audioClip;
 			detectiveAudioSource.Play ();
@@ -177,6 +188,7 @@ public class GameController : MonoBehaviour
 		// TODO save the answer??
 
 		float suspicionScore = 0;
+		float consistencyScore = 0;
 		isTimerActive = false;
 
 		AnswerData answerData = answerButton.GetAnswerData ();
@@ -185,10 +197,12 @@ public class GameController : MonoBehaviour
 		if (currentQuestion.considersFact) {
 			if (playerAnswers.ContainsKey (currentQuestion.questionId)) { // if prior answer was stored
 				if (answerData.answerId.Equals (playerAnswers [currentQuestion.questionId])) { // answer is consistent
-					suspicionScore += ScoreCalculator.CalculateConsistencyScore (true, currentQuestion.consistencyWeight);
+					consistencyScore = ScoreCalculator.CalculateConsistencyScore (true, currentQuestion.consistencyWeight);
+					suspicionScore += consistencyScore;
 				} else { // wrong answer
 					// TODO ask question again
-					suspicionScore += ScoreCalculator.CalculateConsistencyScore (false, currentQuestion.consistencyWeight);
+					consistencyScore = ScoreCalculator.CalculateConsistencyScore (false, currentQuestion.consistencyWeight);
+					suspicionScore += consistencyScore;
 				}
 			} else { // this is the first time that particular question was asked
 				playerAnswers.Add (currentQuestion.questionId, answerData); // store the answer
@@ -212,6 +226,11 @@ public class GameController : MonoBehaviour
 			questionPictureDisplay.SetActive (false);
 		}
 
+		//Debug.Log ("consistency score: " + consistencyScore);
+		// TODO IDK HOW
+		// if consistencyScore <= 0, it means answeris consistent
+		AdaptMusicAndLighting (currentQuestion.considersFact, currentQuestion.considersEmotion, consistencyScore <= 0);
+
 		// Give detective response
 		AudioClip clip;
 		string subtitle;
@@ -231,6 +250,7 @@ public class GameController : MonoBehaviour
 		if (considerConsistency) {
 			if (!consistent) {
 				// TODO make scarier
+				PlayBgm(currentRoundData.bgmNegativeClip);
 				return;
 			}
 		}
@@ -238,14 +258,22 @@ public class GameController : MonoBehaviour
 		if (considerEmotion) {
 			if (!correctExpression) {
 				// TODO make scarier
+				PlayBgm(currentRoundData.bgmNegativeClip);
 				return;
 			} else {
 				// TODO follow emotion
+				if (emotion == HAPPY_EMOTION) {
+					PlayBgm (currentRoundData.bgmPositiveClip);
+				} else if (emotion == DEFAULT_EMOTION) {
+					PlayBgm (currentRoundData.bgmNormalClip);
+				} else {
+					PlayBgm (currentRoundData.bgmNegativeClip);
+				}
 				return;
 			}
 		}
 
-		// don't change anything if it gets to this point: doesn't consider emotion
+		// don't change anything if it gets to this point i.e doesn't consider emotion
 		return;
 	}
 
