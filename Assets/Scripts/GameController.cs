@@ -255,15 +255,19 @@ public class GameController : MonoBehaviour
 			expressionScore <= 0f
 		);
 
-		// Give detective response
-		AudioClip clip;
-		string subtitle;
+		if (string.IsNullOrEmpty (answerData.detectiveResponse)) {
+			HandleEndOfAQuestion ();
+		} else {
+			// Give detective response
+			AudioClip clip;
+			string subtitle;
 
-		dataController.LoadDetectiveRespClip ((suspicionScore > 0), out clip, out subtitle, answerData.detectiveResponse);
-		// Debug.Log ("response subtitle: " + subtitle);
-		isDetectiveTalking = true;
-		ShowAndPlayDialog (clip, subtitle);
-		questionDisplay.SetActive (false);
+			dataController.LoadDetectiveRespClip ((suspicionScore > 0), out clip, out subtitle, answerData.detectiveResponse);
+			// Debug.Log ("response subtitle: " + subtitle);
+			isDetectiveTalking = true;
+			ShowAndPlayDialog (clip, subtitle);
+			questionDisplay.SetActive (false);
+		}
 	}
 
 	/**
@@ -364,6 +368,19 @@ public class GameController : MonoBehaviour
 		playerCamera.GetComponent<PostProcessingBehaviour> ().profile = bloomEffect;
 	}
 
+	void HandleEndOfAQuestion() {
+		// show another question if there are still questions to ask
+		if (questionPool.Length > questionIndex + 1) {
+			// Debug.Log ("show another question");
+			questionIndex++;
+			ShowQuestion ();
+		} else {
+			// Debug.Log ("end of questions");
+			questionDisplay.SetActive (false);
+			RunSequence ();
+		}
+	}
+
 	// Update is called once per frame
 	void Update ()
 	{
@@ -385,15 +402,7 @@ public class GameController : MonoBehaviour
 
 			if (currentSequence.sequenceType.Equals (SEQUENCE_TYPE_QUESTION)) {
 				// Debug.Log ("Update: current sequence is question");
-				// show another question if there are still questions to ask
-				if (questionPool.Length > questionIndex + 1) {
-					// Debug.Log ("show another question");
-					questionIndex++;
-					ShowQuestion ();
-				} else {
-					// Debug.Log ("end of questions");
-					RunSequence ();
-				}
+				HandleEndOfAQuestion();
 			} else {
 				RunSequence ();
 			}
