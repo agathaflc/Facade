@@ -187,10 +187,15 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-	public void AnswerButtonClicked (AnswerButton answerButton)
-	{
-		// Debug.Log ("Selected answer: " + answerButton.GetAnswerData().answerText);
+	IEnumerator HandleAnswer(AnswerButton answerButton) {
 		// TODO tell model to read expression (?)
+		if (currentQuestion.considersEmotion) {
+			dataController.StartFER ();
+			// TODO (maybe) detective writes some notes animation 
+			yield return new WaitForSecondsRealtime (2f);
+			dataController.StopFER ();
+		}
+
 		// TODO save the answer??
 
 		float suspicionScore = 0;
@@ -268,6 +273,12 @@ public class GameController : MonoBehaviour
 			ShowAndPlayDialog (clip, subtitle);
 			questionDisplay.SetActive (false);
 		}
+	}
+
+	public void AnswerButtonClicked (AnswerButton answerButton)
+	{
+		questionDisplay.SetActive (false);
+		StartCoroutine (HandleAnswer (answerButton));
 	}
 
 	/**

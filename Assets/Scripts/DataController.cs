@@ -24,6 +24,8 @@ public class DataController : MonoBehaviour
 	private const string EXPRESSION_DATA_FILE_NAME = "expression_data.json";
 	private const string DISTANCEMAP_DATA_FILE_NAME = "distances.json";
 	private const string DISTANCE_MAPPING_FILE_NAME = "distances_2d_mapping.json";
+	private const string FER_FLAG_FILE_NAME = "flag.txt";
+	private const string RECORD_EXPRESSION = "record";
 
 	// Use this for initialization
 	void Start ()
@@ -67,6 +69,26 @@ public class DataController : MonoBehaviour
 	private void SavePlayerProgress ()
 	{
 		PlayerPrefs.SetFloat (HIGHEST_SCORE_KEY, playerProgress.highestScore);
+	}
+
+	public void StartFER() {
+		string filePath = Path.Combine (Application.streamingAssetsPath, FER_FLAG_FILE_NAME);
+
+		if (File.Exists (filePath)) {
+			File.WriteAllText (filePath, RECORD_EXPRESSION);
+		} else {
+			Debug.LogError ("FER flag does not exist!");
+		}
+	}
+
+	public void StopFER() {
+		string filePath = Path.Combine (Application.streamingAssetsPath, FER_FLAG_FILE_NAME);
+
+		if (File.Exists (filePath)) {
+			File.WriteAllText (filePath, "");
+		} else {
+			Debug.LogError ("FER flag does not exist!");
+		}
 	}
 
 	private void LoadRoundData (string fileName)
