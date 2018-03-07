@@ -54,7 +54,8 @@ public class GameController : MonoBehaviour
 	private float timeRemaining;
 	private int questionIndex;
 	private int sequenceIndex;
-	private float playerScore;
+	private float displayedScore;
+	private float actualOverallScore;
 	private List<GameObject> answerButtonGameObjects = new List<GameObject> ();
 	public AnswerButton selectedBoldAnswer;
 
@@ -72,9 +73,10 @@ public class GameController : MonoBehaviour
 
 		PlayBgm (currentRoundData.bgmNormalClip);
 
-		playerScore = 0;
+		displayedScore = 0;
 		questionIndex = 0;
 		sequenceIndex = 0;
+		actualOverallScore = 0; // TODO should carry over score from previous round
 
 		isTimerActive = false;
 
@@ -193,7 +195,7 @@ public class GameController : MonoBehaviour
 
 		float suspicionScore = 0;
 		float consistencyScore = 0;
-		float emotionDistance = 0;
+		float expressionScore = 0;
 		string closestEmotion = null;
 		isTimerActive = false;
 
@@ -217,17 +219,24 @@ public class GameController : MonoBehaviour
 
 		if (currentQuestion.considersEmotion) {
 			// Debug.Log ("considers emotion");
-			emotionDistance = dataController.ComputeEmotionDistance (answerData.expectedExpression, 
+			float emotionDistance = dataController.ComputeEmotionDistance (answerData.expectedExpression, 
 				dataController.ReadPlayerEmotion (questionIndex), out closestEmotion);
 
 			Debug.Log ("closestEmotion: " + closestEmotion);
 
 			// Debug.Log ("emotion distance: " + emotionDistance.ToString());
-			suspicionScore += ScoreCalculator.CalculateExpressionScore (emotionDistance, currentQuestion.expressionWeight);
+			expressionScore = ScoreCalculator.CalculateExpressionScore (emotionDistance, currentQuestion.expressionWeight);
+			suspicionScore += expressionScore;
 		}
 
-		playerScore += suspicionScore;
-		scoreDisplayText.text = "Suspicion: " + playerScore.ToString ("F2");
+		displayedScore += suspicionScore;
+		actualOverallScore += suspicionScore;
+
+		// don't let displayedScore go below 0
+		if (displayedScore < 0) {
+			displayedScore = 0;
+		}
+		scoreDisplayText.text = "Suspicion: " + displayedScore.ToString ("F2");
 
 		if (questionPictureDisplay.activeSelf) {
 			questionPictureDisplay.GetComponent<ImageLoader> ().DestroyMaterial ();
@@ -235,14 +244,15 @@ public class GameController : MonoBehaviour
 		}
 
 		//Debug.Log ("consistency score: " + consistencyScore);
-		// TODO IDK HOW
-		// if consistencyScore <= 0, it means answeris consistent
+
+		// if consistencyScore <= 0, it means answer is consistent (consistent = true)
+		// if expressionScore <= 0, it means expression is correct (correctExpression = true)
 		AdaptMusicAndLighting (
 			currentQuestion.considersFact,
 			currentQuestion.considersEmotion,
 			closestEmotion,
 			consistencyScore <= 0f,
-			emotionDistance <= EMOTION_DISTANCE_THRESHOLD
+			expressionScore <= 0f
 		);
 
 		// Give detective response
@@ -301,7 +311,7 @@ public class GameController : MonoBehaviour
 	public void EndRound ()
 	{
 		isTimerActive = false;
-		dataController.SubmitNewPlayerScore (playerScore);
+		dataController.SubmitNewPlayerScore (displayedScore);
 		highScoreDisplayText.text = dataController.GetHighestPlayerScore ().ToString ();
 
 		questionDisplay.SetActive (false); // deactivate the question display
