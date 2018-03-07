@@ -160,9 +160,9 @@ public class DataController : MonoBehaviour
 		}
 	}
 
-	public float ComputeEmotionDistance (string[] expected, EmotionData actual)
+	public float ComputeEmotionDistance (string[] expected, EmotionData actual, out string closestEmotion)
 	{
-		return ScoreCalculator.ComputeEmotionDistance (distanceMap, expected, actual);
+		return ScoreCalculator.ComputeEmotionDistance (distanceMap, expected, actual, out closestEmotion);
 	}
 
 

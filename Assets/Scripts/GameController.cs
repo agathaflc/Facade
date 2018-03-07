@@ -17,6 +17,8 @@ public class GameController : MonoBehaviour
 	private const string SURPRISED_EMOTION = "surprised";
 	private const string ANGRY_EMOTION = "angry";
 
+	private const float EMOTION_DISTANCE_THRESHOLD = 2.0f;
+
 	public Text questionDisplayText;
 	public Text scoreDisplayText;
 	public Text timeRemainingDisplayText;
@@ -79,7 +81,8 @@ public class GameController : MonoBehaviour
 		RunSequence ();
 	}
 
-	private void PlayBgm(AudioClip clip) {
+	private void PlayBgm (AudioClip clip)
+	{
 		if (clip == null) {
 			Debug.LogError ("Clip is empty!");
 			return;
@@ -190,6 +193,8 @@ public class GameController : MonoBehaviour
 
 		float suspicionScore = 0;
 		float consistencyScore = 0;
+		float emotionDistance = 0;
+		string closestEmotion = null;
 		isTimerActive = false;
 
 		AnswerData answerData = answerButton.GetAnswerData ();
@@ -212,8 +217,10 @@ public class GameController : MonoBehaviour
 
 		if (currentQuestion.considersEmotion) {
 			// Debug.Log ("considers emotion");
-			float emotionDistance = dataController.ComputeEmotionDistance (answerData.expectedExpression, 
-				                        dataController.ReadPlayerEmotion (questionIndex));
+			emotionDistance = dataController.ComputeEmotionDistance (answerData.expectedExpression, 
+				dataController.ReadPlayerEmotion (questionIndex), out closestEmotion);
+
+			Debug.Log ("closestEmotion: " + closestEmotion);
 
 			// Debug.Log ("emotion distance: " + emotionDistance.ToString());
 			suspicionScore += ScoreCalculator.CalculateExpressionScore (emotionDistance, currentQuestion.expressionWeight);
@@ -230,7 +237,13 @@ public class GameController : MonoBehaviour
 		//Debug.Log ("consistency score: " + consistencyScore);
 		// TODO IDK HOW
 		// if consistencyScore <= 0, it means answeris consistent
-		AdaptMusicAndLighting (currentQuestion.considersFact, currentQuestion.considersEmotion, consistencyScore <= 0);
+		AdaptMusicAndLighting (
+			currentQuestion.considersFact,
+			currentQuestion.considersEmotion,
+			closestEmotion,
+			consistencyScore <= 0f,
+			emotionDistance <= EMOTION_DISTANCE_THRESHOLD
+		);
 
 		// Give detective response
 		AudioClip clip;
@@ -246,12 +259,18 @@ public class GameController : MonoBehaviour
 	/**
 	 * follows the algorithm here: https://trello.com/c/TDz6Ixgb/31-dream-building-algorithm
 	 * */
-	private void AdaptMusicAndLighting(bool considerConsistency, bool considerEmotion, bool consistent = true, 
-		bool correctExpression = true, string emotion = DEFAULT_EMOTION) {
+	private void AdaptMusicAndLighting (
+		bool considerConsistency,
+		bool considerEmotion,
+		string emotion = DEFAULT_EMOTION,
+		bool consistent = true, 
+		bool correctExpression = true
+	)
+	{
 		if (considerConsistency) {
 			if (!consistent) {
 				// TODO make scarier
-				PlayBgm(currentRoundData.bgmNegativeClip);
+				PlayBgm (currentRoundData.bgmNegativeClip);
 				return;
 			}
 		}
@@ -259,13 +278,14 @@ public class GameController : MonoBehaviour
 		if (considerEmotion) {
 			if (!correctExpression) {
 				// TODO make scarier
-				PlayBgm(currentRoundData.bgmNegativeClip);
+				PlayBgm (currentRoundData.bgmNegativeClip);
 				return;
 			} else {
 				// TODO follow emotion
-				if (emotion == HAPPY_EMOTION) {
+				if (emotion.Equals(HAPPY_EMOTION)) {
+					Debug.Log ("happy emotion");
 					PlayBgm (currentRoundData.bgmPositiveClip);
-				} else if (emotion == DEFAULT_EMOTION) {
+				} else if (emotion.Equals(DEFAULT_EMOTION)) {
 					PlayBgm (currentRoundData.bgmNormalClip);
 				} else {
 					PlayBgm (currentRoundData.bgmNegativeClip);
@@ -342,7 +362,7 @@ public class GameController : MonoBehaviour
 
 			if (timeRemaining <= 0f) {
 				// pick whichever answer is selected right now
-				AnswerButtonClicked(selectedBoldAnswer);
+				AnswerButtonClicked (selectedBoldAnswer);
 			}
 		}
 
