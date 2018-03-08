@@ -232,6 +232,9 @@ public class GameController : MonoBehaviour
 			// Debug.Log ("emotion distance: " + emotionDistance.ToString());
 			expressionScore = ScoreCalculator.CalculateExpressionScore (emotionDistance, currentQuestion.expressionWeight);
 			suspicionScore += expressionScore;
+
+			// TODO UNCOMMENT THIS AFTER INTEGRATION WITH FER
+			// dataController.DeleteFERDataFile ();
 		}
 
 		displayedScore += suspicionScore;

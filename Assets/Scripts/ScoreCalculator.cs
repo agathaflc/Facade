@@ -15,19 +15,26 @@ public class ScoreCalculator {
 		return Mathf.Sqrt (Mathf.Pow ((x1 - x2), 2) + Mathf.Pow ((y1 - y2), 2));
 	}
 
-	public static float ComputeEmotionDistance(DistanceData distanceMap, string[] expected, EmotionData actual, out string closestEmotion) {
-		EmotionMapping observedEmotionvector;
+	public static float ComputeEmotionDistance(DistanceData distanceMap, string[] expected, EmotionData[] actual, out string closestEmotion) {
+		List<EmotionMapping> observedEmotionvector = new List<EmotionMapping> ();
 
-		if (actual == null) {
+		if (actual == null || actual.Length == 0) {
 			// assume neutral expression
 			// Debug.Log("actual expression is null");
-			observedEmotionvector = distanceMap.emotions.FirstOrDefault (e => e.type.Equals(EMOTION_NEUTRAL));
+			observedEmotionvector.Add(distanceMap.emotions.FirstOrDefault (e => e.type.Equals(EMOTION_NEUTRAL)));
 		} else {
-			EmotionMapping raw = distanceMap.emotions.FirstOrDefault (e => e.type.Equals (actual.emotion));
-			observedEmotionvector = new EmotionMapping ();
-			observedEmotionvector.x = raw.x * actual.emotionScore / 100.0f;
-			observedEmotionvector.y = raw.y * actual.emotionScore / 100.0f;
-			// Debug.Log ("after multiplied: " + observedEmotionvector.x.ToString() + ", " + observedEmotionvector.y.ToString());
+			for (int i = 0; i < actual.Length; i++) {
+				if (actual [i].emotionScore > 0) {
+					Debug.Log ("non zero emotion: " + actual [i].emotion + ", score: " + actual[i].emotionScore.ToString());
+					EmotionMapping raw = distanceMap.emotions.FirstOrDefault (e => e.type.Equals (actual [i].emotion));
+					EmotionMapping scaled = new EmotionMapping ();
+
+					scaled.x = raw.x * actual [i].emotionScore;
+					scaled.y = raw.y * actual [i].emotionScore;
+
+					observedEmotionvector.Add (scaled);
+				}
+			}
 		}
 
 		float minDistance = 9999f;
@@ -36,12 +43,18 @@ public class ScoreCalculator {
 		int closestEmotionIndex = 0;
 		// if multiple expressions are accepted, take the closer one
 		for (int i = 0; i < expected.Length; i++) {
-			expectedMapping = distanceMap.emotions.FirstOrDefault (e => e.type.Equals (expected [i]));
-			float currentDistance = ComputeDistanceBetweenTwoPoints (observedEmotionvector.x, observedEmotionvector.y, expectedMapping.x, expectedMapping.y);
+			for (int j = 0; j < observedEmotionvector.Count; j++) {
+				expectedMapping = distanceMap.emotions.FirstOrDefault (e => e.type.Equals (expected [i]));
+				float currentDistance = ComputeDistanceBetweenTwoPoints (
+					observedEmotionvector[j].x,
+					observedEmotionvector[j].y,
+					expectedMapping.x,
+					expectedMapping.y);
 
-			if (currentDistance < minDistance) {
-				minDistance = currentDistance;
-				closestEmotionIndex = i;
+				if (currentDistance < minDistance) {
+					minDistance = currentDistance;
+					closestEmotionIndex = i;
+				}
 			}
 		}
 
