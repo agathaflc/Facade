@@ -24,7 +24,14 @@ namespace Tests.Editor {
 		[PrebuildSetup(typeof(ScoreCalculatorTests))]
 		public void CalculatesCorrectHorizontalDistanceBetweenPoints() {
 			string[] expected = {"happy"};
-			Assert.AreEqual (2, ScoreCalculator.ComputeEmotionDistance(distanceMap, expected, new EmotionData("angry", 100)));
+			string closestEmotion;
+			EmotionData[] emotionDataArray = new EmotionData[1];
+			EmotionData angry = new EmotionData("angry", 1);
+
+			emotionDataArray[0] = angry;
+
+			Assert.AreEqual (2, ScoreCalculator.ComputeEmotionDistance(distanceMap, expected, emotionDataArray, out closestEmotion));
+			Assert.AreEqual (closestEmotion, expected [0]);
 		}
 	}
 }

@@ -17,6 +17,8 @@ public class GameController : MonoBehaviour
 	private const string SURPRISED_EMOTION = "surprised";
 	private const string ANGRY_EMOTION = "angry";
 
+	private const float EMOTION_DISTANCE_THRESHOLD = 2.0f;
+
 	public Text questionDisplayText;
 	public Slider scoreDisplayerSlider;
 	public Text scoreDisplayText;
@@ -53,7 +55,8 @@ public class GameController : MonoBehaviour
 	private float timeRemaining;
 	private int questionIndex;
 	private int sequenceIndex;
-	private float playerScore;
+	private float displayedScore;
+	private float actualOverallScore;
 	private List<GameObject> answerButtonGameObjects = new List<GameObject> ();
 	public AnswerButton selectedBoldAnswer;
 
@@ -71,16 +74,18 @@ public class GameController : MonoBehaviour
 
 		PlayBgm (currentRoundData.bgmNormalClip);
 
-		playerScore = 0;
+		displayedScore = 0;
 		questionIndex = 0;
 		sequenceIndex = 0;
+		actualOverallScore = 0; // TODO should carry over score from previous round
 
 		isTimerActive = false;
 
 		RunSequence ();
 	}
 
-	private void PlayBgm(AudioClip clip) {
+	private void PlayBgm (AudioClip clip)
+	{
 		if (clip == null) {
 			Debug.LogError ("Clip is empty!");
 			return;
@@ -183,14 +188,21 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-	public void AnswerButtonClicked (AnswerButton answerButton)
-	{
-		// Debug.Log ("Selected answer: " + answerButton.GetAnswerData().answerText);
+	IEnumerator HandleAnswer(AnswerButton answerButton) {
 		// TODO tell model to read expression (?)
+		if (currentQuestion.considersEmotion) {
+			dataController.StartFER ();
+			// TODO (maybe) detective writes some notes animation 
+			yield return new WaitForSecondsRealtime (2f);
+			dataController.StopFER ();
+		}
+
 		// TODO save the answer??
 
 		float suspicionScore = 0;
 		float consistencyScore = 0;
+		float expressionScore = 0;
+		string closestEmotion = null;
 		isTimerActive = false;
 
 		AnswerData answerData = answerButton.GetAnswerData ();
@@ -214,15 +226,27 @@ public class GameController : MonoBehaviour
 		if (currentQuestion.considersEmotion) {
 			// Debug.Log ("considers emotion");
 			float emotionDistance = dataController.ComputeEmotionDistance (answerData.expectedExpression, 
-				                        dataController.ReadPlayerEmotion (questionIndex));
+				dataController.ReadPlayerEmotion (questionIndex), out closestEmotion);
+
+			Debug.Log ("closestEmotion: " + closestEmotion);
 
 			// Debug.Log ("emotion distance: " + emotionDistance.ToString());
-			suspicionScore += ScoreCalculator.CalculateExpressionScore (emotionDistance, currentQuestion.expressionWeight);
-		}
+			expressionScore = ScoreCalculator.CalculateExpressionScore (emotionDistance, currentQuestion.expressionWeight);
+			suspicionScore += expressionScore;
 
-		playerScore += suspicionScore;
-		scoreDisplayText.text = "Suspicion: " + playerScore.ToString ("F2");
-		scoreDisplayerSlider.value =  playerScore/10; //TODO suspicion scoring system
+			// TODO UNCOMMENT THIS AFTER INTEGRATION WITH FER
+			// dataController.DeleteFERDataFile ();
+		}
+			
+		displayedScore += suspicionScore;
+		actualOverallScore += suspicionScore;
+
+		// don't let displayedScore go below 0
+		if (displayedScore < 0) {
+			displayedScore = 0;
+		}
+		scoreDisplayText.text = "Suspicion: " + displayedScore.ToString ("F2");
+		scoreDisplayerSlider.value =  displayedScore/10; //TODO suspicion scoring system
 
 		if (questionPictureDisplay.activeSelf) {
 			questionPictureDisplay.GetComponent<ImageLoader> ().DestroyMaterial ();
@@ -230,30 +254,53 @@ public class GameController : MonoBehaviour
 		}
 
 		//Debug.Log ("consistency score: " + consistencyScore);
-		// TODO IDK HOW
-		// if consistencyScore <= 0, it means answeris consistent
-		AdaptMusicAndLighting (currentQuestion.considersFact, currentQuestion.considersEmotion, consistencyScore <= 0);
 
-		// Give detective response
-		AudioClip clip;
-		string subtitle;
+		// if consistencyScore <= 0, it means answer is consistent (consistent = true)
+		// if expressionScore <= 0, it means expression is correct (correctExpression = true)
+		AdaptMusicAndLighting (
+			currentQuestion.considersFact,
+			currentQuestion.considersEmotion,
+			closestEmotion,
+			consistencyScore <= 0f,
+			expressionScore <= 0f
+		);
 
-		dataController.LoadDetectiveRespClip ((suspicionScore > 0), out clip, out subtitle, answerData.detectiveResponse);
-		// Debug.Log ("response subtitle: " + subtitle);
-		isDetectiveTalking = true;
-		ShowAndPlayDialog (clip, subtitle);
+		if (string.IsNullOrEmpty (answerData.detectiveResponse)) {
+			HandleEndOfAQuestion ();
+		} else {
+			// Give detective response
+			AudioClip clip;
+			string subtitle;
+
+			dataController.LoadDetectiveRespClip ((suspicionScore > 0), out clip, out subtitle, answerData.detectiveResponse);
+			// Debug.Log ("response subtitle: " + subtitle);
+			isDetectiveTalking = true;
+			ShowAndPlayDialog (clip, subtitle);
+			questionDisplay.SetActive (false);
+		}
+	}
+
+	public void AnswerButtonClicked (AnswerButton answerButton)
+	{
 		questionDisplay.SetActive (false);
+		StartCoroutine (HandleAnswer (answerButton));
 	}
 
 	/**
 	 * follows the algorithm here: https://trello.com/c/TDz6Ixgb/31-dream-building-algorithm
 	 * */
-	private void AdaptMusicAndLighting(bool considerConsistency, bool considerEmotion, bool consistent = true, 
-		bool correctExpression = true, string emotion = DEFAULT_EMOTION) {
+	private void AdaptMusicAndLighting (
+		bool considerConsistency,
+		bool considerEmotion,
+		string emotion = DEFAULT_EMOTION,
+		bool consistent = true, 
+		bool correctExpression = true
+	)
+	{
 		if (considerConsistency) {
 			if (!consistent) {
 				// TODO make scarier
-				PlayBgm(currentRoundData.bgmNegativeClip);
+				PlayBgm (currentRoundData.bgmNegativeClip);
 				return;
 			}
 		}
@@ -261,13 +308,14 @@ public class GameController : MonoBehaviour
 		if (considerEmotion) {
 			if (!correctExpression) {
 				// TODO make scarier
-				PlayBgm(currentRoundData.bgmNegativeClip);
+				PlayBgm (currentRoundData.bgmNegativeClip);
 				return;
 			} else {
 				// TODO follow emotion
-				if (emotion == HAPPY_EMOTION) {
+				if (emotion.Equals(HAPPY_EMOTION)) {
+					Debug.Log ("happy emotion");
 					PlayBgm (currentRoundData.bgmPositiveClip);
-				} else if (emotion == DEFAULT_EMOTION) {
+				} else if (emotion.Equals(DEFAULT_EMOTION)) {
 					PlayBgm (currentRoundData.bgmNormalClip);
 				} else {
 					PlayBgm (currentRoundData.bgmNegativeClip);
@@ -283,7 +331,7 @@ public class GameController : MonoBehaviour
 	public void EndRound ()
 	{
 		isTimerActive = false;
-		dataController.SubmitNewPlayerScore (playerScore);
+		dataController.SubmitNewPlayerScore (displayedScore);
 		highScoreDisplayText.text = dataController.GetHighestPlayerScore ().ToString ();
 
 		questionDisplay.SetActive (false); // deactivate the question display
@@ -335,6 +383,19 @@ public class GameController : MonoBehaviour
 		playerCamera.GetComponent<PostProcessingBehaviour> ().profile = bloomEffect;
 	}
 
+	void HandleEndOfAQuestion() {
+		// show another question if there are still questions to ask
+		if (questionPool.Length > questionIndex + 1) {
+			// Debug.Log ("show another question");
+			questionIndex++;
+			ShowQuestion ();
+		} else {
+			// Debug.Log ("end of questions");
+			questionDisplay.SetActive (false);
+			RunSequence ();
+		}
+	}
+
 	// Update is called once per frame
 	void Update ()
 	{
@@ -343,7 +404,7 @@ public class GameController : MonoBehaviour
 
 			if (timeRemaining <= 0f) {
 				// pick whichever answer is selected right now
-				AnswerButtonClicked(selectedBoldAnswer);
+				AnswerButtonClicked (selectedBoldAnswer);
 			}
 		}
 
@@ -358,15 +419,7 @@ public class GameController : MonoBehaviour
 
 			if (currentSequence.sequenceType.Equals (SEQUENCE_TYPE_QUESTION)) {
 				// Debug.Log ("Update: current sequence is question");
-				// show another question if there are still questions to ask
-				if (questionPool.Length > questionIndex + 1) {
-					// Debug.Log ("show another question");
-					questionIndex++;
-					ShowQuestion ();
-				} else {
-					// Debug.Log ("end of questions");
-					RunSequence ();
-				}
+				HandleEndOfAQuestion();
 			} else {
 				RunSequence ();
 			}

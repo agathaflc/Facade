@@ -88,59 +88,6 @@
       ]
     },
     {
-      "questionDesc": "get player's age",
-      "questionId": "01",
-      "expressionWeight": 0,
-      "consistencyWeight": 1,
-      "considersEmotion": false,
-      "considersFact": true,
-      "pictureFileName": "02.jpg",
-      "variations": [
-        {
-          "questionText": "Please state your age for the record.",
-          "answers": [
-            {
-              "answerId": "010",
-              "answerText": "18"
-            },
-            {
-              "answerId": "011",
-              "answerText": "26"
-            },
-            {
-              "answerId": "012",
-              "answerText": "30"
-            },
-            {
-              "answerId": "013",
-              "answerText": "45"
-            }
-          ]
-        },
-        {
-          "questionText": "How old are you?",
-          "answers": [
-            {
-              "answerId": "010",
-              "answerText": "18"
-            },
-            {
-              "answerId": "011",
-              "answerText": "26"
-            },
-            {
-              "answerId": "012",
-              "answerText": "30"
-            },
-            {
-              "answerId": "013",
-              "answerText": "45"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "questionDesc": "ask how player is feeling",
       "questionId": "02",
       "expressionWeight": 1,
@@ -223,6 +170,59 @@
                 "surprised"
               ],
               "detectiveResponse": "negative"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "questionDesc": "get player's age",
+      "questionId": "01",
+      "expressionWeight": 0,
+      "consistencyWeight": 1,
+      "considersEmotion": false,
+      "considersFact": true,
+      "pictureFileName": "02.jpg",
+      "variations": [
+        {
+          "questionText": "Please state your age for the record.",
+          "answers": [
+            {
+              "answerId": "010",
+              "answerText": "18"
+            },
+            {
+              "answerId": "011",
+              "answerText": "26"
+            },
+            {
+              "answerId": "012",
+              "answerText": "30"
+            },
+            {
+              "answerId": "013",
+              "answerText": "45"
+            }
+          ]
+        },
+        {
+          "questionText": "How old are you?",
+          "answers": [
+            {
+              "answerId": "010",
+              "answerText": "18"
+            },
+            {
+              "answerId": "011",
+              "answerText": "26"
+            },
+            {
+              "answerId": "012",
+              "answerText": "30"
+            },
+            {
+              "answerId": "013",
+              "answerText": "45"
             }
           ]
         }

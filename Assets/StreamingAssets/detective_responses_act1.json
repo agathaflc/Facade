@@ -32,31 +32,31 @@
   "notSuspiciousPositive": [
     {
       "text": "That's good to hear.",
-      "soundFilePath": "audio/n_susp_pos_0"
+      "soundFilePath": "audio/nice-work"
     },
     {
       "text": "Good for you.",
-      "soundFilePath": "audio/n_susp_pos_1"
+      "soundFilePath": "audio/friday-rocks"
     }
   ],
   "notSuspiciousNegative": [
     {
       "text": "That's too bad.",
-      "soundFilePath": "audio/n_susp_neg_0"
+      "soundFilePath": "audio/oh-thats-okay"
     },
     {
-      "text": "Oh, don't worry.",
-      "soundFilePath": "audio/n_susp_neg_1"
+      "text": "Oh, that's okay.",
+      "soundFilePath": "audio/oh-thats-okay"
     }
   ],
   "notSuspiciousNeutral": [
     {
       "text": "I see.",
-      "soundFilePath": "audio/seq0_001"
+      "soundFilePath": "audio/alright"
     },
     {
-      "text": "Got it.",
-      "soundFilePath": "audio/seq0_001"
+      "text": "Alright.",
+      "soundFilePath": "audio/alright"
     }
   ]
 }

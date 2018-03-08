@@ -24,6 +24,9 @@ public class DataController : MonoBehaviour
 	private const string EXPRESSION_DATA_FILE_NAME = "expression_data.json";
 	private const string DISTANCEMAP_DATA_FILE_NAME = "distances.json";
 	private const string DISTANCE_MAPPING_FILE_NAME = "distances_2d_mapping.json";
+	private const string FER_FLAG_FILE_NAME = "flag.txt";
+
+	private const string RECORD_EXPRESSION = "record";
 
 	// Use this for initialization
 	void Start ()
@@ -67,6 +70,36 @@ public class DataController : MonoBehaviour
 	private void SavePlayerProgress ()
 	{
 		PlayerPrefs.SetFloat (HIGHEST_SCORE_KEY, playerProgress.highestScore);
+	}
+
+	public void StartFER() {
+		string filePath = Path.Combine (Application.streamingAssetsPath, FER_FLAG_FILE_NAME);
+
+		if (File.Exists (filePath)) {
+			File.WriteAllText (filePath, RECORD_EXPRESSION);
+		} else {
+			Debug.LogError ("FER flag does not exist!");
+		}
+	}
+
+	public void StopFER() {
+		string filePath = Path.Combine (Application.streamingAssetsPath, FER_FLAG_FILE_NAME);
+
+		if (File.Exists (filePath)) {
+			File.WriteAllText (filePath, "");
+		} else {
+			Debug.LogError ("FER flag does not exist!");
+		}
+	}
+
+	public void DeleteFERDataFile() {
+		string filePath = Path.Combine (Application.streamingAssetsPath, EXPRESSION_DATA_FILE_NAME);
+
+		if (File.Exists (filePath)) {
+			File.Delete (filePath);
+		} else {
+			Debug.LogError ("FER data file doesn't exist");
+		}
 	}
 
 	private void LoadRoundData (string fileName)
@@ -160,13 +193,13 @@ public class DataController : MonoBehaviour
 		}
 	}
 
-	public float ComputeEmotionDistance (string[] expected, EmotionData actual)
+	public float ComputeEmotionDistance (string[] expected, EmotionData[] actual, out string closestEmotion)
 	{
-		return ScoreCalculator.ComputeEmotionDistance (distanceMap, expected, actual);
+		return ScoreCalculator.ComputeEmotionDistance (distanceMap, expected, actual, out closestEmotion);
 	}
 
 
-	public EmotionData ReadPlayerEmotion (int questionIndex)
+	/*public EmotionData ReadPlayerEmotion (int questionIndex)
 	{
 		string filePath = Path.Combine (Application.streamingAssetsPath, EXPRESSION_DATA_FILE_NAME); // streamingAssetsPath is the folder that stores the json
 
@@ -186,6 +219,22 @@ public class DataController : MonoBehaviour
 			} else {
 				Debug.LogError ("Question index does not match!");
 			}
+		} else {
+			Debug.LogError ("Cannot load expression data!");
+		}
+
+		return null;
+	}*/
+
+	public EmotionData[] ReadPlayerEmotion (int questionIndex)
+	{
+		string filePath = Path.Combine (Application.streamingAssetsPath, EXPRESSION_DATA_FILE_NAME); // streamingAssetsPath is the folder that stores the json
+
+		if (File.Exists (filePath)) {
+			string dataAsJson = File.ReadAllText (filePath);
+			ExpressionData loadedExpressions = JsonUtility.FromJson<ExpressionData> (dataAsJson);
+
+			return loadedExpressions.emotions;
 		} else {
 			Debug.LogError ("Cannot load expression data!");
 		}
