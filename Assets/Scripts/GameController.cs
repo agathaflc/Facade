@@ -227,11 +227,11 @@ public class GameController : MonoBehaviour
 			float emotionDistance = dataController.ComputeEmotionDistance (answerData.expectedExpression, 
 				dataController.ReadPlayerEmotion (questionIndex), out closestEmotion);
 
-			Debug.Log ("closestEmotion: " + closestEmotion);
-
 			// Debug.Log ("emotion distance: " + emotionDistance.ToString());
 			expressionScore = ScoreCalculator.CalculateExpressionScore (emotionDistance, currentQuestion.expressionWeight);
 			suspicionScore += expressionScore;
+
+			Debug.Log ("closestEmotion: " + closestEmotion + ", distance: " + emotionDistance.ToString() + ", score: " + expressionScore);
 
 			// TODO UNCOMMENT THIS AFTER INTEGRATION WITH FER
 			// dataController.DeleteFERDataFile ();
@@ -239,6 +239,8 @@ public class GameController : MonoBehaviour
 
 		displayedScore += suspicionScore;
 		actualOverallScore += suspicionScore;
+
+		Debug.Log ("actual score: " + actualOverallScore.ToString ());
 
 		// don't let displayedScore go below 0
 		if (displayedScore < 0) {
