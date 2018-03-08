@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
 	private const float EMOTION_DISTANCE_THRESHOLD = 2.0f;
 
 	public Text questionDisplayText;
+	public Slider scoreDisplayerSlider;
 	public Text scoreDisplayText;
 	public Text timeRemainingDisplayText;
 	public Slider timeRemainingDisplaySlider;
@@ -236,7 +237,7 @@ public class GameController : MonoBehaviour
 			// TODO UNCOMMENT THIS AFTER INTEGRATION WITH FER
 			// dataController.DeleteFERDataFile ();
 		}
-
+			
 		displayedScore += suspicionScore;
 		actualOverallScore += suspicionScore;
 
@@ -247,6 +248,7 @@ public class GameController : MonoBehaviour
 			displayedScore = 0;
 		}
 		scoreDisplayText.text = "Suspicion: " + displayedScore.ToString ("F2");
+		scoreDisplayerSlider.value =  displayedScore/10; //TODO suspicion scoring system
 
 		if (questionPictureDisplay.activeSelf) {
 			questionPictureDisplay.GetComponent<ImageLoader> ().DestroyMaterial ();
@@ -349,8 +351,7 @@ public class GameController : MonoBehaviour
 	{
 		if (isTimerActive) {
 			timeRemainingDisplayText.text = "Time: " + Mathf.Round (timeRemaining).ToString ();
-			timeRemainingDisplaySlider.value = (timeRemaining / 10);//TODO how to obtain different time limit for different questions?
-
+			timeRemainingDisplaySlider.value = (timeRemaining / currentQuestion.timeLimitInSeconds);
 		} else {
 			timeRemainingDisplayText.text = "Time: -";
 		}
@@ -415,6 +416,8 @@ public class GameController : MonoBehaviour
 		if (isDetectiveTalking && !detectiveAudioSource.isPlaying) {
 			isDetectiveTalking = false;
 			subtitleDisplay.SetActive (false);
+
+
 
 			if (currentSequence.sequenceType.Equals (SEQUENCE_TYPE_QUESTION)) {
 				// Debug.Log ("Update: current sequence is question");
