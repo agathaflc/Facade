@@ -147,16 +147,15 @@ public class GameController : MonoBehaviour
 		questionDisplay.SetActive (true);
 		RemoveAnswerButtons ();
 		currentQuestion = questionPool [questionIndex];
-		QVariationData variation = currentQuestion.variations [0]; // TODO determine which variation
-		questionDisplayText.text = variation.questionText;
+		questionDisplayText.text = currentQuestion.questionText;
 
-		for (int i = 0; i < variation.answers.Length; i++) {
+		for (int i = 0; i < currentQuestion.answers.Length; i++) {
 			GameObject answerButtonGameObject = answerButtonObjectPool.GetObject ();
 			answerButtonGameObjects.Add (answerButtonGameObject); // add the current answer button to the list of ACTIVE answer buttonsso we can keep track of it
 			answerButtonGameObject.transform.SetParent (answerButtonParent);
 
 			AnswerButton answerButton = answerButtonGameObject.GetComponent<AnswerButton> ();
-			answerButton.Setup (variation.answers [i]);
+			answerButton.Setup (currentQuestion.answers [i]);
 			if (i == 0) {
 				selectedBoldAnswer = answerButton;
 				selectedBoldAnswer.Bold (); // TODO also shade it maybe?

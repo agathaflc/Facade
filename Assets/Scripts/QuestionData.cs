@@ -12,6 +12,7 @@ public class QuestionData {
 	public bool considersEmotion;
 	public bool considersFact;
 	public string pictureFileName;
-	public QVariationData[] variations;
+	public string questionText;
+	public AnswerData[] answers;
 	public int timeLimitInSeconds = 10;
 }

@@ -26,6 +26,7 @@ public class ScoreCalculator {
 			for (int i = 0; i < actual.Length; i++) {
 				if (actual [i].emotionScore > 0) {
 					Debug.Log ("non zero emotion: " + actual [i].emotion + ", score: " + actual[i].emotionScore.ToString());
+					Debug.Log ("distancemap: " + distanceMap);
 					EmotionMapping raw = distanceMap.emotions.FirstOrDefault (e => e.type.Equals (actual [i].emotion));
 					EmotionMapping scaled = new EmotionMapping ();
 

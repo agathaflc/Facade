@@ -1,8 +1,8 @@
 {
   "responsesPath": "detective_responses_act1.json",
-  "bgmPositiveFile" : "audio/bgm_fast",
-  "bgmNegativeFile" : "audio/bgm_slow",
-  "bgmNormalFile" : "audio/bgm_normal",
+  "bgmPositiveFile": "audio/bgm_fast",
+  "bgmNegativeFile": "audio/bgm_slow",
+  "bgmNormalFile": "audio/bgm_normal",
   "sequence": [
     {
       "sequenceType": "dialog",
@@ -42,48 +42,23 @@
       "considersEmotion": false,
       "considersFact": true,
       "pictureFileName": "wojak.jpg",
-      "variations": [
+      "questionText": "Please state your full name for the record.",
+      "answers": [
         {
-          "questionText": "Please state your full name for the record.",
-          "answers": [
-            {
-              "answerId": "000",
-              "answerText": "Christine  Tse"
-            },
-            {
-              "answerId": "001",
-              "answerText": "Eugene Cheong"
-            },
-            {
-              "answerId": "002",
-              "answerText": "Felicia Agatha"
-            },
-            {
-              "answerId": "003",
-              "answerText": "Vivian Rajkumar"
-            }
-          ]
+          "answerId": "000",
+          "answerText": "Christine  Tse"
         },
         {
-          "questionText": "What is your name?",
-          "answers": [
-            {
-              "answerId": "000",
-              "answerText": "Christine  Tse"
-            },
-            {
-              "answerId": "001",
-              "answerText": "Eugene Cheong"
-            },
-            {
-              "answerId": "002",
-              "answerText": "Felicia Agatha"
-            },
-            {
-              "answerId": "003",
-              "answerText": "Vivian Rajkumar"
-            }
-          ]
+          "answerId": "001",
+          "answerText": "Eugene Cheong"
+        },
+        {
+          "answerId": "002",
+          "answerText": "Felicia Agatha"
+        },
+        {
+          "answerId": "003",
+          "answerText": "Vivian Rajkumar"
         }
       ]
     },
@@ -94,84 +69,41 @@
       "consistencyWeight": 0,
       "considersEmotion": true,
       "considersFact": true,
-      "variations": [
+      "questionText": "How are you feeling today?",
+      "answers": [
         {
-          "questionText": "How are you feeling today?",
-          "answers": [
-            {
-              "answerId": "020",
-              "answerText": "Great!",
-              "expectedExpression": [
-                "happy"
-              ],
-              "detectiveResponse": "positive"
-            },
-            {
-              "answerId": "021",
-              "answerText": "Alright",
-              "expectedExpression": [
-                "neutral"
-              ],
-              "detectiveResponse": "neutral"
-            },
-            {
-              "answerId": "022",
-              "answerText": "Teribble!",
-              "expectedExpression": [
-                "angry",
-                "sad"
-              ],
-              "detectiveResponse": "negative"
-            },
-            {
-              "answerId": "023",
-              "answerText": "I'm scared!",
-              "expectedExpression": [
-                "scared",
-                "surprised"
-              ],
-              "detectiveResponse": "negative"
-            }
-          ]
+          "answerId": "020",
+          "answerText": "Great!",
+          "expectedExpression": [
+            "happy"
+          ],
+          "detectiveResponse": "positive"
         },
         {
-          "questionText": "How are you doing?",
-          "answers": [
-            {
-              "answerId": "020",
-              "answerText": "Great!",
-              "expectedExpression": [
-                "happy"
-              ],
-              "detectiveResponse": "positive"
-            },
-            {
-              "answerId": "021",
-              "answerText": "Alright",
-              "expectedExpression": [
-                "neutral"
-              ],
-              "detectiveResponse": "neutral"
-            },
-            {
-              "answerId": "022",
-              "answerText": "Teribble!",
-              "expectedExpression": [
-                "angry",
-                "sad"
-              ],
-              "detectiveResponse": "negative"
-            },
-            {
-              "answerId": "023",
-              "answerText": "I'm scared!",
-              "expectedExpression": [
-                "scared",
-                "surprised"
-              ],
-              "detectiveResponse": "negative"
-            }
-          ]
+          "answerId": "021",
+          "answerText": "Alright",
+          "expectedExpression": [
+            "neutral"
+          ],
+          "detectiveResponse": "neutral"
+        },
+        {
+          "answerId": "022",
+          "answerText": "Teribble!",
+          "expectedExpression": [
+            "angry",
+            "sad"
+          ],
+          "detectiveResponse": "negative"
+        },
+        {
+          "answerId": "023",
+          "answerText": "I'm scared!",
+          "expectedExpression": [
+            "scared",
+            "surprised"
+          ],
+          "detectiveResponse": "negative"
         }
       ]
     },
@@ -183,48 +115,23 @@
       "considersEmotion": false,
       "considersFact": true,
       "pictureFileName": "02.jpg",
-      "variations": [
+      "questionText": "Please state your age for the record.",
+      "answers": [
         {
-          "questionText": "Please state your age for the record.",
-          "answers": [
-            {
-              "answerId": "010",
-              "answerText": "18"
-            },
-            {
-              "answerId": "011",
-              "answerText": "26"
-            },
-            {
-              "answerId": "012",
-              "answerText": "30"
-            },
-            {
-              "answerId": "013",
-              "answerText": "45"
-            }
-          ]
+          "answerId": "010",
+          "answerText": "18"
         },
         {
-          "questionText": "How old are you?",
-          "answers": [
-            {
-              "answerId": "010",
-              "answerText": "18"
-            },
-            {
-              "answerId": "011",
-              "answerText": "26"
-            },
-            {
-              "answerId": "012",
-              "answerText": "30"
-            },
-            {
-              "answerId": "013",
-              "answerText": "45"
-            }
-          ]
+          "answerId": "011",
+          "answerText": "26"
+        },
+        {
+          "answerId": "012",
+          "answerText": "30"
+        },
+        {
+          "answerId": "013",
+          "answerText": "45"
         }
       ]
     }
