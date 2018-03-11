@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
+using System.Linq;
 
 public class DataController : MonoBehaviour
 {
@@ -70,6 +71,16 @@ public class DataController : MonoBehaviour
 	private void SavePlayerProgress ()
 	{
 		PlayerPrefs.SetFloat (HIGHEST_SCORE_KEY, playerProgress.highestScore);
+	}
+
+	public QuestionData GetQuestionDataById(string questionId) {
+		QuestionData q = currentRound.questions.FirstOrDefault (e => e.questionId.Equals (questionId));
+
+		if (q == null) {
+			Debug.LogError ("GetQuestionTextById: question not found!");
+		}
+
+		return q;
 	}
 
 	public void StartFER() {
@@ -226,7 +237,7 @@ public class DataController : MonoBehaviour
 		return null;
 	}*/
 
-	public EmotionData[] ReadPlayerEmotion (int questionIndex)
+	public EmotionData[] ReadPlayerEmotion ()
 	{
 		string filePath = Path.Combine (Application.streamingAssetsPath, EXPRESSION_DATA_FILE_NAME); // streamingAssetsPath is the folder that stores the json
 
