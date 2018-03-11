@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
-[System.Serializable]
-public class EmotionMapping {
-	public string type;
-	public float x;
-	public float y;
+[Serializable]
+public class EmotionMapping
+{
+    public string type;
+    public float x;
+    public float y;
 }

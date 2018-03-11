@@ -1,31 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class AnswerButton : MonoBehaviour {
+public class AnswerButton : MonoBehaviour
+{
+    private AnswerData answerData;
+    public Text answerText;
+    private GameController gameController;
 
-	public Text answerText;
-	private AnswerData answerData;
-	private GameController gameController;
+    // Use this for initialization
+    private void Start()
+    {
+        gameController = FindObjectOfType<GameController>();
+    }
 
-	// Use this for initialization
-	void Start () {
-		gameController = FindObjectOfType<GameController> ();
-	}
+    public void Setup(AnswerData data)
+    {
+        answerData = data;
+        answerText.text = answerData.answerText;
+    }
 
-	public void Setup(AnswerData data) {
-		answerData = data;
-		answerText.text = answerData.answerText;
-	}
+    public AnswerData GetAnswerData()
+    {
+        return answerData;
+    }
 
-	public AnswerData GetAnswerData() {
-		return answerData;
-	}
-
-	public void HandleClick() {
-		gameController.AnswerButtonClicked (this);
-	}
+    public void HandleClick()
+    {
+        gameController.AnswerButtonClicked(this);
+    }
 
     public void Bold()
     {
@@ -41,6 +43,6 @@ public class AnswerButton : MonoBehaviour {
     {
         gameController.selectedBoldAnswer.UnBold();
         gameController.selectedBoldAnswer = this;
-        this.Bold();
+        Bold();
     }
 }

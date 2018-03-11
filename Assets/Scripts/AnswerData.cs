@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
-[System.Serializable]
-public class AnswerData {
-
-	public string answerId;
-	public string answerText;
-	public string[] expectedExpression;
-	public string detectiveResponse;
+[Serializable]
+public class AnswerData
+{
+    public string answerId;
+    public string answerText;
+    public string detectiveResponse;
+    public string[] expectedExpression;
 }

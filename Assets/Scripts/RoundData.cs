@@ -1,21 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
-[System.Serializable]
-public class RoundData {
+[Serializable]
+public class RoundData
+{
+    public AudioClip bgmNegativeClip;
+    public string bgmNegativeFile;
+    public AudioClip bgmNormalClip;
+    public string bgmNormalFile;
 
-	public float suspicionLevel = 0;
-	public QuestionData[] questions;
-	public SequenceData[] sequence;
-	public string responsesPath;
-	public DetectiveResponses detectiveResponses;
+    public AudioClip bgmPositiveClip;
 
-	public string bgmPositiveFile;
-	public string bgmNegativeFile;
-	public string bgmNormalFile;
-
-	public AudioClip bgmPositiveClip;
-	public AudioClip bgmNegativeClip;
-	public AudioClip bgmNormalClip;
+    public string bgmPositiveFile;
+    public DetectiveResponses detectiveResponses;
+    public QuestionData[] questions;
+    public string responsesPath;
+    public SequenceData[] sequence;
+    public float suspicionLevel = 0;
 }

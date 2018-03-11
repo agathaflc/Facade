@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using UnityEngine.PostProcessing;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.PostProcessing;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -19,52 +19,52 @@ public class GameController : MonoBehaviour
 
     private const float EMOTION_DISTANCE_THRESHOLD = 2.0f;
 
-    public Text questionDisplayText;
-    public Slider scoreDisplayerSlider;
-    public Text scoreDisplayText;
-    public Text timeRemainingDisplayText;
-    public Slider timeRemainingDisplaySlider;
-    public Text highScoreDisplayText;
-    public Text subtitleDisplayText;
-    public SimpleObjectPool answerButtonObjectPool;
-    public Transform answerButtonParent;
-
-    public GameObject questionDisplay;
-    public GameObject roundEndDisplay;
-    public GameObject questionPictureDisplay;
-    public GameObject subtitleDisplay;
-    public GameObject detectiveObject;
-
-    public GameObject room;
-    public Camera playerCamera;
-    public PostProcessingProfile motionBlurEffect;
-    public PostProcessingProfile vignetteEffect;
-    public PostProcessingProfile bloomEffect;
-    public GameObject player;
-
-    private AudioSource detectiveAudioSource;
-    private AudioSource bgmAudioSource;
-
-    private DataController dataController;
-    private RoundData currentRoundData;
-    private QuestionData[] questionPool;
-    private Dictionary<string, string> questionIdToAnswerIdMap = new Dictionary<string, string>();
-
-    private bool isTimerActive;
-    private bool isDetectiveTalking;
-    private float timeRemaining;
-    private int questionIndex;
-    private int sequenceIndex;
-    private float displayedScore;
-    private float actualOverallScore;
-    private List<GameObject> answerButtonGameObjects = new List<GameObject>();
-    public AnswerButton selectedBoldAnswer;
-
     private static QuestionData currentQuestion;
     private static SequenceData currentSequence;
+    private float actualOverallScore;
+    private readonly List<GameObject> answerButtonGameObjects = new List<GameObject>();
+    public SimpleObjectPool answerButtonObjectPool;
+    public Transform answerButtonParent;
+    private AudioSource bgmAudioSource;
+    public PostProcessingProfile bloomEffect;
+    private RoundData currentRoundData;
+
+    private DataController dataController;
+
+    private AudioSource detectiveAudioSource;
+    public GameObject detectiveObject;
+    private float displayedScore;
+    public Text highScoreDisplayText;
+    private bool isDetectiveTalking;
+
+    private bool isTimerActive;
+    public PostProcessingProfile motionBlurEffect;
+    public GameObject player;
+    public Camera playerCamera;
+
+    public GameObject questionDisplay;
+
+    public Text questionDisplayText;
+    private readonly Dictionary<string, string> questionIdToAnswerIdMap = new Dictionary<string, string>();
+    private int questionIndex;
+    public GameObject questionPictureDisplay;
+    private QuestionData[] questionPool;
+
+    public GameObject room;
+    public GameObject roundEndDisplay;
+    public Slider scoreDisplayerSlider;
+    public Text scoreDisplayText;
+    public AnswerButton selectedBoldAnswer;
+    private int sequenceIndex;
+    public GameObject subtitleDisplay;
+    public Text subtitleDisplayText;
+    private float timeRemaining;
+    public Slider timeRemainingDisplaySlider;
+    public Text timeRemainingDisplayText;
+    public PostProcessingProfile vignetteEffect;
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         dataController = FindObjectOfType<DataController>(); // store a ref to data controller
         currentRoundData = dataController.GetCurrentRoundData();
@@ -159,14 +159,14 @@ public class GameController : MonoBehaviour
         currentQuestion = questionPool[questionIndex];
         questionDisplayText.text = currentQuestion.questionText;
 
-        for (int i = 0; i < currentQuestion.answers.Length; i++)
+        for (var i = 0; i < currentQuestion.answers.Length; i++)
         {
-            GameObject answerButtonGameObject = answerButtonObjectPool.GetObject();
+            var answerButtonGameObject = answerButtonObjectPool.GetObject();
             answerButtonGameObjects.Add(
                 answerButtonGameObject); // add the current answer button to the list of ACTIVE answer buttonsso we can keep track of it
             answerButtonGameObject.transform.SetParent(answerButtonParent);
 
-            AnswerButton answerButton = answerButtonGameObject.GetComponent<AnswerButton>();
+            var answerButton = answerButtonGameObject.GetComponent<AnswerButton>();
             answerButton.Setup(currentQuestion.answers[i]);
             if (i == 0)
             {
@@ -179,12 +179,8 @@ public class GameController : MonoBehaviour
         if (currentQuestion.pictureFileName != null)
         {
             questionPictureDisplay.SetActive(true);
-            ImageLoader imageLoader = questionPictureDisplay.GetComponent<ImageLoader>();
-            if (imageLoader != null)
-            {
-                // Debug.Log ("ImageLoader is found");
-                imageLoader.LoadImage(dataController.LoadImage(currentQuestion.pictureFileName));
-            }
+            var imageLoader = questionPictureDisplay.GetComponent<ImageLoader>();
+            if (imageLoader != null) imageLoader.LoadImage(dataController.LoadImage(currentQuestion.pictureFileName));
         }
 
         isTimerActive = true;
@@ -203,12 +199,27 @@ public class GameController : MonoBehaviour
         }
     }
 
+    /**
+     * Handles the event when player is inconsistent with the facts in their answer
+     */
     private void ClarifyAnswer(string questionId, string answerId1, string answerId2)
     {
+        // 1. Make music scarier and respond with "Your answer doesn't match with our record" or sth
+        AudioClip clip;
+        string subtitle;
+
+        dataController.LoadDetectiveClarifyClip(out clip, out subtitle);
+        isDetectiveTalking = true;
+        ShowAndPlayDialog(clip, subtitle);
+        questionDisplay.SetActive(false);
+
+        // 2. Ask again ("So, tell us the truth," then show the same q with only the 2 options)
+
+        // 3. Compare emotion with the answer the player picked here
         // Give the 
-        QuestionData q = dataController.GetQuestionDataById(questionId);
-        AnswerData a1 = q.answers.FirstOrDefault(e => e.answerId.Equals(answerId1));
-        AnswerData a2 = q.answers.FirstOrDefault(e => e.answerId.Equals(answerId2));
+        var q = dataController.GetQuestionDataById(questionId);
+        var a1 = q.answers.FirstOrDefault(e => e.answerId.Equals(answerId1));
+        var a2 = q.answers.FirstOrDefault(e => e.answerId.Equals(answerId2));
 
         // TODO IDK CRYYYYY
         // basically like ShowQuestion() but???
@@ -232,7 +243,6 @@ public class GameController : MonoBehaviour
 
         // check consistency if question considers fact, check for prev answer and so on
         if (considersFact)
-        {
             if (consistent)
             {
                 // answer is consistent
@@ -245,7 +255,6 @@ public class GameController : MonoBehaviour
                 consistencyScore = ScoreCalculator.CalculateConsistencyScore(false, currentQuestion.consistencyWeight);
                 suspicionScore += consistencyScore;
             }
-        }
 
         if (!considersEmotion) return suspicionScore;
         // Debug.Log ("considers emotion");
@@ -256,13 +265,27 @@ public class GameController : MonoBehaviour
         expressionScore = ScoreCalculator.CalculateExpressionScore(emotionDistance, currentQuestion.expressionWeight);
         suspicionScore += expressionScore;
 
-        Debug.Log("closestEmotion: " + closestEmotion + ", distance: " + emotionDistance.ToString() + ", score: " +
+        Debug.Log("closestEmotion: " + closestEmotion + ", distance: " + emotionDistance + ", score: " +
                   expressionScore);
 
         // TODO: UNCOMMENT THIS AFTER INTEGRATION WITH FER
         // dataController.DeleteFERDataFile ();
 
         return suspicionScore;
+    }
+
+    private void SaveAndDisplayScore(float suspicionScore)
+    {
+        displayedScore += suspicionScore;
+        actualOverallScore += suspicionScore;
+
+        Debug.Log("actual score: " + actualOverallScore);
+
+        // don't let displayedScore go below 0
+        if (displayedScore < 0) displayedScore = 0;
+
+        scoreDisplayText.text = "Suspicion: " + displayedScore.ToString("F2");
+        scoreDisplayerSlider.value = displayedScore / 10;
     }
 
     private IEnumerator HandleAnswer(AnswerButton answerButton)
@@ -284,10 +307,7 @@ public class GameController : MonoBehaviour
 
         var answerStoredBefore = questionIdToAnswerIdMap.ContainsKey(currentQuestion.questionId);
 
-        if (!answerStoredBefore)
-        {
-            questionIdToAnswerIdMap.Add(currentQuestion.questionId, answerData.answerId);
-        }
+        if (!answerStoredBefore) questionIdToAnswerIdMap.Add(currentQuestion.questionId, answerData.answerId);
 
         var reallyConsidersFact = currentQuestion.considersFact && answerStoredBefore;
         var consistentFact = reallyConsidersFact &&
@@ -302,19 +322,7 @@ public class GameController : MonoBehaviour
             out closestEmotion,
             consistentFact);
 
-        displayedScore += suspicionScore;
-        actualOverallScore += suspicionScore;
-
-        Debug.Log("actual score: " + actualOverallScore);
-
-        // don't let displayedScore go below 0
-        if (displayedScore < 0)
-        {
-            displayedScore = 0;
-        }
-
-        scoreDisplayText.text = "Suspicion: " + displayedScore.ToString("F2");
-        scoreDisplayerSlider.value = displayedScore / 10; //TODO suspicion scoring system
+        SaveAndDisplayScore(suspicionScore);
 
         if (questionPictureDisplay.activeSelf)
         {
@@ -344,9 +352,8 @@ public class GameController : MonoBehaviour
             AudioClip clip;
             string subtitle;
 
-            dataController.LoadDetectiveRespClip((suspicionScore > 0), out clip, out subtitle,
+            dataController.LoadDetectiveRespClip(suspicionScore > 0, out clip, out subtitle,
                 answerData.detectiveResponse);
-            // Debug.Log ("response subtitle: " + subtitle);
             isDetectiveTalking = true;
             ShowAndPlayDialog(clip, subtitle);
             questionDisplay.SetActive(false);
@@ -371,44 +378,36 @@ public class GameController : MonoBehaviour
     )
     {
         if (considerConsistency)
-        {
             if (!consistent)
             {
                 PlayBgm(currentRoundData.bgmNegativeClip);
                 return;
             }
-        }
 
-        if (considerEmotion)
+        if (!considerEmotion) return;
+
+        if (!correctExpression)
         {
-            if (!correctExpression)
-            {
-                PlayBgm(currentRoundData.bgmNegativeClip);
-                return;
-            }
-
-            if (emotion.Equals(HAPPY_EMOTION))
-            {
-                Debug.Log("happy emotion");
-                PlayBgm(currentRoundData.bgmPositiveClip);
-            }
-            else if (emotion.Equals(DEFAULT_EMOTION))
-            {
-                PlayBgm(currentRoundData.bgmNormalClip);
-            }
-            else
-            {
-                PlayBgm(currentRoundData.bgmNegativeClip);
-            }
-
+            PlayBgm(currentRoundData.bgmNegativeClip);
             return;
         }
 
-        // don't change anything if it gets to this point i.e doesn't consider emotion
-        return;
+        if (emotion.Equals(HAPPY_EMOTION))
+        {
+            Debug.Log("happy emotion");
+            PlayBgm(currentRoundData.bgmPositiveClip);
+        }
+        else if (emotion.Equals(DEFAULT_EMOTION))
+        {
+            PlayBgm(currentRoundData.bgmNormalClip);
+        }
+        else
+        {
+            PlayBgm(currentRoundData.bgmNegativeClip);
+        }
     }
 
-    public void EndRound()
+    private void EndRound()
     {
         isTimerActive = false;
         dataController.SubmitNewPlayerScore(displayedScore);
@@ -429,8 +428,8 @@ public class GameController : MonoBehaviour
     {
         if (isTimerActive)
         {
-            timeRemainingDisplayText.text = "Time: " + Mathf.Round(timeRemaining).ToString();
-            timeRemainingDisplaySlider.value = (timeRemaining / currentQuestion.timeLimitInSeconds);
+            timeRemainingDisplayText.text = "Time: " + Mathf.Round(timeRemaining);
+            timeRemainingDisplaySlider.value = timeRemaining / currentQuestion.timeLimitInSeconds;
         }
         else
         {
@@ -440,12 +439,12 @@ public class GameController : MonoBehaviour
 
     public void LightsCameraAction()
     {
-        GameObject Lightsbulb = room.transform.Find("Lightbulb").gameObject;
-        GameObject Lights = Lightsbulb.transform.Find("Lamp").gameObject;
+        var Lightsbulb = room.transform.Find("Lightbulb").gameObject;
+        var Lights = Lightsbulb.transform.Find("Lamp").gameObject;
         Lights.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
 
-        GameObject SpotLight1 = room.transform.Find("Spot light 1").gameObject;
-        GameObject SpotLight2 = room.transform.Find("Spot light 2").gameObject;
+        var SpotLight1 = room.transform.Find("Spot light 1").gameObject;
+        var SpotLight2 = room.transform.Find("Spot light 2").gameObject;
 
         SpotLight1.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
         SpotLight2.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
@@ -466,7 +465,7 @@ public class GameController : MonoBehaviour
         playerCamera.GetComponent<PostProcessingBehaviour>().profile = bloomEffect;
     }
 
-    void HandleEndOfAQuestion()
+    private void HandleEndOfAQuestion()
     {
         // show another question if there are still questions to ask
         if (questionPool.Length > questionIndex + 1)
@@ -484,17 +483,13 @@ public class GameController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (isTimerActive && questionDisplay.activeSelf == true)
+        if (isTimerActive && questionDisplay.activeSelf)
         {
             timeRemaining -= Time.deltaTime;
 
-            if (timeRemaining <= 0f)
-            {
-                // pick whichever answer is selected right now
-                AnswerButtonClicked(selectedBoldAnswer);
-            }
+            if (timeRemaining <= 0f) AnswerButtonClicked(selectedBoldAnswer);
         }
 
         UpdateTimeRemainingDisplay();
@@ -505,22 +500,13 @@ public class GameController : MonoBehaviour
             isDetectiveTalking = false;
             subtitleDisplay.SetActive(false);
 
-
             if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
-            {
-                // Debug.Log ("Update: current sequence is question");
                 HandleEndOfAQuestion();
-            }
             else
-            {
                 RunSequence();
-            }
         }
 
-        if (Input.GetKeyDown("r"))
-        {
-            LightsCameraAction();
-        }
+        if (Input.GetKeyDown("r")) LightsCameraAction();
 
         if (Input.GetKeyDown("t"))
         {

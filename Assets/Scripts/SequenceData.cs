@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
-[System.Serializable]
-public class SequenceData {
-
-	public string sequenceType;
-	public string filePath;
-	public string subtitleText;
+[Serializable]
+public class SequenceData
+{
+    public string filePath;
+    public string sequenceType;
+    public string subtitleText;
 }

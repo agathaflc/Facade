@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
-[System.Serializable]
-public class ResponseData {
-
-	public string text;
-	public string soundFilePath;
-	public AudioClip clip;
+[Serializable]
+public class ResponseData
+{
+    public AudioClip clip;
+    public string soundFilePath;
+    public string text;
 }

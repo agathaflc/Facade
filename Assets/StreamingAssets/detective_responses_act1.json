@@ -58,5 +58,15 @@
       "text": "Alright.",
       "soundFilePath": "audio/alright"
     }
+  ],
+  "clarifying": [
+    {
+      "text": "Your answe doesn't match with our record. Now, tell me the truth.",
+      "soundFilePath": "audio/clarify-gc"
+    },
+    {
+      "text": "LIES! You said something different earlier, you think I'm a fool?",
+      "soundFilePath": "audio/clarify-bc"
+    }
   ]
 }

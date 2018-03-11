@@ -1,15 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
 {
-
-    public Transform playerBody;
     public float mouseSensitively;
+    public Transform playerBody;
 
-    float xAxisClamp = 0;
-    float yAxisClamp = 90;
+    private float xAxisClamp;
+    private float yAxisClamp = 90;
 
     private void Awake()
     {
@@ -17,25 +14,26 @@ public class PlayerLook : MonoBehaviour
         //Put it in Update function otherwise
         Cursor.lockState = CursorLockMode.Locked;
     }
+
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         RotateCamera();
     }
 
-    void RotateCamera()
+    private void RotateCamera()
     {
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
+        var mouseX = Input.GetAxis("Mouse X");
+        var mouseY = Input.GetAxis("Mouse Y");
 
-        float rotAmountX = mouseX * mouseSensitively;
-        float rotAmountY = mouseY * mouseSensitively;
+        var rotAmountX = mouseX * mouseSensitively;
+        var rotAmountY = mouseY * mouseSensitively;
 
         xAxisClamp -= rotAmountY; // add the rotation amount to determine where the angle is pointing
         yAxisClamp += rotAmountX;
 
-        Vector3 targetRotCam = transform.rotation.eulerAngles; //current rotation of game object camera
-        Vector3 targetRotBody = playerBody.rotation.eulerAngles; //current rotation of game object player
+        var targetRotCam = transform.rotation.eulerAngles; //current rotation of game object camera
+        var targetRotBody = playerBody.rotation.eulerAngles; //current rotation of game object player
 
 
         targetRotCam.x -= rotAmountY; //rotate playerCamera
@@ -55,17 +53,10 @@ public class PlayerLook : MonoBehaviour
         }
 
         if (yAxisClamp > 135)
-        {
             yAxisClamp = targetRotBody.y = 135;
-        }
-        else if (yAxisClamp < 45)
-        {
-            yAxisClamp = targetRotBody.y = 45;
-        }
-        
+        else if (yAxisClamp < 45) yAxisClamp = targetRotBody.y = 45;
+
         transform.rotation = Quaternion.Euler(targetRotCam); //assign back new values
         playerBody.rotation = Quaternion.Euler(targetRotBody); //assign back new values
-
-        
     }
 }

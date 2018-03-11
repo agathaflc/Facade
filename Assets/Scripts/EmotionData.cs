@@ -1,15 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
-[System.Serializable]
-public class EmotionData {
+[Serializable]
+public class EmotionData
+{
+    public string emotion;
+    public float emotionScore;
 
-	public string emotion;
-	public float emotionScore;
-
-	public EmotionData(string e, float score) {
-		emotion = e;
-		emotionScore = score;
-	}
+    public EmotionData(string e, float score)
+    {
+        emotion = e;
+        emotionScore = score;
+    }
 }

@@ -1,28 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ImageLoader : MonoBehaviour {
+public class ImageLoader : MonoBehaviour
+{
+    private Material material;
 
-	Material material;
+    // Use this for initialization
+    private void Start()
+    {
+    }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // Update is called once per frame
+    private void Update()
+    {
+    }
 
-	public void LoadImage(Texture2D tex) {
-		material = this.GetComponent<Image> ().material;
-		material.mainTexture = tex;
-	}
+    public void LoadImage(Texture2D tex)
+    {
+        material = GetComponent<Image>().material;
+        material.mainTexture = tex;
+    }
 
-	public void DestroyMaterial() {
-		Destroy (material.mainTexture);
-	}
+    public void DestroyMaterial()
+    {
+        Destroy(material.mainTexture);
+    }
 }
