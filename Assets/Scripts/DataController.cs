@@ -11,6 +11,8 @@ public class DataController : MonoBehaviour
     private const string DETECTIVE_RESPONSE_NEUTRAL = "neutral";
     private const string DETECTIVE_RESPONSE_POSITIVE = "positive";
     private const string DETECTIVE_RESPONSE_NEGATIVE = "negative";
+    public const string DETECTIVE_RESPONSE_CLARIFYING = "clarifying";
+    public const string DETECTIVE_RESPONSE_POST_CLARIFYING = "postClarifying";
 
     private const string ACT_ONE_QUESTIONS_FILE_NAME = "questionsACT1.json";
     private const string ACT_ONE_DATA_FILE_NAME = "act1.json";
@@ -146,27 +148,8 @@ public class DataController : MonoBehaviour
         return Resources.Load<AudioClip>(relativeResourcePath);
     }
 
-    public void LoadDetectiveClarifyClip(out AudioClip clip, out string subtitle)
-    {
-        var responseData = currentRound.detectiveResponses.clarifying;
-
-        var index = Random.Range(0, responseData.Length);
-
-        if (responseData[index].clip != null)
-        {
-            clip = responseData[index].clip;
-        }
-        else
-        {
-            clip = Resources.Load<AudioClip>(responseData[index].soundFilePath);
-            responseData[index].clip = clip;
-        }
-
-        subtitle = responseData[index].text;
-    }
-
-    public void LoadDetectiveRespClip(bool suspicious, out AudioClip clip, out string subtitle,
-        string responseType = DETECTIVE_RESPONSE_NEUTRAL)
+    public void LoadDetectiveRespClip(out AudioClip clip, out string subtitle,
+        string responseType = DETECTIVE_RESPONSE_NEUTRAL, bool suspicious = false)
     {
         ResponseData[] responseData;
 
@@ -189,6 +172,12 @@ public class DataController : MonoBehaviour
                 responseData = suspicious
                     ? currentRound.detectiveResponses.suspiciousNeutral
                     : currentRound.detectiveResponses.notSuspiciousNeutral;
+                break;
+            case DETECTIVE_RESPONSE_CLARIFYING:
+                responseData = currentRound.detectiveResponses.clarifying;
+                break;
+            case DETECTIVE_RESPONSE_POST_CLARIFYING:
+                responseData = currentRound.detectiveResponses.postClarifying;
                 break;
             default:
                 responseData = currentRound.detectiveResponses.notSuspiciousNeutral;

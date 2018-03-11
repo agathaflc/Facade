@@ -4,6 +4,7 @@
 public class DetectiveResponses
 {
     public ResponseData[] clarifying;
+    public ResponseData[] postClarifying;
     public ResponseData[] notSuspiciousNegative;
     public ResponseData[] notSuspiciousNeutral;
     public ResponseData[] notSuspiciousPositive;

@@ -19,49 +19,50 @@ public class GameController : MonoBehaviour
 
     private const float EMOTION_DISTANCE_THRESHOLD = 2.0f;
 
-    private static QuestionData currentQuestion;
-    private static SequenceData currentSequence;
-    private float actualOverallScore;
-    private readonly List<GameObject> answerButtonGameObjects = new List<GameObject>();
-    public SimpleObjectPool answerButtonObjectPool;
-    public Transform answerButtonParent;
-    private AudioSource bgmAudioSource;
-    public PostProcessingProfile bloomEffect;
-    private RoundData currentRoundData;
-
-    private DataController dataController;
-
-    private AudioSource detectiveAudioSource;
-    public GameObject detectiveObject;
-    private float displayedScore;
-    public Text highScoreDisplayText;
-    private bool isDetectiveTalking;
-
-    private bool isTimerActive;
-    public PostProcessingProfile motionBlurEffect;
-    public GameObject player;
-    public Camera playerCamera;
-
-    public GameObject questionDisplay;
-
     public Text questionDisplayText;
-    private readonly Dictionary<string, string> questionIdToAnswerIdMap = new Dictionary<string, string>();
-    private int questionIndex;
-    public GameObject questionPictureDisplay;
-    private QuestionData[] questionPool;
-
-    public GameObject room;
-    public GameObject roundEndDisplay;
     public Slider scoreDisplayerSlider;
     public Text scoreDisplayText;
-    public AnswerButton selectedBoldAnswer;
-    private int sequenceIndex;
-    public GameObject subtitleDisplay;
-    public Text subtitleDisplayText;
-    private float timeRemaining;
-    public Slider timeRemainingDisplaySlider;
     public Text timeRemainingDisplayText;
+    public Slider timeRemainingDisplaySlider;
+    public Text highScoreDisplayText;
+    public Text subtitleDisplayText;
+    public SimpleObjectPool answerButtonObjectPool;
+    public Transform answerButtonParent;
+
+    public GameObject questionDisplay;
+    public GameObject roundEndDisplay;
+    public GameObject questionPictureDisplay;
+    public GameObject subtitleDisplay;
+    public GameObject detectiveObject;
+
+    public GameObject room;
+    public Camera playerCamera;
+    public PostProcessingProfile motionBlurEffect;
     public PostProcessingProfile vignetteEffect;
+    public PostProcessingProfile bloomEffect;
+    public GameObject player;
+
+    private AudioSource detectiveAudioSource;
+    private AudioSource bgmAudioSource;
+
+    private DataController dataController;
+    private RoundData currentRoundData;
+    private QuestionData[] questionPool;
+    private readonly Dictionary<string, string> questionIdToAnswerIdMap = new Dictionary<string, string>();
+
+    private bool isTimerActive;
+    private bool isDetectiveTalking;
+    private bool isClarifying;
+    private float timeRemaining;
+    private int questionIndex;
+    private int sequenceIndex;
+    private float displayedScore;
+    private float actualOverallScore;
+    private List<GameObject> answerButtonGameObjects = new List<GameObject>();
+    public AnswerButton selectedBoldAnswer;
+
+    private static QuestionData currentQuestion;
+    private static SequenceData currentSequence;
 
     // Use this for initialization
     private void Start()
@@ -80,6 +81,7 @@ public class GameController : MonoBehaviour
         actualOverallScore = 0; // TODO should carry over score from previous round
 
         isTimerActive = false;
+        isClarifying = false;
 
         RunSequence();
     }
@@ -152,6 +154,24 @@ public class GameController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
+    private void DisplayAnswers(IList<AnswerData> answers)
+    {
+        for (var i = 0; i < answers.Count; i++)
+        {
+            var answerButtonGameObject = answerButtonObjectPool.GetObject();
+            answerButtonGameObjects.Add(
+                answerButtonGameObject); // add the current answer button to the list of ACTIVE answer buttons so we can keep track of it
+            answerButtonGameObject.transform.SetParent(answerButtonParent);
+
+            var answerButton = answerButtonGameObject.GetComponent<AnswerButton>();
+            answerButton.Setup(answers[i]);
+
+            if (i != 0) continue; // only make bold the first item
+            selectedBoldAnswer = answerButton;
+            selectedBoldAnswer.Bold(); // TODO (UI) also shade it maybe?
+        }
+    }
+
     private void ShowQuestion()
     {
         questionDisplay.SetActive(true);
@@ -159,21 +179,7 @@ public class GameController : MonoBehaviour
         currentQuestion = questionPool[questionIndex];
         questionDisplayText.text = currentQuestion.questionText;
 
-        for (var i = 0; i < currentQuestion.answers.Length; i++)
-        {
-            var answerButtonGameObject = answerButtonObjectPool.GetObject();
-            answerButtonGameObjects.Add(
-                answerButtonGameObject); // add the current answer button to the list of ACTIVE answer buttonsso we can keep track of it
-            answerButtonGameObject.transform.SetParent(answerButtonParent);
-
-            var answerButton = answerButtonGameObject.GetComponent<AnswerButton>();
-            answerButton.Setup(currentQuestion.answers[i]);
-            if (i == 0)
-            {
-                selectedBoldAnswer = answerButton;
-                selectedBoldAnswer.Bold(); // TODO (UI) also shade it maybe?
-            }
-        }
+        DisplayAnswers(currentQuestion.answers);
 
         // show picture if any
         if (currentQuestion.pictureFileName != null)
@@ -202,29 +208,43 @@ public class GameController : MonoBehaviour
     /**
      * Handles the event when player is inconsistent with the facts in their answer
      */
-    private void ClarifyAnswer(string questionId, string answerId1, string answerId2)
+    private IEnumerator ClarifyAnswer(string questionId, string answerId1, string answerId2)
     {
         // 1. Make music scarier and respond with "Your answer doesn't match with our record" or sth
         AudioClip clip;
         string subtitle;
-
-        dataController.LoadDetectiveClarifyClip(out clip, out subtitle);
-        isDetectiveTalking = true;
+ 
+        dataController.LoadDetectiveRespClip(out clip, out subtitle, DataController.DETECTIVE_RESPONSE_CLARIFYING);
         ShowAndPlayDialog(clip, subtitle);
         questionDisplay.SetActive(false);
 
-        // 2. Ask again ("So, tell us the truth," then show the same q with only the 2 options)
+        while (detectiveAudioSource.isPlaying)
+        {
+            yield return null;
+        }
 
-        // 3. Compare emotion with the answer the player picked here
-        // Give the 
-        var q = dataController.GetQuestionDataById(questionId);
-        var a1 = q.answers.FirstOrDefault(e => e.answerId.Equals(answerId1));
-        var a2 = q.answers.FirstOrDefault(e => e.answerId.Equals(answerId2));
+        subtitleDisplay.SetActive(false);
+        questionDisplay.SetActive(true);
 
-        // TODO IDK CRYYYYY
+        // 2. Ask again (Show the same q with only the 2 options)
         // basically like ShowQuestion() but???
         RemoveAnswerButtons();
         questionDisplayText.text = currentQuestion.questionText;
+
+        AnswerData[] answerDatas =
+        {
+            currentQuestion.answers.FirstOrDefault(e => e.answerId.Equals(answerId1)),
+            currentQuestion.answers.FirstOrDefault(e => e.answerId.Equals(answerId2))
+        };
+
+        DisplayAnswers(answerDatas);
+
+        isClarifying = true;
+        isTimerActive = true;
+
+        // 3. Compare emotion with the answer the player picked here, store the new answer for record
+
+        // TODO IDK CRYYYYY
     }
 
     private float CalculateSuspicionScore(
@@ -290,7 +310,7 @@ public class GameController : MonoBehaviour
 
     private IEnumerator HandleAnswer(AnswerButton answerButton)
     {
-        if (currentQuestion.considersEmotion)
+        if (currentQuestion.considersEmotion && !isClarifying) // no need to record again if it's just clarifying
         {
             dataController.StartFER();
             // TODO (maybe) detective writes some notes animation 
@@ -309,12 +329,17 @@ public class GameController : MonoBehaviour
 
         if (!answerStoredBefore) questionIdToAnswerIdMap.Add(currentQuestion.questionId, answerData.answerId);
 
-        var reallyConsidersFact = currentQuestion.considersFact && answerStoredBefore;
-        var consistentFact = reallyConsidersFact &&
+        var considerPrevFact = currentQuestion.considersFact && answerStoredBefore;
+        var consistentFact = considerPrevFact &&
                              answerData.answerId.Equals(questionIdToAnswerIdMap[currentQuestion.questionId]);
 
+        if (isClarifying)
+        {
+            consistentFact = false;
+        }
+
         var suspicionScore = CalculateSuspicionScore(
-            reallyConsidersFact,
+            considerPrevFact,
             currentQuestion.considersEmotion,
             answerData.expectedExpression,
             out consistencyScore,
@@ -330,34 +355,51 @@ public class GameController : MonoBehaviour
             questionPictureDisplay.SetActive(false);
         }
 
-        //Debug.Log ("consistency score: " + consistencyScore);
 
-        // if consistencyScore <= 0, it means answer is consistent (consistent = true)
-        // if expressionScore <= 0, it means expression is correct (correctExpression = true)
-        AdaptMusicAndLighting(
-            currentQuestion.considersFact,
-            currentQuestion.considersEmotion,
-            closestEmotion,
-            consistencyScore <= 0f,
-            expressionScore <= 0f
-        );
-
-        if (string.IsNullOrEmpty(answerData.detectiveResponse))
+        if (!isClarifying)
         {
-            HandleEndOfAQuestion();
+            // if consistencyScore <= 0, it means answer is consistent (consistent = true)
+            // if expressionScore <= 0, it means expression is correct (correctExpression = true)
+            AdaptMusicAndLighting(
+                currentQuestion.considersFact,
+                currentQuestion.considersEmotion,
+                closestEmotion,
+                consistencyScore <= 0f,
+                expressionScore <= 0f
+            );
+
+            if (considerPrevFact && !consistentFact) // player answers inconsistent fact
+            {
+                StartCoroutine(ClarifyAnswer(currentQuestion.questionId, answerData.answerId,
+                    questionIdToAnswerIdMap[currentQuestion.questionId]));
+                yield break;
+            }
+
+            if (string.IsNullOrEmpty(answerData.detectiveResponse))
+            {
+                HandleEndOfAQuestion();
+            }
+            else
+            {
+                GetAndPlayDetectiveResponse(answerData.detectiveResponse);
+            }
         }
         else
         {
-            // Give detective response
-            AudioClip clip;
-            string subtitle;
-
-            dataController.LoadDetectiveRespClip(suspicionScore > 0, out clip, out subtitle,
-                answerData.detectiveResponse);
-            isDetectiveTalking = true;
-            ShowAndPlayDialog(clip, subtitle);
-            questionDisplay.SetActive(false);
+            GetAndPlayDetectiveResponse(DataController.DETECTIVE_RESPONSE_POST_CLARIFYING);
         }
+    }
+
+    private void GetAndPlayDetectiveResponse(string responseType)
+    {
+        // Give detective response
+        AudioClip clip;
+        string subtitle;
+
+        dataController.LoadDetectiveRespClip(out clip, out subtitle, responseType);
+        isDetectiveTalking = true;
+        ShowAndPlayDialog(clip, subtitle);
+        questionDisplay.SetActive(false);
     }
 
     public void AnswerButtonClicked(AnswerButton answerButton)
