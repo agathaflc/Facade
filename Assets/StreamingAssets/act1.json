@@ -31,7 +31,7 @@
       "sequenceType": "dialog",
       "filePath": "audio/whatever",
       "subtitleText": "In a hole in the ground there lived another hobbit.",
-      "bgm": "audio/custom_bgm"
+      "bgm": "audio/imperial-march"
     }
   ],
   "questions": [

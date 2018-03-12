@@ -122,6 +122,10 @@ public class GameController : MonoBehaviour
             // Debug.Log ("RunSequence: current sequence is dialog");
             isDetectiveTalking = true;
             ShowAndPlayDialog(dataController.LoadAudioFile(currentSequence.filePath), currentSequence.subtitleText);
+            if (!string.IsNullOrEmpty(currentSequence.bgm))
+            {
+                PlayBgm(dataController.LoadAudioFile(currentSequence.bgm));
+            }
         }
 
         sequenceIndex++;
