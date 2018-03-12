@@ -10,12 +10,17 @@
       "subtitleText": "It began... well, it began as you might expect."
     },
     {
-      "sequenceType": "question"
+      "sequenceType": "question",
+      "noOfQuestions": 2
     },
     {
       "sequenceType": "dialog",
       "filePath": "audio/seq0_001",
       "subtitleText": "In a hole in the ground, there lived a hobbit."
+    },
+    {
+      "sequenceType": "question",
+      "noOfQuestions": 1
     },
     {
       "sequenceType": "dialog",
