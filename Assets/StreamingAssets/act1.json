@@ -29,8 +29,9 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "sentence2.wav",
-      "subtitleText": "In a hole in the ground there lived another hobbit."
+      "filePath": "audio/whatever",
+      "subtitleText": "In a hole in the ground there lived another hobbit.",
+      "bgm": "audio/custom_bgm"
     }
   ],
   "questions": [
@@ -139,7 +140,7 @@
       "questionDesc": "ask how player is feeling",
       "questionId": "02",
       "expressionWeight": 1,
-      "consistencyWeight": 0,
+      "consistencyWeight": 3,
       "considersEmotion": true,
       "considersFact": true,
       "questionText": "How are you feeling today?",

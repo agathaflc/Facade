@@ -263,18 +263,12 @@ public class GameController : MonoBehaviour
 
         // check consistency if question considers fact, check for prev answer and so on
         if (considersFact)
-            if (consistent)
-            {
-                // answer is consistent
-                consistencyScore = ScoreCalculator.CalculateConsistencyScore(true, currentQuestion.consistencyWeight);
-                suspicionScore += consistencyScore;
-            }
-            else
-            {
-                // wrong answer
-                consistencyScore = ScoreCalculator.CalculateConsistencyScore(false, currentQuestion.consistencyWeight);
-                suspicionScore += consistencyScore;
-            }
+        {
+            consistencyScore = ScoreCalculator.CalculateConsistencyScore(consistent, currentQuestion.consistencyWeight);
+            suspicionScore += consistencyScore;
+            
+            Debug.Log("suspicion score after calculating consistency: " + suspicionScore);
+        }
 
         if (!considersEmotion) return suspicionScore;
         // Debug.Log ("considers emotion");
@@ -299,7 +293,7 @@ public class GameController : MonoBehaviour
         displayedScore += suspicionScore;
         actualOverallScore += suspicionScore;
 
-        Debug.Log("actual score: " + actualOverallScore);
+        Debug.Log("suspicion score: " + suspicionScore + ", actual score: " + actualOverallScore);
 
         // don't let displayedScore go below 0
         if (displayedScore < 0) displayedScore = 0;
