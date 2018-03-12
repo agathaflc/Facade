@@ -13,7 +13,6 @@ public class RoundData
 
     public string bgmPositiveFile;
     public DetectiveResponses detectiveResponses;
-    public QuestionData[] questions;
     public string responsesPath;
     public SequenceData[] sequence;
     public float suspicionLevel = 0;

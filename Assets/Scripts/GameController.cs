@@ -69,14 +69,12 @@ public class GameController : MonoBehaviour
     {
         dataController = FindObjectOfType<DataController>(); // store a ref to data controller
         currentRoundData = dataController.GetCurrentRoundData();
-        questionPool = currentRoundData.questions;
         detectiveAudioSource = detectiveObject.GetComponent<AudioSource>();
         bgmAudioSource = player.GetComponent<AudioSource>();
 
         PlayBgm(currentRoundData.bgmNormalClip);
 
         displayedScore = 0;
-        questionIndex = 0;
         sequenceIndex = 0;
         actualOverallScore = 0; // TODO should carry over score from previous round
 
@@ -114,6 +112,9 @@ public class GameController : MonoBehaviour
         if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
         {
             // Debug.Log ("RunSequence: current sequence is question");
+            questionPool = currentSequence.questions;
+            questionIndex = 0;
+            
             subtitleDisplay.SetActive(false);
             BeginQuestions();
         }

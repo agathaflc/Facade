@@ -71,15 +71,6 @@ public class DataController : MonoBehaviour
         PlayerPrefs.SetFloat(HIGHEST_SCORE_KEY, playerProgress.highestScore);
     }
 
-    public QuestionData GetQuestionDataById(string questionId)
-    {
-        var q = currentRound.questions.FirstOrDefault(e => e.questionId.Equals(questionId));
-
-        if (q == null) Debug.LogError("GetQuestionTextById: question not found!");
-
-        return q;
-    }
-
     public void StartFER()
     {
         var filePath = Path.Combine(Application.streamingAssetsPath, FER_FLAG_FILE_NAME);

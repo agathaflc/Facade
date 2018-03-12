@@ -7,4 +7,5 @@ public class SequenceData
     public string sequenceType;
     public string subtitleText;
     public string bgm;
+    public QuestionData[] questions;
 }
