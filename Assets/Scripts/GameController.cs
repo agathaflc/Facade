@@ -128,7 +128,6 @@ public class GameController : MonoBehaviour
                 PlayBgm(dataController.LoadAudioFile(currentSequence.bgm));
             }
         }
-
         sequenceIndex++;
     }
 
@@ -147,6 +146,7 @@ public class GameController : MonoBehaviour
             detectiveAudioSource.clip = audioClip;
             detectiveAudioSource.Play();
 
+            if (string.IsNullOrEmpty(subtitle)) return;
             subtitleDisplay.SetActive(true);
             subtitleDisplayText.text = subtitle;
         }
@@ -192,6 +192,12 @@ public class GameController : MonoBehaviour
             questionPictureDisplay.SetActive(true);
             var imageLoader = questionPictureDisplay.GetComponent<ImageLoader>();
             if (imageLoader != null) imageLoader.LoadImage(dataController.LoadImage(currentQuestion.pictureFileName));
+        }
+        
+        // play the audio if any(?)
+        if (!string.IsNullOrEmpty(currentQuestion.filePath))
+        {
+            ShowAndPlayDialog(dataController.LoadAudioFile(currentQuestion.filePath), null);
         }
 
         isTimerActive = true;
@@ -246,10 +252,6 @@ public class GameController : MonoBehaviour
 
         isClarifying = true;
         isTimerActive = true;
-
-        // 3. Compare emotion with the answer the player picked here, store the new answer for record
-
-        // TODO IDK CRYYYYY
     }
 
     private float CalculateSuspicionScore(
@@ -478,7 +480,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void LightsCameraAction()
+    private void LightsCameraAction()
     {
         var Lightsbulb = room.transform.Find("Lightbulb").gameObject;
         var Lights = Lightsbulb.transform.Find("Lamp").gameObject;
@@ -491,17 +493,17 @@ public class GameController : MonoBehaviour
         SpotLight2.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
     }
 
-    public void MotionBlur()
+    private void MotionBlur()
     {
         playerCamera.GetComponent<PostProcessingBehaviour>().profile = motionBlurEffect;
     }
 
-    public void Vignette()
+    private void Vignette()
     {
         playerCamera.GetComponent<PostProcessingBehaviour>().profile = vignetteEffect;
     }
 
-    public void Bloom()
+    private void Bloom()
     {
         playerCamera.GetComponent<PostProcessingBehaviour>().profile = bloomEffect;
     }
