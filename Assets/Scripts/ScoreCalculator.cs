@@ -19,43 +19,43 @@ public class ScoreCalculator
     public static float ComputeEmotionDistance(DistanceData distanceMap, string[] expected, EmotionData[] actual,
         out string closestEmotion)
     {
-        var observedEmotionvector = new List<EmotionMapping>();
+        var observedEmotionVector = new List<EmotionMapping>();
 
         if (actual == null || actual.Length == 0)
-            observedEmotionvector.Add(distanceMap.emotions.FirstOrDefault(e => e.type.Equals(EMOTION_NEUTRAL)));
+            observedEmotionVector.Add(distanceMap.emotions.FirstOrDefault(e => e.type.Equals(EMOTION_NEUTRAL)));
         else
-            for (var i = 0; i < actual.Length; i++)
-                if (actual[i].emotionScore > 0)
+            foreach (var emotionData in actual)
+                if (emotionData.emotionScore > 0)
                 {
                     Debug.Log(
-                        "non zero emotion: " + actual[i].emotion + ", score: " + actual[i].emotionScore);
-                    Debug.Log("distancemap: " + distanceMap);
-                    var raw = distanceMap.emotions.FirstOrDefault(e => e.type.Equals(actual[i].emotion));
-                    var scaled = new EmotionMapping();
+                        "non zero emotion: " + emotionData.emotion + ", score: " + emotionData.emotionScore);
 
-                    scaled.x = raw.x * actual[i].emotionScore;
-                    scaled.y = raw.y * actual[i].emotionScore;
+                    var raw = distanceMap.emotions.FirstOrDefault(e => e.type.Equals(emotionData.emotion));
+                    var scaled = new EmotionMapping
+                    {
+                        x = raw.x * emotionData.emotionScore,
+                        y = raw.y * emotionData.emotionScore
+                    };
 
-                    observedEmotionvector.Add(scaled);
+                    observedEmotionVector.Add(scaled);
                 }
 
         var minDistance = 9999f;
-        EmotionMapping expectedMapping;
 
         var closestEmotionIndex = 0;
         // if multiple expressions are accepted, take the closer one
         for (var i = 0; i < expected.Length; i++)
-        for (var j = 0; j < observedEmotionvector.Count; j++)
         {
-            expectedMapping = distanceMap.emotions.FirstOrDefault(e => e.type.Equals(expected[i]));
-            var currentDistance = ComputeDistanceBetweenTwoPoints(
-                observedEmotionvector[j].x,
-                observedEmotionvector[j].y,
-                expectedMapping.x,
-                expectedMapping.y);
-
-            if (currentDistance < minDistance)
+            foreach (var emotionMapping in observedEmotionVector)
             {
+                var expectedMapping = distanceMap.emotions.FirstOrDefault(e => e.type.Equals(expected[i]));
+                var currentDistance = ComputeDistanceBetweenTwoPoints(
+                    emotionMapping.x,
+                    emotionMapping.y,
+                    expectedMapping.x,
+                    expectedMapping.y);
+
+                if (!(currentDistance < minDistance)) continue;
                 minDistance = currentDistance;
                 closestEmotionIndex = i;
             }

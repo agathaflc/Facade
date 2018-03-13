@@ -123,7 +123,7 @@
             {
               "answerId": "040",
               "answerText": "Great!",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "happy"
               ],
               "detectiveResponse": "positive"
@@ -131,7 +131,7 @@
             {
               "answerId": "041",
               "answerText": "Alright",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "happy",
                 "neutral"
               ],
@@ -140,7 +140,7 @@
             {
               "answerId": "042",
               "answerText": "Teribble",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "angry",
                 "sad"
               ],
@@ -149,7 +149,7 @@
             {
               "answerId": "043",
               "answerText": "I'm scared!",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "scared",
                 "surprised"
               ],
@@ -373,7 +373,7 @@
             {
               "answerId": "100",
               "answerText": "Yes",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "neutral",
                 "sad",
                 "scared"
@@ -383,7 +383,7 @@
             {
               "answerId": "101",
               "answerText": "No",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "neutral",
                 "scared"
               ],
@@ -392,7 +392,7 @@
             {
               "answerId": "102",
               "answerText": "Somewhat",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "neutral",
                 "sad",
                 "scared"
@@ -402,7 +402,7 @@
             {
               "answerId": "103",
               "answerText": "I don't remember",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "neutral",
                 "scared"
               ],
@@ -414,7 +414,15 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/i-wanna-discuss",
+      "readExpression": true,
+      "scoreWeight": 3,
+      "expectedExpressions": [
+        "scared",
+        "surprised",
+        "angry",
+        "sad"
+      ],
       "subtitleText": "You see.. this girl was found dead last night. Her name was Lianne. It’s a real tragedy."
     },
     {
@@ -439,7 +447,7 @@
             {
               "answerId": "110",
               "answerText": "Jason Smith",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "scared",
                 "angry"
               ],
@@ -448,7 +456,7 @@
             {
               "answerId": "111",
               "answerText": "Anna Wu",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "scared",
                 "angry"
               ],
@@ -457,7 +465,7 @@
             {
               "answerId": "112",
               "answerText": "My alibi",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "scared",
                 "angry"
               ],
@@ -466,7 +474,7 @@
             {
               "answerId": "113",
               "answerText": "No one",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "neutral"
               ],
               "detectiveResponse": "negative"

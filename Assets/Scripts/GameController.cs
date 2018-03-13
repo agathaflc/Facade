@@ -81,7 +81,7 @@ public class GameController : MonoBehaviour
         isTimerActive = false;
         isClarifying = false;
 
-        RunSequence();
+        StartCoroutine(RunSequence());
     }
 
     private void PlayBgm(AudioClip clip)
@@ -99,12 +99,12 @@ public class GameController : MonoBehaviour
     /**
      * Should only be called after the previous sequence is completed
      **/
-    private void RunSequence()
+    private IEnumerator RunSequence()
     {
         if (sequenceIndex >= currentRoundData.sequence.Length)
         {
             EndRound();
-            return;
+            yield break;
         }
 
         currentSequence = currentRoundData.sequence[sequenceIndex];
@@ -114,7 +114,7 @@ public class GameController : MonoBehaviour
             // Debug.Log ("RunSequence: current sequence is question");
             questionPool = currentSequence.questions;
             questionIndex = 0;
-            
+
             subtitleDisplay.SetActive(false);
             BeginQuestions();
         }
@@ -123,12 +123,45 @@ public class GameController : MonoBehaviour
             // Debug.Log ("RunSequence: current sequence is dialog");
             isDetectiveTalking = true;
             ShowAndPlayDialog(dataController.LoadAudioFile(currentSequence.filePath), currentSequence.subtitleText);
+
             if (!string.IsNullOrEmpty(currentSequence.bgm))
             {
                 PlayBgm(dataController.LoadAudioFile(currentSequence.bgm));
             }
+
+            if (currentSequence.readExpression)
+            {
+                // TODO create a pop-up that instructs player to put on an appropriate expression?
+
+//                while (detectiveAudioSource.isPlaying)
+//                {
+//                    yield return null;
+//                }
+                
+                dataController.StartFER();
+                yield return new WaitForSecondsRealtime(2f);
+                dataController.StopFER();
+
+                string closestEmotion;
+                SaveAndDisplayScore(CalculateSuspicionScore_EmotionOnly(currentSequence.expectedExpressions,
+                    currentSequence.scoreWeight, out closestEmotion));
+            }
         }
+
         sequenceIndex++;
+    }
+
+    private float CalculateSuspicionScore_EmotionOnly(string[] expectedExpressions, float weight,
+        out string closestEmotion)
+    {
+        var emotionDistance = dataController.ComputeEmotionDistance(expectedExpressions,
+            dataController.ReadPlayerEmotion(), out closestEmotion);
+        
+        // TODO: UNCOMMENT THIS AFTER INTEGRATION WITH FER
+        // dataController.DeleteFERDataFile ();
+
+        Debug.Log ("CalculateSuspicionScore_EmotionOnly: " + emotionDistance);
+        return ScoreCalculator.CalculateExpressionScore(emotionDistance, weight);
     }
 
     private void ShowAndPlayDialog(AudioClip audioClip, string subtitle)
@@ -193,7 +226,7 @@ public class GameController : MonoBehaviour
             var imageLoader = questionPictureDisplay.GetComponent<ImageLoader>();
             if (imageLoader != null) imageLoader.LoadImage(dataController.LoadImage(currentQuestion.pictureFileName));
         }
-        
+
         // play the audio if any(?)
         if (!string.IsNullOrEmpty(currentQuestion.filePath))
         {
@@ -224,7 +257,7 @@ public class GameController : MonoBehaviour
         // 1. Make music scarier and respond with "Your answer doesn't match with our record" or sth
         AudioClip clip;
         string subtitle;
- 
+
         dataController.LoadDetectiveRespClip(out clip, out subtitle, DataController.DETECTIVE_RESPONSE_CLARIFYING);
         ShowAndPlayDialog(clip, subtitle);
         questionDisplay.SetActive(false);
@@ -273,7 +306,7 @@ public class GameController : MonoBehaviour
         {
             consistencyScore = ScoreCalculator.CalculateConsistencyScore(consistent, currentQuestion.consistencyWeight);
             suspicionScore += consistencyScore;
-            
+
             Debug.Log("suspicion score after calculating consistency: " + suspicionScore);
         }
 
@@ -342,7 +375,7 @@ public class GameController : MonoBehaviour
         var suspicionScore = CalculateSuspicionScore(
             considerPrevFact,
             currentQuestion.considersEmotion,
-            answerData.expectedExpression,
+            answerData.expectedExpressions,
             out consistencyScore,
             out expressionScore,
             out closestEmotion,
@@ -521,7 +554,7 @@ public class GameController : MonoBehaviour
         {
             // Debug.Log ("end of questions");
             questionDisplay.SetActive(false);
-            RunSequence();
+            StartCoroutine(RunSequence());
         }
     }
 
@@ -546,7 +579,7 @@ public class GameController : MonoBehaviour
             if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
                 HandleEndOfAQuestion();
             else
-                RunSequence();
+                StartCoroutine(RunSequence());
         }
 
         if (Input.GetKeyDown("r")) LightsCameraAction();
