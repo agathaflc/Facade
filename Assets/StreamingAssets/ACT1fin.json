@@ -66,19 +66,19 @@
           "answers": [
             {
               "answerId": "020",
-              "answerText": "18",
+              "answerText": "18"
             },
             {
               "answerId": "021",
-              "answerText": "26",
+              "answerText": "26"
             },
             {
               "answerId": "022",
-              "answerText": "31",
+              "answerText": "31"
             },
             {
               "answerId": "023",
-              "answerText": "43",
+              "answerText": "43"
             }
           ]
         },
@@ -94,19 +94,19 @@
           "answers": [
             {
               "answerId": "030",
-              "answerText": "USA",
+              "answerText": "USA"
             },
             {
               "answerId": "031",
-              "answerText": "India",
+              "answerText": "India"
             },
             {
               "answerId": "032",
-              "answerText": "France",
+              "answerText": "France"
             },
             {
               "answerId": "033",
-              "answerText": "South Africa",
+              "answerText": "South Africa"
             }
           ]
         },
@@ -123,25 +123,36 @@
             {
               "answerId": "040",
               "answerText": "Great!",
-              "expectedExpression": ["happy"],
+              "expectedExpression": [
+                "happy"
+              ],
               "detectiveResponse": "positive"
             },
             {
               "answerId": "041",
               "answerText": "Alright",
-              "expectedExpression": ["happy", "neutral"],
+              "expectedExpression": [
+                "happy",
+                "neutral"
+              ],
               "detectiveResponse": "positive"
             },
             {
               "answerId": "042",
               "answerText": "Teribble",
-              "expectedExpression": ["angry", "sad"],
+              "expectedExpression": [
+                "angry",
+                "sad"
+              ],
               "detectiveResponse": "negative"
             },
             {
               "answerId": "043",
               "answerText": "I'm scared!",
-              "expectedExpression": ["scared", "surprised"],
+              "expectedExpression": [
+                "scared",
+                "surprised"
+              ],
               "detectiveResponse": "negative"
             }
           ]
@@ -174,8 +185,8 @@
       "subtitleText": "It’s a bit dramatic to shoot myself, but at least I’m outta there now!"
     },
     {
-      "sequenceType" : "question",
-      "questions":[
+      "sequenceType": "question",
+      "questions": [
         {
           "questionDesc": "Dream Count",
           "questionId": "05",
@@ -187,22 +198,22 @@
           "questionText": "What about you? I hope you had enough sleep last night. How often do you dream?",
           "answers": [
             {
-              "answerId": "050" ,
+              "answerId": "050",
               "answerText": "Quite often",
               "detectiveResponse": "positive"
             },
             {
-              "answerId": "051" ,
+              "answerId": "051",
               "answerText": "Only sometimes",
               "detectiveResponse": "neutral"
             },
             {
-              "answerId": "052" ,
+              "answerId": "052",
               "answerText": "Never",
               "detectiveResponse": "neutral"
             },
             {
-              "answerId": "053" ,
+              "answerId": "053",
               "answerText": "I can't remember",
               "detectiveResponse": "negative"
             }
@@ -217,7 +228,7 @@
     },
     {
       "sequenceType": "question",
-      "questions":[
+      "questions": [
         {
           "questionDesc": "Incident Location",
           "questionId": "06",
@@ -227,21 +238,21 @@
           "considersFact": true,
           "filePath": "",
           "questionText": "So tell me where you were last night?",
-          "answers":[
+          "answers": [
             {
-              "answerId": "060" ,
+              "answerId": "060",
               "answerText": "Bar"
             },
             {
-              "answerId": "061" ,
+              "answerId": "061",
               "answerText": "Party"
             },
             {
-              "answerId": "062" ,
+              "answerId": "062",
               "answerText": "Nightclub"
             },
             {
-              "answerId": "063" ,
+              "answerId": "063",
               "answerText": "Restaurant"
             }
           ]
@@ -255,24 +266,24 @@
           "considersFact": true,
           "filePath": "",
           "questionText": "And were you with anyone last night?",
-          "answers":[
+          "answers": [
             {
-              "answerId": "070" ,
+              "answerId": "070",
               "answerText": "Sister",
               "detectiveResponse": "neutral"
             },
             {
-              "answerId": "071" ,
+              "answerId": "071",
               "answerText": "Friend",
               "detectiveResponse": "neutral"
             },
             {
-              "answerId": "072" ,
+              "answerId": "072",
               "answerText": "Colleague",
               "detectiveResponse": "neutral"
             },
             {
-              "answerId": "073" ,
+              "answerId": "073",
               "answerText": "No one",
               "detectiveResponse": "negative"
             }
@@ -287,21 +298,21 @@
           "considersFact": true,
           "filePath": "",
           "questionText": "When did you get home last night?",
-          "answers":[
+          "answers": [
             {
-              "answerId": "080" ,
+              "answerId": "080",
               "answerText": "12 AM"
             },
             {
-              "answerId": "081" ,
+              "answerId": "081",
               "answerText": "3 AM"
             },
             {
-              "answerId": "082" ,
+              "answerId": "082",
               "answerText": "12 NOON"
             },
             {
-              "answerId": "083" ,
+              "answerId": "083",
               "answerText": "I don't remember"
             }
           ]
@@ -315,24 +326,24 @@
           "considersFact": true,
           "filePath": "",
           "questionText": "Tell me, how did you get home last night?",
-          "answers":[
+          "answers": [
             {
-              "answerId": "090" ,
+              "answerId": "090",
               "answerText": "I drove",
               "detectiveResponse": "negative"
             },
             {
-              "answerId": "091" ,
+              "answerId": "091",
               "answerText": "Taxi",
               "detectiveResponse": "positive"
             },
             {
-              "answerId": "092" ,
+              "answerId": "092",
               "answerText": "I walked",
               "detectiveResponse": "positive"
             },
             {
-              "answerId": "093" ,
+              "answerId": "093",
               "answerText": "My friend drove",
               "detectiveResponse": "neutral"
             }
@@ -347,7 +358,7 @@
     },
     {
       "sequenceType": "question",
-      "questions":[
+      "questions": [
         {
           "questionDesc": "Victim Intro",
           "questionId": "10",
@@ -362,25 +373,39 @@
             {
               "answerId": "100",
               "answerText": "Yes",
-              "expectedExpression":["neutral", "sad", "scared"],
+              "expectedExpression": [
+                "neutral",
+                "sad",
+                "scared"
+              ],
               "detectiveResponse": "neutral"
             },
             {
               "answerId": "101",
               "answerText": "No",
-              "expectedExpression":["neutral", "scared"],
+              "expectedExpression": [
+                "neutral",
+                "scared"
+              ],
               "detectiveResponse": "negative"
             },
             {
               "answerId": "102",
               "answerText": "Somewhat",
-              "expectedExpression":["neutral", "sad", "scared"],
+              "expectedExpression": [
+                "neutral",
+                "sad",
+                "scared"
+              ],
               "detectiveResponse": "neutral"
             },
             {
               "answerId": "103",
               "answerText": "I don't remember",
-              "expectedExpression":["neutral", "scared"],
+              "expectedExpression": [
+                "neutral",
+                "scared"
+              ],
               "detectiveResponse": "negative"
             }
           ]
@@ -399,7 +424,7 @@
     },
     {
       "sequenceType": "question",
-      "questions":[
+      "questions": [
         {
           "questionDesc": "Witnesses Intro",
           "questionId": "11",
@@ -414,25 +439,36 @@
             {
               "answerId": "110",
               "answerText": "Jason Smith",
-              "expectedExpression": ["scared", "angry"],
+              "expectedExpression": [
+                "scared",
+                "angry"
+              ],
               "detectiveResponse": "negative"
             },
             {
               "answerId": "111",
               "answerText": "Anna Wu",
-              "expectedExpression": ["scared", "angry"],
+              "expectedExpression": [
+                "scared",
+                "angry"
+              ],
               "detectiveResponse": "negative"
             },
             {
               "answerId": "112",
               "answerText": "My alibi",
-              "expectedExpression": ["scared", "angry"],
+              "expectedExpression": [
+                "scared",
+                "angry"
+              ],
               "detectiveResponse": "negative"
             },
             {
               "answerId": "113",
               "answerText": "No one",
-              "expectedExpression": ["neutral"],
+              "expectedExpression": [
+                "neutral"
+              ],
               "detectiveResponse": "negative"
             }
           ]
@@ -446,7 +482,7 @@
           "considersFact": true,
           "filePath": "",
           "questionText": "And why exactly did they seem suspicious to you?",
-          "answers":[
+          "answers": [
             {
               "answerId": "120",
               "answerText": "They were acting paranoid",
@@ -473,18 +509,18 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath":"",
-      "subtitleText":"Look man, I know you don’t have anything to do with this, and I can tell you’re a good guy who was just in the wrong place at the wrong time."
+      "filePath": "",
+      "subtitleText": "Look man, I know you don’t have anything to do with this, and I can tell you’re a good guy who was just in the wrong place at the wrong time."
     },
     {
       "sequenceType": "dialog",
-      "filePath":"",
-      "subtitleText":"So you don’t have anything to be worried about. I’m gonna step out for a second to finish up some paperwork, and I’ll be back in a while."
+      "filePath": "",
+      "subtitleText": "So you don’t have anything to be worried about. I’m gonna step out for a second to finish up some paperwork, and I’ll be back in a while."
     },
     {
       "sequenceType": "dialog",
-      "filePath":"",
-      "subtitleText":"I just hope we can figure out this case together, so that poor girl’s parents can get some closure. I’ll see you in a bit!"
+      "filePath": "",
+      "subtitleText": "I just hope we can figure out this case together, so that poor girl’s parents can get some closure. I’ll see you in a bit!"
     }
   ]
 }
