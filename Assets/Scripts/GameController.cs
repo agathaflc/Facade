@@ -51,7 +51,7 @@ public class GameController : MonoBehaviour
     private readonly Dictionary<string, string> questionIdToAnswerIdMap = new Dictionary<string, string>();
 
     private bool isTimerActive;
-    private bool isDetectiveTalking;
+    private bool isEventDone;
     private bool isClarifying;
     private float timeRemaining;
     private int questionIndex;
@@ -121,7 +121,7 @@ public class GameController : MonoBehaviour
         else if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_DIALOG))
         {
             // Debug.Log ("RunSequence: current sequence is dialog");
-            isDetectiveTalking = true;
+            isEventDone = false;
             ShowAndPlayDialog(dataController.LoadAudioFile(currentSequence.filePath), currentSequence.subtitleText);
 
             if (!string.IsNullOrEmpty(currentSequence.bgm))
@@ -133,18 +133,32 @@ public class GameController : MonoBehaviour
             {
                 // TODO create a pop-up that instructs player to put on an appropriate expression?
 
-//                while (detectiveAudioSource.isPlaying)
-//                {
-//                    yield return null;
-//                }
+                while (detectiveAudioSource.isPlaying)
+                {
+                    yield return null;
+                }
                 
+                subtitleDisplay.SetActive(false);
+
                 dataController.StartFER();
+                Debug.Log("wait 2 seconds");
                 yield return new WaitForSecondsRealtime(2f);
                 dataController.StopFER();
 
                 string closestEmotion;
                 SaveAndDisplayScore(CalculateSuspicionScore_EmotionOnly(currentSequence.expectedExpressions,
                     currentSequence.scoreWeight, out closestEmotion));
+
+                isEventDone = true;
+            }
+            else
+            {
+                while (detectiveAudioSource.isPlaying)
+                {
+                    yield return null;
+                }
+
+                isEventDone = true;
             }
         }
 
@@ -156,11 +170,11 @@ public class GameController : MonoBehaviour
     {
         var emotionDistance = dataController.ComputeEmotionDistance(expectedExpressions,
             dataController.ReadPlayerEmotion(), out closestEmotion);
-        
+
         // TODO: UNCOMMENT THIS AFTER INTEGRATION WITH FER
         // dataController.DeleteFERDataFile ();
 
-        Debug.Log ("CalculateSuspicionScore_EmotionOnly: " + emotionDistance);
+        Debug.Log("CalculateSuspicionScore_EmotionOnly: " + emotionDistance);
         return ScoreCalculator.CalculateExpressionScore(emotionDistance, weight);
     }
 
@@ -212,6 +226,7 @@ public class GameController : MonoBehaviour
 
     private void ShowQuestion()
     {
+        isEventDone = false;
         questionDisplay.SetActive(true);
         RemoveAnswerButtons();
         currentQuestion = questionPool[questionIndex];
@@ -252,7 +267,7 @@ public class GameController : MonoBehaviour
     /**
      * Handles the event when player is inconsistent with the facts in their answer
      */
-    private IEnumerator ClarifyAnswer(string questionId, string answerId1, string answerId2)
+    private IEnumerator ClarifyAnswer(string answerId1, string answerId2)
     {
         // 1. Make music scarier and respond with "Your answer doesn't match with our record" or sth
         AudioClip clip;
@@ -404,8 +419,7 @@ public class GameController : MonoBehaviour
 
             if (considerPrevFact && !consistentFact) // player answers inconsistent fact
             {
-                StartCoroutine(ClarifyAnswer(currentQuestion.questionId, answerData.answerId,
-                    questionIdToAnswerIdMap[currentQuestion.questionId]));
+                StartCoroutine(ClarifyAnswer(answerData.answerId, questionIdToAnswerIdMap[currentQuestion.questionId]));
                 yield break;
             }
 
@@ -416,11 +430,23 @@ public class GameController : MonoBehaviour
             else
             {
                 GetAndPlayDetectiveResponse(answerData.detectiveResponse);
+                while (detectiveAudioSource.isPlaying)
+                {
+                    yield return null;
+                }
+
+                isEventDone = true;
             }
         }
         else
         {
             GetAndPlayDetectiveResponse(DataController.DETECTIVE_RESPONSE_POST_CLARIFYING);
+            while (detectiveAudioSource.isPlaying)
+            {
+                yield return null;
+            }
+
+            isEventDone = true;
         }
     }
 
@@ -431,7 +457,6 @@ public class GameController : MonoBehaviour
         string subtitle;
 
         dataController.LoadDetectiveRespClip(out clip, out subtitle, responseType);
-        isDetectiveTalking = true;
         ShowAndPlayDialog(clip, subtitle);
         questionDisplay.SetActive(false);
     }
@@ -571,9 +596,8 @@ public class GameController : MonoBehaviour
         UpdateTimeRemainingDisplay();
 
         // handle the sequence thing
-        if (isDetectiveTalking && !detectiveAudioSource.isPlaying)
+        if (isEventDone)
         {
-            isDetectiveTalking = false;
             subtitleDisplay.SetActive(false);
 
             if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
