@@ -1,0 +1,532 @@
+{
+  "responsesPath": "detective_responses_act2.json",
+  "bgmPositiveFile": "audio/bgm_fast",
+  "bgmNegativeFile": "audio/bgm_slow",
+  "bgmNormalFile": "audio/bgm_normal",
+  "sequence": [
+    {
+      "sequenceType": "dialog",
+      "filePath": "",
+      "subtitleText": "Alright listen up, I’ve spent the last 18 hours working on this case, having to question a bunch of hysterical kids I don’t give a damn about."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "",
+      "subtitleText": "And I’m definitely not interested in hearing any sob story bullshit from you, so don’t start any funny business with me. Got it?"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "",
+      "subtitleText": "Let’s begin."
+    },
+    {
+      "sequenceType": "question",
+      "questions": [
+        {
+          "questionDesc": "Player Name",
+          "questionId": "01",
+          "expressionWeight": 0,
+          "consistencyWeight": 1,
+          "considersEmotion": false,
+          "considersFact": true,
+          "filePath": "",
+          "questionText": "Restate your full name for the record.",
+          "answers": [
+            {
+              "answerId": "010",
+              "answerText": "Ella Wong",
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "011",
+              "answerText": "James Peterson",
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "012",
+              "answerText": "Anya Patel",
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "013",
+              "answerText": "Charles Davis",
+              "detectiveResponse": "neutral"
+            }
+          ]
+        },
+        {
+          "questionDesc": "Number of witnesses",
+          "questionId": "02",
+          "expressionWeight": 0,
+          "consistencyWeight": 1,
+          "considersEmotion": false,
+          "considersFact": true,
+          "filePath": "",
+          "questionText": "How many people do you  remember being present last night?",
+          "answers": [
+            {
+              "answerId": "020",
+              "answerText": "1",
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "021",
+              "answerText": "5",
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "022",
+              "answerText": "12",
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "023",
+              "answerText": "None",
+              "detectiveResponse": "negative"
+            },
+          ]
+        },
+        {
+          "questionDesc": "Player Alibi",
+          "questionId": "03",
+          "expressionWeight": 0,
+          "consistencyWeight": 1,
+          "considersEmotion": false,
+          "considersFact": true,
+          "filePath": "",
+          "questionText": "Who were you with last night?",
+          "answers":[
+            {
+              "answerId": "070" ,
+              "answerText": "Sister",
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "071" ,
+              "answerText": "Friend",
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "072" ,
+              "answerText": "Colleague",
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "073" ,
+              "answerText": "No one",
+              "detectiveResponse": "negative"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "",
+      "subtitleText": "Hm yes, I just spoke with your alibi from last night actually. They had quite a lot of interesting thing to say about you from last night."
+    },
+    {
+      "sequenceType": "question",
+      "questions": [
+        {
+          "questionDesc": "Player Location",
+          "questionId": "04",
+          "expressionWeight": 0,
+          "consistencyWeight": 1,
+          "considersEmotion": false,
+          "considersFact": true,
+          "filePath": "",
+          "questionText": "And where did you say you were last night?",
+          "answers":[
+            {
+              "answerId": "060" ,
+              "answerText": "Bar"
+            },
+            {
+              "answerId": "061" ,
+              "answerText": "Party"
+            },
+            {
+              "answerId": "062" ,
+              "answerText": "Nightclub"
+            },
+            {
+              "answerId": "063" ,
+              "answerText": "Restaurant"
+            }
+          ]
+        },
+        {
+          "questionDesc": "Player Location Reason",
+          "questionId": "05",
+          "expressionWeight": 0,
+          "consistencyWeight": 1,
+          "considersEmotion": false,
+          "considersFact": true,
+          "filePath": "",
+          "questionText": "What reason did you have to be there?",
+          "answers":[
+            {
+              "answerId": "050",
+              "answerText": "To have fun",
+              "expectedExpression": ["happy", "neutral"],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "051",
+              "answerText": "Meeting someone",
+              "expectedExpression": ["happy", "neutral"],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "052",
+              "answerText": "To pick up something",
+              "expectedExpression": ["neutral"],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "053",
+              "answerText": "No reason",
+              "expectedExpression": ["scared", "neutral", "surprised"],
+              "detectiveResponse": "negative"
+            }
+          ]
+        },
+        {
+          "questionDesc": "Player Leave Time",
+          "questionId": "06",
+          "expressionWeight": 0,
+          "consistencyWeight": 1,
+          "considersEmotion": false,
+          "considersFact": true,
+          "filePath": "",
+          "questionText": "What time did you leave the premises last night?",
+          "answers":[
+            {
+              "answerId": "080" ,
+              "answerText": "12 AM"
+            },
+            {
+              "answerId": "081" ,
+              "answerText": "3 AM"
+            },
+            {
+              "answerId": "082" ,
+              "answerText": "12 NOON"
+            },
+            {
+              "answerId": "083" ,
+              "answerText": "I don't remember"
+            }
+          ]
+        },
+        {
+          "questionDesc": "Player Intoxicated",
+          "questionId": "07",
+          "expressionWeight": 0.2,
+          "consistencyWeight": 0.8,
+          "considersEmotion": true,
+          "considersFact": true,
+          "filePath": "",
+          "questionText": "And were you intoxicated in any way last night?",
+          "answers": [
+            {
+              "answerId": "070",
+              "answerText": "Yes",
+              "expectedExpression": ["scared", "angry", "surprised", "sad"],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "071",
+              "answerText": "No",
+              "expectedExpression": ["scared", "surprised", "sad"],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "072",
+              "answerText": "Of course not!",
+              "expectedExpression": ["scared", "surprised", "sad"],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "073",
+              "answerText": "I don't remember",
+              "expectedExpression": ["scared", "sad"],
+              "detectiveResponse": "negative"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "",
+      "subtitleText": "Listen kid, you and I both know that you were definitely wasted last night. I can see how hungover you are right now."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "",
+      "subtitleText": "These bright lights must be bothering you huh?"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "",
+      "subtitleText": "Good."
+    },
+    {
+      "sequenceType": "question",
+      "questions": [
+        {
+          "questionDesc": "Player Intoxicated",
+          "questionId": "08",
+          "expressionWeight": 0.2,
+          "consistencyWeight": 0.8,
+          "considersEmotion": true,
+          "considersFact": true,
+          "filePath": "",
+          "questionText": "Your alibi claimed you disappeared at 12:45 AM last night. What exactly were you doing?",
+          "answers": [
+            {
+              "answerId": "080",
+              "answerText": "Finding someone",
+              "expectedExpression": ["happy", "neutral"],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "081",
+              "answerText": "Going to the bathroom",
+              "expectedExpression": ["scared", "surprised"],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "082",
+              "answerText": "Finding something",
+              "expectedExpression": ["happy", "neutral"],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "083",
+              "answerText": "I don't remember",
+              "expectedExpression": ["scared", "surprised"],
+              "detectiveResponse": "negative"
+            }
+          ]
+        },
+        {
+          "questionDesc": "Player Alibi Feelings",
+          "questionId": "09",
+          "expressionWeight": 1,
+          "consistencyWeight": 0,
+          "considersEmotion": true,
+          "considersFact": false,
+          "filePath": "",
+          "questionText": "You and your alibi don’t seem to be very close. How do you feel about them?",
+          "answers": [
+            {
+              "answerId": "090",
+              "answerText": "We have a good relationship",
+              "expectedExpression": ["happy", "neutral"],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "091",
+              "answerText": "They are not trustworthy",
+              "expectedExpression": ["angry", "sad", "scared"],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "092",
+              "answerText": "I hardly know them",
+              "expectedExpression": ["neutral", "sad"],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "093",
+              "answerText": "I don't like them",
+              "expectedExpression": ["angry", "sad", "scared", "surprised"],
+              "detectiveResponse": "neutral"
+            }
+          ]
+        },
+        {
+          "questionDesc": "Player Victim Relationship",
+          "questionId": "10",
+          "expressionWeight": 0.5,
+          "consistencyWeight": 0.5,
+          "considersEmotion": true,
+          "considersFact": true,
+          "filePath": "",
+          "questionText": "And what about the victim. How did you know her?",
+          "answers": [
+            {
+              "answerId": "100",
+              "answerText": "Freind",
+              "expectedExpression": ["sad", "scared", "surprised"],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "101",
+              "answerText": "Colleague",
+              "expectedExpression": ["sad", "scared", "surprised"],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "102",
+              "answerText": "Ex-lover",
+              "expectedExpression": ["sad", "scared", "surprised"],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "103",
+              "answerText": "I didn't know her",
+              "expectedExpression": ["neutral"],
+              "detectiveResponse": "neutral"
+            }
+          ]
+        },
+        {
+          "questionDesc": "Player Victim Feelings",
+          "questionId": "11",
+          "expressionWeight": 1,
+          "consistencyWeight": 0,
+          "considersEmotion": true,
+          "considersFact": false,
+          "filePath": "",
+          "questionText": "Your alibi claimed you were not on good terms with the victim. Why is that?",
+          "answers": [
+            {
+              "answerId": "110",
+              "answerText": "She betrayed me",
+              "expectedExpression": ["sad", "scared", "surprised", "angry"],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "111",
+              "answerText": "She was unkind to me",
+              "expectedExpression": ["sad", "scared", "surprised", "angry"],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "112",
+              "answerText": "She stole from me",
+              "expectedExpression": ["sad", "scared", "surprised", "angry"],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "113",
+              "answerText": "That is not true!",
+              "expectedExpression": ["surprised", "angry"],
+              "detectiveResponse": "negative"
+            }
+          ]
+        },
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "",
+      "subtitleText": "You must have had a really bad relationship with the victim huh? You seem like the kinda guy who'd get rid of someone they didn't like.."
+    },
+    {
+      "sequenceType": "question",
+      "questions": [
+        {
+          "questionDesc": "Player Gun",
+          "questionId": "12",
+          "expressionWeight": 0.5,
+          "consistencyWeight": 0.5,
+          "considersEmotion": true,
+          "considersFact": true,
+          "filePath": "",
+          "questionText": "So why did we find a concealed weapon on your person last night?",
+          "answers":[
+            {
+              "answerId": "120",
+              "answerText": "That's none of your business",
+              "expectedExpression": ["surprised", "angry"],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "121",
+              "answerText": "It's not mine",
+              "expectedExpression": ["surprised", "scared", "sad"],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "122",
+              "answerText": "Defense Measure",
+              "expectedExpression": ["surprised", "angry"],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "123",
+              "answerText": "I don't know",
+              "expectedExpression": ["surprised", "scared", "sad"],
+              "detectiveResponse": "negative"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "",
+      "subtitleText": "Enough! I don’t know why I’m sitting here wasting my time asking you these questions."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "",
+      "subtitleText": "I spoke to every other witness from last night and they all say you were the one acting weirdly."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "",
+      "subtitleText": "Even your alibi claimed you were doing suspicious stuff. And now you’re trying to tell me that you had nothing to do with this murder?!"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "",
+      "subtitleText": "We both know you’re guilty."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "",
+      "subtitleText": "Her cold dead body is being examined right now as we speak, and all we need is just a connection to you."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "",
+      "subtitleText": "A girl was murdered..."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "",
+      "subtitleText": "Shot in cold blood..."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "",
+      "subtitleText": "A girl that you have some bad history with."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "",
+      "subtitleText": "And you’re trying to tell me, that you have nothing to do with this??"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "",
+      "subtitleText": "Then what’s that?"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "",
+      "subtitleText": "You have some audacity coming in here with the very same gun you killed that poor girl with."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "",
+      "subtitleText": "I’m sick and tired of scum like you thinking you can smooth talk your way out of a fair judgement."
+    },
+  ]
+}
