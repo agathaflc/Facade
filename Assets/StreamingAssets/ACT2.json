@@ -169,7 +169,7 @@
             {
               "answerId": "050",
               "answerText": "To have fun",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "happy",
                 "neutral"
               ],
@@ -178,7 +178,7 @@
             {
               "answerId": "051",
               "answerText": "Meeting someone",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "happy",
                 "neutral"
               ],
@@ -187,7 +187,7 @@
             {
               "answerId": "052",
               "answerText": "To pick up something",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "neutral"
               ],
               "detectiveResponse": "neutral"
@@ -195,7 +195,7 @@
             {
               "answerId": "053",
               "answerText": "No reason",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "scared",
                 "neutral",
                 "surprised"
@@ -245,7 +245,7 @@
             {
               "answerId": "070",
               "answerText": "Yes",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "scared",
                 "angry",
                 "surprised",
@@ -256,7 +256,7 @@
             {
               "answerId": "071",
               "answerText": "No",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "scared",
                 "surprised",
                 "sad"
@@ -266,7 +266,7 @@
             {
               "answerId": "072",
               "answerText": "Of course not!",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "scared",
                 "surprised",
                 "sad"
@@ -276,7 +276,7 @@
             {
               "answerId": "073",
               "answerText": "I don't remember",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "scared",
                 "sad"
               ],
@@ -317,7 +317,7 @@
             {
               "answerId": "080",
               "answerText": "Finding someone",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "happy",
                 "neutral"
               ],
@@ -326,7 +326,7 @@
             {
               "answerId": "081",
               "answerText": "Going to the bathroom",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "scared",
                 "surprised"
               ],
@@ -335,7 +335,7 @@
             {
               "answerId": "082",
               "answerText": "Finding something",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "happy",
                 "neutral"
               ],
@@ -344,7 +344,7 @@
             {
               "answerId": "083",
               "answerText": "I don't remember",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "scared",
                 "surprised"
               ],
@@ -365,7 +365,7 @@
             {
               "answerId": "090",
               "answerText": "We have a good relationship",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "happy",
                 "neutral"
               ],
@@ -374,7 +374,7 @@
             {
               "answerId": "091",
               "answerText": "They are not trustworthy",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "angry",
                 "sad",
                 "scared"
@@ -384,7 +384,7 @@
             {
               "answerId": "092",
               "answerText": "I hardly know them",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "neutral",
                 "sad"
               ],
@@ -393,7 +393,7 @@
             {
               "answerId": "093",
               "answerText": "I don't like them",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "angry",
                 "sad",
                 "scared",
@@ -416,7 +416,7 @@
             {
               "answerId": "100",
               "answerText": "Freind",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "sad",
                 "scared",
                 "surprised"
@@ -426,7 +426,7 @@
             {
               "answerId": "101",
               "answerText": "Colleague",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "sad",
                 "scared",
                 "surprised"
@@ -436,7 +436,7 @@
             {
               "answerId": "102",
               "answerText": "Ex-lover",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "sad",
                 "scared",
                 "surprised"
@@ -446,7 +446,7 @@
             {
               "answerId": "103",
               "answerText": "I didn't know her",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "neutral"
               ],
               "detectiveResponse": "neutral"
@@ -466,7 +466,7 @@
             {
               "answerId": "110",
               "answerText": "She betrayed me",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "sad",
                 "scared",
                 "surprised",
@@ -477,7 +477,7 @@
             {
               "answerId": "111",
               "answerText": "She was unkind to me",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "sad",
                 "scared",
                 "surprised",
@@ -488,7 +488,7 @@
             {
               "answerId": "112",
               "answerText": "She stole from me",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "sad",
                 "scared",
                 "surprised",
@@ -499,7 +499,7 @@
             {
               "answerId": "113",
               "answerText": "That is not true!",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "surprised",
                 "angry"
               ],
@@ -530,7 +530,7 @@
             {
               "answerId": "120",
               "answerText": "That's none of your business",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "surprised",
                 "angry"
               ],
@@ -539,7 +539,7 @@
             {
               "answerId": "121",
               "answerText": "It's not mine",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "surprised",
                 "scared",
                 "sad"
@@ -549,7 +549,7 @@
             {
               "answerId": "122",
               "answerText": "Defense Measure",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "surprised",
                 "angry"
               ],
@@ -558,7 +558,7 @@
             {
               "answerId": "123",
               "answerText": "I don't know",
-              "expectedExpression": [
+              "expectedExpressions": [
                 "surprised",
                 "scared",
                 "sad"
