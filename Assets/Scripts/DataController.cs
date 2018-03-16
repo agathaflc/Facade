@@ -14,7 +14,7 @@ public class DataController : MonoBehaviour
     public const string DETECTIVE_RESPONSE_CLARIFYING = "clarifying";
     public const string DETECTIVE_RESPONSE_POST_CLARIFYING = "postClarifying";
 
-    private const string ACT_ONE_QUESTIONS_FILE_NAME = "questionsACT1.json";
+    private const string ACT_ONE_SEQUENCE_FILE_NAME = "ACT1fin.json";
     private const string ACT_ONE_DATA_FILE_NAME = "act1.json";
     private const string EXPRESSION_DATA_FILE_NAME = "expression_data.json";
     private const string DISTANCEMAP_DATA_FILE_NAME = "distances.json";
@@ -32,7 +32,7 @@ public class DataController : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject); // prevent destroy objects in previous scene that has been unloaded
         //LoadGameData(ACT_ONE_QUESTIONS_FILE_NAME);
-        LoadRoundData(ACT_ONE_DATA_FILE_NAME);
+        LoadRoundData(ACT_ONE_SEQUENCE_FILE_NAME);
         LoadPlayerProgress();
         ReadDistanceMap();
 

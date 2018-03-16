@@ -19,6 +19,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
+          "filePath": "audio/shall-we",
           "pictureFileName": "wojak.jpg",
           "questionText": "Please state your full name for the record.",
           "answers": [

@@ -6,5 +6,5 @@ public class AnswerData
     public string answerId;
     public string answerText;
     public string detectiveResponse;
-    public string[] expectedExpression;
+    public string[] expectedExpressions;
 }
