@@ -42,14 +42,14 @@ public class PlayerLook : MonoBehaviour
         targetRotCam.z = 0; //clamping z axis of camera to prevent complete rotation upside down
 
         //conversion between euler and quaternion angle values, 90 is looking down, -90/270 is looking up
-        if (xAxisClamp > 90)
+        if (xAxisClamp > 30)
         {
-            xAxisClamp = targetRotCam.x = 90;
+            xAxisClamp = targetRotCam.x = 30;
         }
-        else if (xAxisClamp < -90)
+        else if (xAxisClamp < -30)
         {
-            xAxisClamp = -90;
-            targetRotCam.x = 270;
+            xAxisClamp = -30;
+            targetRotCam.x = -30;
         }
 
         if (yAxisClamp > 135)

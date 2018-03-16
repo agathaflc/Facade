@@ -5,6 +5,9 @@ public class MenuScreenController : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("Game");
+		Initiate.Fade ("Game", Color.black, 0.8f);
+        //SceneManager.LoadScene("Game");
     }
+
+
 }

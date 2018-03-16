@@ -2238,8 +2238,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aa6a261dc5d4424ab30454c30fe2722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBody: {fileID: 30381819}
   mouseSensitively: 2
+  playerBody: {fileID: 30381819}
 --- !u!114 &1267432958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3642,7 +3642,7 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 6
+  m_Intensity: 15
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
