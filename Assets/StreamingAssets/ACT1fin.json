@@ -1,8 +1,9 @@
 {
   "responsesPath": "detective_responses_act1.json",
-  "bgmPositiveFile": "audio/bgm_fast",
-  "bgmNegativeFile": "audio/bgm_slow",
-  "bgmNormalFile": "audio/bgm_normal",
+  "bgmHappyFile": "audio/bgm_fast",
+  "bgmSadScaredFile": "audio/bgm_slow",
+  "bgmNeutralFile": "audio/bgm_normal",
+  "bgmAngrySurprisedFile": "audio/imperial-march",
   "sequence": [
     {
       "sequenceType": "dialog",
