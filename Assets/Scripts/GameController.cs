@@ -227,8 +227,10 @@ public class GameController : MonoBehaviour
     private void ShowQuestion()
     {
         isEventDone = false;
-        StartCoroutine(FadeInAndActivateDisplay(questionDisplay));
+        
+        questionDisplay.SetActive(true);
         RemoveAnswerButtons();
+        
         currentQuestion = questionPool[questionIndex];
         questionDisplayText.text = currentQuestion.questionText;
 
@@ -264,44 +266,6 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private IEnumerator FadeOutAndDeactivateDisplay(GameObject display)
-    {
-//        var displayRenderer = display.GetComponent<CanvasRenderer>();
-//
-//        Debug.Log(displayRenderer);
-//        if (displayRenderer != null && displayRenderer.GetAlpha() > 0)
-//        {
-//            Debug.Log("Fade out: for loop");
-//            for (var f = 1f; f >= 0; f -= FADE_STEP)
-//            {
-//                displayRenderer.SetAlpha(f);
-//                yield return null;
-//            }
-//        }
-//                
-        display.SetActive(false);
-        yield break;
-    }
-    
-    private IEnumerator FadeInAndActivateDisplay(GameObject display)
-    {
-        display.SetActive(true);
-
-//        var displayRenderer = display.GetComponent<CanvasRenderer>();
-//
-//        Debug.Log(displayRenderer);
-//        if (displayRenderer != null && displayRenderer.GetAlpha().Equals(0))
-//        {
-//            Debug.Log("Fade in: for loop");
-//            for (var f = 0f; f < 1f; f += FADE_STEP)
-//            {
-//                displayRenderer.SetAlpha(f);
-//                yield return null;
-//            }
-//        }
-        yield break;
-    }
-
     /**
      * Handles the event when player is inconsistent with the facts in their answer
      */
@@ -313,7 +277,7 @@ public class GameController : MonoBehaviour
 
         dataController.LoadDetectiveRespClip(out clip, out subtitle, DataController.DETECTIVE_RESPONSE_CLARIFYING);
         ShowAndPlayDialog(clip, subtitle);
-        StartCoroutine(FadeOutAndDeactivateDisplay(questionDisplay));
+        questionDisplay.SetActive(false);
 
         while (detectiveAudioSource.isPlaying)
         {
@@ -321,7 +285,7 @@ public class GameController : MonoBehaviour
         }
 
         subtitleDisplay.SetActive(false);
-        StartCoroutine(FadeInAndActivateDisplay(questionDisplay));
+        questionDisplay.SetActive(true);
 
         // 2. Ask again (Show the same q with only the 2 options)
         // basically like ShowQuestion() but???
@@ -496,12 +460,12 @@ public class GameController : MonoBehaviour
 
         dataController.LoadDetectiveRespClip(out clip, out subtitle, responseType);
         ShowAndPlayDialog(clip, subtitle);
-        StartCoroutine(FadeOutAndDeactivateDisplay(questionDisplay));
+        questionDisplay.SetActive(false);
     }
 
     public void AnswerButtonClicked(AnswerButton answerButton)
     {
-        StartCoroutine(FadeOutAndDeactivateDisplay(questionDisplay));
+        questionDisplay.SetActive(false);
         StartCoroutine(HandleAnswer(answerButton));
     }
 
@@ -552,7 +516,7 @@ public class GameController : MonoBehaviour
         dataController.SubmitNewPlayerScore(displayedScore);
         highScoreDisplayText.text = dataController.GetHighestPlayerScore().ToString();
 
-        StartCoroutine(FadeOutAndDeactivateDisplay(questionDisplay));
+        questionDisplay.SetActive(false);
         roundEndDisplay.SetActive(true); // activate (show) the round end display
 
         questionPictureDisplay.GetComponent<ImageLoader>().DestroyMaterial();
@@ -616,7 +580,7 @@ public class GameController : MonoBehaviour
         else
         {
             // Debug.Log ("end of questions");
-            StartCoroutine(FadeOutAndDeactivateDisplay(questionDisplay));
+            questionDisplay.SetActive(false);
             StartCoroutine(RunSequence());
         }
     }
