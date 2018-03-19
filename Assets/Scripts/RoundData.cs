@@ -4,14 +4,16 @@ using UnityEngine;
 [Serializable]
 public class RoundData
 {
-    public AudioClip bgmNegativeClip;
-    public string bgmNegativeFile;
-    public AudioClip bgmNormalClip;
-    public string bgmNormalFile;
+    public AudioClip bgmHappyClip;
+    public AudioClip bgmNeutralClip;
+    public AudioClip bgmSadScaredClip;
+    public AudioClip bgmAngrySurprisedClip;
 
-    public AudioClip bgmPositiveClip;
+    public string bgmHappyFile;
+    public string bgmNeutralFile;
+    public string bgmSadScaredFile;
+    public string bgmAngrySurprisedFile;
 
-    public string bgmPositiveFile;
     public DetectiveResponses detectiveResponses;
     public string responsesPath;
     public SequenceData[] sequence;

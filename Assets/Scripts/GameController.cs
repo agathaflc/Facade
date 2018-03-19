@@ -17,6 +17,11 @@ public class GameController : MonoBehaviour
     private const string SURPRISED_EMOTION = "surprised";
     private const string ANGRY_EMOTION = "angry";
 
+    private const string MUSIC_HAPPY = "music_happy";
+    private const string MUSIC_NEUTRAL = "music_neutral";
+    private const string MUSIC_SAD_SCARED = "music_sad_scared";
+    private const string MUSIC_SURPRISED_ANGRY = "music_surprised_angry";
+
     private const float EMOTION_DISTANCE_THRESHOLD = 2.0f;
     private const float FADE_STEP = 0.1f;
 
@@ -64,6 +69,7 @@ public class GameController : MonoBehaviour
 
     private static QuestionData currentQuestion;
     private static SequenceData currentSequence;
+    private static string currentBgm;
 
     // Use this for initialization
     private void Start()
@@ -73,7 +79,8 @@ public class GameController : MonoBehaviour
         detectiveAudioSource = detectiveObject.GetComponent<AudioSource>();
         bgmAudioSource = player.GetComponent<AudioSource>();
 
-        PlayBgm(currentRoundData.bgmNormalClip);
+        PlayBgm(currentRoundData.bgmNeutralClip, MUSIC_NEUTRAL); // always start off with the base clip 
+        currentBgm = MUSIC_NEUTRAL;
 
         displayedScore = 0;
         sequenceIndex = 0;
@@ -85,7 +92,7 @@ public class GameController : MonoBehaviour
         StartCoroutine(RunSequence());
     }
 
-    private void PlayBgm(AudioClip clip)
+    private void PlayBgm(AudioClip clip, string musicType)
     {
         if (clip == null)
         {
@@ -93,6 +100,7 @@ public class GameController : MonoBehaviour
             return;
         }
 
+        currentBgm = musicType;
         bgmAudioSource.clip = clip;
         bgmAudioSource.Play();
     }
@@ -127,7 +135,7 @@ public class GameController : MonoBehaviour
 
             if (!string.IsNullOrEmpty(currentSequence.bgm))
             {
-                PlayBgm(dataController.LoadAudioFile(currentSequence.bgm));
+                PlayBgm(dataController.LoadAudioFile(currentSequence.bgm), "special_bgm");
             }
 
             if (currentSequence.readExpression)
@@ -138,7 +146,7 @@ public class GameController : MonoBehaviour
                 {
                     yield return null;
                 }
-                
+
                 subtitleDisplay.SetActive(false);
 
                 dataController.StartFER();
@@ -227,10 +235,10 @@ public class GameController : MonoBehaviour
     private void ShowQuestion()
     {
         isEventDone = false;
-        
+
         questionDisplay.SetActive(true);
         RemoveAnswerButtons();
-        
+
         currentQuestion = questionPool[questionIndex];
         questionDisplayText.text = currentQuestion.questionText;
 
@@ -483,7 +491,11 @@ public class GameController : MonoBehaviour
         if (considerConsistency)
             if (!consistent)
             {
-                PlayBgm(currentRoundData.bgmNegativeClip);
+                // todo play the foghorn thing??
+                if (!currentBgm.Contains(SCARED_EMOTION))
+                {
+                    PlayBgm(currentRoundData.bgmSadScaredClip, MUSIC_SAD_SCARED);
+                }
                 return;
             }
 
@@ -491,22 +503,29 @@ public class GameController : MonoBehaviour
 
         if (!correctExpression)
         {
-            PlayBgm(currentRoundData.bgmNegativeClip);
+            // todo play the foghorn thing??
+            if (!currentBgm.Contains(SCARED_EMOTION)) PlayBgm(currentRoundData.bgmSadScaredClip, MUSIC_SAD_SCARED);
             return;
         }
 
-        if (emotion.Equals(HAPPY_EMOTION))
+        // if the current music is the same emotion, don't change
+        if (currentBgm.Contains(emotion)) return;
+
+        if (MUSIC_HAPPY.Contains(emotion))
         {
-            bgmAudioSource.pitch = 1.3f;
-            PlayBgm(currentRoundData.bgmPositiveClip);
+            PlayBgm(currentRoundData.bgmHappyClip, MUSIC_HAPPY);
         }
-        else if (emotion.Equals(DEFAULT_EMOTION))
+        else if (MUSIC_NEUTRAL.Contains(emotion))
         {
-            PlayBgm(currentRoundData.bgmNormalClip);
+            PlayBgm(currentRoundData.bgmNeutralClip, MUSIC_NEUTRAL);
         }
-        else
+        else if (MUSIC_SAD_SCARED.Contains(emotion))
         {
-            PlayBgm(currentRoundData.bgmNegativeClip);
+            PlayBgm(currentRoundData.bgmSadScaredClip, MUSIC_SAD_SCARED);
+        }
+        else if (MUSIC_SURPRISED_ANGRY.Contains(emotion))
+        {
+            PlayBgm(currentRoundData.bgmAngrySurprisedClip, MUSIC_SURPRISED_ANGRY);
         }
     }
 

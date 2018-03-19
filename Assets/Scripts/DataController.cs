@@ -129,9 +129,9 @@ public class DataController : MonoBehaviour
             return;
         }
 
-        currentRound.bgmPositiveClip = LoadAudioFile(currentRound.bgmPositiveFile);
-        currentRound.bgmNegativeClip = LoadAudioFile(currentRound.bgmNegativeFile);
-        currentRound.bgmNormalClip = LoadAudioFile(currentRound.bgmNormalFile);
+        currentRound.bgmHappyClip = LoadAudioFile(currentRound.bgmHappyFile);
+        currentRound.bgmSadScaredClip = LoadAudioFile(currentRound.bgmSadScaredFile);
+        currentRound.bgmNeutralClip = LoadAudioFile(currentRound.bgmNeutralFile);
     }
 
     public AudioClip LoadAudioFile(string relativeResourcePath)
