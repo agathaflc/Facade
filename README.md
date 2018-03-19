@@ -18,7 +18,7 @@ Use the following command:
 
 ```conda create -n env1 python=3.6 opencv tensorflow keras matplotlib```
 
-This will create the environment and name it `cv2`. It will also install the libraries written after `python=3.6`. If you wanna look into these libraries go ahead but basically this command does the installation for you.
+This will create the environment and name it `env1`. It will also install the libraries written after `python=3.6`. If you wanna look into these libraries go ahead but basically this command does the installation for you.
 
 ### Step 3: Activate the Environment
 ```conda activate env1```
