@@ -341,7 +341,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '"Reality is merely an illusion, albeit a very persistenet one."'
+  m_Text: '"Reality is merely an illusion, albeit a very persistent one."'
 --- !u!222 &210253545
 CanvasRenderer:
   m_ObjectHideFlags: 0
