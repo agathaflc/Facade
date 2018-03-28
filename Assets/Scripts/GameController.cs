@@ -130,6 +130,7 @@ public class GameController : MonoBehaviour
         else if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_DIALOG))
         {
             // Debug.Log ("RunSequence: current sequence is dialog");
+            LockCursor();
             isEventDone = false;
             ShowAndPlayDialog(dataController.LoadAudioFile(currentSequence.filePath), currentSequence.subtitleText);
 
@@ -208,10 +209,20 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private static void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     private void BeginQuestions()
     {
+        UnlockCursor();
         ShowQuestion();
-        Cursor.lockState = CursorLockMode.None;
     }
 
     private void DisplayAnswers(IList<AnswerData> answers)
