@@ -149,7 +149,10 @@ adj2noun = {'neutral': 'neutral', 'anger': 'angry', 'fear': 'scared', 'happy': '
 def write_output_to_file(emotion_conf, max_val):
     output_dict = dict(sorted(emotion_confidences.items(), key=operator.itemgetter(1), reverse=True)[:3])
     for key in output_dict:
-        output_dict[key] = output_dict[key] / max_val
+        if (max_val != 0):
+            output_dict[key] = output_dict[key] / max_val
+        else:
+            output_dict[key] = 0
 
     final_output_list = []
     for key in output_dict:
@@ -158,8 +161,11 @@ def write_output_to_file(emotion_conf, max_val):
         temp['emotionScore'] = output_dict[key]
         final_output_list.append(temp)
 
+    final_emotions_output = {}
+    final_emotions_output['emotions'] = final_output_list
+
     with open(os.path.join('..', '..', 'Assets', 'StreamingAssets', 'expression_data.json'), 'a') as fp:
-        json.dump(final_output_list, fp)
+        json.dump(final_emotions_output, fp)
 
 print("COUNT:",c)
 print(dict(sorted(emotion_confidences.items(), key=operator.itemgetter(1), reverse=True)))
