@@ -132,11 +132,11 @@ public class GameController : MonoBehaviour
             // Debug.Log ("RunSequence: current sequence is dialog");
             LockCursor();
             isEventDone = false;
-            ShowAndPlayDialog(dataController.LoadAudioFile(currentSequence.filePath), currentSequence.subtitleText);
+            ShowAndPlayDialog(DataController.LoadAudioFile(currentSequence.filePath), currentSequence.subtitleText);
 
             if (!string.IsNullOrEmpty(currentSequence.bgm))
             {
-                PlayBgm(dataController.LoadAudioFile(currentSequence.bgm), "special_bgm");
+                PlayBgm(DataController.LoadAudioFile(currentSequence.bgm), "special_bgm");
             }
 
             if (currentSequence.readExpression)
@@ -150,10 +150,10 @@ public class GameController : MonoBehaviour
 
                 subtitleDisplay.SetActive(false);
 
-                dataController.StartFER();
+                DataController.StartFER();
                 Debug.Log("wait 2 seconds");
                 yield return new WaitForSecondsRealtime(2f);
-                dataController.StopFER();
+                DataController.StopFER();
 
                 string closestEmotion;
                 SaveAndDisplayScore(CalculateSuspicionScore_EmotionOnly(currentSequence.expectedExpressions,
@@ -179,7 +179,7 @@ public class GameController : MonoBehaviour
         out string closestEmotion)
     {
         var emotionDistance = dataController.ComputeEmotionDistance(expectedExpressions,
-            dataController.ReadPlayerEmotion(), out closestEmotion);
+            DataController.ReadPlayerEmotion(), out closestEmotion);
 
         // TODO: UNCOMMENT THIS AFTER INTEGRATION WITH FER
         // dataController.DeleteFERDataFile ();
@@ -260,13 +260,13 @@ public class GameController : MonoBehaviour
         {
             questionPictureDisplay.SetActive(true);
             var imageLoader = questionPictureDisplay.GetComponent<ImageLoader>();
-            if (imageLoader != null) imageLoader.LoadImage(dataController.LoadImage(currentQuestion.pictureFileName));
+            if (imageLoader != null) imageLoader.LoadImage(DataController.LoadImage(currentQuestion.pictureFileName));
         }
 
         // play the audio if any(?)
         if (!string.IsNullOrEmpty(currentQuestion.filePath))
         {
-            ShowAndPlayDialog(dataController.LoadAudioFile(currentQuestion.filePath), null);
+            ShowAndPlayDialog(DataController.LoadAudioFile(currentQuestion.filePath), null);
         }
 
         isTimerActive = true;
@@ -349,7 +349,7 @@ public class GameController : MonoBehaviour
         if (!considersEmotion) return suspicionScore;
         // Debug.Log ("considers emotion");
         var emotionDistance = dataController.ComputeEmotionDistance(expectedExpression,
-            dataController.ReadPlayerEmotion(), out closestEmotion);
+            DataController.ReadPlayerEmotion(), out closestEmotion);
 
         // Debug.Log ("emotion distance: " + emotionDistance.ToString());
         expressionScore = ScoreCalculator.CalculateExpressionScore(emotionDistance, currentQuestion.expressionWeight);
@@ -382,10 +382,10 @@ public class GameController : MonoBehaviour
     {
         if (currentQuestion.considersEmotion && !isClarifying) // no need to record again if it's just clarifying
         {
-            dataController.StartFER();
+            DataController.StartFER();
             // TODO (maybe) detective writes some notes animation 
             yield return new WaitForSecondsRealtime(2f);
-            dataController.StopFER();
+            DataController.StopFER();
         }
 
         float consistencyScore;

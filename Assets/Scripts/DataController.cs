@@ -19,6 +19,7 @@ public class DataController : MonoBehaviour
     private const string EXPRESSION_DATA_FILE_NAME = "expression_data.json";
     private const string DISTANCEMAP_DATA_FILE_NAME = "distances.json";
     private const string DISTANCE_MAPPING_FILE_NAME = "distances_2d_mapping.json";
+    private const string ACT_FILE_PATH = "act_files.json";
     private const string FER_FLAG_FILE_NAME = "flag.txt";
 
     private const string RECORD_EXPRESSION = "record";
@@ -27,16 +28,39 @@ public class DataController : MonoBehaviour
 
     private PlayerProgress playerProgress;
 
+    private static int currentAct;
+    private string[] actFiles;
+
     // Use this for initialization
     private void Start()
     {
         DontDestroyOnLoad(gameObject); // prevent destroy objects in previous scene that has been unloaded
         //LoadGameData(ACT_ONE_QUESTIONS_FILE_NAME);
-        LoadRoundData(ACT_ONE_SEQUENCE_FILE_NAME);
         LoadPlayerProgress();
         ReadDistanceMap();
 
+        currentAct = 0;
+        actFiles = ReadActFileNames(ACT_FILE_PATH);
+
+        LoadRoundData(actFiles[currentAct]);
+        
         SceneManager.LoadScene(MENU_SCREEN);
+    }
+
+    private static string[] ReadActFileNames(string fileName)
+    {
+        var filePath = Path.Combine(Application.streamingAssetsPath, fileName);
+
+        if (File.Exists(filePath))
+        {
+            var dataAsJson = File.ReadAllText(filePath);
+            var actFileFromJson = JsonUtility.FromJson<ActFile>(dataAsJson);
+
+            return actFileFromJson.actFileNames;
+        }
+
+        Debug.LogError("GetActFileNames: cannot read data!");
+        return null;
     }
 
     public RoundData GetCurrentRoundData()
@@ -46,11 +70,10 @@ public class DataController : MonoBehaviour
 
     public void SubmitNewPlayerScore(float newScore)
     {
-        if (newScore > playerProgress.highestScore)
-        {
-            playerProgress.highestScore = newScore;
-            SavePlayerProgress();
-        }
+        if (!(newScore > playerProgress.highestScore)) return;
+        
+        playerProgress.highestScore = newScore;
+        SavePlayerProgress();
     }
 
     public float GetHighestPlayerScore()
@@ -71,7 +94,7 @@ public class DataController : MonoBehaviour
         PlayerPrefs.SetFloat(HIGHEST_SCORE_KEY, playerProgress.highestScore);
     }
 
-    public void StartFER()
+    public static void StartFER()
     {
         var filePath = Path.Combine(Application.streamingAssetsPath, FER_FLAG_FILE_NAME);
 
@@ -81,7 +104,7 @@ public class DataController : MonoBehaviour
             Debug.LogError("FER flag does not exist!");
     }
 
-    public void StopFER()
+    public static void StopFER()
     {
         var filePath = Path.Combine(Application.streamingAssetsPath, FER_FLAG_FILE_NAME);
 
@@ -121,7 +144,7 @@ public class DataController : MonoBehaviour
         }
     }
 
-    public void LoadBgms()
+    private void LoadBgms()
     {
         if (currentRound == null)
         {
@@ -134,7 +157,7 @@ public class DataController : MonoBehaviour
         currentRound.bgmNeutralClip = LoadAudioFile(currentRound.bgmNeutralFile);
     }
 
-    public AudioClip LoadAudioFile(string relativeResourcePath)
+    public static AudioClip LoadAudioFile(string relativeResourcePath)
     {
         return Resources.Load<AudioClip>(relativeResourcePath);
     }
@@ -230,35 +253,7 @@ public class DataController : MonoBehaviour
         return ScoreCalculator.ComputeEmotionDistance(distanceMap, expected, actual, out closestEmotion);
     }
 
-
-    /*public EmotionData ReadPlayerEmotion (int questionIndex)
-    {
-        string filePath = Path.Combine (Application.streamingAssetsPath, EXPRESSION_DATA_FILE_NAME); // streamingAssetsPath is the folder that stores the json
-
-        if (File.Exists (filePath)) {
-            string dataAsJson = File.ReadAllText (filePath);
-            ExpressionData loadedExpressions = JsonUtility.FromJson<ExpressionData> (dataAsJson);
-
-            if (loadedExpressions.emotions.Length < questionIndex + 1) { // index out of bounds???
-                Debug.LogError ("Expression data for this question does not exist!");
-            }
-
-            EmotionData correspondingEmotion = loadedExpressions.emotions [questionIndex];
-
-            if (correspondingEmotion.questionNo == questionIndex) {
-                // Debug.Log ("expression data loaded successfully");
-                return correspondingEmotion;
-            } else {
-                Debug.LogError ("Question index does not match!");
-            }
-        } else {
-            Debug.LogError ("Cannot load expression data!");
-        }
-
-        return null;
-    }*/
-
-    public EmotionData[] ReadPlayerEmotion()
+    public static EmotionData[] ReadPlayerEmotion()
     {
         var filePath =
             Path.Combine(Application.streamingAssetsPath,
@@ -277,7 +272,7 @@ public class DataController : MonoBehaviour
         return null;
     }
 
-    public Texture2D LoadImage(string fileName)
+    public static Texture2D LoadImage(string fileName)
     {
         Texture2D tex = null;
         byte[] fileData;
@@ -286,12 +281,11 @@ public class DataController : MonoBehaviour
             Path.Combine(Application.streamingAssetsPath,
                 fileName); // streamingAssetsPath is the folder that stores the json
 
-        if (File.Exists(filePath))
-        {
-            fileData = File.ReadAllBytes(filePath);
-            tex = new Texture2D(2, 2, TextureFormat.DXT1, false);
-            tex.LoadImage(fileData); //..this will auto-resize the texture dimensions.
-        }
+        if (!File.Exists(filePath)) return null;
+        
+        fileData = File.ReadAllBytes(filePath);
+        tex = new Texture2D(2, 2, TextureFormat.DXT1, false);
+        tex.LoadImage(fileData); //..this will auto-resize the texture dimensions.
 
         return tex;
     }
