@@ -1,16 +1,16 @@
 {
   "emotions": [
     {
-      "emotion": "angry",
-      "emotionScore": 0.4055447087568395
-    },
-    {
-      "emotion": "sad",
+      "emotion": "neutral",
       "emotionScore": 0
     },
     {
-      "emotion": "happy",
-      "emotionScore": 0.55
+      "emotion": "angry",
+      "emotionScore": 0
+    },
+    {
+      "emotion": "scared",
+      "emotionScore": 0
     }
   ]
-}{"emotions": [{"emotion": "neutral", "emotionScore": 0}, {"emotion": "angry", "emotionScore": 0}, {"emotion": "scared", "emotionScore": 0}]}
+}

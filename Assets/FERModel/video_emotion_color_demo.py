@@ -164,7 +164,7 @@ def write_output_to_file(emotion_conf, max_val):
     final_emotions_output = {}
     final_emotions_output['emotions'] = final_output_list
 
-    with open(os.path.join('..', '..', 'Assets', 'StreamingAssets', 'expression_data.json'), 'a') as fp:
+    with open(os.path.join('..', '..', 'Assets', 'StreamingAssets', 'expression_data.json'), 'w') as fp:
         json.dump(final_emotions_output, fp)
 
 print("COUNT:",c)
