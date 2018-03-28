@@ -47,6 +47,12 @@ public class DataController : MonoBehaviour
         SceneManager.LoadScene(MENU_SCREEN);
     }
 
+    private void StartCurrentAct()
+    {
+        LoadRoundData(actFiles[currentAct]);
+        Initiate.Fade ("Game", Color.black, 0.8f);
+    }
+
     private static string[] ReadActFileNames(string fileName)
     {
         var filePath = Path.Combine(Application.streamingAssetsPath, fileName);
@@ -288,5 +294,22 @@ public class DataController : MonoBehaviour
         tex.LoadImage(fileData); //..this will auto-resize the texture dimensions.
 
         return tex;
+    }
+
+    public void StartNextAct()
+    {
+        currentAct++;
+        if (currentAct > actFiles.Length)
+        {
+            LoadGameOverScreen();
+            return;
+        }
+        
+        StartCurrentAct();
+    }
+
+    private void LoadGameOverScreen()
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -542,6 +542,7 @@ public class GameController : MonoBehaviour
 
     private void EndRound()
     {
+        UnlockCursor();
         isTimerActive = false;
         dataController.SubmitNewPlayerScore(displayedScore);
         highScoreDisplayText.text = dataController.GetHighestPlayerScore().ToString();
@@ -555,6 +556,11 @@ public class GameController : MonoBehaviour
     public void ReturnToMenu()
     {
         SceneManager.LoadScene("MenuScreen");
+    }
+
+    public void ContinueToNextAct()
+    {
+        dataController.StartNextAct();
     }
 
     private void UpdateTimeRemainingDisplay()

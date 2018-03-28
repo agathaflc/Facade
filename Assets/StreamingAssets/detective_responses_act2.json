@@ -1,0 +1,82 @@
+{
+  "suspiciousPositive": [
+    {
+      "text": "That's good, although I think you're hiding something.",
+      "soundFilePath": "audio/susp_pos_0"
+    },
+    {
+      "text": "O..kay, great.",
+      "soundFilePath": "audio/susp_pos_1"
+    }
+  ],
+  "suspiciousNeutral": [
+    {
+      "text": "(a neutral-suspicious response 0)",
+      "soundFilePath": "audio/susp_neut_0"
+    },
+    {
+      "text": "(a neutral-suspicious response 1)",
+      "soundFilePath": "audio/susp_neut_0"
+    }
+  ],
+  "suspiciousNegative": [
+    {
+      "text": "Oh, that's bad. Are you sure, though?",
+      "soundFilePath": "audio/susp_neg_0"
+    },
+    {
+      "text": "That's awful, but you need to tell me the truth.",
+      "soundFilePath": "audio/susp_neg_0"
+    }
+  ],
+  "notSuspiciousPositive": [
+    {
+      "text": "That's good to hear.",
+      "soundFilePath": "audio/nice-work"
+    },
+    {
+      "text": "Good for you.",
+      "soundFilePath": "audio/friday-rocks"
+    }
+  ],
+  "notSuspiciousNegative": [
+    {
+      "text": "That's too bad.",
+      "soundFilePath": "audio/oh-thats-okay"
+    },
+    {
+      "text": "Oh, that's okay.",
+      "soundFilePath": "audio/oh-thats-okay"
+    }
+  ],
+  "notSuspiciousNeutral": [
+    {
+      "text": "I see.",
+      "soundFilePath": "audio/alright"
+    },
+    {
+      "text": "Alright.",
+      "soundFilePath": "audio/alright"
+    }
+  ],
+  "clarifying": [
+    {
+      "text": "Your answer doesn't match with our record. Now, tell me the truth.",
+      "soundFilePath": "audio/ill-tell-you-what-i-think"
+    },
+    {
+      "text": "LIES! You said something different earlier, you think I'm a fool?",
+      "soundFilePath": "audio/ill-tell-you-what-i-think"
+    }
+  ],
+  "postClarifying": [
+    {
+      "text": "You better stop lying if you don't wanna get in trouble.",
+      "soundFilePath": "audio/ill-tell-you-what-i-think"
+    },
+    {
+      "text": "Try to think more clearly next time, okay?",
+      "soundFilePath": "audio/ill-tell-you-what-i-think"
+    }
+  ]
+}
