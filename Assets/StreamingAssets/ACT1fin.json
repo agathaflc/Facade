@@ -12,12 +12,12 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/silence_3sec",
       "subtitleText": "Look, I know it’s kinda troublesome, but we have to question all the witnesses that were present."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/silence_3sec",
       "subtitleText": "I know you’re not involved with anything, but I’m just here trying to do my job as quickly as possible we can both go home. So let’s get started."
     },
     {
@@ -30,7 +30,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "",
+          "filePath": "audio/silence_3sec",
           "questionText": "What's your name?",
           "answers": [
             {
@@ -62,7 +62,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "",
+          "filePath": "audio/silence_3sec",
           "questionText": "How old are you?",
           "answers": [
             {
@@ -90,7 +90,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "",
+          "filePath": "audio/silence_3sec",
           "questionText": "And where are you from?",
           "answers": [
             {
@@ -118,7 +118,7 @@
           "consistencyWeight": 0,
           "considersEmotion": true,
           "considersFact": false,
-          "filePath": "",
+          "filePath": "audio/silence_3sec",
           "questionText": "So tell me, how are you feeling today?",
           "answers": [
             {
@@ -162,27 +162,27 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/silence_3sec",
       "subtitleText": "Ah there’s nothing to be worried about! I’m pretty tired myself."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/silence_3sec",
       "subtitleText": "I’ve been having the hardest time sleeping lately, cause I keep having the strangest dreams."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/silence_3sec",
       "subtitleText": "Just last night I dreamt I was stuck in a war zone, surrounded by enemies, with only one bullet left. Doomed to be defeated and skinned alive by those bastards."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/silence_3sec",
       "subtitleText": "And I sure as hell wasn’t gonna let them catch me alive, so I ate the bullet. But it turns out it was all just a dream!"
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/silence_3sec",
       "subtitleText": "It’s a bit dramatic to shoot myself, but at least I’m outta there now!"
     },
     {
@@ -195,7 +195,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "",
+          "filePath": "audio/silence_3sec",
           "questionText": "What about you? I hope you had enough sleep last night. How often do you dream?",
           "answers": [
             {
@@ -224,7 +224,7 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/silence_3sec",
       "subtitleText": "Okay, I don't think you want to hear about my weird dreams! Let's get back to the case."
     },
     {
@@ -237,7 +237,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "",
+          "filePath": "audio/silence_3sec",
           "questionText": "So tell me where you were last night?",
           "answers": [
             {
@@ -265,7 +265,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "",
+          "filePath": "audio/silence_3sec",
           "questionText": "And were you with anyone last night?",
           "answers": [
             {
@@ -297,7 +297,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "",
+          "filePath": "audio/silence_3sec",
           "questionText": "When did you get home last night?",
           "answers": [
             {
@@ -325,7 +325,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "",
+          "filePath": "audio/silence_3sec",
           "questionText": "Tell me, how did you get home last night?",
           "answers": [
             {
@@ -354,7 +354,7 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/silence_3sec",
       "subtitleText": "Okay, so you must be wondering why I’m asking you all these questions. Well you see, last night there was an accident... Well we’re not so sure it was an accident."
     },
     {
@@ -368,7 +368,7 @@
           "considersEmotion": true,
           "considersFact": true,
           "pictureFileName": "wojak.jpg",
-          "filePath": "",
+          "filePath": "audio/silence_3sec",
           "questionText": "Do you recognize this person from last night?",
           "answers": [
             {
@@ -428,7 +428,7 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/silence_3sec",
       "subtitleText": "I can’t begin to imagine what her family is going through. I would be devastated if something like this happened to my little girl."
     },
     {
@@ -442,7 +442,7 @@
           "considersEmotion": true,
           "considersFact": true,
           "pictureFileName": "wojak.jpg",
-          "filePath": "",
+          "filePath": "audio/silence_3sec",
           "questionText": "Do you remember any of these people acting suspiciously last night?",
           "answers": [
             {
@@ -489,7 +489,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "",
+          "filePath": "audio/silence_3sec",
           "questionText": "And why exactly did they seem suspicious to you?",
           "answers": [
             {
@@ -518,17 +518,17 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/silence_3sec",
       "subtitleText": "Look man, I know you don’t have anything to do with this, and I can tell you’re a good guy who was just in the wrong place at the wrong time."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/silence_3sec",
       "subtitleText": "So you don’t have anything to be worried about. I’m gonna step out for a second to finish up some paperwork, and I’ll be back in a while."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/silence_3sec",
       "subtitleText": "I just hope we can figure out this case together, so that poor girl’s parents can get some closure. I’ll see you in a bit!"
     }
   ]
