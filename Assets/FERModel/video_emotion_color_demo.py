@@ -29,125 +29,134 @@ emotion_labels = {0:'neutral',1:'anger',2:'fear',3:'happy',4:'sad',5:'surprise'}
 face_detection = load_detection_model(detection_model_path)
 emotion_classifier = load_model(path_inputs=path_inputs, path_weights=path_weights)
 
-# hyper-parameters for bounding boxes shape
-frame_window = 5
-emotion_offsets = (0, 0)
 
-# starting lists for calculating modes
-emotion_window = []
+def read_expression():
+    global emotion_labels
+    # hyper-parameters for bounding boxes shape
+    frame_window = 5
+    emotion_offsets = (0, 0)
 
-# starting video streaming
-#cv2.namedWindow('window_frame', 0)
-#cv2.resizeWindow('window_frame', 500, 500)
-video_capture = cv2.VideoCapture(0)
-video_capture.set(cv2.CAP_PROP_BRIGHTNESS, 50)
+    # starting lists for calculating modes
+    emotion_window = []
 
-timeout = time.time() + 5 # 5 seconds from now
-sleep_index = 0
+    # starting video streaming
+    #cv2.namedWindow('window_frame', 0)
+    #cv2.resizeWindow('window_frame', 500, 500)
+    video_capture = cv2.VideoCapture(0)
+    video_capture.set(cv2.CAP_PROP_BRIGHTNESS, 50)
 
-# initialise dictionary of emotion confidences
-emotion_confidences = {'neutral': 0.0, 'anger': 0.0, 'fear': 0.0, 'happy': 0.0, 'sad': 0.0, 'surprise': 0.0}
-c = 0
-while True:
+    timeout = time.time() + 5 # 5 seconds from now
+    sleep_index = 0
 
-    # try:
-    #     with open('flag.txt', 'r') as fp:
-    #         lines = fp.readlines()
-    #         print(lines)
-    #         print("FILE HAS BEEN READ")
-    # except:
-    #     print("FLAG.TXT DOESN'T EXIST")
-    #     continue
+    # initialise dictionary of emotion confidences
+    emotion_confidences = {'neutral': 0.0, 'anger': 0.0, 'fear': 0.0, 'happy': 0.0, 'sad': 0.0, 'surprise': 0.0}
+    c = 0
+    while True:
 
-    if time.time() > timeout:
-        break
+        # try:
+        #     with open('flag.txt', 'r') as fp:
+        #         lines = fp.readlines()
+        #         print(lines)
+        #         print("FILE HAS BEEN READ")
+        # except:
+        #     print("FLAG.TXT DOESN'T EXIST")
+        #     continue
 
-    bgr_image = video_capture.read()[1]
-    gray_image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2GRAY)
-    rgb_image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
-    faces = detect_faces(face_detection, gray_image)
+        if time.time() > timeout:
+            break
 
-    for face_coordinates in faces:
+        bgr_image = video_capture.read()[1]
+        gray_image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2GRAY)
+        rgb_image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
+        faces = detect_faces(face_detection, gray_image)
 
-        x1, x2, y1, y2 = apply_offsets(face_coordinates, emotion_offsets)
-        gray_face = gray_image[y1:y2, x1:x2]
-        print("gray face shape original", gray_face.shape)
+        for face_coordinates in faces:
 
-        gray_face = preprocess_input(gray_face, False)
-        print("gray face shape post-preprocessing", gray_face.shape)
+            x1, x2, y1, y2 = apply_offsets(face_coordinates, emotion_offsets)
+            gray_face = gray_image[y1:y2, x1:x2]
+            print("gray face shape original", gray_face.shape)
 
-        emotion_prediction = emotion_classifier.predict(gray_face)
-        pred_class = emotion_classifier.predict_classes(gray_face)
-        print ("emotion prediction", emotion_prediction)
-        emotion_probability = np.max(emotion_prediction)
-        print ("emotion probability", emotion_probability)
-        # use this info for printing model output
-        emotion_label_arg = np.argmax(emotion_prediction)
-        print("ARG", emotion_label_arg)
-        emotion_text = emotion_labels[emotion_label_arg]
-        emotion_confidences[emotion_text] += np.amax(emotion_prediction)
+            gray_face = preprocess_input(gray_face, False)
+            print("gray face shape post-preprocessing", gray_face.shape)
 
-        print("EMOTION:", emotion_text)
-        print("PROB:", emotion_probability.max())
-        c += 1
+            emotion_prediction = emotion_classifier.predict(gray_face)
+            pred_class = emotion_classifier.predict_classes(gray_face)
+            print ("emotion prediction", emotion_prediction)
+            emotion_probability = np.max(emotion_prediction)
+            print ("emotion probability", emotion_probability)
+            # use this info for printing model output
+            emotion_label_arg = np.argmax(emotion_prediction)
+            print("ARG", emotion_label_arg)
+            emotion_text = emotion_labels[emotion_label_arg]
+            emotion_confidences[emotion_text] += np.amax(emotion_prediction)
 
-        emotion_scores = emotion_prediction.tolist()[0]
-        emotion_array = {}
+            print("EMOTION:", emotion_text)
+            print("PROB:", emotion_probability.max())
+            c += 1
 
-        for counter, value in enumerate(emotion_scores):
-            new_item = {emotion_labels[counter]:value}
-            emotion_array.update(new_item)
+            emotion_scores = emotion_prediction.tolist()[0]
+            emotion_array = {}
 
-        sorted_x = sorted(emotion_array.items(), key=operator.itemgetter(1), reverse=True)
-        first = emotion_labels[pred_class.tolist()[0]]
-        first_score = emotion_array[first]
-        second = sorted_x[1][0]
-        second_score=emotion_array[second]
+            for counter, value in enumerate(emotion_scores):
+                new_item = {emotion_labels[counter]:value}
+                emotion_array.update(new_item)
+
+            sorted_x = sorted(emotion_array.items(), key=operator.itemgetter(1), reverse=True)
+            first = emotion_labels[pred_class.tolist()[0]]
+            first_score = emotion_array[first]
+            second = sorted_x[1][0]
+            second_score=emotion_array[second]
 
 
-        #second_emotion
+            #second_emotion
 
-        # logic -- append label to emotion_window (global array)
-        emotion_window.append(emotion_text)
-        print ("emotion window", emotion_window)
+            # logic -- append label to emotion_window (global array)
+            emotion_window.append(emotion_text)
+            print ("emotion window", emotion_window)
 
-        # logic -- if more than 10 emotions in emotion_window, reset the window
-        if len(emotion_window) > frame_window:
-            emotion_window.pop(0)
+            # logic -- if more than 10 emotions in emotion_window, reset the window
+            if len(emotion_window) > frame_window:
+                emotion_window.pop(0)
 
-        if emotion_text == 'angry':
-            color = emotion_probability * np.asarray((255, 0, 0)) # red
-        elif emotion_text == 'sad':
-            color = emotion_probability * np.asarray((0, 0, 255)) # blue
-        elif emotion_text == 'happy':
-            color = emotion_probability * np.asarray((255, 255, 0)) # red and green
-        elif emotion_text == 'surprise':
-            color = emotion_probability * np.asarray((0, 255, 255)) # blue green
-        # fear & neutral
-        else:
-            color = emotion_probability * np.asarray((0, 255, 0))
+            if emotion_text == 'angry':
+                color = emotion_probability * np.asarray((255, 0, 0)) # red
+            elif emotion_text == 'sad':
+                color = emotion_probability * np.asarray((0, 0, 255)) # blue
+            elif emotion_text == 'happy':
+                color = emotion_probability * np.asarray((255, 255, 0)) # red and green
+            elif emotion_text == 'surprise':
+                color = emotion_probability * np.asarray((0, 255, 255)) # blue green
+            # fear & neutral
+            else:
+                color = emotion_probability * np.asarray((0, 255, 0))
 
-        color = color.astype(int)
-        color = color.tolist()
-        print ("color", color)
+            color = color.astype(int)
+            color = color.tolist()
+            print ("color", color)
 
-        draw_bounding_box(face_coordinates, rgb_image, color)
-        draw_text(face_coordinates, rgb_image, emotion_text+'  '+'%s:%.3f  %s:%.3f' % (first, first_score, second, second_score),
-                  color, 0, -45, 1, 1)
-        # make sure loop isn't hogging cpu
-        sleep_index += 1
-        if sleep_index % 5 == 0:
-            time.sleep(1)
+            draw_bounding_box(face_coordinates, rgb_image, color)
+            draw_text(face_coordinates, rgb_image, emotion_text+'  '+'%s:%.3f  %s:%.3f' % (first, first_score, second, second_score),
+                      color, 0, -45, 1, 1)
+            # make sure loop isn't hogging cpu
+            sleep_index += 1
+            if sleep_index % 5 == 0:
+                time.sleep(1)
 
-    bgr_image = cv2.cvtColor(rgb_image, cv2.COLOR_RGB2BGR)
-    #cv2.imshow('window_frame', bgr_image)
-    #if cv2.waitKey(1) & 0xFF == ord('q'):
-        #break
+        bgr_image = cv2.cvtColor(rgb_image, cv2.COLOR_RGB2BGR)
+        #cv2.imshow('window_frame', bgr_image)
+        #if cv2.waitKey(1) & 0xFF == ord('q'):
+            #break
+        
+        print("COUNT:",c)
 
-adj2noun = {'neutral': 'neutral', 'anger': 'angry', 'fear': 'scared', 'happy': 'happy', 'surprise': 'surprised', 'sad': 'sad'}
+    adj2noun = {'neutral': 'neutral', 'anger': 'angry', 'fear': 'scared', 'happy': 'happy', 'surprise': 'surprised', 'sad': 'sad'}
 
-def write_output_to_file(emotion_conf, max_val):
-    output_dict = dict(sorted(emotion_confidences.items(), key=operator.itemgetter(1), reverse=True)[:3])
+    print(dict(sorted(emotion_confidences.items(), key=operator.itemgetter(1), reverse=True)))
+    print(dict(sorted(emotion_confidences.items(), key=operator.itemgetter(1), reverse=True)[:3]))
+    write_output_to_file(emotion_confidences, c, adj2noun)
+
+def write_output_to_file(emotion_conf, max_val, adj2noun):
+    output_dict = dict(sorted(emotion_conf.items(), key=operator.itemgetter(1), reverse=True)[:3])
     for key in output_dict:
         if (max_val != 0):
             output_dict[key] = output_dict[key] / max_val
@@ -167,7 +176,26 @@ def write_output_to_file(emotion_conf, max_val):
     with open(os.path.join('..', '..', 'Assets', 'StreamingAssets', 'expression_data.json'), 'w') as fp:
         json.dump(final_emotions_output, fp)
 
-print("COUNT:",c)
-print(dict(sorted(emotion_confidences.items(), key=operator.itemgetter(1), reverse=True)))
-print(dict(sorted(emotion_confidences.items(), key=operator.itemgetter(1), reverse=True)[:3]))
-write_output_to_file(emotion_confidences, c)
+def check_trigger():
+    try:
+        with open(os.path.join('..', '..', 'Assets', 'StreamingAssets', 'flag.txt'), 'r') as fp:
+            if (fp.read()) == "record":
+                print("YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYYYYYYYYYYYYYYYYYYYYY")
+                return True
+            else:
+                return False
+    except Exception as e:
+        print(e)
+        print("Exiting")
+        exit(1)
+
+def main():
+    while True:
+        if check_trigger():
+            read_expression()
+        else:
+            print("Trigger is deactivated, sleeping for 0.5 seconds...")
+
+        time.sleep(0.5) # checks every 0.5 seconds
+
+main()
