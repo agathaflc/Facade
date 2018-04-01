@@ -2,31 +2,31 @@
   "suspiciousPositive": [
     {
       "text": "That's good, although I think you're hiding something.",
-      "soundFilePath": "audio/susp_pos_0"
+      "soundFilePath": "audio/silence_3sec"
     },
     {
       "text": "O..kay, great.",
-      "soundFilePath": "audio/susp_pos_1"
+      "soundFilePath": "audio/silence_3sec"
     }
   ],
   "suspiciousNeutral": [
     {
       "text": "(a neutral-suspicious response 0)",
-      "soundFilePath": "audio/susp_neut_0"
+      "soundFilePath": "audio/silence_3sec"
     },
     {
       "text": "(a neutral-suspicious response 1)",
-      "soundFilePath": "audio/susp_neut_0"
+      "soundFilePath": "audio/silence_3sec"
     }
   ],
   "suspiciousNegative": [
     {
       "text": "Oh, that's bad. Are you sure, though?",
-      "soundFilePath": "audio/susp_neg_0"
+      "soundFilePath": "audio/silence_3sec"
     },
     {
       "text": "That's awful, but you need to tell me the truth.",
-      "soundFilePath": "audio/susp_neg_0"
+      "soundFilePath": "audio/silence_3sec"
     }
   ],
   "notSuspiciousPositive": [

@@ -444,13 +444,16 @@ public class GameController : MonoBehaviour
                 yield break;
             }
 
-            if (string.IsNullOrEmpty(answerData.detectiveResponse))
+            if (string.IsNullOrEmpty(answerData.detectiveResponse)) // no specified detective response
             {
                 HandleEndOfAQuestion();
             }
             else
             {
-                GetAndPlayDetectiveResponse(answerData.detectiveResponse);
+                if (currentQuestion.considersEmotion)
+                {
+                    GetAndPlayDetectiveResponse(answerData.detectiveResponse, !(expressionScore <= 0f));
+                }
                 while (detectiveAudioSource.isPlaying)
                 {
                     yield return null;
@@ -471,13 +474,13 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void GetAndPlayDetectiveResponse(string responseType)
+    private void GetAndPlayDetectiveResponse(string responseType, bool suspicious = false)
     {
         // Give detective response
         AudioClip clip;
         string subtitle;
 
-        dataController.LoadDetectiveRespClip(out clip, out subtitle, responseType);
+        dataController.LoadDetectiveRespClip(out clip, out subtitle, responseType, suspicious);
         ShowAndPlayDialog(clip, subtitle);
         questionDisplay.SetActive(false);
     }
@@ -519,6 +522,8 @@ public class GameController : MonoBehaviour
             return;
         }
 
+        Debug.Log("AdaptMusicAndLighting: incorrect expression.");
+        
         // if the current music is the same emotion, don't change
         if (currentBgm.Contains(emotion)) return;
 

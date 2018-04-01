@@ -75,23 +75,23 @@ public class ScoreCalculator
 
     /**
      * threshold:
-     * 	0-0.5 = 3 pts	0.5-1 = 2 pts	1-1.5 = 1 pt
-     * 	1.5-2 = 0 pt
-     * 	2-2.5 = -1 pt	2.5-3 = -2 pts	> 3 = -3 pts
+     * 	0-0.25 = 3 pts	0.25-0.5 = 2 pts	0.5-0.75 = 1 pt
+     *  0.75-1 = 0 pt
+     * 	1-1.25 = -1 pt	1.25-1.5 = -2 pts	> 1.5 = -3 pts
      **/
     public static float CalculateExpressionScore(float rawDistance, float weight)
     {
-        if (rawDistance <= 0.5)
+        if (rawDistance <= 0.3)
             return 3f * CORRECT_EXPRESSION_MULTIPLIER * weight;
-        if (rawDistance <= 1)
+        if (rawDistance <= 0.4)
             return 2f * CORRECT_EXPRESSION_MULTIPLIER * weight;
-        if (rawDistance <= 1.5)
+        if (rawDistance <= 0.5)
             return 1f * CORRECT_EXPRESSION_MULTIPLIER * weight;
-        if (rawDistance <= 2)
+        if (rawDistance <= 0.6)
             return 0f * weight;
-        if (rawDistance <= 2.5)
+        if (rawDistance <= 0.7)
             return 1f * WRONG_EXPRESSION_MULTIPLIER * weight;
-        if (rawDistance <= 3)
+        if (rawDistance <= 0.8)
             return 2f * WRONG_EXPRESSION_MULTIPLIER * weight;
         return 3f * WRONG_EXPRESSION_MULTIPLIER * weight;
     }
