@@ -583,8 +583,8 @@ public class GameController : MonoBehaviour
 
     private void LightsCameraAction()
     {
-        var Lightsbulb = room.transform.Find("Lightbulb").gameObject;
-        var Lights = Lightsbulb.transform.Find("Lamp").gameObject;
+        var Lightbulb = room.transform.Find("Lightbulb").gameObject;
+        var Lights = Lightbulb.transform.Find("Lamp").gameObject;
         Lights.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
 
         var SpotLight1 = room.transform.Find("Spot light 1").gameObject;
