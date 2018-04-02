@@ -45,7 +45,7 @@ def read_expression():
     video_capture = cv2.VideoCapture(0)
     video_capture.set(cv2.CAP_PROP_BRIGHTNESS, 50)
 
-    timeout = time.time() + 5 # 5 seconds from now
+    timeout = time.time() + 2 # 5 seconds from now
     sleep_index = 0
 
     # initialise dictionary of emotion confidences

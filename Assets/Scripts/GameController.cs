@@ -151,7 +151,7 @@ public class GameController : MonoBehaviour
                 subtitleDisplay.SetActive(false);
 
                 DataController.StartFER();
-                Debug.Log("wait 2 seconds");
+                Debug.Log("wait 3 seconds");
                 yield return new WaitForSecondsRealtime(2f);
                 DataController.StopFER();
 
@@ -182,7 +182,7 @@ public class GameController : MonoBehaviour
             DataController.ReadPlayerEmotion(), out closestEmotion);
 
         // TODO: UNCOMMENT THIS AFTER INTEGRATION WITH FER
-        // dataController.DeleteFERDataFile ();
+         dataController.DeleteFERDataFile ();
 
         Debug.Log("CalculateSuspicionScore_EmotionOnly: " + emotionDistance);
         return ScoreCalculator.CalculateExpressionScore(emotionDistance, weight);
@@ -359,7 +359,7 @@ public class GameController : MonoBehaviour
                   expressionScore);
 
         // TODO: UNCOMMENT THIS AFTER INTEGRATION WITH FER
-        // dataController.DeleteFERDataFile ();
+         dataController.DeleteFERDataFile ();
 
         return suspicionScore;
     }
