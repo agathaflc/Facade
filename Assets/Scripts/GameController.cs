@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour
     private const float EMOTION_DISTANCE_THRESHOLD = 2.0f;
     private const float FADE_STEP = 0.1f;
     private const float FER_RECORDING_TIME = 4f;
+    private const float MAX_SUSPICION_SCORE = 10f;
 
     public Text questionDisplayText;
     public Slider scoreDisplayerSlider;
@@ -373,6 +374,12 @@ public class GameController : MonoBehaviour
     {
         displayedScore += suspicionScore;
         dataController.AddOverallScore(suspicionScore);
+
+        if (displayedScore > MAX_SUSPICION_SCORE)
+        {
+            // TODO does it just end? does something else happen? does detective say anything?
+            EndRound();
+        }
 
         Debug.Log("suspicion score: " + suspicionScore + ", actual score: " + dataController.GetOverallScore());
 
