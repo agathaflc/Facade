@@ -9,10 +9,10 @@ public class RoundData
     public AudioClip bgmSadScaredClip;
     public AudioClip bgmAngrySurprisedClip;
 
-    public string bgmHappyFile;
-    public string bgmNeutralFile;
-    public string bgmSadScaredFile;
-    public string bgmAngrySurprisedFile;
+    public AudioData bgmHappyFile;
+    public AudioData bgmNeutralFile;
+    public AudioData bgmSadScaredFile;
+    public AudioData bgmAngrySurprisedFile;
 
     public DetectiveResponses detectiveResponses;
     public string responsesPath;

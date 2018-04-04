@@ -1,9 +1,21 @@
 {
   "responsesPath": "detective_responses_act1.json",
-  "bgmHappyFile": "audio/bgm_fast",
-  "bgmSadScaredFile": "audio/bgm_slow",
-  "bgmNeutralFile": "audio/bgm_normal",
-  "bgmAngrySurprisedFile": "audio/imperial-march",
+  "bgmHappyFile": {
+    "fileName": "audio/bgm_fast",
+    "seek": 0
+  },
+  "bgmSadScaredFile": {
+    "fileName": "audio/bgm_slow",
+    "seek": 0
+  },
+  "bgmNeutralFile": {
+    "fileName": "audio/cornfield_chase_1",
+    "seek": 16
+  },
+  "bgmAngrySurprisedFile": {
+    "fileName": "audio/imperial-march",
+    "seek": 0
+  },
   "sequence": [
     {
       "sequenceType": "dialog",

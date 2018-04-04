@@ -77,7 +77,7 @@ public class DataController : MonoBehaviour
     private void StartCurrentAct()
     {
         LoadRoundData(actFiles[currentAct]);
-        Initiate.Fade ("GameScene", Color.black, 0.8f);
+        Initiate.Fade ("GameScene", Color.black, 1f);
     }
 
     private static string[] ReadActFileNames(string fileName)
@@ -185,9 +185,10 @@ public class DataController : MonoBehaviour
             return;
         }
 
-        currentRound.bgmHappyClip = LoadAudioFile(currentRound.bgmHappyFile);
-        currentRound.bgmSadScaredClip = LoadAudioFile(currentRound.bgmSadScaredFile);
-        currentRound.bgmNeutralClip = LoadAudioFile(currentRound.bgmNeutralFile);
+        currentRound.bgmHappyClip = LoadAudioFile(currentRound.bgmHappyFile.fileName);
+        currentRound.bgmSadScaredClip = LoadAudioFile(currentRound.bgmSadScaredFile.fileName);
+        currentRound.bgmNeutralClip = LoadAudioFile(currentRound.bgmNeutralFile.fileName);
+        currentRound.bgmAngrySurprisedClip = LoadAudioFile(currentRound.bgmAngrySurprisedFile.fileName);
     }
 
     public static AudioClip LoadAudioFile(string relativeResourcePath)

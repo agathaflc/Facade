@@ -82,7 +82,7 @@ public class GameController : MonoBehaviour
         detectiveAudioSource = detectiveObject.GetComponent<AudioSource>();
         bgmAudioSource = player.GetComponent<AudioSource>();
 
-        PlayBgm(currentRoundData.bgmNeutralClip, MUSIC_NEUTRAL); // always start off with the base clip 
+        PlayBgm(currentRoundData.bgmNeutralClip, MUSIC_NEUTRAL, currentRoundData.bgmNeutralFile.seek, true); // always start off with the base clip 
         currentBgm = MUSIC_NEUTRAL;
 
         displayedScore = 0;
@@ -94,7 +94,7 @@ public class GameController : MonoBehaviour
         StartCoroutine(RunSequence());
     }
 
-    private void PlayBgm(AudioClip clip, string musicType)
+    private void PlayBgm(AudioClip clip, string musicType, float seek, bool fadeIn = false)
     {
         if (clip == null)
         {
@@ -104,7 +104,17 @@ public class GameController : MonoBehaviour
 
         currentBgm = musicType;
         bgmAudioSource.clip = clip;
-        bgmAudioSource.Play();
+        bgmAudioSource.loop = true;
+        bgmAudioSource.time = seek;
+
+        if (fadeIn)
+        {
+            StartCoroutine(FadeInAudio(bgmAudioSource));
+        }
+        else
+        {
+            bgmAudioSource.Play();
+        }
     }
 
     /**
@@ -136,9 +146,9 @@ public class GameController : MonoBehaviour
             isEventDone = false;
             ShowAndPlayDialog(DataController.LoadAudioFile(currentSequence.filePath), currentSequence.subtitleText);
 
-            if (!string.IsNullOrEmpty(currentSequence.bgm))
+            if (currentSequence.bgm != null)
             {
-                PlayBgm(DataController.LoadAudioFile(currentSequence.bgm), "special_bgm");
+                PlayBgm(DataController.LoadAudioFile(currentSequence.bgm.fileName), "special_bgm", currentSequence.bgm.seek);
             }
 
             if (currentSequence.readExpression)
@@ -361,7 +371,7 @@ public class GameController : MonoBehaviour
 
         Debug.Log("closestEmotion: " + closestEmotion + ", distance: " + emotionDistance + ", score: " +
                   expressionScore);
-        
+
         if (FER_is_On)
         {
             dataController.DeleteFERDataFile();
@@ -414,7 +424,8 @@ public class GameController : MonoBehaviour
 
         var considerPrevFact = currentQuestion.considersFact && answerStoredBefore;
         var consistentFact = considerPrevFact &&
-                             answerData.answerId.Equals(dataController.GetAsnwerIdByQuestionId(currentQuestion.questionId));
+                             answerData.answerId.Equals(
+                                 dataController.GetAsnwerIdByQuestionId(currentQuestion.questionId));
 
         if (isClarifying)
         {
@@ -453,7 +464,8 @@ public class GameController : MonoBehaviour
 
             if (considerPrevFact && !consistentFact) // player answers inconsistent fact
             {
-                StartCoroutine(ClarifyAnswer(answerData.answerId, dataController.GetAsnwerIdByQuestionId(currentQuestion.questionId)));
+                StartCoroutine(ClarifyAnswer(answerData.answerId,
+                    dataController.GetAsnwerIdByQuestionId(currentQuestion.questionId)));
                 yield break;
             }
 
@@ -471,7 +483,7 @@ public class GameController : MonoBehaviour
                 {
                     GetAndPlayDetectiveResponse(answerData.detectiveResponse);
                 }
-                
+
                 while (detectiveAudioSource.isPlaying)
                 {
                     yield return null;
@@ -527,8 +539,9 @@ public class GameController : MonoBehaviour
                 // todo play the foghorn thing??
                 if (!currentBgm.Contains(SCARED_EMOTION))
                 {
-                    PlayBgm(currentRoundData.bgmSadScaredClip, MUSIC_SAD_SCARED);
+                    PlayBgm(currentRoundData.bgmSadScaredClip, MUSIC_SAD_SCARED, currentRoundData.bgmSadScaredFile.seek);
                 }
+
                 return;
             }
 
@@ -537,30 +550,30 @@ public class GameController : MonoBehaviour
         if (!correctExpression)
         {
             // todo play the foghorn thing??
-            if (!currentBgm.Contains(SCARED_EMOTION)) PlayBgm(currentRoundData.bgmSadScaredClip, MUSIC_SAD_SCARED);
+            if (!currentBgm.Contains(SCARED_EMOTION)) PlayBgm(currentRoundData.bgmSadScaredClip, MUSIC_SAD_SCARED, currentRoundData.bgmSadScaredFile.seek);
             return;
         }
 
         Debug.Log("AdaptMusicAndLighting: correct expression.");
-        
+
         // if the current music is the same emotion, don't change
         if (currentBgm.Contains(emotion)) return;
 
         if (MUSIC_HAPPY.Contains(emotion))
         {
-            PlayBgm(currentRoundData.bgmHappyClip, MUSIC_HAPPY);
+            PlayBgm(currentRoundData.bgmHappyClip, MUSIC_HAPPY, currentRoundData.bgmHappyFile.seek);
         }
         else if (MUSIC_NEUTRAL.Contains(emotion))
         {
-            PlayBgm(currentRoundData.bgmNeutralClip, MUSIC_NEUTRAL);
+            PlayBgm(currentRoundData.bgmNeutralClip, MUSIC_NEUTRAL, currentRoundData.bgmNeutralFile.seek);
         }
         else if (MUSIC_SAD_SCARED.Contains(emotion))
         {
-            PlayBgm(currentRoundData.bgmSadScaredClip, MUSIC_SAD_SCARED);
+            PlayBgm(currentRoundData.bgmSadScaredClip, MUSIC_SAD_SCARED, currentRoundData.bgmSadScaredFile.seek);
         }
         else if (MUSIC_SURPRISED_ANGRY.Contains(emotion))
         {
-            PlayBgm(currentRoundData.bgmAngrySurprisedClip, MUSIC_SURPRISED_ANGRY);
+            PlayBgm(currentRoundData.bgmAngrySurprisedClip, MUSIC_SURPRISED_ANGRY, currentRoundData.bgmAngrySurprisedFile.seek);
         }
     }
 
@@ -642,6 +655,21 @@ public class GameController : MonoBehaviour
             // Debug.Log ("end of questions");
             questionDisplay.SetActive(false);
             StartCoroutine(RunSequence());
+        }
+    }
+
+    private IEnumerator FadeInAudio(AudioSource audioSource)
+    {
+        var t = 0f;
+
+        audioSource.volume = t;
+        audioSource.Play();
+        
+        while (t < 3f)
+        {
+            t += Time.deltaTime;
+            audioSource.volume = t;
+            yield return null;
         }
     }
 
