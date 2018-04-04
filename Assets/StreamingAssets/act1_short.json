@@ -163,16 +163,6 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/silence_3sec",
-      "subtitleText": "Ah there’s nothing to be worried about! I’m pretty tired myself."
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/silence_3sec",
-      "subtitleText": "I’ve been having the hardest time sleeping lately, cause I keep having the strangest dreams."
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/silence_3sec",
       "subtitleText": "Just last night I dreamt I was stuck in a war zone, surrounded by enemies, with only one bullet left. Doomed to be defeated and skinned alive by those bastards."
     },
     {
@@ -226,136 +216,6 @@
       "sequenceType": "dialog",
       "filePath": "audio/silence_3sec",
       "subtitleText": "Okay, I don't think you want to hear about my weird dreams! Let's get back to the case."
-    },
-    {
-      "sequenceType": "question",
-      "questions": [
-        {
-          "questionDesc": "Incident Location",
-          "questionId": "06",
-          "expressionWeight": 0,
-          "consistencyWeight": 1,
-          "considersEmotion": false,
-          "considersFact": true,
-          "filePath": "audio/silence_3sec",
-          "questionText": "So tell me where you were last night?",
-          "answers": [
-            {
-              "answerId": "060",
-              "answerText": "Bar"
-            },
-            {
-              "answerId": "061",
-              "answerText": "Party"
-            },
-            {
-              "answerId": "062",
-              "answerText": "Nightclub"
-            },
-            {
-              "answerId": "063",
-              "answerText": "Restaurant"
-            }
-          ]
-        },
-        {
-          "questionDesc": "Player Alibi",
-          "questionId": "07",
-          "expressionWeight": 0,
-          "consistencyWeight": 1,
-          "considersEmotion": false,
-          "considersFact": true,
-          "filePath": "audio/silence_3sec",
-          "questionText": "And were you with anyone last night?",
-          "answers": [
-            {
-              "answerId": "070",
-              "answerText": "Sister",
-              "detectiveResponse": "neutral"
-            },
-            {
-              "answerId": "071",
-              "answerText": "Friend",
-              "detectiveResponse": "neutral"
-            },
-            {
-              "answerId": "072",
-              "answerText": "Colleague",
-              "detectiveResponse": "neutral"
-            },
-            {
-              "answerId": "073",
-              "answerText": "No one",
-              "detectiveResponse": "negative"
-            }
-          ]
-        },
-        {
-          "questionDesc": "Player Home Time",
-          "questionId": "08",
-          "expressionWeight": 0,
-          "consistencyWeight": 1,
-          "considersEmotion": false,
-          "considersFact": true,
-          "filePath": "audio/silence_3sec",
-          "questionText": "When did you get home last night?",
-          "answers": [
-            {
-              "answerId": "080",
-              "answerText": "12 AM"
-            },
-            {
-              "answerId": "081",
-              "answerText": "3 AM"
-            },
-            {
-              "answerId": "082",
-              "answerText": "12 Noon"
-            },
-            {
-              "answerId": "083",
-              "answerText": "I don't remember"
-            }
-          ]
-        },
-        {
-          "questionDesc": "Player Home Transport",
-          "questionId": "09",
-          "expressionWeight": 0,
-          "consistencyWeight": 1,
-          "considersEmotion": false,
-          "considersFact": true,
-          "filePath": "audio/silence_3sec",
-          "questionText": "Tell me, how did you get home last night?",
-          "answers": [
-            {
-              "answerId": "090",
-              "answerText": "I drove",
-              "detectiveResponse": "negative"
-            },
-            {
-              "answerId": "091",
-              "answerText": "Taxi",
-              "detectiveResponse": "positive"
-            },
-            {
-              "answerId": "092",
-              "answerText": "I walked",
-              "detectiveResponse": "positive"
-            },
-            {
-              "answerId": "093",
-              "answerText": "My friend drove",
-              "detectiveResponse": "neutral"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/silence_3sec",
-      "subtitleText": "Okay, so you must be wondering why I’m asking you all these questions. Well you see, last night there was an accident... Well we’re not so sure it was an accident."
     },
     {
       "sequenceType": "question",
@@ -436,54 +296,6 @@
       "questions": [
         {
           "questionDesc": "Witnesses Intro",
-          "questionId": "11",
-          "expressionWeight": 0.3,
-          "consistencyWeight": 0.7,
-          "considersEmotion": true,
-          "considersFact": true,
-          "pictureFileName": "wojak.jpg",
-          "filePath": "audio/silence_3sec",
-          "questionText": "Do you remember any of these people acting suspiciously last night?",
-          "answers": [
-            {
-              "answerId": "110",
-              "answerText": "Jason Smith",
-              "expectedExpressions": [
-                "scared",
-                "angry"
-              ],
-              "detectiveResponse": "negative"
-            },
-            {
-              "answerId": "111",
-              "answerText": "Anna Wu",
-              "expectedExpressions": [
-                "scared",
-                "angry"
-              ],
-              "detectiveResponse": "negative"
-            },
-            {
-              "answerId": "112",
-              "answerText": "My alibi",
-              "expectedExpressions": [
-                "scared",
-                "angry"
-              ],
-              "detectiveResponse": "negative"
-            },
-            {
-              "answerId": "113",
-              "answerText": "No one",
-              "expectedExpressions": [
-                "neutral"
-              ],
-              "detectiveResponse": "negative"
-            }
-          ]
-        },
-        {
-          "questionDesc": "Witnesses Intro",
           "questionId": "12",
           "expressionWeight": 0,
           "consistencyWeight": 1,
@@ -519,7 +331,7 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/silence_3sec",
-      "subtitleText": "Look man, I know you don’t have anything to do with this, and I can tell you’re a good guy who was just in the wrong place at the wrong time."
+      "subtitleText": "Look, I know you don’t have anything to do with this, and I can tell you’re a good guy who was just in the wrong place at the wrong time."
     },
     {
       "sequenceType": "dialog",

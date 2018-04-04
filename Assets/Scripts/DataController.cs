@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,10 +15,7 @@ public class DataController : MonoBehaviour
     public const string DETECTIVE_RESPONSE_CLARIFYING = "clarifying";
     public const string DETECTIVE_RESPONSE_POST_CLARIFYING = "postClarifying";
 
-    private const string ACT_ONE_SEQUENCE_FILE_NAME = "ACT1fin.json";
-    private const string ACT_ONE_DATA_FILE_NAME = "act1.json";
     private const string EXPRESSION_DATA_FILE_NAME = "expression_data.json";
-    private const string DISTANCEMAP_DATA_FILE_NAME = "distances.json";
     private const string DISTANCE_MAPPING_FILE_NAME = "distances_2d_mapping.json";
     private const string ACT_FILE_PATH = "act_files.json";
     private const string FER_FLAG_FILE_NAME = "flag.txt";
@@ -25,6 +23,9 @@ public class DataController : MonoBehaviour
     private const string RECORD_EXPRESSION = "record";
     private RoundData currentRound;
     private DistanceData distanceMap;
+    
+    private readonly Dictionary<string, string> questionIdToAnswerIdMap = new Dictionary<string, string>();
+    private float actualOverallScore;
 
     private PlayerProgress playerProgress;
 
@@ -39,12 +40,38 @@ public class DataController : MonoBehaviour
         LoadPlayerProgress();
         ReadDistanceMap();
 
+        actualOverallScore = 0;
         currentAct = 0;
         actFiles = ReadActFileNames(ACT_FILE_PATH);
 
         LoadRoundData(actFiles[currentAct]);
         
         SceneManager.LoadScene(MENU_SCREEN);
+    }
+
+    public void AddOverallScore(float score)
+    {
+        actualOverallScore += score;
+    }
+
+    public float GetOverallScore()
+    {
+        return actualOverallScore;
+    }
+
+    public bool CheckIfAnswerIsStored(string questionId)
+    {
+        return questionIdToAnswerIdMap.ContainsKey(questionId);
+    }
+
+    public void StoreNewAnswer(string questionId, string answerId)
+    {
+        questionIdToAnswerIdMap.Add(questionId, answerId);
+    }
+
+    public string GetAsnwerIdByQuestionId(string questionId)
+    {
+        return questionIdToAnswerIdMap[questionId];
     }
 
     private void StartCurrentAct()

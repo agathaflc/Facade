@@ -55,7 +55,6 @@ public class GameController : MonoBehaviour
     private DataController dataController;
     private RoundData currentRoundData;
     private QuestionData[] questionPool;
-    private readonly Dictionary<string, string> questionIdToAnswerIdMap = new Dictionary<string, string>();
 
     private bool isTimerActive;
     private bool isEventDone;
@@ -64,7 +63,6 @@ public class GameController : MonoBehaviour
     private int questionIndex;
     private int sequenceIndex;
     private float displayedScore;
-    private float actualOverallScore;
     private List<GameObject> answerButtonGameObjects = new List<GameObject>();
     public AnswerButton selectedBoldAnswer;
 
@@ -88,7 +86,6 @@ public class GameController : MonoBehaviour
 
         displayedScore = 0;
         sequenceIndex = 0;
-        actualOverallScore = 0; // TODO should carry over score from previous round
 
         isTimerActive = false;
         isClarifying = false;
@@ -375,12 +372,13 @@ public class GameController : MonoBehaviour
     private void SaveAndDisplayScore(float suspicionScore)
     {
         displayedScore += suspicionScore;
-        actualOverallScore += suspicionScore;
+        dataController.AddOverallScore(suspicionScore);
 
-        Debug.Log("suspicion score: " + suspicionScore + ", actual score: " + actualOverallScore);
+        Debug.Log("suspicion score: " + suspicionScore + ", actual score: " + dataController.GetOverallScore());
 
         // don't let displayedScore go below 0
         if (displayedScore < 0) displayedScore = 0;
+        Debug.Log("displayed score: " + displayedScore.ToString("F1"));
 
         scoreDisplayText.text = "Suspicion: " + displayedScore.ToString("F2");
         scoreDisplayerSlider.value = displayedScore / 10;
@@ -403,13 +401,13 @@ public class GameController : MonoBehaviour
 
         var answerData = answerButton.GetAnswerData();
 
-        var answerStoredBefore = questionIdToAnswerIdMap.ContainsKey(currentQuestion.questionId);
+        var answerStoredBefore = dataController.CheckIfAnswerIsStored(currentQuestion.questionId);
 
-        if (!answerStoredBefore) questionIdToAnswerIdMap.Add(currentQuestion.questionId, answerData.answerId);
+        if (!answerStoredBefore) dataController.StoreNewAnswer(currentQuestion.questionId, answerData.answerId);
 
         var considerPrevFact = currentQuestion.considersFact && answerStoredBefore;
         var consistentFact = considerPrevFact &&
-                             answerData.answerId.Equals(questionIdToAnswerIdMap[currentQuestion.questionId]);
+                             answerData.answerId.Equals(dataController.GetAsnwerIdByQuestionId(currentQuestion.questionId));
 
         if (isClarifying)
         {
@@ -448,7 +446,7 @@ public class GameController : MonoBehaviour
 
             if (considerPrevFact && !consistentFact) // player answers inconsistent fact
             {
-                StartCoroutine(ClarifyAnswer(answerData.answerId, questionIdToAnswerIdMap[currentQuestion.questionId]));
+                StartCoroutine(ClarifyAnswer(answerData.answerId, dataController.GetAsnwerIdByQuestionId(currentQuestion.questionId)));
                 yield break;
             }
 
@@ -458,7 +456,7 @@ public class GameController : MonoBehaviour
             }
             else
             {
-                if (currentQuestion.considersEmotion)
+                if (currentQuestion.considersEmotion) // if it considers emotion, also pass the expression score
                 {
                     GetAndPlayDetectiveResponse(answerData.detectiveResponse, !(expressionScore <= 0f));
                 }
@@ -475,7 +473,7 @@ public class GameController : MonoBehaviour
                 isEventDone = true;
             }
         }
-        else
+        else // was clarifying
         {
             GetAndPlayDetectiveResponse(DataController.DETECTIVE_RESPONSE_POST_CLARIFYING);
             while (detectiveAudioSource.isPlaying)
@@ -484,6 +482,7 @@ public class GameController : MonoBehaviour
             }
 
             isEventDone = true;
+            isClarifying = false;
         }
     }
 
