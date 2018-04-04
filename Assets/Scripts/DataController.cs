@@ -50,7 +50,7 @@ public class DataController : MonoBehaviour
     private void StartCurrentAct()
     {
         LoadRoundData(actFiles[currentAct]);
-        Initiate.Fade ("Game", Color.black, 0.8f);
+        Initiate.Fade ("GameScene", Color.black, 0.8f);
     }
 
     private static string[] ReadActFileNames(string fileName)

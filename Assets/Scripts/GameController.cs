@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour
 
     private const float EMOTION_DISTANCE_THRESHOLD = 2.0f;
     private const float FADE_STEP = 0.1f;
+    private const float FER_RECORDING_TIME = 4f;
 
     public Text questionDisplayText;
     public Slider scoreDisplayerSlider;
@@ -70,6 +71,9 @@ public class GameController : MonoBehaviour
     private static QuestionData currentQuestion;
     private static SequenceData currentSequence;
     private static string currentBgm;
+
+    // testing variables
+    private const bool FER_is_On = false;
 
     // Use this for initialization
     private void Start()
@@ -152,7 +156,7 @@ public class GameController : MonoBehaviour
 
                 DataController.StartFER();
                 Debug.Log("wait 3 seconds");
-                yield return new WaitForSecondsRealtime(2f);
+                yield return new WaitForSecondsRealtime(FER_RECORDING_TIME);
                 DataController.StopFER();
 
                 string closestEmotion;
@@ -181,8 +185,10 @@ public class GameController : MonoBehaviour
         var emotionDistance = dataController.ComputeEmotionDistance(expectedExpressions,
             DataController.ReadPlayerEmotion(), out closestEmotion);
 
-        // TODO: UNCOMMENT THIS AFTER INTEGRATION WITH FER
-         dataController.DeleteFERDataFile ();
+        if (FER_is_On)
+        {
+            dataController.DeleteFERDataFile();
+        }
 
         Debug.Log("CalculateSuspicionScore_EmotionOnly: " + emotionDistance);
         return ScoreCalculator.CalculateExpressionScore(emotionDistance, weight);
@@ -357,9 +363,11 @@ public class GameController : MonoBehaviour
 
         Debug.Log("closestEmotion: " + closestEmotion + ", distance: " + emotionDistance + ", score: " +
                   expressionScore);
-
-        // TODO: UNCOMMENT THIS AFTER INTEGRATION WITH FER
-         dataController.DeleteFERDataFile ();
+        
+        if (FER_is_On)
+        {
+            dataController.DeleteFERDataFile();
+        }
 
         return suspicionScore;
     }
@@ -384,7 +392,7 @@ public class GameController : MonoBehaviour
         {
             DataController.StartFER();
             // TODO (maybe) detective writes some notes animation 
-            yield return new WaitForSecondsRealtime(2f);
+            yield return new WaitForSecondsRealtime(FER_RECORDING_TIME);
             DataController.StopFER();
         }
 
@@ -454,6 +462,11 @@ public class GameController : MonoBehaviour
                 {
                     GetAndPlayDetectiveResponse(answerData.detectiveResponse, !(expressionScore <= 0f));
                 }
+                else
+                {
+                    GetAndPlayDetectiveResponse(answerData.detectiveResponse);
+                }
+                
                 while (detectiveAudioSource.isPlaying)
                 {
                     yield return null;
@@ -522,7 +535,7 @@ public class GameController : MonoBehaviour
             return;
         }
 
-        Debug.Log("AdaptMusicAndLighting: incorrect expression.");
+        Debug.Log("AdaptMusicAndLighting: correct expression.");
         
         // if the current music is the same emotion, don't change
         if (currentBgm.Contains(emotion)) return;

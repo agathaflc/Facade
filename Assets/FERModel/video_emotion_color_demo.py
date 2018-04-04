@@ -45,7 +45,7 @@ def read_expression():
     video_capture = cv2.VideoCapture(0)
     video_capture.set(cv2.CAP_PROP_BRIGHTNESS, 50)
 
-    timeout = time.time() + 2 # 5 seconds from now
+    timeout = time.time() + 3 # 5 seconds from now
     sleep_index = 0
 
     # initialise dictionary of emotion confidences
@@ -193,9 +193,9 @@ def main():
     while True:
         if check_trigger():
             read_expression()
-        else:
-            print("Trigger is deactivated, sleeping for 0.5 seconds...")
+        # else:
+        #     print("Trigger is deactivated, sleeping for 0.2 seconds...")
 
-        time.sleep(0.5) # checks every 0.5 seconds
+        time.sleep(0.2) # checks every 0.2 seconds
 
 main()
