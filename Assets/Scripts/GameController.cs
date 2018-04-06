@@ -73,6 +73,10 @@ public class GameController : MonoBehaviour
 
     // testing variables
     private const bool FER_is_On = false;
+    
+    // just for playing around lol
+    public GameObject Liam;
+    public GameObject Kira;
 
     // Use this for initialization
     private void Start()
@@ -91,7 +95,18 @@ public class GameController : MonoBehaviour
         isTimerActive = false;
         isClarifying = false;
 
+        PlayDetectiveAnimation();
+
         StartCoroutine(RunSequence());
+    }
+
+    private void PlayDetectiveAnimation()
+    {
+        var liamAnimation = Liam.GetComponent<Animator>();
+        liamAnimation.Play("HumanoidIdle");
+
+        var kiraAnimation = Kira.GetComponent<Animator>();
+        kiraAnimation.Play("HumanoidWalk");
     }
 
     private void PlayBgm(AudioClip clip, string musicType, float seek, bool fadeIn = false)

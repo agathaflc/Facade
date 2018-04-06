@@ -3,7 +3,7 @@ guid: 51e4dfff8f35c4143bdf24741ab40046
 timeCreated: 1509342384
 licenseType: Store
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 22
   fileIDToRecycleName:
     100000: chest
     100002: f_index.01.L
@@ -146,10 +146,17 @@ ModelImporter:
     9500000: //RootNode
     13700000: HansSuite_Hairs
     13700002: HansSuite_Mesh
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HansSuite
+    second: {fileID: 2100000, guid: ff7259f259ca6854eb574fa1c99f0085, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -162,12 +169,14 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
     animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -175,13 +184,18 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
@@ -191,6 +205,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -668,7 +683,7 @@ ModelImporter:
     - name: f_index.01.L
       parentName: hand.L
       position: {x: 0.034206655, y: 0.09626131, z: -0.019027634}
-      rotation: {x: 0.045826748, y: 0.17300667, z: -0.04928051, w: 0.9826189}
+      rotation: {x: 0.04582675, y: 0.17300668, z: -0.049280513, w: 0.982619}
       scale: {x: 1.0000006, y: 0.9999996, z: 0.99999905}
     - name: f_index.02.L
       parentName: f_index.01.L
@@ -678,31 +693,11 @@ ModelImporter:
     - name: f_index.03.L
       parentName: f_index.02.L
       position: {x: 0.0000000055879346, y: 0.03239585, z: -0.00000003352761}
-      rotation: {x: 0.038536172, y: -0.0019288671, z: -0.006871136, w: 0.9992317}
+      rotation: {x: 0.038536176, y: -0.0019288671, z: -0.0068711364, w: 0.9992317}
       scale: {x: 1.0000012, y: 1.0000023, z: 1.000002}
     - name: f_index.03.L_end
       parentName: f_index.03.L
       position: {x: -0, y: 0.029281039, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: thumb.01.L
-      parentName: hand.L
-      position: {x: 0.028181735, y: 0.015145071, z: -0.010820939}
-      rotation: {x: -0.13052163, y: -0.019124864, z: -0.40415916, w: 0.90512633}
-      scale: {x: 0.99999934, y: 1.0000008, z: 0.9999985}
-    - name: thumb.02.L
-      parentName: thumb.01.L
-      position: {x: -0.00000004097819, y: 0.035414327, z: 0}
-      rotation: {x: 0.027320707, y: -0.13549858, z: 0.020973507, w: 0.9901787}
-      scale: {x: 1.0000007, y: 0.9999997, z: 1.0000018}
-    - name: thumb.03.L
-      parentName: thumb.02.L
-      position: {x: -0.0000000074505797, y: 0.033597838, z: -0.0000000745058}
-      rotation: {x: 0.023661735, y: -0.07910761, z: 0.01132525, w: 0.9965209}
-      scale: {x: 0.99999964, y: 0.99999833, z: 1.0000013}
-    - name: thumb.03.L_end
-      parentName: thumb.03.L
-      position: {x: -0, y: 0.036138736, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: f_middle.01.L
@@ -725,30 +720,10 @@ ModelImporter:
       position: {x: -0, y: 0.034686048, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: f_ring.01.L
-      parentName: hand.L
-      position: {x: -0.011057786, y: 0.0969687, z: 0.002106577}
-      rotation: {x: 0.036563512, y: 0.19798124, z: -0.020600125, w: 0.97930694}
-      scale: {x: 1.0000013, y: 0.9999997, z: 0.99999994}
-    - name: f_ring.02.L
-      parentName: f_ring.01.L
-      position: {x: -0.0000000074505797, y: 0.033536144, z: 0.000000026077029}
-      rotation: {x: 0.037341084, y: -0.0006091147, z: -0.016302837, w: 0.99916947}
-      scale: {x: 1.000001, y: 1.0000019, z: 1.0000017}
-    - name: f_ring.03.L
-      parentName: f_ring.02.L
-      position: {x: -0.000000016763805, y: 0.03213731, z: -0.000000026077029}
-      rotation: {x: 0.03934384, y: -0.0012824254, z: -0.003953202, w: 0.99921715}
-      scale: {x: 1.0000008, y: 1.0000019, z: 1.0000014}
-    - name: f_ring.03.L_end
-      parentName: f_ring.03.L
-      position: {x: -0, y: 0.030403549, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
     - name: f_pinky.01.L
       parentName: hand.L
       position: {x: -0.028774347, y: 0.09593131, z: 0.012299554}
-      rotation: {x: 0.034493227, y: 0.21102893, z: -0.017101424, w: 0.9767213}
+      rotation: {x: 0.034493227, y: 0.21102895, z: -0.017101424, w: 0.97672135}
       scale: {x: 1.0000008, y: 0.9999993, z: 0.99999964}
     - name: f_pinky.02.L
       parentName: f_pinky.01.L
@@ -765,6 +740,46 @@ ModelImporter:
       position: {x: -0, y: 0.022295328, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
+    - name: f_ring.01.L
+      parentName: hand.L
+      position: {x: -0.011057786, y: 0.0969687, z: 0.002106577}
+      rotation: {x: 0.036563516, y: 0.19798125, z: -0.020600127, w: 0.979307}
+      scale: {x: 1.0000013, y: 0.9999997, z: 0.99999994}
+    - name: f_ring.02.L
+      parentName: f_ring.01.L
+      position: {x: -0.0000000074505797, y: 0.033536144, z: 0.000000026077029}
+      rotation: {x: 0.037341084, y: -0.0006091147, z: -0.016302837, w: 0.99916947}
+      scale: {x: 1.000001, y: 1.0000019, z: 1.0000017}
+    - name: f_ring.03.L
+      parentName: f_ring.02.L
+      position: {x: -0.000000016763805, y: 0.03213731, z: -0.000000026077029}
+      rotation: {x: 0.03934384, y: -0.0012824254, z: -0.003953202, w: 0.99921715}
+      scale: {x: 1.0000008, y: 1.0000019, z: 1.0000014}
+    - name: f_ring.03.L_end
+      parentName: f_ring.03.L
+      position: {x: -0, y: 0.030403549, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: thumb.01.L
+      parentName: hand.L
+      position: {x: 0.028181735, y: 0.015145071, z: -0.010820939}
+      rotation: {x: -0.13052164, y: -0.019124864, z: -0.4041592, w: 0.90512633}
+      scale: {x: 0.99999934, y: 1.0000008, z: 0.9999985}
+    - name: thumb.02.L
+      parentName: thumb.01.L
+      position: {x: -0.00000004097819, y: 0.035414327, z: 0}
+      rotation: {x: 0.027320707, y: -0.13549858, z: 0.020973507, w: 0.9901787}
+      scale: {x: 1.0000007, y: 0.9999997, z: 1.0000018}
+    - name: thumb.03.L
+      parentName: thumb.02.L
+      position: {x: -0.0000000074505797, y: 0.033597838, z: -0.0000000745058}
+      rotation: {x: 0.023661735, y: -0.07910761, z: 0.01132525, w: 0.9965209}
+      scale: {x: 0.99999964, y: 0.99999833, z: 1.0000013}
+    - name: thumb.03.L_end
+      parentName: thumb.03.L
+      position: {x: -0, y: 0.036138736, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     - name: shoulder.R
       parentName: chest
       position: {x: 0.011689274, y: 0.30278885, z: 0.05346998}
@@ -778,7 +793,7 @@ ModelImporter:
     - name: forearm.R
       parentName: upper_arm.R
       position: {x: 0.000000018160788, y: 0.2825739, z: 0}
-      rotation: {x: 0.027865706, y: 0.22164683, z: 0.0056551825, w: 0.9747124}
+      rotation: {x: 0.027865706, y: 0.22164685, z: 0.0056551825, w: 0.97471243}
       scale: {x: 1.0000011, y: 1.0000001, z: 0.9999999}
     - name: hand.R
       parentName: forearm.R
@@ -805,30 +820,10 @@ ModelImporter:
       position: {x: -0, y: 0.029281039, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: thumb.01.R
-      parentName: hand.R
-      position: {x: -0.028181698, y: 0.015145173, z: -0.010820943}
-      rotation: {x: -0.13052167, y: 0.019124951, z: 0.40415892, w: 0.90512645}
-      scale: {x: 0.9999987, y: 1.0000005, z: 0.99999964}
-    - name: thumb.02.R
-      parentName: thumb.01.R
-      position: {x: -0.00000006332993, y: 0.035414338, z: 0}
-      rotation: {x: 0.027316058, y: 0.13549894, z: -0.020972999, w: 0.9901788}
-      scale: {x: 1.000001, y: 1, z: 1.0000013}
-    - name: thumb.03.R
-      parentName: thumb.02.R
-      position: {x: 0.0000000372529, y: 0.033597883, z: -0.000000029802319}
-      rotation: {x: 0.02366207, y: 0.07910645, z: -0.011328512, w: 0.99652094}
-      scale: {x: 0.9999998, y: 1.0000005, z: 1.0000021}
-    - name: thumb.03.R_end
-      parentName: thumb.03.R
-      position: {x: -0, y: 0.036138736, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
     - name: f_middle.01.R
       parentName: hand.R
       position: {x: -0.010524533, y: 0.09694698, z: -0.008872225}
-      rotation: {x: 0.04195621, y: -0.18480863, z: 0.033652045, w: 0.98130167}
+      rotation: {x: 0.04195621, y: -0.18480864, z: 0.033652045, w: 0.9813017}
       scale: {x: 1.000001, y: 1.0000011, z: 1}
     - name: f_middle.02.R
       parentName: f_middle.01.R
@@ -843,26 +838,6 @@ ModelImporter:
     - name: f_middle.03.R_end
       parentName: f_middle.03.R
       position: {x: -0, y: 0.034686048, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: f_ring.01.R
-      parentName: hand.R
-      position: {x: 0.01105783, y: 0.09696886, z: 0.0021065471}
-      rotation: {x: 0.03656586, y: -0.197981, z: 0.020599244, w: 0.97930694}
-      scale: {x: 1.0000005, y: 0.99999905, z: 0.9999993}
-    - name: f_ring.02.R
-      parentName: f_ring.01.R
-      position: {x: -0.000000020489095, y: 0.03353611, z: 0.000000028870996}
-      rotation: {x: 0.037341014, y: 0.00060924864, z: 0.016302787, w: 0.9991694}
-      scale: {x: 1.0000012, y: 1.0000032, z: 1.0000015}
-    - name: f_ring.03.R
-      parentName: f_ring.02.R
-      position: {x: -0.0000000037252899, y: 0.032137282, z: -0.000000022351738}
-      rotation: {x: 0.03934409, y: 0.0012826282, z: 0.003953491, w: 0.99921715}
-      scale: {x: 1.0000008, y: 1.000001, z: 1.0000018}
-    - name: f_ring.03.R_end
-      parentName: f_ring.03.R
-      position: {x: -0, y: 0.030403549, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: f_pinky.01.R
@@ -885,6 +860,46 @@ ModelImporter:
       position: {x: -0, y: 0.022295328, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
+    - name: f_ring.01.R
+      parentName: hand.R
+      position: {x: 0.01105783, y: 0.09696886, z: 0.0021065471}
+      rotation: {x: 0.036565863, y: -0.19798101, z: 0.020599246, w: 0.979307}
+      scale: {x: 1.0000005, y: 0.99999905, z: 0.9999993}
+    - name: f_ring.02.R
+      parentName: f_ring.01.R
+      position: {x: -0.000000020489095, y: 0.03353611, z: 0.000000028870996}
+      rotation: {x: 0.037341014, y: 0.00060924864, z: 0.016302787, w: 0.9991694}
+      scale: {x: 1.0000012, y: 1.0000032, z: 1.0000015}
+    - name: f_ring.03.R
+      parentName: f_ring.02.R
+      position: {x: -0.0000000037252899, y: 0.032137282, z: -0.000000022351738}
+      rotation: {x: 0.03934409, y: 0.0012826282, z: 0.003953491, w: 0.99921715}
+      scale: {x: 1.0000008, y: 1.000001, z: 1.0000018}
+    - name: f_ring.03.R_end
+      parentName: f_ring.03.R
+      position: {x: -0, y: 0.030403549, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: thumb.01.R
+      parentName: hand.R
+      position: {x: -0.028181698, y: 0.015145173, z: -0.010820943}
+      rotation: {x: -0.13052167, y: 0.019124951, z: 0.40415892, w: 0.90512645}
+      scale: {x: 0.9999987, y: 1.0000005, z: 0.99999964}
+    - name: thumb.02.R
+      parentName: thumb.01.R
+      position: {x: -0.00000006332993, y: 0.035414338, z: 0}
+      rotation: {x: 0.027316058, y: 0.13549894, z: -0.020972999, w: 0.9901788}
+      scale: {x: 1.000001, y: 1, z: 1.0000013}
+    - name: thumb.03.R
+      parentName: thumb.02.R
+      position: {x: 0.0000000372529, y: 0.033597883, z: -0.000000029802319}
+      rotation: {x: 0.02366207, y: 0.07910645, z: -0.011328512, w: 0.99652094}
+      scale: {x: 0.9999998, y: 1.0000005, z: 1.0000021}
+    - name: thumb.03.R_end
+      parentName: thumb.03.R
+      position: {x: -0, y: 0.036138736, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     - name: thigh.L
       parentName: hips
       position: {x: -0.0916884, y: 0.047229946, z: 0.047979403}
@@ -898,12 +913,12 @@ ModelImporter:
     - name: foot.L
       parentName: shin.L
       position: {x: 0.000000009516952, y: 0.49679917, z: 0.0000000034924592}
-      rotation: {x: -0.5665886, y: 0.012602814, z: -0.0067243488, w: 0.823877}
+      rotation: {x: -0.5665886, y: 0.0126028145, z: -0.0067243488, w: 0.82387704}
       scale: {x: 0.9999997, y: 1.0000012, z: 1.0000013}
     - name: toe.L
       parentName: foot.L
       position: {x: -0.00000001042008, y: 0.13655125, z: -6.548361e-11}
-      rotation: {x: -0.0032240553, y: 0.9748079, z: -0.22302222, w: 0.00042515612}
+      rotation: {x: -0.0032240553, y: 0.974808, z: -0.22302222, w: 0.00042515615}
       scale: {x: 1.0000006, y: 0.99999964, z: 0.9999988}
     - name: toe.L_end
       parentName: toe.L
