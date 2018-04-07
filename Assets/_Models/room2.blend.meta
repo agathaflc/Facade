@@ -43,6 +43,11 @@ ModelImporter:
     4300004: Lightbulb
     4300006: Table
     4300008: Room_Frame
+    6400000: DeskPaper1
+    6400002: DoorHandle_001
+    6400004: Lightbulb
+    6400006: Room_Frame
+    6400008: Table
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}
@@ -77,7 +82,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
