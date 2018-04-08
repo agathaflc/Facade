@@ -356,6 +356,11 @@ public class GameController : MonoBehaviour
         currentQuestion = questionPool[questionIndex];
         questionDisplayText.text = currentQuestion.questionText;
 
+        if (!string.IsNullOrEmpty(currentQuestion.effect))
+        {
+            ShowSpecialEffect(currentQuestion.effect);
+        }
+
         DisplayAnswers(currentQuestion.answers);
 
         // show picture if any
