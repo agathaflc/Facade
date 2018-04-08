@@ -178,7 +178,7 @@ def write_output_to_file(emotion_conf, max_val, adj2noun):
 
 def check_trigger():
     try:
-        with open(os.path.join('..', '..', 'Assets', 'StreamingAssets', 'flag.txt'), 'r') as fp:
+        with open(os.path.join('..', 'flag.txt'), 'r') as fp:
             if (fp.read()) == "record":
                 print("YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYYYYYYYYYYYYYYYYYYYYY")
                 return True
