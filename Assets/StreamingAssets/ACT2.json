@@ -75,7 +75,7 @@
           "considersEmotion": false,
           "considersFact": true,
           "filePath": "",
-          "questionText": "How many people do you  remember being present last night?",
+          "questionText": "How many people do you remember being at the premises last night?",
           "answers": [
             {
               "answerId": "020",
@@ -136,7 +136,7 @@
     {
       "sequenceType": "dialog",
       "filePath": "",
-      "subtitleText": "Hm yes, I just spoke with your alibi from last night actually. They had quite a lot of interesting thing to say about you from last night."
+      "subtitleText": "Hm yes, I just spoke with your alibi from last night actually. They had quite a lot of interesting things to say about you from last night."
     },
     {
       "sequenceType": "question",
@@ -177,7 +177,7 @@
           "considersEmotion": false,
           "considersFact": true,
           "filePath": "",
-          "questionText": "What reason did you have to be there?",
+          "questionText": "Why were you there again?",
           "answers": [
             {
               "answerId": "050",
@@ -225,7 +225,7 @@
           "considersEmotion": false,
           "considersFact": true,
           "filePath": "",
-          "questionText": "What time did you leave the premises last night?",
+          "questionText": "What time did you leave the premises?",
           "answers": [
             {
               "answerId": "080",
@@ -534,7 +534,7 @@
           "considersEmotion": true,
           "considersFact": true,
           "filePath": "",
-          "questionText": "So why did we find a concealed weapon on your person last night?",
+          "questionText": "So why did we find a concealed weapon on your person’s last night?",
           "answers": [
             {
               "answerId": "120",
@@ -636,7 +636,7 @@
     {
       "sequenceType": "dialog",
       "filePath": "",
-      "subtitleText": "I’m sick and tired of scum like you thinking you can smooth talk your way out of a fair judgement."
+      "subtitleText": "I am sick and tired of scum like you thinking you can smooth talk your way out of a fair judgement."
     }
   ]
 }
