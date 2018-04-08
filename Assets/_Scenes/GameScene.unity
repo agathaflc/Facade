@@ -2544,7 +2544,7 @@ MonoBehaviour:
   player: {fileID: 65289683}
   selectedBoldAnswer: {fileID: 0}
   FER_is_On: 0
-  gameSceneOnly: 1
+  gameSceneOnly: 0
   Liam: {fileID: 1321651007}
   Kira: {fileID: 1604754582}
   walkingSpeed: 0.5
