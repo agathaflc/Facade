@@ -11,21 +11,29 @@
   ],
   "suspiciousNeutral": [
     {
-      "text": "(a neutral-suspicious response 0)",
+      "text": "Yeahhh..",
       "soundFilePath": "audio/susp_neut_0"
     },
     {
-      "text": "(a neutral-suspicious response 1)",
+      "text": "Right..",
+      "soundFilePath": "audio/susp_neut_0"
+    },
+    {
+      "text": "Hmmm..",
       "soundFilePath": "audio/susp_neut_0"
     }
   ],
   "suspiciousNegative": [
     {
-      "text": "Oh, that's bad. Are you sure, though?",
+      "text": "Right..",
       "soundFilePath": "audio/susp_neg_0"
     },
     {
-      "text": "That's awful, but you need to tell me the truth.",
+      "text": "Sure..",
+      "soundFilePath": "audio/susp_neg_0"
+    },
+    {
+      "text": "* Scoff *",
       "soundFilePath": "audio/susp_neg_0"
     }
   ],
@@ -41,41 +49,45 @@
   ],
   "notSuspiciousNegative": [
     {
-      "text": "That's too bad.",
+      "text": "K.",
       "soundFilePath": "audio/oh-thats-okay"
     },
     {
-      "text": "Oh, that's okay.",
+      "text": "Hmmm..",
       "soundFilePath": "audio/oh-thats-okay"
     }
   ],
   "notSuspiciousNeutral": [
     {
-      "text": "I see.",
+      "text": "K.",
       "soundFilePath": "audio/alright"
     },
     {
-      "text": "Alright.",
+      "text": "Uh huh.",
+      "soundFilePath": "audio/alright"
+    },
+    {
+      "text": "Hmmm..",
       "soundFilePath": "audio/alright"
     }
   ],
   "clarifying": [
     {
-      "text": "Your answer doesn't match with our record. Now, tell me the truth.",
+      "text": "That’s not what you said earlier.",
       "soundFilePath": "audio/ill-tell-you-what-i-think"
     },
     {
-      "text": "LIES! You said something different earlier, you think I'm a fool?",
+      "text": "What? Don’t lie to me.",
       "soundFilePath": "audio/ill-tell-you-what-i-think"
+    },
+    {
+      "text": "Do you think I’m an idiot?",
+      "soundFilePath": ""
     }
   ],
   "postClarifying": [
     {
-      "text": "You better stop lying if you don't wanna get in trouble.",
-      "soundFilePath": "audio/ill-tell-you-what-i-think"
-    },
-    {
-      "text": "Try to think more clearly next time, okay?",
+      "text": "Do you think I’m an idiot?",
       "soundFilePath": "audio/ill-tell-you-what-i-think"
     }
   ]
