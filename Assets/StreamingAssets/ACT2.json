@@ -307,7 +307,8 @@
     {
       "sequenceType": "dialog",
       "filePath": "",
-      "subtitleText": "These bright lights must be bothering you huh?"
+      "subtitleText": "These bright lights must be bothering you huh?",
+      "effect": "bloom"
     },
     {
       "sequenceType": "dialog",
@@ -326,6 +327,7 @@
           "considersFact": true,
           "filePath": "",
           "questionText": "Your alibi claimed you disappeared at 12:45 AM last night. What exactly were you doing?",
+          "effect": "motionBlur",
           "answers": [
             {
               "answerId": "080",
@@ -521,7 +523,8 @@
     {
       "sequenceType": "dialog",
       "filePath": "",
-      "subtitleText": "You must have had a really bad relationship with the victim huh? You seem like the kinda guy who'd get rid of someone they didn't like.."
+      "subtitleText": "You must have had a really bad relationship with the victim huh? You seem like the kinda guy who'd get rid of someone they didn't like..",
+      "effect": "vignette"
     },
     {
       "sequenceType": "question",
