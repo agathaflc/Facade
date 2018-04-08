@@ -1,61 +1,77 @@
 {
   "suspiciousPositive": [
     {
-      "text": "That's good, although I think you're hiding something.",
+      "text": "Ok",
       "soundFilePath": "audio/silence_3sec"
     },
     {
-      "text": "O..kay, great.",
+      "text": "Noted",
       "soundFilePath": "audio/silence_3sec"
     }
   ],
   "suspiciousNeutral": [
     {
-      "text": "(a neutral-suspicious response 0)",
+      "text": "Ok",
       "soundFilePath": "audio/silence_3sec"
     },
     {
-      "text": "(a neutral-suspicious response 1)",
+      "text": "I see",
+      "soundFilePath": "audio/silence_3sec"
+    },
+    {
+      "text": "Noted",
       "soundFilePath": "audio/silence_3sec"
     }
   ],
   "suspiciousNegative": [
     {
-      "text": "Oh, that's bad. Are you sure, though?",
+      "text": "Uh huh..",
       "soundFilePath": "audio/silence_3sec"
     },
     {
-      "text": "That's awful, but you need to tell me the truth.",
+      "text": "Hmmm..",
+      "soundFilePath": "audio/silence_3sec"
+    },
+    {
+      "text": "I see..",
       "soundFilePath": "audio/silence_3sec"
     }
   ],
   "notSuspiciousPositive": [
     {
-      "text": "That's good to hear.",
+      "text": "Alright",
       "soundFilePath": "audio/nice-work"
     },
     {
-      "text": "Good for you.",
+      "text": "Right",
+      "soundFilePath": "audio/friday-rocks"
+    },
+    {
+      "text": "Ok",
+      "soundFilePath": "audio/friday-rocks"
+    },
+    {
+      "text": "Got it",
       "soundFilePath": "audio/friday-rocks"
     }
   ],
   "notSuspiciousNegative": [
     {
-      "text": "That's too bad.",
+      "text": "Uh huh..",
       "soundFilePath": "audio/oh-thats-okay"
     },
     {
-      "text": "Oh, that's okay.",
+      "text": "I see..",
       "soundFilePath": "audio/oh-thats-okay"
     }
   ],
   "notSuspiciousNeutral": [
     {
-      "text": "I see.",
+      "text": "Ok",
       "soundFilePath": "audio/alright"
     },
     {
-      "text": "Alright.",
+      "text": "Got it",
       "soundFilePath": "audio/alright"
     }
   ],
