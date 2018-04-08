@@ -2850,13 +2850,8 @@ Transform:
   m_LocalScale: {x: 96.3186, y: 96.31845, z: 96.3185}
   m_Children: []
   m_Father: {fileID: 593331700}
-<<<<<<< HEAD
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -203.123, y: 220.64801, z: -110.951996}
-=======
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -201.477, y: 239.89, z: -103.85199}
->>>>>>> 3ddefac2a79d792a750085e8ebd7fb51628837b4
 --- !u!108 &1322763238
 Light:
   m_ObjectHideFlags: 0
@@ -3219,13 +3214,8 @@ Transform:
   m_LocalScale: {x: 96.31845, y: 96.31844, z: 96.318474}
   m_Children: []
   m_Father: {fileID: 593331700}
-<<<<<<< HEAD
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -205.663, y: 316.508, z: -94.017}
-=======
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -203.863, y: 301.06, z: -100.51999}
->>>>>>> 3ddefac2a79d792a750085e8ebd7fb51628837b4
 --- !u!108 &1472231129
 Light:
   m_ObjectHideFlags: 0
