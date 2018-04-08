@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.PostProcessing;
 using UnityEngine.SceneManagement;
@@ -72,17 +73,31 @@ public class GameController : MonoBehaviour
     private static string currentBgm;
 
     // testing variables
-    private const bool FER_is_On = false;
+    public bool FER_is_On;
+    public bool gameSceneOnly;
+
+    // just for playing around lol
+    public GameObject Liam;
+    public GameObject Kira;
+
+    // for animation
+    public float walkingSpeed = 2.0f;
+    public float rotationSpeed = 75.0f;
 
     // Use this for initialization
     private void Start()
     {
+        PlayDetectiveAnimation();
+
+        if (gameSceneOnly) return;
+
         dataController = FindObjectOfType<DataController>(); // store a ref to data controller
         currentRoundData = dataController.GetCurrentRoundData();
         detectiveAudioSource = detectiveObject.GetComponent<AudioSource>();
         bgmAudioSource = player.GetComponent<AudioSource>();
 
-        PlayBgm(currentRoundData.bgmNeutralClip, MUSIC_NEUTRAL, currentRoundData.bgmNeutralFile.seek, true); // always start off with the base clip 
+        PlayBgm(currentRoundData.bgmNeutralClip, MUSIC_NEUTRAL, currentRoundData.bgmNeutralFile.seek,
+            true); // always start off with the base clip 
         currentBgm = MUSIC_NEUTRAL;
 
         displayedScore = 0;
@@ -92,6 +107,42 @@ public class GameController : MonoBehaviour
         isClarifying = false;
 
         StartCoroutine(RunSequence());
+    }
+
+    private void PlayDetectiveAnimation()
+    {
+        var liamAnimation = Liam.GetComponent<Animator>();
+        liamAnimation.Play("HumanoidIdle");
+
+        var kiraAnimation = Kira.GetComponent<Animator>();
+        kiraAnimation.Play("HumanoidWalk");
+    }
+
+    private void HandleWalking()
+    {
+        var vertical = Input.GetAxis("Vertical");
+        if (vertical != 0)
+        {
+            Debug.Log("vertical: " + vertical);
+        }
+
+        var translation = vertical * walkingSpeed;
+        var horizontal = Input.GetAxis("Horizontal");
+        if (horizontal != 0)
+        {
+            Debug.Log("Horizontal: " + horizontal);
+        }
+
+        var rotation = horizontal * rotationSpeed;
+        translation *= Time.deltaTime;
+        rotation *= Time.deltaTime;
+
+        var detectiveTransform = Kira.GetComponent<Transform>();
+        var detectiveAnimator = Kira.GetComponent<Animator>();
+        detectiveTransform.Translate(0, 0, translation);
+        detectiveTransform.Rotate(0,rotation, 0);
+
+        detectiveAnimator.SetBool("IsWalking", translation != 0);
     }
 
     private void PlayBgm(AudioClip clip, string musicType, float seek, bool fadeIn = false)
@@ -148,7 +199,8 @@ public class GameController : MonoBehaviour
 
             if (currentSequence.bgm != null)
             {
-                PlayBgm(DataController.LoadAudioFile(currentSequence.bgm.fileName), "special_bgm", currentSequence.bgm.seek);
+                PlayBgm(DataController.LoadAudioFile(currentSequence.bgm.fileName), "special_bgm",
+                    currentSequence.bgm.seek);
             }
 
             if (currentSequence.readExpression)
@@ -539,7 +591,8 @@ public class GameController : MonoBehaviour
                 // todo play the foghorn thing??
                 if (!currentBgm.Contains(SCARED_EMOTION))
                 {
-                    PlayBgm(currentRoundData.bgmSadScaredClip, MUSIC_SAD_SCARED, currentRoundData.bgmSadScaredFile.seek);
+                    PlayBgm(currentRoundData.bgmSadScaredClip, MUSIC_SAD_SCARED,
+                        currentRoundData.bgmSadScaredFile.seek);
                 }
 
                 return;
@@ -550,7 +603,8 @@ public class GameController : MonoBehaviour
         if (!correctExpression)
         {
             // todo play the foghorn thing??
-            if (!currentBgm.Contains(SCARED_EMOTION)) PlayBgm(currentRoundData.bgmSadScaredClip, MUSIC_SAD_SCARED, currentRoundData.bgmSadScaredFile.seek);
+            if (!currentBgm.Contains(SCARED_EMOTION))
+                PlayBgm(currentRoundData.bgmSadScaredClip, MUSIC_SAD_SCARED, currentRoundData.bgmSadScaredFile.seek);
             return;
         }
 
@@ -573,7 +627,8 @@ public class GameController : MonoBehaviour
         }
         else if (MUSIC_SURPRISED_ANGRY.Contains(emotion))
         {
-            PlayBgm(currentRoundData.bgmAngrySurprisedClip, MUSIC_SURPRISED_ANGRY, currentRoundData.bgmAngrySurprisedFile.seek);
+            PlayBgm(currentRoundData.bgmAngrySurprisedClip, MUSIC_SURPRISED_ANGRY,
+                currentRoundData.bgmAngrySurprisedFile.seek);
         }
     }
 
@@ -664,7 +719,7 @@ public class GameController : MonoBehaviour
 
         audioSource.volume = t;
         audioSource.Play();
-        
+
         while (t < 3f)
         {
             t += Time.deltaTime;
@@ -718,5 +773,7 @@ public class GameController : MonoBehaviour
             playerCamera.GetComponent<PostProcessingBehaviour>().enabled =
                 !playerCamera.GetComponent<PostProcessingBehaviour>().enabled;
         }
+        
+        HandleWalking();
     }
 }
