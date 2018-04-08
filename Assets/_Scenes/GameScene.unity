@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2845,20 +2845,25 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1322763236}
-  m_LocalRotation: {x: 0.4295356, y: 0.28650525, z: 0.45177945, w: 0.72753644}
-  m_LocalPosition: {x: -3.6855447, y: 3.982184, z: -5.4541483}
+  m_LocalRotation: {x: 0.34769878, y: 0.1738375, z: 0.46333265, w: 0.7963724}
+  m_LocalPosition: {x: -3.6856065, y: 3.9821837, z: -5.454235}
   m_LocalScale: {x: 96.3186, y: 96.31845, z: 96.3185}
   m_Children: []
   m_Father: {fileID: 593331700}
+<<<<<<< HEAD
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: -203.123, y: 220.64801, z: -110.951996}
+=======
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -201.477, y: 239.89, z: -103.85199}
+>>>>>>> 3ddefac2a79d792a750085e8ebd7fb51628837b4
 --- !u!108 &1322763238
 Light:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1322763236}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 8
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3209,20 +3214,25 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1472231127}
-  m_LocalRotation: {x: 0.6227726, y: 0.5899767, z: 0.16931202, w: 0.48519605}
-  m_LocalPosition: {x: -3.464181, y: 4.376111, z: 4.168985}
+  m_LocalRotation: {x: 0.67773366, y: 0.6063248, z: 0.095442936, w: 0.40489256}
+  m_LocalPosition: {x: -3.4642153, y: 4.376111, z: 4.1690116}
   m_LocalScale: {x: 96.31845, y: 96.31844, z: 96.318474}
   m_Children: []
   m_Father: {fileID: 593331700}
+<<<<<<< HEAD
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: -205.663, y: 316.508, z: -94.017}
+=======
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -203.863, y: 301.06, z: -100.51999}
+>>>>>>> 3ddefac2a79d792a750085e8ebd7fb51628837b4
 --- !u!108 &1472231129
 Light:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1472231127}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 8
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
