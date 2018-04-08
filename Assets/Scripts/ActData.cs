@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [Serializable]
-public class RoundData
+public class ActData
 {
     public AudioClip bgmHappyClip;
     public AudioClip bgmNeutralClip;

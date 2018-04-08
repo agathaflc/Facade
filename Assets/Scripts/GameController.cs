@@ -23,6 +23,10 @@ public class GameController : MonoBehaviour
     private const string MUSIC_SAD_SCARED = "music_sad_scared";
     private const string MUSIC_SURPRISED_ANGRY = "music_surprised_angry";
 
+    private const string EFFECT_BLOOM = "bloom";
+    private const string EFFECT_MOTION_BLUR = "motionBlur";
+    private const string EFFECT_VIGNETTE = "vignette";
+
     private const float EMOTION_DISTANCE_THRESHOLD = 2.0f;
     private const float FADE_STEP = 0.1f;
     private const float FER_RECORDING_TIME = 4f;
@@ -49,13 +53,14 @@ public class GameController : MonoBehaviour
     public PostProcessingProfile motionBlurEffect;
     public PostProcessingProfile vignetteEffect;
     public PostProcessingProfile bloomEffect;
+    public PostProcessingBehaviour postProcessingBehaviour;
     public GameObject player;
 
     private AudioSource detectiveAudioSource;
     private AudioSource bgmAudioSource;
 
     private DataController dataController;
-    private RoundData currentRoundData;
+    private ActData currentActData;
     private QuestionData[] questionPool;
 
     private bool isTimerActive;
@@ -92,11 +97,12 @@ public class GameController : MonoBehaviour
         if (gameSceneOnly) return;
 
         dataController = FindObjectOfType<DataController>(); // store a ref to data controller
-        currentRoundData = dataController.GetCurrentRoundData();
+        currentActData = dataController.GetCurrentRoundData();
         detectiveAudioSource = detectiveObject.GetComponent<AudioSource>();
         bgmAudioSource = player.GetComponent<AudioSource>();
+        postProcessingBehaviour = playerCamera.GetComponent<PostProcessingBehaviour>();
 
-        PlayBgm(currentRoundData.bgmNeutralClip, MUSIC_NEUTRAL, currentRoundData.bgmNeutralFile.seek,
+        PlayBgm(currentActData.bgmNeutralClip, MUSIC_NEUTRAL, currentActData.bgmNeutralFile.seek,
             true); // always start off with the base clip 
         currentBgm = MUSIC_NEUTRAL;
 
@@ -140,7 +146,7 @@ public class GameController : MonoBehaviour
         var detectiveTransform = Kira.GetComponent<Transform>();
         var detectiveAnimator = Kira.GetComponent<Animator>();
         detectiveTransform.Translate(0, 0, translation);
-        detectiveTransform.Rotate(0,rotation, 0);
+        detectiveTransform.Rotate(0, rotation, 0);
 
         detectiveAnimator.SetBool("IsWalking", translation != 0);
     }
@@ -173,13 +179,13 @@ public class GameController : MonoBehaviour
      **/
     private IEnumerator RunSequence()
     {
-        if (sequenceIndex >= currentRoundData.sequence.Length)
+        if (sequenceIndex >= currentActData.sequence.Length)
         {
             EndRound();
             yield break;
         }
 
-        currentSequence = currentRoundData.sequence[sequenceIndex];
+        currentSequence = currentActData.sequence[sequenceIndex];
 
         if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
         {
@@ -195,6 +201,12 @@ public class GameController : MonoBehaviour
             // Debug.Log ("RunSequence: current sequence is dialog");
             LockCursor();
             isEventDone = false;
+
+            if (!string.IsNullOrEmpty(currentSequence.effect)) // show special effects if any
+            {
+                ShowSpecialEffect(currentSequence.effect);
+            }
+
             ShowAndPlayDialog(DataController.LoadAudioFile(currentSequence.filePath), currentSequence.subtitleText);
 
             if (currentSequence.bgm != null)
@@ -223,7 +235,7 @@ public class GameController : MonoBehaviour
                 SaveAndDisplayScore(CalculateSuspicionScore_EmotionOnly(currentSequence.expectedExpressions,
                     currentSequence.scoreWeight, out closestEmotion));
 
-                isEventDone = true;
+                ConcludeEvent();
             }
             else
             {
@@ -232,11 +244,36 @@ public class GameController : MonoBehaviour
                     yield return null;
                 }
 
-                isEventDone = true;
+                ConcludeEvent();
             }
         }
 
         sequenceIndex++;
+    }
+
+    private void ConcludeEvent()
+    {
+        isEventDone = true;
+        postProcessingBehaviour.enabled = false;
+    }
+
+    private void ShowSpecialEffect(string currentSequenceEffect)
+    {
+        if (currentSequenceEffect.Equals(EFFECT_BLOOM))
+        {
+            Bloom();
+            postProcessingBehaviour.enabled = true;
+        }
+        else if (currentSequenceEffect.Equals(EFFECT_MOTION_BLUR))
+        {
+            MotionBlur();
+            postProcessingBehaviour.enabled = true;
+        }
+        else if (currentSequenceEffect.Equals(EFFECT_VIGNETTE))
+        {
+            Vignette();
+            postProcessingBehaviour.enabled = true;
+        }
     }
 
     private float CalculateSuspicionScore_EmotionOnly(string[] expectedExpressions, float weight,
@@ -541,7 +578,7 @@ public class GameController : MonoBehaviour
                     yield return null;
                 }
 
-                isEventDone = true;
+                ConcludeEvent();
             }
         }
         else // was clarifying
@@ -552,7 +589,7 @@ public class GameController : MonoBehaviour
                 yield return null;
             }
 
-            isEventDone = true;
+            ConcludeEvent();
             isClarifying = false;
         }
     }
@@ -591,8 +628,8 @@ public class GameController : MonoBehaviour
                 // todo play the foghorn thing??
                 if (!currentBgm.Contains(SCARED_EMOTION))
                 {
-                    PlayBgm(currentRoundData.bgmSadScaredClip, MUSIC_SAD_SCARED,
-                        currentRoundData.bgmSadScaredFile.seek);
+                    PlayBgm(currentActData.bgmSadScaredClip, MUSIC_SAD_SCARED,
+                        currentActData.bgmSadScaredFile.seek);
                 }
 
                 return;
@@ -604,7 +641,7 @@ public class GameController : MonoBehaviour
         {
             // todo play the foghorn thing??
             if (!currentBgm.Contains(SCARED_EMOTION))
-                PlayBgm(currentRoundData.bgmSadScaredClip, MUSIC_SAD_SCARED, currentRoundData.bgmSadScaredFile.seek);
+                PlayBgm(currentActData.bgmSadScaredClip, MUSIC_SAD_SCARED, currentActData.bgmSadScaredFile.seek);
             return;
         }
 
@@ -615,20 +652,20 @@ public class GameController : MonoBehaviour
 
         if (MUSIC_HAPPY.Contains(emotion))
         {
-            PlayBgm(currentRoundData.bgmHappyClip, MUSIC_HAPPY, currentRoundData.bgmHappyFile.seek);
+            PlayBgm(currentActData.bgmHappyClip, MUSIC_HAPPY, currentActData.bgmHappyFile.seek);
         }
         else if (MUSIC_NEUTRAL.Contains(emotion))
         {
-            PlayBgm(currentRoundData.bgmNeutralClip, MUSIC_NEUTRAL, currentRoundData.bgmNeutralFile.seek);
+            PlayBgm(currentActData.bgmNeutralClip, MUSIC_NEUTRAL, currentActData.bgmNeutralFile.seek);
         }
         else if (MUSIC_SAD_SCARED.Contains(emotion))
         {
-            PlayBgm(currentRoundData.bgmSadScaredClip, MUSIC_SAD_SCARED, currentRoundData.bgmSadScaredFile.seek);
+            PlayBgm(currentActData.bgmSadScaredClip, MUSIC_SAD_SCARED, currentActData.bgmSadScaredFile.seek);
         }
         else if (MUSIC_SURPRISED_ANGRY.Contains(emotion))
         {
-            PlayBgm(currentRoundData.bgmAngrySurprisedClip, MUSIC_SURPRISED_ANGRY,
-                currentRoundData.bgmAngrySurprisedFile.seek);
+            PlayBgm(currentActData.bgmAngrySurprisedClip, MUSIC_SURPRISED_ANGRY,
+                currentActData.bgmAngrySurprisedFile.seek);
         }
     }
 
@@ -773,7 +810,7 @@ public class GameController : MonoBehaviour
             playerCamera.GetComponent<PostProcessingBehaviour>().enabled =
                 !playerCamera.GetComponent<PostProcessingBehaviour>().enabled;
         }
-        
+
         HandleWalking();
     }
 }

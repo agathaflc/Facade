@@ -25,12 +25,14 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/silence_3sec",
-      "subtitleText": "Look, I know it’s kinda troublesome, but we have to question all the witnesses that were present."
+      "subtitleText": "Look, I know it’s kinda troublesome, but we have to question all the witnesses that were present.",
+      "effect": "vignette"
     },
     {
       "sequenceType": "dialog",
       "filePath": "audio/silence_3sec",
-      "subtitleText": "I know you’re not involved with anything, but I’m just here trying to do my job as quickly as possible we can both go home. So let’s get started."
+      "subtitleText": "I know you’re not involved with anything, but I’m just here trying to do my job as quickly as possible we can both go home. So let’s get started.",
+      "effect": "vignette"
     },
     {
       "sequenceType": "question",

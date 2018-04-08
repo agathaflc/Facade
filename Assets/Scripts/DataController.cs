@@ -21,7 +21,7 @@ public class DataController : MonoBehaviour
     private const string FER_FLAG_FILE_NAME = "flag.txt";
 
     private const string RECORD_EXPRESSION = "record";
-    private RoundData currentRound;
+    private ActData currentActData;
     private DistanceData distanceMap;
     
     private readonly Dictionary<string, string> questionIdToAnswerIdMap = new Dictionary<string, string>();
@@ -29,7 +29,7 @@ public class DataController : MonoBehaviour
 
     private PlayerProgress playerProgress;
 
-    private static int currentAct;
+    private static int currentActNo;
     private string[] actFiles;
 
     // Use this for initialization
@@ -41,10 +41,10 @@ public class DataController : MonoBehaviour
         ReadDistanceMap();
 
         actualOverallScore = 0;
-        currentAct = 0;
+        currentActNo = 0;
         actFiles = ReadActFileNames(ACT_FILE_PATH);
 
-        LoadRoundData(actFiles[currentAct]);
+        LoadRoundData(actFiles[currentActNo]);
         
         SceneManager.LoadScene(MENU_SCREEN);
     }
@@ -76,7 +76,7 @@ public class DataController : MonoBehaviour
 
     private void StartCurrentAct()
     {
-        LoadRoundData(actFiles[currentAct]);
+        LoadRoundData(actFiles[currentActNo]);
         Initiate.Fade ("GameScene", Color.black, 1f);
     }
 
@@ -96,9 +96,9 @@ public class DataController : MonoBehaviour
         return null;
     }
 
-    public RoundData GetCurrentRoundData()
+    public ActData GetCurrentRoundData()
     {
-        return currentRound;
+        return currentActData;
     }
 
     public void SubmitNewPlayerScore(float newScore)
@@ -166,9 +166,9 @@ public class DataController : MonoBehaviour
         if (File.Exists(filePath))
         {
             var dataAsJson = File.ReadAllText(filePath);
-            currentRound = JsonUtility.FromJson<RoundData>(dataAsJson);
+            currentActData = JsonUtility.FromJson<ActData>(dataAsJson);
 
-            LoadAllDetectiveResponses(currentRound.responsesPath);
+            LoadAllDetectiveResponses(currentActData.responsesPath);
             LoadBgms();
         }
         else
@@ -179,16 +179,16 @@ public class DataController : MonoBehaviour
 
     private void LoadBgms()
     {
-        if (currentRound == null)
+        if (currentActData == null)
         {
             Debug.LogError("current round is null!");
             return;
         }
 
-        currentRound.bgmHappyClip = LoadAudioFile(currentRound.bgmHappyFile.fileName);
-        currentRound.bgmSadScaredClip = LoadAudioFile(currentRound.bgmSadScaredFile.fileName);
-        currentRound.bgmNeutralClip = LoadAudioFile(currentRound.bgmNeutralFile.fileName);
-        currentRound.bgmAngrySurprisedClip = LoadAudioFile(currentRound.bgmAngrySurprisedFile.fileName);
+        currentActData.bgmHappyClip = LoadAudioFile(currentActData.bgmHappyFile.fileName);
+        currentActData.bgmSadScaredClip = LoadAudioFile(currentActData.bgmSadScaredFile.fileName);
+        currentActData.bgmNeutralClip = LoadAudioFile(currentActData.bgmNeutralFile.fileName);
+        currentActData.bgmAngrySurprisedClip = LoadAudioFile(currentActData.bgmAngrySurprisedFile.fileName);
     }
 
     public static AudioClip LoadAudioFile(string relativeResourcePath)
@@ -204,31 +204,31 @@ public class DataController : MonoBehaviour
         switch (responseType)
         {
             case null:
-                responseData = currentRound.detectiveResponses.notSuspiciousNeutral;
+                responseData = currentActData.detectiveResponses.notSuspiciousNeutral;
                 break;
             case DETECTIVE_RESPONSE_POSITIVE:
                 responseData = suspicious
-                    ? currentRound.detectiveResponses.suspiciousPositive
-                    : currentRound.detectiveResponses.notSuspiciousPositive;
+                    ? currentActData.detectiveResponses.suspiciousPositive
+                    : currentActData.detectiveResponses.notSuspiciousPositive;
                 break;
             case DETECTIVE_RESPONSE_NEGATIVE:
                 responseData = suspicious
-                    ? currentRound.detectiveResponses.suspiciousNegative
-                    : currentRound.detectiveResponses.notSuspiciousNegative;
+                    ? currentActData.detectiveResponses.suspiciousNegative
+                    : currentActData.detectiveResponses.notSuspiciousNegative;
                 break;
             case DETECTIVE_RESPONSE_NEUTRAL:
                 responseData = suspicious
-                    ? currentRound.detectiveResponses.suspiciousNeutral
-                    : currentRound.detectiveResponses.notSuspiciousNeutral;
+                    ? currentActData.detectiveResponses.suspiciousNeutral
+                    : currentActData.detectiveResponses.notSuspiciousNeutral;
                 break;
             case DETECTIVE_RESPONSE_CLARIFYING:
-                responseData = currentRound.detectiveResponses.clarifying;
+                responseData = currentActData.detectiveResponses.clarifying;
                 break;
             case DETECTIVE_RESPONSE_POST_CLARIFYING:
-                responseData = currentRound.detectiveResponses.postClarifying;
+                responseData = currentActData.detectiveResponses.postClarifying;
                 break;
             default:
-                responseData = currentRound.detectiveResponses.notSuspiciousNeutral;
+                responseData = currentActData.detectiveResponses.notSuspiciousNeutral;
                 break;
         }
 
@@ -257,7 +257,7 @@ public class DataController : MonoBehaviour
         if (File.Exists(filePath))
         {
             var dataAsJson = File.ReadAllText(filePath);
-            currentRound.detectiveResponses = JsonUtility.FromJson<DetectiveResponses>(dataAsJson);
+            currentActData.detectiveResponses = JsonUtility.FromJson<DetectiveResponses>(dataAsJson);
         }
         else
         {
@@ -326,8 +326,8 @@ public class DataController : MonoBehaviour
 
     public void StartNextAct()
     {
-        currentAct++;
-        if (currentAct > actFiles.Length)
+        currentActNo++;
+        if (currentActNo > actFiles.Length)
         {
             LoadGameOverScreen();
             return;

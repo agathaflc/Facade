@@ -14,4 +14,5 @@ public class QuestionData
     public string questionText;
     public int timeLimitInSeconds = 10;
     public string filePath;
+    public string effect;
 }
