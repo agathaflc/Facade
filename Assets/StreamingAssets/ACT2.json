@@ -253,7 +253,7 @@
           "considersEmotion": true,
           "considersFact": true,
           "filePath": "",
-          "questionText": "And were you intoxicated in any way last night?",
+          "questionText": "And were you intoxicated in any way?",
           "answers": [
             {
               "answerId": "070",
@@ -478,7 +478,7 @@
           "answers": [
             {
               "answerId": "110",
-              "answerText": "She betrayed me",
+              "answerText": "She was untrustworthy",
               "expectedExpressions": [
                 "sad",
                 "scared",
@@ -489,29 +489,25 @@
             },
             {
               "answerId": "111",
-              "answerText": "She was unkind to me",
+              "answerText": "She also didn't like me",
               "expectedExpressions": [
                 "sad",
-                "scared",
-                "surprised",
                 "angry"
               ],
               "detectiveResponse": "negative"
             },
             {
               "answerId": "112",
-              "answerText": "She stole from me",
+              "answerText": "She is okay",
               "expectedExpressions": [
-                "sad",
-                "scared",
-                "surprised",
-                "angry"
+                "neutral",
+                "happy"
               ],
-              "detectiveResponse": "negative"
+              "detectiveResponse": "neutral"
             },
             {
               "answerId": "113",
-              "answerText": "That is not true!",
+              "answerText": "That is not true! I didn't say that",
               "expectedExpressions": [
                 "surprised",
                 "angry"
