@@ -53,7 +53,7 @@ public class GameController : MonoBehaviour
     public PostProcessingProfile motionBlurEffect;
     public PostProcessingProfile vignetteEffect;
     public PostProcessingProfile bloomEffect;
-    public PostProcessingBehaviour postProcessingBehaviour;
+    private PostProcessingBehaviour postProcessingBehaviour;
     public GameObject player;
 
     private AudioSource detectiveAudioSource;

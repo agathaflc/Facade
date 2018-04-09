@@ -10,8 +10,8 @@ public static class ScoreCalculator
     private const int WRONG_ANSWER_MULTIPLIER = 1;
     private const int CORRECT_EXPRESSION_MULTIPLIER = -1;
     private const int WRONG_EXPRESSION_MULTIPLIER = 1;
-    
-    private static Dictionary<string, float[]> emotionToThreshold = new Dictionary<string, float[]>(); 
+
+    public static Dictionary<string, float[]> emotionToThreshold = new Dictionary<string, float[]>();
 
     private static float ComputeDistanceBetweenTwoPoints(float x1, float y1, float x2, float y2)
     {
@@ -83,17 +83,19 @@ public static class ScoreCalculator
      **/
     public static float CalculateExpressionScore(float rawDistance, float weight, string expectedEmotion)
     {
-        if (rawDistance <= 0.3)
+        var thresholds = emotionToThreshold[expectedEmotion];
+
+        if (rawDistance <= thresholds[0])
             return 3f * CORRECT_EXPRESSION_MULTIPLIER * weight;
-        if (rawDistance <= 0.4)
+        if (rawDistance <= thresholds[1])
             return 2f * CORRECT_EXPRESSION_MULTIPLIER * weight;
-        if (rawDistance <= 0.5)
+        if (rawDistance <= thresholds[2])
             return 1f * CORRECT_EXPRESSION_MULTIPLIER * weight;
-        if (rawDistance <= 0.6)
+        if (rawDistance <= thresholds[3])
             return 0f * weight;
-        if (rawDistance <= 0.7)
+        if (rawDistance <= thresholds[4])
             return 1f * WRONG_EXPRESSION_MULTIPLIER * weight;
-        if (rawDistance <= 0.8)
+        if (rawDistance <= thresholds[5])
             return 2f * WRONG_EXPRESSION_MULTIPLIER * weight;
         return 3f * WRONG_EXPRESSION_MULTIPLIER * weight;
     }
