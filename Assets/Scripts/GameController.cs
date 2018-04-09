@@ -62,6 +62,7 @@ public class GameController : MonoBehaviour
     private DataController dataController;
     private ActData currentActData;
     private QuestionData[] questionPool;
+    private List<QuestionData> allQuestions = new List<QuestionData>();
 
     private bool isTimerActive;
     private bool isEventDone;
@@ -133,7 +134,7 @@ public class GameController : MonoBehaviour
         }
 
         var translation = vertical * walkingSpeed;
-        
+
         var horizontal = Input.GetAxis("Horizontal");
         if (horizontal != 0)
         {
@@ -149,7 +150,9 @@ public class GameController : MonoBehaviour
         detectiveTransform.Translate(0, 0, translation);
         detectiveTransform.Translate(rotation, 0, 0);
 
-        detectiveAnimator.SetBool("IsWalking", translation != 0 || rotation != 0);
+//        detectiveAnimator.SetBool("IsWalking", translation != 0 || rotation != 0);
+        // if using the AnimationHelper
+        detectiveAnimator.SetFloat("Speed", translation != 0 ? walkingSpeed : 0f);
     }
 
     private void PlayBgm(AudioClip clip, string musicType, float seek, bool fadeIn = false)
@@ -256,6 +259,11 @@ public class GameController : MonoBehaviour
     {
         isEventDone = true;
         postProcessingBehaviour.enabled = false;
+
+        if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
+        {
+            allQuestions.Add(currentQuestion);
+        }
     }
 
     private void ShowSpecialEffect(string currentSequenceEffect)
@@ -461,7 +469,8 @@ public class GameController : MonoBehaviour
             DataController.ReadPlayerEmotion(), out closestEmotion);
 
         // Debug.Log ("emotion distance: " + emotionDistance.ToString());
-        expressionScore = ScoreCalculator.CalculateExpressionScore(emotionDistance, currentQuestion.expressionWeight, closestEmotion);
+        expressionScore =
+            ScoreCalculator.CalculateExpressionScore(emotionDistance, currentQuestion.expressionWeight, closestEmotion);
         suspicionScore += expressionScore;
 
         Debug.Log("closestEmotion: " + closestEmotion + ", distance: " + emotionDistance + ", score: " +
@@ -520,7 +529,7 @@ public class GameController : MonoBehaviour
         var considerPrevFact = currentQuestion.considersFact && answerStoredBefore;
         var consistentFact = considerPrevFact &&
                              answerData.answerId.Equals(
-                                 dataController.GetAsnwerIdByQuestionId(currentQuestion.questionId));
+                                 dataController.GetAnswerIdByQuestionId(currentQuestion.questionId));
 
         if (isClarifying)
         {
@@ -560,7 +569,7 @@ public class GameController : MonoBehaviour
             if (considerPrevFact && !consistentFact) // player answers inconsistent fact
             {
                 StartCoroutine(ClarifyAnswer(answerData.answerId,
-                    dataController.GetAsnwerIdByQuestionId(currentQuestion.questionId)));
+                    dataController.GetAnswerIdByQuestionId(currentQuestion.questionId)));
                 yield break;
             }
 
@@ -595,8 +604,8 @@ public class GameController : MonoBehaviour
                 yield return null;
             }
 
-            ConcludeEvent();
             isClarifying = false;
+            ConcludeEvent();
         }
     }
 

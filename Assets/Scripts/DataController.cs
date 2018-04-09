@@ -69,7 +69,7 @@ public class DataController : MonoBehaviour
         questionIdToAnswerIdMap.Add(questionId, answerId);
     }
 
-    public string GetAsnwerIdByQuestionId(string questionId)
+    public string GetAnswerIdByQuestionId(string questionId)
     {
         return questionIdToAnswerIdMap[questionId];
     }

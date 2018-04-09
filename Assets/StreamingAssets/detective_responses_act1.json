@@ -1,25 +1,25 @@
 {
   "suspiciousPositive": [
     {
-      "text": "Ok",
+      "text": "Ok.",
       "soundFilePath": "audio/silence_3sec"
     },
     {
-      "text": "Noted",
+      "text": "Noted.",
       "soundFilePath": "audio/silence_3sec"
     }
   ],
   "suspiciousNeutral": [
     {
-      "text": "Ok",
+      "text": "Ok.",
       "soundFilePath": "audio/silence_3sec"
     },
     {
-      "text": "I see",
+      "text": "I see.",
       "soundFilePath": "audio/silence_3sec"
     },
     {
-      "text": "Noted",
+      "text": "Noted.",
       "soundFilePath": "audio/silence_3sec"
     }
   ],
@@ -39,19 +39,19 @@
   ],
   "notSuspiciousPositive": [
     {
-      "text": "Alright",
+      "text": "Alright.",
       "soundFilePath": "audio/nice-work"
     },
     {
-      "text": "Right",
+      "text": "Right.",
       "soundFilePath": "audio/friday-rocks"
     },
     {
-      "text": "Ok",
+      "text": "Ok.",
       "soundFilePath": "audio/friday-rocks"
     },
     {
-      "text": "Got it",
+      "text": "Got it.",
       "soundFilePath": "audio/friday-rocks"
     }
   ],
@@ -67,11 +67,11 @@
   ],
   "notSuspiciousNeutral": [
     {
-      "text": "Ok",
+      "text": "Ok.",
       "soundFilePath": "audio/alright"
     },
     {
-      "text": "Got it",
+      "text": "Got it.",
       "soundFilePath": "audio/alright"
     }
   ],
