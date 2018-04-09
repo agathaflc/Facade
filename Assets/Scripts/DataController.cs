@@ -275,6 +275,12 @@ public class DataController : MonoBehaviour
         {
             var dataAsJson = File.ReadAllText(filePath);
             distanceMap = JsonUtility.FromJson<DistanceData>(dataAsJson);
+            
+            ScoreCalculator.emotionToThreshold = new Dictionary<string, float[]>();
+            foreach (var emotionData in distanceMap.emotions)
+            {
+                ScoreCalculator.emotionToThreshold.Add(emotionData.type, emotionData.thresholds);
+            }
         }
         else
         {

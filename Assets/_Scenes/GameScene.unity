@@ -2541,6 +2541,7 @@ MonoBehaviour:
   motionBlurEffect: {fileID: 11400000, guid: 1d576b4f9b60cae4f82b38009d0b3138, type: 2}
   vignetteEffect: {fileID: 11400000, guid: fad07c4624af9aa4cb21a9eaf4cf912c, type: 2}
   bloomEffect: {fileID: 11400000, guid: 2476016b9db4793459c550e08e6d4857, type: 2}
+  postProcessingBehaviour: {fileID: 0}
   player: {fileID: 65289683}
   selectedBoldAnswer: {fileID: 0}
   FER_is_On: 0
@@ -2850,7 +2851,7 @@ Transform:
   m_LocalScale: {x: 96.3186, y: 96.31845, z: 96.3185}
   m_Children: []
   m_Father: {fileID: 593331700}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: -203.123, y: 220.64801, z: -110.951996}
 --- !u!108 &1322763238
 Light:
@@ -3214,7 +3215,7 @@ Transform:
   m_LocalScale: {x: 96.31845, y: 96.31844, z: 96.318474}
   m_Children: []
   m_Father: {fileID: 593331700}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: -205.663, y: 316.508, z: -94.017}
 --- !u!108 &1472231129
 Light:
