@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: dce244ef7b103dc4482be9e5b69707d1
+timeCreated: 1523281547
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Caslon Antique
+  fontNames:
+  - Caslon Antique
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: d5018368aae6cf04a92cc2fde6ca973c, type: 3}
+  - {fileID: 12800000, guid: 69462e8d96ebb8247ad693a68eab128f, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
