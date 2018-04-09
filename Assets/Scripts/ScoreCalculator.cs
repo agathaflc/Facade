@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class ScoreCalculator
+public static class ScoreCalculator
 {
     private const string EMOTION_NEUTRAL = "neutral";
 
@@ -10,6 +10,8 @@ public class ScoreCalculator
     private const int WRONG_ANSWER_MULTIPLIER = 1;
     private const int CORRECT_EXPRESSION_MULTIPLIER = -1;
     private const int WRONG_EXPRESSION_MULTIPLIER = 1;
+    
+    private static Dictionary<string, float[]> emotionToThreshold = new Dictionary<string, float[]>(); 
 
     private static float ComputeDistanceBetweenTwoPoints(float x1, float y1, float x2, float y2)
     {
@@ -79,7 +81,7 @@ public class ScoreCalculator
      *  0.75-1 = 0 pt
      * 	1-1.25 = -1 pt	1.25-1.5 = -2 pts	> 1.5 = -3 pts
      **/
-    public static float CalculateExpressionScore(float rawDistance, float weight)
+    public static float CalculateExpressionScore(float rawDistance, float weight, string expectedEmotion)
     {
         if (rawDistance <= 0.3)
             return 3f * CORRECT_EXPRESSION_MULTIPLIER * weight;

@@ -70,7 +70,7 @@ public class GameController : MonoBehaviour
     private int questionIndex;
     private int sequenceIndex;
     private float displayedScore;
-    private List<GameObject> answerButtonGameObjects = new List<GameObject>();
+    private readonly List<GameObject> answerButtonGameObjects = new List<GameObject>();
     public AnswerButton selectedBoldAnswer;
 
     private static QuestionData currentQuestion;
@@ -133,22 +133,23 @@ public class GameController : MonoBehaviour
         }
 
         var translation = vertical * walkingSpeed;
+        
         var horizontal = Input.GetAxis("Horizontal");
         if (horizontal != 0)
         {
             Debug.Log("Horizontal: " + horizontal);
         }
 
-        var rotation = horizontal * rotationSpeed;
+        var rotation = horizontal * walkingSpeed;
         translation *= Time.deltaTime;
         rotation *= Time.deltaTime;
 
         var detectiveTransform = Kira.GetComponent<Transform>();
         var detectiveAnimator = Kira.GetComponent<Animator>();
         detectiveTransform.Translate(0, 0, translation);
-        detectiveTransform.Rotate(0, rotation, 0);
+        detectiveTransform.Translate(rotation, 0, 0);
 
-        detectiveAnimator.SetBool("IsWalking", translation != 0);
+        detectiveAnimator.SetBool("IsWalking", translation != 0 || rotation != 0);
     }
 
     private void PlayBgm(AudioClip clip, string musicType, float seek, bool fadeIn = false)
@@ -288,7 +289,7 @@ public class GameController : MonoBehaviour
         }
 
         Debug.Log("CalculateSuspicionScore_EmotionOnly: " + emotionDistance);
-        return ScoreCalculator.CalculateExpressionScore(emotionDistance, weight);
+        return ScoreCalculator.CalculateExpressionScore(emotionDistance, weight, closestEmotion);
     }
 
     private void ShowAndPlayDialog(AudioClip audioClip, string subtitle)
@@ -460,7 +461,7 @@ public class GameController : MonoBehaviour
             DataController.ReadPlayerEmotion(), out closestEmotion);
 
         // Debug.Log ("emotion distance: " + emotionDistance.ToString());
-        expressionScore = ScoreCalculator.CalculateExpressionScore(emotionDistance, currentQuestion.expressionWeight);
+        expressionScore = ScoreCalculator.CalculateExpressionScore(emotionDistance, currentQuestion.expressionWeight, closestEmotion);
         suspicionScore += expressionScore;
 
         Debug.Log("closestEmotion: " + closestEmotion + ", distance: " + emotionDistance + ", score: " +
