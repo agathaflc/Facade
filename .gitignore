@@ -34,3 +34,6 @@ sysinfo.txt
 *.unitypackage
 
 .idea/
+
+# Unused imported assets
+/Assets/Unused
