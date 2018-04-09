@@ -84,19 +84,27 @@ public static class ScoreCalculator
     public static float CalculateExpressionScore(float rawDistance, float weight, string expectedEmotion)
     {
         var thresholds = emotionToThreshold[expectedEmotion];
+        float score = 0;
 
         if (rawDistance <= thresholds[0])
-            return 3f * CORRECT_EXPRESSION_MULTIPLIER * weight;
-        if (rawDistance <= thresholds[1])
-            return 2f * CORRECT_EXPRESSION_MULTIPLIER * weight;
-        if (rawDistance <= thresholds[2])
-            return 1f * CORRECT_EXPRESSION_MULTIPLIER * weight;
-        if (rawDistance <= thresholds[3])
-            return 0f * weight;
-        if (rawDistance <= thresholds[4])
-            return 1f * WRONG_EXPRESSION_MULTIPLIER * weight;
-        if (rawDistance <= thresholds[5])
-            return 2f * WRONG_EXPRESSION_MULTIPLIER * weight;
-        return 3f * WRONG_EXPRESSION_MULTIPLIER * weight;
+            score = 3f * CORRECT_EXPRESSION_MULTIPLIER * weight;
+        else if (rawDistance <= thresholds[1])
+            score = 2f * CORRECT_EXPRESSION_MULTIPLIER * weight;
+        else if (rawDistance <= thresholds[2])
+            score = 1f * CORRECT_EXPRESSION_MULTIPLIER * weight;
+        else if (rawDistance <= thresholds[3])
+            score = 0f * weight;
+        else if (rawDistance <= thresholds[4])
+            score = 1f * WRONG_EXPRESSION_MULTIPLIER * weight;
+        else if (rawDistance <= thresholds[5])
+            score = 2f * WRONG_EXPRESSION_MULTIPLIER * weight;
+        else score = 3f * WRONG_EXPRESSION_MULTIPLIER * weight;
+
+        if (expectedEmotion.Equals(EMOTION_NEUTRAL))
+        {
+            return (score * 0.3f);
+        }
+
+        return score;
     }
 }
