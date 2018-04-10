@@ -389,7 +389,15 @@ ModelImporter:
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'RightArmRoll'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'RightForeArmRoll'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
-    animationRetargetingWarnings: 
+    animationRetargetingWarnings: "\nRetargeting quality report for clip 'act12_M01_B_sit':\n\tLeftUpperArm
+      average position error 1.2 mm and maximum position error 2.3 mm at time 1:10
+      (12.5%) Frame 70\n\tLeftLowerArm average position error 0.9 mm and maximum position
+      error 1.9 mm at time 3:30 (37.5%) Frame 210\n\tRightUpperArm average position
+      error 1.2 mm and maximum position error 2.3 mm at time 1:10 (12.5%) Frame 70\n\tRightLowerArm
+      average position error 1.1 mm and maximum position error 2.2 mm at time 5:50
+      (62.5%) Frame 350\n\tRightHand average position error 0.8 mm and maximum position
+      error 1.6 mm at time 1: 9 (12.3%) Frame 69\n\tHead average position error 1.2
+      mm and maximum position error 2.3 mm at time 5:50 (62.5%) Frame 350\n"
     animationDoRetargetingWarnings: 1
     importAnimatedCustomProperties: 0
     animationCompression: 3

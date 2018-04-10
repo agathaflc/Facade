@@ -378,20 +378,17 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Inbetween bone
-      rotation in copied configuration does not match rotation in animation file:\n\t'Spine1'
-      : rotation error = 3.074811 deg\n\t'Spine3' : rotation error = 3.120438 deg\n\t'LeftArmRoll'
-      : rotation error = 6.607306 deg\n\t'LeftForeArmRoll' : rotation error = 1.214483
-      deg\n\t'RightArmRoll' : rotation error = 9.461110 deg\n\t'RightForeArmRoll'
-      : rotation error = 4.714380 deg\n"
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
       might lower retargeting quality:\nNote: Activate translation DOF on avatar to
-      improve retargeting quality.\n\t'Spine1' is inbetween humanoid transforms and
-      has rotation animation that will be discarded.\n\t'Spine3' is inbetween humanoid
-      transforms and has rotation animation that will be discarded.\n\t'LeftArmRoll'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'RightArmRoll'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
+      improve retargeting quality.\n\t'Spine2' is inbetween humanoid transforms and
+      has rotation animation that will be discarded.\n\t'Head' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\t'eyerid2_Left'
+      has translation animation that will be discarded.\n\t'eyerid2_Right' has translation
+      animation that will be discarded.\n\t'LeftArmRoll' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\t'RightArmRoll' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0

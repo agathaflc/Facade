@@ -378,19 +378,17 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Inbetween bone
-      rotation in copied configuration does not match rotation in animation file:\n\t'Spine1'
-      : rotation error = 3.431062 deg\n\t'Spine3' : rotation error = 3.410380 deg\n\t'LeftArmRoll'
-      : rotation error = 5.514301 deg\n\t'LeftForeArmRoll' : rotation error = 1.331913
-      deg\n\t'RightArmRoll' : rotation error = 8.648661 deg\n"
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
       might lower retargeting quality:\nNote: Activate translation DOF on avatar to
-      improve retargeting quality.\n\t'Spine1' is inbetween humanoid transforms and
-      has rotation animation that will be discarded.\n\t'Spine3' is inbetween humanoid
-      transforms and has rotation animation that will be discarded.\n\t'LeftArmRoll'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'LeftForeArmRoll'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'RightArmRoll'
+      improve retargeting quality.\n\t'Spine2' is inbetween humanoid transforms and
+      has rotation animation that will be discarded.\n\t'Head' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\t'tail_of_eye_Left'
+      has translation animation that will be discarded.\n\t'eyerid2_Right' has translation
+      animation that will be discarded.\n\t'LeftArmRoll' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\t'LeftForeArmRoll' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\t'RightArmRoll'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'RightForeArmRoll'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 

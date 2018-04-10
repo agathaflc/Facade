@@ -222,19 +222,19 @@ ModelImporter:
     - boneName: thigh.L
       humanName: LeftUpperLeg
       limit:
-        min: {x: -60, y: -15, z: -90}
-        max: {x: 60, y: 59.999996, z: 50}
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
         value: {x: 0, y: 0, z: 0}
         length: 0
-        modified: 1
+        modified: 0
     - boneName: thigh.R
       humanName: RightUpperLeg
       limit:
-        min: {x: -60, y: -15, z: -90}
-        max: {x: 60, y: 60, z: 50}
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
         value: {x: 0, y: 0, z: 0}
         length: 0
-        modified: 1
+        modified: 0
     - boneName: shin.L
       humanName: LeftLowerLeg
       limit:
@@ -270,88 +270,88 @@ ModelImporter:
     - boneName: spine
       humanName: Spine
       limit:
-        min: {x: -14.451612, y: -14.451612, z: -7.4838715}
-        max: {x: 12.129032, y: 12.129034, z: 7.4838696}
+        min: {x: -40, y: -40, z: -7.4838715}
+        max: {x: 40, y: 40, z: 28.387096}
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 1
     - boneName: chest
       humanName: Chest
       limit:
-        min: {x: -23.741936, y: -14.451612, z: -37.677418}
-        max: {x: 23.741936, y: 14.451614, z: 21.419357}
+        min: {x: -40, y: -40, z: -28.387096}
+        max: {x: 40, y: 40, z: 40.000004}
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 1
     - boneName: neck
       humanName: Neck
       limit:
-        min: {x: -40, y: -21, z: -40}
-        max: {x: 40, y: 21.41936, z: 40}
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
         value: {x: 0, y: 0, z: 0}
         length: 0
-        modified: 1
+        modified: 0
     - boneName: head
       humanName: Head
       limit:
-        min: {x: -40, y: -30, z: -40}
-        max: {x: 40, y: 30.709677, z: 40}
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
         value: {x: 0, y: 0, z: 0}
         length: 0
-        modified: 1
+        modified: 0
     - boneName: shoulder.L
       humanName: LeftShoulder
       limit:
-        min: {x: 0, y: -3.3870964, z: -15}
-        max: {x: 0, y: 15, z: 30}
+        min: {x: 0, y: -15, z: -15}
+        max: {x: 0, y: 15, z: 30.000002}
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 1
     - boneName: shoulder.R
       humanName: RightShoulder
       limit:
-        min: {x: 0, y: -5.7096777, z: -15}
-        max: {x: 0, y: 5.7, z: 30}
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
         value: {x: 0, y: 0, z: 0}
         length: 0
-        modified: 1
+        modified: 0
     - boneName: upper_arm.L
       humanName: LeftUpperArm
       limit:
-        min: {x: -90, y: -76.77419, z: -60}
-        max: {x: 90, y: 76.77421, z: 100}
+        min: {x: -90, y: -100, z: -48}
+        max: {x: 90, y: 100, z: 100}
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 1
     - boneName: upper_arm.R
       humanName: RightUpperArm
       limit:
-        min: {x: -90, y: -76.77419, z: -60}
-        max: {x: 90, y: 76.77421, z: 100}
+        min: {x: -90, y: -100, z: -50}
+        max: {x: 90, y: 100, z: 100}
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 1
     - boneName: forearm.L
       humanName: LeftLowerArm
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
+        min: {x: -90, y: 0, z: -64}
+        max: {x: 90, y: 0, z: 80}
         value: {x: 0, y: 0, z: 0}
         length: 0
-        modified: 0
+        modified: 1
     - boneName: forearm.R
       humanName: RightLowerArm
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
+        min: {x: -90, y: 0, z: -64}
+        max: {x: 90, y: 0, z: 80}
         value: {x: 0, y: 0, z: 0}
         length: 0
-        modified: 0
+        modified: 1
     - boneName: hand.L
       humanName: LeftHand
       limit:
-        min: {x: 0, y: -26.064516, z: -80}
-        max: {x: 0, y: 26.064512, z: 80}
+        min: {x: 0, y: -40, z: -59.09677}
+        max: {x: 0, y: 40, z: 80}
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 1
