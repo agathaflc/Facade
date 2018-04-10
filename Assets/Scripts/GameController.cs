@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -6,6 +7,7 @@ using UnityEngine;
 using UnityEngine.PostProcessing;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class GameController : MonoBehaviour
 {
@@ -42,6 +44,7 @@ public class GameController : MonoBehaviour
     public SimpleObjectPool answerButtonObjectPool;
     public Transform answerButtonParent;
 
+	public GameObject postReport;
     public GameObject questionDisplay;
     public GameObject roundEndDisplay;
     public GameObject questionPictureDisplay;
@@ -748,6 +751,28 @@ public class GameController : MonoBehaviour
         playerCamera.GetComponent<PostProcessingBehaviour>().profile = bloomEffect;
     }
 
+	private void GeneratePostReport(){
+
+		postReport.SetActive (true);
+		string report = "";
+		report = "The suspect stated his name as" + GetAnswer (1);
+		postReport.transform.GetChild (0).gameObject.GetComponent<Text> ().text = report;
+	}
+
+	private string GetAnswer(int i){
+		string index = "0" + i;
+		string answerIndex = dataController.GetAnswerIdByQuestionId (index);
+		int answerIndexInt = 0;
+		Int32.TryParse (answerIndex, out answerIndexInt);
+		//answerIndexInt = answerIndex % 10;
+		string answer = allQuestions[i].answers[answerIndexInt].answerText;
+		return answer;
+	}
+
+	public void ContinuePostReport(){
+		postReport.SetActive (false);
+	}
+
     private void HandleEndOfAQuestion()
     {
         // show another question if there are still questions to ask
@@ -803,7 +828,10 @@ public class GameController : MonoBehaviour
                 StartCoroutine(RunSequence());
         }
 
-        if (Input.GetKeyDown("r")) LightsCameraAction();
+		if (Input.GetKeyDown ("r")) 
+		{
+			LightsCameraAction ();
+		}
 
         if (Input.GetKeyDown("t"))
         {
@@ -825,6 +853,11 @@ public class GameController : MonoBehaviour
             playerCamera.GetComponent<PostProcessingBehaviour>().enabled =
                 !playerCamera.GetComponent<PostProcessingBehaviour>().enabled;
         }
+
+		if (Input.GetKeyDown ("i")) 
+		{
+			GeneratePostReport();
+		}
 
         HandleWalking();
     }
