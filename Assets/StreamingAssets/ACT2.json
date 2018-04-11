@@ -24,12 +24,12 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/BadCop/SENTENCES/S2 - AND I_M DEFINITELY",
       "subtitleText": "And I’m definitely not interested in hearing any sob story bullshit from you, so don’t start any funny business with me. Got it?"
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/BadCop/SENTENCES/S3 - LET_S BEGIN",
       "subtitleText": "Let’s begin."
     },
     {
@@ -42,7 +42,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "",
+          "filePath": "audio/BadCop/QUESTIONS/Q1",
           "questionText": "Restate your full name for the record.",
           "answers": [
             {
@@ -74,7 +74,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "",
+          "filePath": "audio/BadCop/QUESTIONS/Q2",
           "questionText": "How many people do you remember being at the premises last night?",
           "answers": [
             {
@@ -106,7 +106,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "",
+          "filePath": "audio/BadCop/QUESTIONS/Q3",
           "questionText": "Who were you with last night?",
           "answers": [
             {
@@ -135,7 +135,7 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/BadCop/SENTENCES/S4 - HMM YES, I JUST SPOKE WITH",
       "subtitleText": "Hm yes, I just spoke with your alibi from last night actually. They had quite a lot of interesting things to say about you from last night."
     },
     {
@@ -148,7 +148,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "",
+          "filePath": "audio/BadCop/QUESTIONS/Q4",
           "questionText": "And where did you say you were last night?",
           "answers": [
             {
@@ -176,7 +176,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "",
+          "filePath": "audio/BadCop/QUESTIONS/Q5",
           "questionText": "Why were you there again?",
           "answers": [
             {
@@ -224,7 +224,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "",
+          "filePath": "audio/BadCop/QUESTIONS/Q6",
           "questionText": "What time did you leave the premises?",
           "answers": [
             {
@@ -252,7 +252,7 @@
           "consistencyWeight": 0.8,
           "considersEmotion": true,
           "considersFact": true,
-          "filePath": "",
+          "filePath": "audio/BadCop/QUESTIONS/Q7",
           "questionText": "And were you intoxicated in any way?",
           "answers": [
             {
@@ -301,18 +301,18 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/BadCop/SENTENCES/S5 - SCOFF LISTEN KID",
       "subtitleText": "Listen kid, you and I both know that you were definitely wasted last night. I can see how hungover you are right now."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/BadCop/SENTENCES/S6 - THESE BRIGHT LIGHTS",
       "subtitleText": "These bright lights must be bothering you huh?",
       "effect": "bloom"
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/BadCop/SENTENCES/S7 - GOOD",
       "subtitleText": "Good."
     },
     {
@@ -325,7 +325,7 @@
           "consistencyWeight": 0.8,
           "considersEmotion": true,
           "considersFact": true,
-          "filePath": "",
+          "filePath": "audio/BadCop/QUESTIONS/Q8",
           "questionText": "Your alibi claimed you disappeared at 12:45 AM last night. What exactly were you doing?",
           "effect": "motionBlur",
           "answers": [
@@ -374,7 +374,7 @@
           "consistencyWeight": 0,
           "considersEmotion": true,
           "considersFact": false,
-          "filePath": "",
+          "filePath": "audio/BadCop/QUESTIONS/Q9",
           "questionText": "You and your alibi don’t seem to be very close. How do you feel about them?",
           "answers": [
             {
@@ -425,7 +425,7 @@
           "consistencyWeight": 0.5,
           "considersEmotion": true,
           "considersFact": true,
-          "filePath": "",
+          "filePath": "audio/BadCop/QUESTIONS/Q10",
           "questionText": "And what about the victim. How did you know her?",
           "answers": [
             {
@@ -475,7 +475,7 @@
           "consistencyWeight": 0,
           "considersEmotion": true,
           "considersFact": false,
-          "filePath": "",
+          "filePath": "audio/BadCop/QUESTIONS/Q11",
           "questionText": "Your alibi claimed you were not on good terms with the victim. Why is that?",
           "answers": [
             {
@@ -522,7 +522,7 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/BadCop/SENTENCES/S8 - YOU MUST HAVE HAD",
       "subtitleText": "You must have had a really bad relationship with the victim huh? You seem like the kinda guy who'd get rid of someone they didn't like..",
       "effect": "vignette"
     },
@@ -536,7 +536,7 @@
           "consistencyWeight": 0.5,
           "considersEmotion": true,
           "considersFact": true,
-          "filePath": "",
+          "filePath": "audio/BadCop/QUESTIONS/Q12",
           "questionText": "So why did we find a concealed weapon on your person’s last night?",
           "answers": [
             {
@@ -583,62 +583,62 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/BadCop/SENTENCES/S9 - ENOUGH",
       "subtitleText": "Enough! I don’t know why I’m sitting here wasting my time asking you these questions."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/BadCop/SENTENCES/S10 - I SPOKE TO EVERY",
       "subtitleText": "I spoke to every other witness from last night and they all say you were the one acting weirdly."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/BadCop/SENTENCES/S11 - EVEN YOUR ALIBI",
       "subtitleText": "Even your alibi claimed you were doing suspicious stuff. And now you’re trying to tell me that you had nothing to do with this murder?!"
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/BadCop/SENTENCES/S12 - WE BOTH KNOW",
       "subtitleText": "We both know you’re guilty."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/BadCop/SENTENCES/S13 - HER COLD DEAD BODY",
       "subtitleText": "Her cold dead body is being examined right now as we speak, and all we need is just a connection to you."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/BadCop/SENTENCES/S14 - A GIRL WAS MURDER",
       "subtitleText": "A girl was murdered..."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/BadCop/SENTENCES/S15 - SHOT IN COLD BLOOD",
       "subtitleText": "Shot in cold blood..."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/BadCop/SENTENCES/S16 - A GIRL YOU HAVE SOME BAD HISTORY WITH",
       "subtitleText": "A girl that you have some bad history with."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/BadCop/SENTENCES/S17 - AND YOU_RE TRYING TO TELL ME",
       "subtitleText": "And you’re trying to tell me, that you have nothing to do with this??"
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/BadCop/SENTENCES/S18 - THAN WHATS THAT",
       "subtitleText": "Then what’s that?"
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/BadCop/SENTENCES/S19 - YOU HAVE SOME AUDACITY",
       "subtitleText": "You have some audacity coming in here with the very same gun you killed that poor girl with."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "",
+      "filePath": "audio/BadCop/SENTENCES/S20 - I AM SICK AND TIRED",
       "subtitleText": "I am sick and tired of scum like you thinking you can smooth talk your way out of a fair judgement."
     }
   ]

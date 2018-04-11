@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.PostProcessing;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -50,8 +51,8 @@ public class GameController : MonoBehaviour
     public GameObject questionPictureDisplay;
     public GameObject subtitleDisplay;
     public GameObject detectiveObject;
-    public GameObject Hans;
-    public GameObject Kira;
+    public GameObject hans;
+    public GameObject kira;
 
     public GameObject room;
     public Camera playerCamera;
@@ -60,6 +61,11 @@ public class GameController : MonoBehaviour
     public PostProcessingProfile bloomEffect;
     private PostProcessingBehaviour postProcessingBehaviour;
     public GameObject player;
+
+    // animation stuff
+    public PlayableDirector introTimeline;
+    public RuntimeAnimatorController hansController;
+    public RuntimeAnimatorController kiraController;
 
     private AudioSource detectiveAudioSource;
     private AudioSource bgmAudioSource;
@@ -99,15 +105,15 @@ public class GameController : MonoBehaviour
 
         dataController = FindObjectOfType<DataController>(); // store a ref to data controller
 
-        if (dataController.GetCurrentActNo() == 1)
+        if (dataController.GetCurrentActNo() != 1)
         {
-            detectiveObject = Hans;
-            Kira.SetActive(false);
+            detectiveObject = hans;
+            kira.SetActive(false);
         }
         else
         {
-            detectiveObject = Kira;
-            Hans.SetActive(false);
+            detectiveObject = kira;
+            hans.SetActive(false);
         }
 
         currentActData = dataController.GetCurrentRoundData();
@@ -125,9 +131,22 @@ public class GameController : MonoBehaviour
         isTimerActive = false;
         isClarifying = false;
 
-        StartCoroutine(RunSequence());
+        StartCoroutine(PlayIntro());
     }
 
+    private IEnumerator PlayIntro()
+    {
+        PlayTimeline(introTimeline);
+
+        while (introTimeline.state == PlayState.Playing)
+        {
+            yield return null;
+        }
+
+//        detectiveObject.GetComponent<Animator>().enabled = true;
+        detectiveObject.GetComponent<Animator>().runtimeAnimatorController = hansController;
+        StartCoroutine(RunSequence());
+    }
 
 //    private void HandleWalking()
 //    {
@@ -149,8 +168,8 @@ public class GameController : MonoBehaviour
 //        translation *= Time.deltaTime;
 //        rotation *= Time.deltaTime;
 //
-//        var detectiveTransform = Kira.GetComponent<Transform>();
-//        var detectiveAnimator = Kira.GetComponent<Animator>();
+//        var detectiveTransform = kira.GetComponent<Transform>();
+//        var detectiveAnimator = kira.GetComponent<Animator>();
 //        detectiveTransform.Translate(0, 0, translation);
 //        detectiveTransform.Translate(rotation, 0, 0);
 //
@@ -805,6 +824,11 @@ public class GameController : MonoBehaviour
             audioSource.volume = t;
             yield return null;
         }
+    }
+
+    private void PlayTimeline(PlayableDirector playableDirector)
+    {
+        playableDirector.Play();
     }
 
     // Update is called once per frame
