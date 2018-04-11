@@ -752,23 +752,24 @@ public class GameController : MonoBehaviour
         playerCamera.GetComponent<PostProcessingBehaviour>().profile = bloomEffect;
     }
 
-	private void GeneratePostReport(){
+    private void GeneratePostReport()
+    {
+        postReport.SetActive(true);
+        string report = "";
+        report = "The suspect stated his name as" + GetAnswer(0);
+        postReport.transform.GetChild(0).gameObject.GetComponent<Text>().text = report;
+    }
 
-		postReport.SetActive (true);
-		string report = "";
-		report = "The suspect stated his name as" + GetAnswer (1);
-		postReport.transform.GetChild (0).gameObject.GetComponent<Text> ().text = report;
-	}
-
-	private string GetAnswer(int i){
-		string index = "0" + i;
-		string answerIndex = dataController.GetAnswerIdByQuestionId (index);
-		int answerIndexInt = 0;
-		Int32.TryParse (answerIndex, out answerIndexInt);
-		//answerIndexInt = answerIndex % 10;
-		string answer = allQuestions[i].answers[answerIndexInt].answerText;
-		return answer;
-	}
+    private string GetAnswer(int i)
+    {
+//        string index = "0" + i;
+        string answerIndex = dataController.GetAnswerIdByQuestionId(allQuestions[i].questionId);
+//        int answerIndexInt = 0;
+//        Int32.TryParse(answerIndex, out answerIndexInt);
+        //answerIndexInt = answerIndex % 10;
+        string answer = allQuestions[i].answers.First(a => a.answerId.Equals(answerIndex)).answerText;
+        return answer;
+    }
 
 	public void ContinuePostReport(){
 		postReport.SetActive (false);
