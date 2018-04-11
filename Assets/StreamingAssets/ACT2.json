@@ -33,6 +33,11 @@
       "subtitleText": "Let’s begin."
     },
     {
+      "sequenceType": "dialog",
+      "filePath": "audio/BadCop/SENTENCES/S3 - LET_S BEGIN",
+      "subtitleText": "Let’s begin."
+    },
+    {
       "sequenceType": "question",
       "questions": [
         {

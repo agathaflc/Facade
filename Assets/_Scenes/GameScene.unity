@@ -1257,7 +1257,7 @@ PlayableDirector:
   m_GameObject: {fileID: 261924088}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: cd8caecdc001b7346a6d1af3c97c4597, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 9b0f6f04e1ba46543935fb0b720ff13f, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -1272,6 +1272,8 @@ PlayableDirector:
   - key: {fileID: 114736485744151970, guid: cd8caecdc001b7346a6d1af3c97c4597, type: 2}
     value: {fileID: 1604754582}
   - key: {fileID: 114356854659195182, guid: cd8caecdc001b7346a6d1af3c97c4597, type: 2}
+    value: {fileID: 442740191}
+  - key: {fileID: 114957020297931346, guid: 9b0f6f04e1ba46543935fb0b720ff13f, type: 2}
     value: {fileID: 442740191}
   m_ExposedReferences:
     m_References: []
@@ -2519,7 +2521,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400080, guid: 1cd664fa02ced6e48af22b6df2472799, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.000000007450581
       objectReference: {fileID: 0}
     - target: {fileID: 400080, guid: 1cd664fa02ced6e48af22b6df2472799, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3036,14 +3038,15 @@ MonoBehaviour:
   vignetteEffect: {fileID: 11400000, guid: fad07c4624af9aa4cb21a9eaf4cf912c, type: 2}
   bloomEffect: {fileID: 11400000, guid: 2476016b9db4793459c550e08e6d4857, type: 2}
   player: {fileID: 65289683}
-  introTimeline: {fileID: 261924090}
+  timelines:
+  - {fileID: 11400000, guid: 9b0f6f04e1ba46543935fb0b720ff13f, type: 2}
+  - {fileID: 11400000, guid: cd8caecdc001b7346a6d1af3c97c4597, type: 2}
+  playableDirector: {fileID: 261924090}
   hansController: {fileID: 9100000, guid: ced0da6be5d0a434480ae708bd8c3d54, type: 2}
   kiraController: {fileID: 9100000, guid: d448e523aee1a964f981445453107c36, type: 2}
   selectedBoldAnswer: {fileID: 0}
   FER_is_On: 0
   gameSceneOnly: 0
-  walkingSpeed: 0.5
-  rotationSpeed: 75
 --- !u!4 &1022346134
 Transform:
   m_ObjectHideFlags: 0

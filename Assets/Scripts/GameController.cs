@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.PostProcessing;
 using UnityEngine.SceneManagement;
+using UnityEngine.Timeline;
 using UnityEngine.UI;
 
 
@@ -63,7 +64,9 @@ public class GameController : MonoBehaviour
     public GameObject player;
 
     // animation stuff
-    public PlayableDirector introTimeline;
+    public List<TimelineAsset> timelines;
+    public PlayableDirector playableDirector;
+    private int currentTimelineNo = 0;
     public RuntimeAnimatorController hansController;
     public RuntimeAnimatorController kiraController;
 
@@ -93,14 +96,10 @@ public class GameController : MonoBehaviour
     public bool FER_is_On;
     public bool gameSceneOnly;
 
-    // for animation
-    public float walkingSpeed = 2.0f;
-    public float rotationSpeed = 75.0f;
 
     // Use this for initialization
     private void Start()
     {
-//        PlayDetectiveAnimation();
         if (gameSceneOnly) return;
 
         dataController = FindObjectOfType<DataController>(); // store a ref to data controller
@@ -136,9 +135,10 @@ public class GameController : MonoBehaviour
 
     private IEnumerator PlayIntro()
     {
-        PlayTimeline(introTimeline);
+        playableDirector.playableAsset = timelines[0];
+        PlayTimeline(playableDirector);
 
-        while (introTimeline.state == PlayState.Playing)
+        while (playableDirector.state == PlayState.Playing)
         {
             yield return null;
         }
@@ -147,36 +147,6 @@ public class GameController : MonoBehaviour
         detectiveObject.GetComponent<Animator>().runtimeAnimatorController = hansController;
         StartCoroutine(RunSequence());
     }
-
-//    private void HandleWalking()
-//    {
-//        var vertical = Input.GetAxis("Vertical");
-//        if (vertical != 0)
-//        {
-//            Debug.Log("vertical: " + vertical);
-//        }
-//
-//        var translation = vertical * walkingSpeed;
-//
-//        var horizontal = Input.GetAxis("Horizontal");
-//        if (horizontal != 0)
-//        {
-//            Debug.Log("Horizontal: " + horizontal);
-//        }
-//
-//        var rotation = horizontal * walkingSpeed;
-//        translation *= Time.deltaTime;
-//        rotation *= Time.deltaTime;
-//
-//        var detectiveTransform = kira.GetComponent<Transform>();
-//        var detectiveAnimator = kira.GetComponent<Animator>();
-//        detectiveTransform.Translate(0, 0, translation);
-//        detectiveTransform.Translate(rotation, 0, 0);
-//
-////        detectiveAnimator.SetBool("IsWalking", translation != 0 || rotation != 0);
-//        // if using the AnimationHelper
-//        detectiveAnimator.SetFloat("Speed", translation != 0 ? walkingSpeed : 0f);
-//    }
 
     private void PlayBgm(AudioClip clip, string musicType, float seek, bool fadeIn = false)
     {

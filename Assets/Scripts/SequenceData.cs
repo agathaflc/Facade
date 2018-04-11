@@ -12,4 +12,5 @@ public class SequenceData
     public float scoreWeight;
     public string[] expectedExpressions;
     public QuestionData[] questions;
+    public bool triggerTimeline;
 }
