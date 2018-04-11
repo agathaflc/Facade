@@ -49,6 +49,11 @@ public class DataController : MonoBehaviour
         SceneManager.LoadScene(MENU_SCREEN);
     }
 
+    public int GetCurrentActNo()
+    {
+        return currentActNo;
+    }
+
     public void AddOverallScore(float score)
     {
         actualOverallScore += score;

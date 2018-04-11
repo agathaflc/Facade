@@ -50,6 +50,8 @@ public class GameController : MonoBehaviour
     public GameObject questionPictureDisplay;
     public GameObject subtitleDisplay;
     public GameObject detectiveObject;
+    public GameObject Hans;
+    public GameObject Kira;
 
     public GameObject room;
     public Camera playerCamera;
@@ -85,10 +87,6 @@ public class GameController : MonoBehaviour
     public bool FER_is_On;
     public bool gameSceneOnly;
 
-    // just for playing around lol
-    public GameObject Liam;
-    public GameObject Kira;
-
     // for animation
     public float walkingSpeed = 2.0f;
     public float rotationSpeed = 75.0f;
@@ -96,11 +94,22 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        PlayDetectiveAnimation();
-
+//        PlayDetectiveAnimation();
         if (gameSceneOnly) return;
 
         dataController = FindObjectOfType<DataController>(); // store a ref to data controller
+
+        if (dataController.GetCurrentActNo() == 1)
+        {
+            detectiveObject = Hans;
+            Kira.SetActive(false);
+        }
+        else
+        {
+            detectiveObject = Kira;
+            Hans.SetActive(false);
+        }
+
         currentActData = dataController.GetCurrentRoundData();
         detectiveAudioSource = detectiveObject.GetComponent<AudioSource>();
         bgmAudioSource = player.GetComponent<AudioSource>();
@@ -119,44 +128,36 @@ public class GameController : MonoBehaviour
         StartCoroutine(RunSequence());
     }
 
-    private void PlayDetectiveAnimation()
-    {
-        var liamAnimation = Liam.GetComponent<Animator>();
-        liamAnimation.Play("HumanoidIdle");
 
-        var kiraAnimation = Kira.GetComponent<Animator>();
-        kiraAnimation.Play("HumanoidWalk");
-    }
-
-    private void HandleWalking()
-    {
-        var vertical = Input.GetAxis("Vertical");
-        if (vertical != 0)
-        {
-            Debug.Log("vertical: " + vertical);
-        }
-
-        var translation = vertical * walkingSpeed;
-
-        var horizontal = Input.GetAxis("Horizontal");
-        if (horizontal != 0)
-        {
-            Debug.Log("Horizontal: " + horizontal);
-        }
-
-        var rotation = horizontal * walkingSpeed;
-        translation *= Time.deltaTime;
-        rotation *= Time.deltaTime;
-
-        var detectiveTransform = Kira.GetComponent<Transform>();
-        var detectiveAnimator = Kira.GetComponent<Animator>();
-        detectiveTransform.Translate(0, 0, translation);
-        detectiveTransform.Translate(rotation, 0, 0);
-
-//        detectiveAnimator.SetBool("IsWalking", translation != 0 || rotation != 0);
-        // if using the AnimationHelper
-        detectiveAnimator.SetFloat("Speed", translation != 0 ? walkingSpeed : 0f);
-    }
+//    private void HandleWalking()
+//    {
+//        var vertical = Input.GetAxis("Vertical");
+//        if (vertical != 0)
+//        {
+//            Debug.Log("vertical: " + vertical);
+//        }
+//
+//        var translation = vertical * walkingSpeed;
+//
+//        var horizontal = Input.GetAxis("Horizontal");
+//        if (horizontal != 0)
+//        {
+//            Debug.Log("Horizontal: " + horizontal);
+//        }
+//
+//        var rotation = horizontal * walkingSpeed;
+//        translation *= Time.deltaTime;
+//        rotation *= Time.deltaTime;
+//
+//        var detectiveTransform = Kira.GetComponent<Transform>();
+//        var detectiveAnimator = Kira.GetComponent<Animator>();
+//        detectiveTransform.Translate(0, 0, translation);
+//        detectiveTransform.Translate(rotation, 0, 0);
+//
+////        detectiveAnimator.SetBool("IsWalking", translation != 0 || rotation != 0);
+//        // if using the AnimationHelper
+//        detectiveAnimator.SetFloat("Speed", translation != 0 ? walkingSpeed : 0f);
+//    }
 
     private void PlayBgm(AudioClip clip, string musicType, float seek, bool fadeIn = false)
     {
@@ -859,6 +860,6 @@ public class GameController : MonoBehaviour
 			GeneratePostReport();
 		}
 
-        HandleWalking();
+//        HandleWalking();
     }
 }

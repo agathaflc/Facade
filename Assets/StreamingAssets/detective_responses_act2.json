@@ -1,94 +1,70 @@
 {
-  "suspiciousPositive": [
-    {
-      "text": "That's good, although I think you're hiding something.",
-      "soundFilePath": "audio/susp_pos_0"
-    },
-    {
-      "text": "O..kay, great.",
-      "soundFilePath": "audio/susp_pos_1"
-    }
-  ],
   "suspiciousNeutral": [
     {
       "text": "Yeahhh..",
-      "soundFilePath": "audio/susp_neut_0"
+      "soundFilePath": "audio/BadCop/RESPONSES/yeah"
     },
     {
       "text": "Right..",
-      "soundFilePath": "audio/susp_neut_0"
+      "soundFilePath": "audio/BadCop/RESPONSES/right"
     },
     {
       "text": "Hmmm..",
-      "soundFilePath": "audio/susp_neut_0"
+      "soundFilePath": "audio/BadCop/RESPONSES/hm"
     }
   ],
   "suspiciousNegative": [
     {
       "text": "Right..",
-      "soundFilePath": "audio/susp_neg_0"
+      "soundFilePath": "audio/BadCop/RESPONSES/right"
     },
     {
       "text": "Sure..",
-      "soundFilePath": "audio/susp_neg_0"
+      "soundFilePath": "audio/BadCop/RESPONSES/sure"
     },
     {
       "text": "* Scoff *",
-      "soundFilePath": "audio/susp_neg_0"
-    }
-  ],
-  "notSuspiciousPositive": [
-    {
-      "text": "That's good to hear.",
-      "soundFilePath": "audio/nice-work"
-    },
-    {
-      "text": "Good for you.",
-      "soundFilePath": "audio/friday-rocks"
+      "soundFilePath": "audio/BadCop/RESPONSES/scoff"
     }
   ],
   "notSuspiciousNegative": [
     {
       "text": "K.",
-      "soundFilePath": "audio/oh-thats-okay"
+      "soundFilePath": "audio/BadCop/RESPONSES/k"
     },
     {
       "text": "Hmmm..",
-      "soundFilePath": "audio/oh-thats-okay"
+      "soundFilePath": "audio/BadCop/RESPONSES/hm"
     }
   ],
   "notSuspiciousNeutral": [
     {
       "text": "K.",
-      "soundFilePath": "audio/alright"
+      "soundFilePath": "audio/BadCop/RESPONSES/k"
     },
     {
       "text": "Uh huh.",
-      "soundFilePath": "audio/alright"
+      "soundFilePath": "audio/BadCop/RESPONSES/uh-huh"
     },
     {
       "text": "Hmmm..",
-      "soundFilePath": "audio/alright"
+      "soundFilePath": "audio/BadCop/RESPONSES/hm"
     }
   ],
   "clarifying": [
     {
       "text": "That’s not what you said earlier.",
-      "soundFilePath": "audio/ill-tell-you-what-i-think"
+      "soundFilePath": "audio/BadCop/CLARIFICATIONS/thats-not-what-you-said"
     },
     {
       "text": "What? Don’t lie to me.",
-      "soundFilePath": "audio/ill-tell-you-what-i-think"
-    },
-    {
-      "text": "Do you think I’m an idiot?",
-      "soundFilePath": ""
+      "soundFilePath": "audio/BadCop/CLARIFICATIONS/what-dont-lie-to-me"
     }
   ],
   "postClarifying": [
     {
       "text": "Do you think I’m an idiot?",
-      "soundFilePath": "audio/ill-tell-you-what-i-think"
+      "soundFilePath": "audio/BadCop/CLARIFICATIONS/you-think-im-an-idiot"
     }
   ]
 }
