@@ -152,12 +152,15 @@ public class GameController : MonoBehaviour
 
     private IEnumerator PlayIntro()
     {
+        subtitleDisplay.SetActive(true);
+        subtitleDisplayText.text = "";
+        
         playableDirector.playableAsset = timelines[0];
         PlayTimeline(playableDirector);
 
         while (playableDirector.state == PlayState.Playing)
         {
-//            if (playableDirectoor.t)
+//            if (playableDirector.time > 83)
             yield return null;
         }
 
