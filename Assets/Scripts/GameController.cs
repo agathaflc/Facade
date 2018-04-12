@@ -743,24 +743,41 @@ public class GameController : MonoBehaviour
 
     private void GeneratePostReport()
     {
-        postReport.SetActive(true);
+		UnlockCursor ();
+		playerCamera.GetComponent<PlayerLook> ().enabled = false;
+		Debug.Log(GetAnswer(0));
+		postReport.SetActive(true);
         string report = "";
-        report = "The suspect stated his name as" + GetAnswer(0);
+		report = "Investigatation case #160418(HO4) status: on going. \nDocument classification: confidential." +
+			"\nThe suspect was interviewed by detective warren at 1900HRS at MaryHill police station, interrogation room 5." +
+			"\nThe following details the factual statement as recorded," +
+			"\n The suspect stated the following information about themselves:" +
+			"\n Name: " + GetAnswer(0) + 
+			"\n Age: " + GetAnswer(1) + 
+			"\n Country of Origin: " + GetAnswer(2) +
+			"\n Dream Frequency: " + GetAnswer(4) +
+			"\n\n The suspect stated the following information about their whereabouts:" +
+			"\n Location during time of incident: " + GetAnswer(5) +
+			"\n Alibi: " + GetAnswer(6) +
+			"\n Time of Arrival at home: " + GetAnswer(7) +
+			"\n Method of Transportation home: " + GetAnswer(8) +
+			"\n\n The suspect stated the following information when prompted with the incident:" +
+			"\n Recognition of victim: " + GetAnswer(9) +
+			"\n Accuse person of acting suspiciously: " + GetAnswer(10) +
+			"\n Reason for accusation: " +  GetAnswer(11);
         postReport.transform.GetChild(0).gameObject.GetComponent<Text>().text = report;
     }
 
     private string GetAnswer(int i)
     {
-//        string index = "0" + i;
-        string answerIndex = dataController.GetAnswerIdByQuestionId(allQuestions[i].questionId);
-//        int answerIndexInt = 0;
-//        Int32.TryParse(answerIndex, out answerIndexInt);
-        //answerIndexInt = answerIndex % 10;
-        string answer = allQuestions[i].answers.First(a => a.answerId.Equals(answerIndex)).answerText;
-        return answer;
+		string answerIndex = dataController.GetAnswerIdByQuestionId(allQuestions[i].questionId);
+		string answer = allQuestions[i].answers.First(a => a.answerId.Equals(answerIndex)).answerText;
+	    return answer;
     }
 
 	public void ContinuePostReport(){
+		LockCursor ();
+		playerCamera.GetComponent<PlayerLook> ().enabled = true;
 		postReport.SetActive (false);
 	}
 
