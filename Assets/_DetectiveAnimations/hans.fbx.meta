@@ -189,6 +189,7 @@ ModelImporter:
     7400032: HansFormal_Hairs|(8)SlamTable
     7400034: HansFormal_Hairs|Chair.000Action
     7400036: (9)GetUpOnly
+    7400038: (10)EncloseOnly
     9500000: //RootNode
     13700000: HansFormal_Hairs
     13700002: HansFormal_Mesh
@@ -740,6 +741,34 @@ ModelImporter:
       takeName: HansFormal|(9)HandsOnTableGetUp
       firstFrame: 4329
       lastFrame: 4368
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: (10)EncloseOnly
+      takeName: HansFormal|(10)EnclosePlayer
+      firstFrame: 4332
+      lastFrame: 4386
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

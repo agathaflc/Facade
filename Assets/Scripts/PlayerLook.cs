@@ -8,6 +8,12 @@ public class PlayerLook : MonoBehaviour
     private float xAxisClamp;
     private float yAxisClamp = 90;
 
+    private const float max_yAxisRotation = 125;
+    private const float min_yAxisRotation = 35;
+    
+    private const float max_xAxisRotation = 45;
+    private const float min_xAxisRotation = -45;
+
     private void Awake()
     {
         //Awake called once per game object, problem is that minimise and maximise, will dealocate it
@@ -42,19 +48,18 @@ public class PlayerLook : MonoBehaviour
         targetRotCam.z = 0; //clamping z axis of camera to prevent complete rotation upside down
 
         //conversion between euler and quaternion angle values, 90 is looking down, -90/270 is looking up
-        if (xAxisClamp > 30)
+        if (xAxisClamp > max_xAxisRotation)
         {
-            xAxisClamp = targetRotCam.x = 30;
+            xAxisClamp = targetRotCam.x = max_xAxisRotation;
         }
-        else if (xAxisClamp < -30)
+        else if (xAxisClamp < min_xAxisRotation)
         {
-            xAxisClamp = -30;
-            targetRotCam.x = -30;
+            xAxisClamp = targetRotCam.x = min_xAxisRotation;
         }
 
-        if (yAxisClamp > 135)
-            yAxisClamp = targetRotBody.y = 135;
-        else if (yAxisClamp < 45) yAxisClamp = targetRotBody.y = 45;
+        if (yAxisClamp > max_yAxisRotation)
+            yAxisClamp = targetRotBody.y = max_yAxisRotation;
+        else if (yAxisClamp < min_yAxisRotation) yAxisClamp = targetRotBody.y = min_yAxisRotation;
 
         transform.rotation = Quaternion.Euler(targetRotCam); //assign back new values
         playerBody.rotation = Quaternion.Euler(targetRotBody); //assign back new values

@@ -100,6 +100,8 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        StartCoroutine(PlayIntro());
+        
         if (gameSceneOnly) return;
 
         dataController = FindObjectOfType<DataController>(); // store a ref to data controller
@@ -130,7 +132,7 @@ public class GameController : MonoBehaviour
         isTimerActive = false;
         isClarifying = false;
 
-        StartCoroutine(PlayIntro());
+        
     }
 
     private IEnumerator PlayIntro()
