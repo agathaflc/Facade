@@ -12,7 +12,7 @@ public class PlayerLook : MonoBehaviour
     private const float min_yAxisRotation = 35;
     
     private const float max_xAxisRotation = 45;
-    private const float min_xAxisRotation = -45;
+    private const float min_xAxisRotation = -30;
 
     private void Awake()
     {

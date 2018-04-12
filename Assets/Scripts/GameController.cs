@@ -36,6 +36,11 @@ public class GameController : MonoBehaviour
     private const float FER_RECORDING_TIME = 4f;
     private const float MAX_SUSPICION_SCORE = 10f;
 
+    // testing variables
+    public bool FER_is_On;
+    public bool gameSceneOnly;
+    public bool runTimeline;
+
     public Text questionDisplayText;
     public Slider scoreDisplayerSlider;
     public Text scoreDisplayText;
@@ -71,7 +76,11 @@ public class GameController : MonoBehaviour
     public RuntimeAnimatorController kiraController;
 
     private AudioSource detectiveAudioSource;
-    private AudioSource bgmAudioSource;
+    private AudioSource bgmAudioSource1;
+    private AudioSource bgmAudioSource2;
+
+    private AudioSource currentBgmAudioSource;
+    public float volumeChangesPerSecond = 10;
 
     private DataController dataController;
     private ActData currentActData;
@@ -92,16 +101,15 @@ public class GameController : MonoBehaviour
     private static SequenceData currentSequence;
     private static string currentBgm;
 
-    // testing variables
-    public bool FER_is_On;
-    public bool gameSceneOnly;
-
 
     // Use this for initialization
     private void Start()
     {
-        StartCoroutine(PlayIntro());
-        
+        if (runTimeline)
+        {
+            StartCoroutine(PlayIntro());
+        }
+
         if (gameSceneOnly) return;
 
         dataController = FindObjectOfType<DataController>(); // store a ref to data controller
@@ -119,7 +127,11 @@ public class GameController : MonoBehaviour
 
         currentActData = dataController.GetCurrentRoundData();
         detectiveAudioSource = detectiveObject.GetComponent<AudioSource>();
-        bgmAudioSource = player.GetComponent<AudioSource>();
+
+        var audioSource = player.GetComponents<AudioSource>();
+        bgmAudioSource1 = audioSource[0];
+        bgmAudioSource2 = audioSource[1];
+        currentBgmAudioSource = bgmAudioSource1;
         postProcessingBehaviour = playerCamera.GetComponent<PostProcessingBehaviour>();
 
         PlayBgm(currentActData.bgmNeutralClip, MUSIC_NEUTRAL, currentActData.bgmNeutralFile.seek,
@@ -132,7 +144,10 @@ public class GameController : MonoBehaviour
         isTimerActive = false;
         isClarifying = false;
 
-        
+        if (!runTimeline)
+        {
+            StartCoroutine(RunSequence());
+        }
     }
 
     private IEnumerator PlayIntro()
@@ -142,15 +157,17 @@ public class GameController : MonoBehaviour
 
         while (playableDirector.state == PlayState.Playing)
         {
+//            if (playableDirectoor.t)
             yield return null;
         }
 
 //        detectiveObject.GetComponent<Animator>().enabled = true;
+        
         detectiveObject.GetComponent<Animator>().runtimeAnimatorController = hansController;
         StartCoroutine(RunSequence());
     }
 
-    private void PlayBgm(AudioClip clip, string musicType, float seek, bool fadeIn = false)
+    private void PlayBgm(AudioClip clip, string musicType, float seek, bool fadeIn = true)
     {
         if (clip == null)
         {
@@ -159,18 +176,59 @@ public class GameController : MonoBehaviour
         }
 
         currentBgm = musicType;
-        bgmAudioSource.clip = clip;
-        bgmAudioSource.loop = true;
-        bgmAudioSource.time = seek;
 
-        if (fadeIn)
+        AudioSource toBeFadedOut;
+        AudioSource toBeFadedIn;
+        if (currentBgmAudioSource == bgmAudioSource1)
         {
-            StartCoroutine(FadeInAudio(bgmAudioSource));
+            toBeFadedIn = bgmAudioSource2;
+            toBeFadedOut = bgmAudioSource1;
+            currentBgmAudioSource = bgmAudioSource2;
         }
         else
         {
-            bgmAudioSource.Play();
+            toBeFadedIn = bgmAudioSource1;
+            toBeFadedOut = bgmAudioSource2;
+            currentBgmAudioSource = bgmAudioSource1;
         }
+        
+        toBeFadedIn.clip = clip;
+        toBeFadedIn.loop = true;
+        toBeFadedIn.time = seek;
+
+        if (fadeIn)
+        {
+            StartCoroutine(FadeInAudio(toBeFadedIn));
+            StartCoroutine(FadeOutAudio(toBeFadedOut));
+        }
+        else
+        {
+            toBeFadedIn.Play();
+            toBeFadedOut.Stop();
+        }
+    }
+
+    private IEnumerator FadeInAudio(AudioSource audioSource)
+    {
+        audioSource.volume = 0f;
+        audioSource.Play();
+
+        while (audioSource.volume < 1f)
+        {
+            audioSource.volume += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    private IEnumerator FadeOutAudio(AudioSource audioSource)
+    {
+        while (audioSource.volume > 0f)
+        {
+            audioSource.volume -= Time.deltaTime;
+            yield return null;
+        }
+        
+        audioSource.Stop();
     }
 
     /**
@@ -797,21 +855,6 @@ public class GameController : MonoBehaviour
             // Debug.Log ("end of questions");
             questionDisplay.SetActive(false);
             StartCoroutine(RunSequence());
-        }
-    }
-
-    private IEnumerator FadeInAudio(AudioSource audioSource)
-    {
-        var t = 0f;
-
-        audioSource.volume = t;
-        audioSource.Play();
-
-        while (t < 3f)
-        {
-            t += Time.deltaTime;
-            audioSource.volume = t;
-            yield return null;
         }
     }
 

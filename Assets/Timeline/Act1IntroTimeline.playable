@@ -137,7 +137,19 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -306,6 +318,23 @@ MonoBehaviour:
   m_UseTrackMatchFields: 0
   m_MatchTargetFields: 63
   m_RemoveStartOffset: 1
+--- !u!114 &114424331807300460
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2024714994, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Name: AnimationPlayableAsset of opening hand
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 7400022, guid: d45ae26ef404e0242b4d733573eb96a6, type: 3}
+  m_Position: {x: 0, y: 0, z: 0}
+  m_Rotation: {x: 0, y: 0, z: 0, w: 1}
+  m_UseTrackMatchFields: 0
+  m_MatchTargetFields: 63
+  m_RemoveStartOffset: 1
 --- !u!114 &114443601787561998
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -435,7 +464,19 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -609,6 +650,23 @@ MonoBehaviour:
   m_UseTrackMatchFields: 0
   m_MatchTargetFields: 63
   m_RemoveStartOffset: 0
+--- !u!114 &114822360116057536
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2024714994, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Name: AnimationPlayableAsset of opening hand
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 7400022, guid: d45ae26ef404e0242b4d733573eb96a6, type: 3}
+  m_Position: {x: 0, y: 0, z: 0}
+  m_Rotation: {x: 0, y: 0, z: 0, w: 1}
+  m_UseTrackMatchFields: 0
+  m_MatchTargetFields: 63
+  m_RemoveStartOffset: 1
 --- !u!114 &114887004408741858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -669,6 +727,40 @@ MonoBehaviour:
   m_Clip: {fileID: 7400000, guid: b1a5e04ae51004842aba06704a6c2903, type: 3}
   m_Position: {x: 0.1, y: -0.15, z: -0.97}
   m_Rotation: {x: 0, y: 0.19115165, z: 0, w: 0.9815605}
+  m_UseTrackMatchFields: 0
+  m_MatchTargetFields: 63
+  m_RemoveStartOffset: 1
+--- !u!114 &114944759780834604
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2024714994, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Name: AnimationPlayableAsset of opening hand
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 7400022, guid: d45ae26ef404e0242b4d733573eb96a6, type: 3}
+  m_Position: {x: 0, y: 0, z: 0}
+  m_Rotation: {x: 0, y: 0, z: 0, w: 1}
+  m_UseTrackMatchFields: 0
+  m_MatchTargetFields: 63
+  m_RemoveStartOffset: 1
+--- !u!114 &114983048892539694
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 2024714994, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Name: AnimationPlayableAsset of angry gesture
+  m_EditorClassIdentifier: 
+  m_Clip: {fileID: 7400000, guid: d45ae26ef404e0242b4d733573eb96a6, type: 3}
+  m_Position: {x: 0, y: 0, z: 0}
+  m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_UseTrackMatchFields: 0
   m_MatchTargetFields: 63
   m_RemoveStartOffset: 1
