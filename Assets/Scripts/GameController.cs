@@ -163,6 +163,8 @@ public class GameController : MonoBehaviour
 //            if (playableDirector.time > 83)
             yield return null;
         }
+        
+        subtitleDisplay.SetActive(false);
 
 //        detectiveObject.GetComponent<Animator>().enabled = true;
         
