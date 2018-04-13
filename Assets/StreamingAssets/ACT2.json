@@ -317,6 +317,12 @@
     },
     {
       "sequenceType": "dialog",
+      "filePath": "audio/BadCop/SENTENCES/S5_1 - DEFINITELY wasted",
+      "subtitleText": "Listen kid, you and I both know that you were definitely wasted last night. I can see how hungover you are right now.",
+      "animationNo": 2
+    },
+    {
+      "sequenceType": "dialog",
       "filePath": "audio/BadCop/SENTENCES/S6 - THESE BRIGHT LIGHTS",
       "subtitleText": "These bright lights must be bothering you huh?",
       "effect": "bloom"
