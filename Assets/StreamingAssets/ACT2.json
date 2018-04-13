@@ -604,7 +604,8 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/BadCop/SENTENCES/S9 - ENOUGH",
-      "subtitleText": "Enough! I don’t know why I’m sitting here wasting my time asking you these questions."
+      "subtitleText": "Enough! I don’t know why I’m sitting here wasting my time asking you these questions.",
+      "animationNo": 8
     },
     {
       "sequenceType": "dialog",
