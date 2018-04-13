@@ -1,0 +1,110 @@
+{
+  "suspiciousPositive": [
+    {
+      "text": "Nice",
+      "soundFilePath": "audio/GoodCop/RESPONSES/nice"
+    },
+    {
+      "text": "Ok.",
+      "soundFilePath": "audio/GoodCop/RESPONSES/ok"
+    },
+    {
+      "text": "Got it.",
+      "soundFilePath": "audio/GoodCop/RESPONSES/gotIt"
+    }
+  ],
+  "notSuspiciousPositive": [
+    {
+      "text": "Great!",
+      "soundFilePath": "audio/GoodCop/RESPONSES/great"
+    },
+    {
+      "text": "Good to hear!",
+      "soundFilePath": "audio/GoodCop/RESPONSES/goodToHear"
+    },
+  ],
+  "suspiciousNeutral": [
+    {
+      "text": "Ok.",
+      "soundFilePath": "audio/GoodCop/RESPONSES/ok"
+    },
+    {
+      "text": "Uh huh..",
+      "soundFilePath": "audio/GoodCop/RESPONSES/uhuh"
+    },
+    {
+      "text": "Hmm..",
+      "soundFilePath": "audio/GoodCop/RESPONSES/hm"
+    }
+  ],
+  "notSuspiciousNeutral": [
+    {
+      "text": "Right.",
+      "soundFilePath": "audio/GoodCop/RESPONSES/right"
+    },
+    {
+      "text": "Noted.",
+      "soundFilePath": "audio/GoodCop/RESPONSES/noted"
+    },
+    {
+      "text": "Got it.",
+      "soundFilePath": "audio/GoodCop/RESPONSES/gotIt"
+    }
+  ],
+  "suspiciousNegative": [
+    {
+      "text": "Right..",
+      "soundFilePath": "audio/GoodCop/RESPONSES/right"
+    },
+    {
+      "text": "Sure..",
+      "soundFilePath": "audio/GoodCop/RESPONSES/sure"
+    },
+    {
+      "text": "* Scoff *",
+      "soundFilePath": "audio/GoodCop/RESPONSES/scoff"
+    },
+    {
+      "text": "Hmm..",
+      "soundFilePath": "audio/GoodCop/RESPONSES/hm"
+    }
+  ],
+  "notSuspiciousNegative": [
+    {
+      "text": "K.",
+      "soundFilePath": "audio/GoodCop/RESPONSES/k"
+    },
+    {
+      "text": "Hmmm..",
+      "soundFilePath": "audio/GoodCop/RESPONSES/hm"
+    }
+  ],
+  "clarifying": [
+    {
+      "text": "Your answer doesn't match with out record.",
+      "soundFilePath": "audio/GoodCop/CLARIFICATIONS/answer-doesnt-match"
+    },
+    {
+      "text": "You said something different earlier...",
+      "soundFilePath": "audio/GoodCop/CLARIFICATIONS/you-said-something-different"
+    },
+    {
+      "text": "Is that what you answered earlier?",
+      "soundFilePath": "audio/GoodCop/CLARIFICATIONS/is-that-what-you-answered"
+    },
+    {
+      "text": "Wanna say that again?",
+      "soundFilePath": "audio/GoodCop/CLARIFICATIONS/say-that-again"
+    },
+  ],
+  "postClarifying": [
+    {
+      "text": "You better stop lying if you don't wanna get in trouble.",
+      "soundFilePath": "audio/GoodCop/CLARIFICATIONS/you-better-stop-lying"
+    },
+    {
+      "text": "Try to think more clearly next time, okay?",
+      "soundFilePath": "audio/GoodCop/CLARIFICATIONS/try-to-think-more-clearly"
+    }
+  ]
+}
