@@ -555,7 +555,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 65289683}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.13, y: 1.103, z: 1.555}
+  m_LocalPosition: {x: -0.13, y: 1.103, z: 1.544}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 1660801659}
@@ -1652,7 +1652,7 @@ PlayableDirector:
   m_GameObject: {fileID: 261924088}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 6bf6405a86beea04dbd0b1889b9a8b4f, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 9b0f6f04e1ba46543935fb0b720ff13f, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -3582,7 +3582,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400080, guid: 1cd664fa02ced6e48af22b6df2472799, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1.7763566e-15
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400080, guid: 1cd664fa02ced6e48af22b6df2472799, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3594,15 +3594,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400080, guid: 1cd664fa02ced6e48af22b6df2472799, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1.8318678e-15
+      value: 0.0000000055879354
       objectReference: {fileID: 0}
     - target: {fileID: 400080, guid: 1cd664fa02ced6e48af22b6df2472799, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: -0.7071069
       objectReference: {fileID: 0}
     - target: {fileID: 400080, guid: 1cd664fa02ced6e48af22b6df2472799, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.70710677
+      value: 0.7071067
       objectReference: {fileID: 0}
     - target: {fileID: 100080, guid: 1cd664fa02ced6e48af22b6df2472799, type: 3}
       propertyPath: m_IsActive
@@ -4243,8 +4243,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FER_is_On: 0
-  gameSceneOnly: 0
-  runTimeline: 0
+  gameSceneOnly: 1
+  runTimeline: 1
   questionDisplayText: {fileID: 1862245467}
   scoreDisplayerSlider: {fileID: 1720664495}
   scoreDisplayText: {fileID: 1712600188}
@@ -4269,7 +4269,6 @@ MonoBehaviour:
   bloomEffect: {fileID: 11400000, guid: 2476016b9db4793459c550e08e6d4857, type: 2}
   player: {fileID: 65289683}
   timelines:
-  - {fileID: 11400000, guid: 6bf6405a86beea04dbd0b1889b9a8b4f, type: 2}
   - {fileID: 11400000, guid: 9b0f6f04e1ba46543935fb0b720ff13f, type: 2}
   playableDirector: {fileID: 261924090}
   hansController: {fileID: 9100000, guid: ced0da6be5d0a434480ae708bd8c3d54, type: 2}
@@ -4947,7 +4946,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400086, guid: 19d4468b9aeac6243a8fe82d92628b9b, type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1321651007}
-  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalRotation: {x: -0, y: -0.99666595, z: -0.08159069, w: 0}
   m_LocalPosition: {x: -0.161, y: 0.041, z: 1.45}
   m_LocalScale: {x: 0.23737472, y: 0.20827922, z: 0.22834022}
   m_Children:
@@ -4955,7 +4954,7 @@ Transform:
   - {fileID: 849011102}
   m_Father: {fileID: 0}
   m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+  m_LocalEulerAnglesHint: {x: -9.36, y: -180, z: 0}
 --- !u!1 &1322763236
 GameObject:
   m_ObjectHideFlags: 0
@@ -6200,7 +6199,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.15
+  near clip plane: 0.13
   far clip plane: 1000
   field of view: 60
   orthographic: 0

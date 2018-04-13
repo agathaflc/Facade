@@ -364,6 +364,7 @@ ModelImporter:
     400356: temple_Right
     400358: u_lip_center
     7400000: idle_01
+    7400002: donothing
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -786,6 +787,394 @@ ModelImporter:
       - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandThumb1/RightHandThumb2/RightHandThumb3/RightHandThumbNull
         weight: 1
       maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: donothing
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 2
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: PelvisRoot
+        weight: 1
+      - path: PelvisRoot/Hips
+        weight: 1
+      - path: PelvisRoot/Hips/Back_long_skart1
+        weight: 1
+      - path: PelvisRoot/Hips/Back_long_skart1/Back_long_skart2
+        weight: 1
+      - path: PelvisRoot/Hips/Back_long_skart1/Back_long_skart2/Back_long_skart3
+        weight: 1
+      - path: PelvisRoot/Hips/Back_long_skart1/Back_long_skart2/Back_long_skart3/Back_long_skart4
+        weight: 1
+      - path: PelvisRoot/Hips/Back_long_skart1/Back_long_skart2/Back_long_skart3/Back_long_skart4/Back_long_skart5
+        weight: 1
+      - path: PelvisRoot/Hips/Back_long_skart1/Back_long_skart2/Back_long_skart3/Back_long_skart4/Back_long_skart5/Back_long_skart6
+        weight: 1
+      - path: PelvisRoot/Hips/BackLeft_long_skart1
+        weight: 1
+      - path: PelvisRoot/Hips/BackLeft_long_skart1/BackLeft_long_skart2
+        weight: 1
+      - path: PelvisRoot/Hips/BackLeft_long_skart1/BackLeft_long_skart2/BackLeft_long_skart3
+        weight: 1
+      - path: PelvisRoot/Hips/BackLeft_long_skart1/BackLeft_long_skart2/BackLeft_long_skart3/BackLeft_long_skart4
+        weight: 1
+      - path: PelvisRoot/Hips/BackLeft_long_skart1/BackLeft_long_skart2/BackLeft_long_skart3/BackLeft_long_skart4/BackLeft_long_skart5
+        weight: 1
+      - path: PelvisRoot/Hips/BackLeft_long_skart1/BackLeft_long_skart2/BackLeft_long_skart3/BackLeft_long_skart4/BackLeft_long_skart5/BackLeft_long_skart6
+        weight: 1
+      - path: PelvisRoot/Hips/BackRight_long_skart1
+        weight: 1
+      - path: PelvisRoot/Hips/BackRight_long_skart1/BackRight_long_skart2
+        weight: 1
+      - path: PelvisRoot/Hips/BackRight_long_skart1/BackRight_long_skart2/BackRight_long_skart3
+        weight: 1
+      - path: PelvisRoot/Hips/BackRight_long_skart1/BackRight_long_skart2/BackRight_long_skart3/BackRight_long_skart4
+        weight: 1
+      - path: PelvisRoot/Hips/BackRight_long_skart1/BackRight_long_skart2/BackRight_long_skart3/BackRight_long_skart4/BackRight_long_skart5
+        weight: 1
+      - path: PelvisRoot/Hips/BackRight_long_skart1/BackRight_long_skart2/BackRight_long_skart3/BackRight_long_skart4/BackRight_long_skart5/BackRight_long_skart6
+        weight: 1
+      - path: PelvisRoot/Hips/Front_long_skart1
+        weight: 1
+      - path: PelvisRoot/Hips/Front_long_skart1/Front_long_skart2
+        weight: 1
+      - path: PelvisRoot/Hips/Front_long_skart1/Front_long_skart2/Front_long_skart3
+        weight: 1
+      - path: PelvisRoot/Hips/Front_long_skart1/Front_long_skart2/Front_long_skart3/Front_long_skart4
+        weight: 1
+      - path: PelvisRoot/Hips/Front_long_skart1/Front_long_skart2/Front_long_skart3/Front_long_skart4/Front_long_skart5
+        weight: 1
+      - path: PelvisRoot/Hips/Front_long_skart1/Front_long_skart2/Front_long_skart3/Front_long_skart4/Front_long_skart5/Front_long_skart6
+        weight: 1
+      - path: PelvisRoot/Hips/Front_skart1
+        weight: 1
+      - path: PelvisRoot/Hips/Front_skart1/Front_skart2
+        weight: 1
+      - path: PelvisRoot/Hips/Front_skart1/Front_skart2/Front_skart3
+        weight: 1
+      - path: PelvisRoot/Hips/Front_skart1/Front_skart2/Front_skart3/Front_skart4
+        weight: 1
+      - path: PelvisRoot/Hips/FrontLeft_long_skart1
+        weight: 1
+      - path: PelvisRoot/Hips/FrontLeft_long_skart1/FrontLeft_long_skart2
+        weight: 1
+      - path: PelvisRoot/Hips/FrontLeft_long_skart1/FrontLeft_long_skart2/FrontLeft_long_skart3
+        weight: 1
+      - path: PelvisRoot/Hips/FrontLeft_long_skart1/FrontLeft_long_skart2/FrontLeft_long_skart3/FrontLeft_long_skart4
+        weight: 1
+      - path: PelvisRoot/Hips/FrontLeft_long_skart1/FrontLeft_long_skart2/FrontLeft_long_skart3/FrontLeft_long_skart4/FrontLeft_long_skart5
+        weight: 1
+      - path: PelvisRoot/Hips/FrontLeft_long_skart1/FrontLeft_long_skart2/FrontLeft_long_skart3/FrontLeft_long_skart4/FrontLeft_long_skart5/FrontLeft_long_skart6
+        weight: 1
+      - path: PelvisRoot/Hips/FrontRight_long_skart1
+        weight: 1
+      - path: PelvisRoot/Hips/FrontRight_long_skart1/FrontRight_long_skart2
+        weight: 1
+      - path: PelvisRoot/Hips/FrontRight_long_skart1/FrontRight_long_skart2/FrontRight_long_skart3
+        weight: 1
+      - path: PelvisRoot/Hips/FrontRight_long_skart1/FrontRight_long_skart2/FrontRight_long_skart3/FrontRight_long_skart4
+        weight: 1
+      - path: PelvisRoot/Hips/FrontRight_long_skart1/FrontRight_long_skart2/FrontRight_long_skart3/FrontRight_long_skart4/FrontRight_long_skart5
+        weight: 1
+      - path: PelvisRoot/Hips/FrontRight_long_skart1/FrontRight_long_skart2/FrontRight_long_skart3/FrontRight_long_skart4/FrontRight_long_skart5/FrontRight_long_skart6
+        weight: 1
+      - path: PelvisRoot/Hips/Left_long_skart1
+        weight: 1
+      - path: PelvisRoot/Hips/Left_long_skart1/Left_long_skart2
+        weight: 1
+      - path: PelvisRoot/Hips/Left_long_skart1/Left_long_skart2/Left_long_skart3
+        weight: 1
+      - path: PelvisRoot/Hips/Left_long_skart1/Left_long_skart2/Left_long_skart3/Left_long_skart4
+        weight: 1
+      - path: PelvisRoot/Hips/Left_long_skart1/Left_long_skart2/Left_long_skart3/Left_long_skart4/Left_long_skart5
+        weight: 1
+      - path: PelvisRoot/Hips/Left_long_skart1/Left_long_skart2/Left_long_skart3/Left_long_skart4/Left_long_skart5/Left_long_skart6
+        weight: 1
+      - path: PelvisRoot/Hips/LeftUpLeg
+        weight: 1
+      - path: PelvisRoot/Hips/LeftUpLeg/LeftHip_Helper
+        weight: 1
+      - path: PelvisRoot/Hips/LeftUpLeg/LeftLeg
+        weight: 1
+      - path: PelvisRoot/Hips/LeftUpLeg/LeftLeg/LeftFoot
+        weight: 1
+      - path: PelvisRoot/Hips/LeftUpLeg/LeftLeg/LeftFoot/LeftToes
+        weight: 1
+      - path: PelvisRoot/Hips/LeftUpLeg/LeftLeg/LeftFoot/LeftToes/LeftToesNull
+        weight: 1
+      - path: PelvisRoot/Hips/LeftUpLeg/LeftLeg/LeftLeg_Helper
+        weight: 1
+      - path: PelvisRoot/Hips/Right_long_skart1
+        weight: 1
+      - path: PelvisRoot/Hips/Right_long_skart1/Right_long_skart2
+        weight: 1
+      - path: PelvisRoot/Hips/Right_long_skart1/Right_long_skart2/Right_long_skart3
+        weight: 1
+      - path: PelvisRoot/Hips/Right_long_skart1/Right_long_skart2/Right_long_skart3/Right_long_skart4
+        weight: 1
+      - path: PelvisRoot/Hips/Right_long_skart1/Right_long_skart2/Right_long_skart3/Right_long_skart4/Right_long_skart5
+        weight: 1
+      - path: PelvisRoot/Hips/Right_long_skart1/Right_long_skart2/Right_long_skart3/Right_long_skart4/Right_long_skart5/Right_long_skart6
+        weight: 1
+      - path: PelvisRoot/Hips/RightUpLeg
+        weight: 1
+      - path: PelvisRoot/Hips/RightUpLeg/RightHip_Helper
+        weight: 1
+      - path: PelvisRoot/Hips/RightUpLeg/RightLeg
+        weight: 1
+      - path: PelvisRoot/Hips/RightUpLeg/RightLeg/RightFoot
+        weight: 1
+      - path: PelvisRoot/Hips/RightUpLeg/RightLeg/RightFoot/RightToes
+        weight: 1
+      - path: PelvisRoot/Hips/RightUpLeg/RightLeg/RightFoot/RightToes/RightToesNull
+        weight: 1
+      - path: PelvisRoot/Hips/RightUpLeg/RightLeg/RightLeg_Helper
+        weight: 1
+      - path: PelvisRoot/Hips/Spine
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArm_Helper
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHandIndex1
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHandIndex1/LeftHandIndex2
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHandIndex1/LeftHandIndex2/LeftHandIndex3
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHandIndex1/LeftHandIndex2/LeftHandIndex3/LeftHandIndexNull
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHanditem_Null
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHandMiddle1
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHandMiddle1/LeftHandMiddle2
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHandMiddle1/LeftHandMiddle2/LeftHandMiddle3
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHandMiddle1/LeftHandMiddle2/LeftHandMiddle3/LeftHandMiddleNull
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHandPinky1
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHandPinky1/LeftHandPinky2
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHandPinky1/LeftHandPinky2/LeftHandPinky3
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHandPinky1/LeftHandPinky2/LeftHandPinky3/LeftHandPinkyNull
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHandRing1
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHandRing1/LeftHandRing2
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHandRing1/LeftHandRing2/LeftHandRing3
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHandRing1/LeftHandRing2/LeftHandRing3/LeftHandRingNull
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHandThumb1
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHandThumb1/LeftHandThumb2
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHandThumb1/LeftHandThumb2/LeftHandThumb3
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/LeftShoulder/LeftArm/LeftArmRoll/LeftForeArm/LeftForeArmRoll/LeftHand/LeftHandThumb1/LeftHandThumb2/LeftHandThumb3/LeftHandThumbNull
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/cheek_Left
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/cheek_Right
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/eye_Left
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/eye_Right
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/eyelid_und1_Left
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/eyelid_und1_Right
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/eyelid_und2_Left
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/eyelid_und2_Right
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/eyelid_und_Left
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/eyelid_und_Right
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/eyerid1_Left
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/eyerid1_Right
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/eyerid2_Left
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/eyerid2_Right
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/eyerid_Left
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/eyerid_Right
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/inner_corner_of_eye_Left
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/inner_corner_of_eye_Right
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/jaw
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/jaw/b_lip_center
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/jaw/chin
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/jaw/lip_u_Left
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/jaw/lip_u_Right
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/jaw/rip_btm_Left
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/jaw/rip_btm_Right
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/lip_Left
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/lip_Right
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/lip_t_Left
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/lip_t_Right
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/mayu
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/mayu/eyebrow_a_Left
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/mayu/eyebrow_a_Left/eyebrow_b_Left
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/mayu/eyebrow_a_Left/eyebrow_b_Left/temple_Left
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/mayu/eyebrow_a_Right
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/mayu/eyebrow_a_Right/eyebrow_b_Right
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/mayu/eyebrow_a_Right/eyebrow_b_Right/temple_Right
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/nose
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/nose/nostrir_Left
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/nose/nostrir_Right
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/tail_of_eye_Left
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/tail_of_eye_Right
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/u_lip_center
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/u_lip_center/lip_top_Left
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/face/atama_n/u_lip_center/lip_top_Right
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/Glasses_Null
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/LeftEarring_Null
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/Neck/Head/RightEarring_Null
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArm_Helper
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandIndex1
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandIndex1/RightHandIndex2
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandIndex1/RightHandIndex2/RightHandIndex3
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandIndex1/RightHandIndex2/RightHandIndex3/RightHandIndexNull
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHanditem_Null
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandMiddle1
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandMiddle1/RightHandMiddle2
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandMiddle1/RightHandMiddle2/RightHandMiddle3
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandMiddle1/RightHandMiddle2/RightHandMiddle3/RightHandMiddleNull
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandPinky1
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandPinky1/RightHandPinky2
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandPinky1/RightHandPinky2/RightHandPinky3
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandPinky1/RightHandPinky2/RightHandPinky3/RightHandPinkyNull
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandRing1
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandRing1/RightHandRing2
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandRing1/RightHandRing2/RightHandRing3
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandRing1/RightHandRing2/RightHandRing3/RightHandRingNull
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandThumb1
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandThumb1/RightHandThumb2
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandThumb1/RightHandThumb2/RightHandThumb3
+        weight: 1
+      - path: PelvisRoot/Hips/Spine/Spine1/Spine2/Spine3/RightShoulder/RightArm/RightArmRoll/RightForeArm/RightForeArmRoll/RightHand/RightHandThumb1/RightHandThumb2/RightHandThumb3/RightHandThumbNull
+        weight: 1
+      maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     isReadable: 1
