@@ -170,20 +170,20 @@ ModelImporter:
     2100000: HansFormal
     4300000: HansFormal_Mesh
     4300002: HansFormal_Hairs
-    7400000: HansFormal|(0)GruffSitDown
-    7400002: HansFormal|(1)AggresivePointAtTable
+    7400000: (0)GruffSitDown
+    7400002: (1)AggresivePointAtTable
     7400004: HansFormal|(10)EnclosePlayer
     7400006: HansFormal|(15)FoldArmsOverChest
-    7400008: HansFormal|(2)PointAtPlayer
+    7400008: (2)PointAtPlayer
     7400010: HansFormal|(3)SingleHahChuckle
-    7400012: HansFormal|(4)SlowNod
-    7400014: HansFormal|(5)IncredulousScoff
-    7400016: HansFormal|(6)LeanForward
-    7400018: HansFormal|(8)SlamTable
+    7400012: (4)SlowNod
+    7400014: (5)IncredulousScoff
+    7400016: (6)LeanForward
+    7400018: (8)SlamTable
     7400020: HansFormal|(9)GetUpLeanForward
     7400022: HansFormal|(9)HandsOnTableGetUp_USETHIS
     7400024: HansFormal|Chair.000Action
-    7400026: HansFormal|NeutralSit
+    7400026: ()NeutralSit
     7400028: HansFormal_Mesh|(9)GetUpLeanForward
     7400030: HansFormal_Mesh|Chair.000Action
     7400032: HansFormal_Hairs|(8)SlamTable
@@ -233,7 +233,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: HansFormal|(0)GruffSitDown
+      name: (0)GruffSitDown
       takeName: HansFormal|(0)GruffSitDown
       firstFrame: 0
       lastFrame: 50
@@ -261,9 +261,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: HansFormal|(1)AggresivePointAtTable
+      name: (1)AggresivePointAtTable
       takeName: HansFormal|(1)AggresivePointAtTable
-      firstFrame: 0
+      firstFrame: 11
       lastFrame: 80
       wrapMode: 0
       orientationOffsetY: 0
@@ -345,7 +345,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: HansFormal|(2)PointAtPlayer
+      name: (2)PointAtPlayer
       takeName: HansFormal|(2)PointAtPlayer
       firstFrame: 4333
       lastFrame: 4413
@@ -401,7 +401,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: HansFormal|(4)SlowNod
+      name: (4)SlowNod
       takeName: HansFormal|(4)SlowNod
       firstFrame: 4332
       lastFrame: 4412
@@ -429,7 +429,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: HansFormal|(5)IncredulousScoff
+      name: (5)IncredulousScoff
       takeName: HansFormal|(5)IncredulousScoff
       firstFrame: 4325
       lastFrame: 4365
@@ -457,7 +457,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: HansFormal|(6)LeanForward
+      name: (6)LeanForward
       takeName: HansFormal|(6)LeanForward
       firstFrame: 4333
       lastFrame: 4413
@@ -485,7 +485,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: HansFormal|(8)SlamTable
+      name: (8)SlamTable
       takeName: HansFormal|(8)SlamTable
       firstFrame: 4333
       lastFrame: 4413
@@ -597,9 +597,9 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: HansFormal|NeutralSit
+      name: ()NeutralSit
       takeName: HansFormal|NeutralSit
-      firstFrame: 4333
+      firstFrame: 4328
       lastFrame: 4372
       wrapMode: 0
       orientationOffsetY: 0

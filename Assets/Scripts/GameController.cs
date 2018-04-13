@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.PostProcessing;
@@ -51,7 +52,7 @@ public class GameController : MonoBehaviour
     public SimpleObjectPool answerButtonObjectPool;
     public Transform answerButtonParent;
 
-	public GameObject postReport;
+    public GameObject postReport;
     public GameObject questionDisplay;
     public GameObject roundEndDisplay;
     public GameObject questionPictureDisplay;
@@ -74,6 +75,8 @@ public class GameController : MonoBehaviour
     private int currentTimelineNo = 0;
     public RuntimeAnimatorController hansController;
     public RuntimeAnimatorController kiraController;
+
+    private int animationNoHash = Animator.StringToHash("animationNo");
 
     private AudioSource detectiveAudioSource;
     private AudioSource bgmAudioSource1;
@@ -134,8 +137,7 @@ public class GameController : MonoBehaviour
         currentBgmAudioSource = bgmAudioSource1;
         postProcessingBehaviour = playerCamera.GetComponent<PostProcessingBehaviour>();
 
-        PlayBgm(currentActData.bgmNeutralClip, MUSIC_NEUTRAL, currentActData.bgmNeutralFile.seek,
-            true); // always start off with the base clip 
+        PlayBgm(currentActData.bgmNeutralClip, MUSIC_NEUTRAL, currentActData.bgmNeutralFile.seek); // always start off with the base clip 
         currentBgm = MUSIC_NEUTRAL;
 
         displayedScore = 0;
@@ -147,6 +149,8 @@ public class GameController : MonoBehaviour
         if (!runTimeline)
         {
             StartCoroutine(RunSequence());
+            detectiveObject.GetComponent<Animator>().runtimeAnimatorController =
+                detectiveObject == hans ? hansController : kiraController;
         }
     }
 
@@ -154,7 +158,7 @@ public class GameController : MonoBehaviour
     {
         subtitleDisplay.SetActive(true);
         subtitleDisplayText.text = "";
-        
+
         playableDirector.playableAsset = timelines[0];
         PlayTimeline(playableDirector);
 
@@ -163,12 +167,14 @@ public class GameController : MonoBehaviour
 //            if (playableDirector.time > 83)
             yield return null;
         }
-        
+
         subtitleDisplay.SetActive(false);
 
 //        detectiveObject.GetComponent<Animator>().enabled = true;
-        
-        detectiveObject.GetComponent<Animator>().runtimeAnimatorController = hansController;
+
+        detectiveObject.GetComponent<Animator>().runtimeAnimatorController =
+            detectiveObject == hans ? hansController : kiraController;
+
         StartCoroutine(RunSequence());
     }
 
@@ -196,7 +202,7 @@ public class GameController : MonoBehaviour
             toBeFadedOut = bgmAudioSource2;
             currentBgmAudioSource = bgmAudioSource1;
         }
-        
+
         toBeFadedIn.clip = clip;
         toBeFadedIn.loop = true;
         toBeFadedIn.time = seek;
@@ -232,7 +238,7 @@ public class GameController : MonoBehaviour
             audioSource.volume -= Time.deltaTime;
             yield return null;
         }
-        
+
         audioSource.Stop();
     }
 
@@ -277,15 +283,22 @@ public class GameController : MonoBehaviour
                     currentSequence.bgm.seek);
             }
 
+//            if (currentSequence.animationNo != 0)
+//            {
+//                detectiveObject.GetComponent<Animator>().SetInteger(animationNoHash, currentSequence.animationNo);
+////                detectiveObject.GetComponent<Animator>().SetInteger(animationNoHash, 0);
+//            }
+            
+            detectiveObject.GetComponent<Animator>().SetInteger(animationNoHash, currentSequence.animationNo);
+
+            while (detectiveAudioSource.isPlaying)
+            {
+                yield return null;
+            }
+
             if (currentSequence.readExpression)
             {
                 // TODO create a pop-up that instructs player to put on an appropriate expression?
-
-                while (detectiveAudioSource.isPlaying)
-                {
-                    yield return null;
-                }
-
                 subtitleDisplay.SetActive(false);
 
                 DataController.StartFER();
@@ -296,18 +309,9 @@ public class GameController : MonoBehaviour
                 string closestEmotion;
                 SaveAndDisplayScore(CalculateSuspicionScore_EmotionOnly(currentSequence.expectedExpressions,
                     currentSequence.scoreWeight, out closestEmotion));
-
-                ConcludeEvent();
             }
-            else
-            {
-                while (detectiveAudioSource.isPlaying)
-                {
-                    yield return null;
-                }
-
-                ConcludeEvent();
-            }
+            
+            ConcludeEvent();
         }
 
         sequenceIndex++;
@@ -808,43 +812,44 @@ public class GameController : MonoBehaviour
 
     private void GeneratePostReport()
     {
-		UnlockCursor ();
-		playerCamera.GetComponent<PlayerLook> ().enabled = false;
-		Debug.Log(GetAnswer(0));
-		postReport.SetActive(true);
+        UnlockCursor();
+        playerCamera.GetComponent<PlayerLook>().enabled = false;
+        Debug.Log(GetAnswer(0));
+        postReport.SetActive(true);
         string report = "";
-		report = "Investigatation case #160418(HO4) status: on going. \nDocument classification: confidential." +
-			"\nThe suspect was interviewed by detective warren at 1900HRS at MaryHill police station, interrogation room 5." +
-			"\nThe following details the factual statement as recorded," +
-			"\n The suspect stated the following information about themselves:" +
-			"\n Name: " + GetAnswer(0) + 
-			"\n Age: " + GetAnswer(1) + 
-			"\n Country of Origin: " + GetAnswer(2) +
-			"\n Dream Frequency: " + GetAnswer(4) +
-			"\n\n The suspect stated the following information about their whereabouts:" +
-			"\n Location during time of incident: " + GetAnswer(5) +
-			"\n Alibi: " + GetAnswer(6) +
-			"\n Time of Arrival at home: " + GetAnswer(7) +
-			"\n Method of Transportation home: " + GetAnswer(8) +
-			"\n\n The suspect stated the following information when prompted with the incident:" +
-			"\n Recognition of victim: " + GetAnswer(9) +
-			"\n Accuse person of acting suspiciously: " + GetAnswer(10) +
-			"\n Reason for accusation: " +  GetAnswer(11);
+        report = "Investigatation case #160418(HO4) status: on going. \nDocument classification: confidential." +
+                 "\nThe suspect was interviewed by detective warren at 1900HRS at MaryHill police station, interrogation room 5." +
+                 "\nThe following details the factual statement as recorded," +
+                 "\n The suspect stated the following information about themselves:" +
+                 "\n Name: " + GetAnswer(0) +
+                 "\n Age: " + GetAnswer(1) +
+                 "\n Country of Origin: " + GetAnswer(2) +
+                 "\n Dream Frequency: " + GetAnswer(4) +
+                 "\n\n The suspect stated the following information about their whereabouts:" +
+                 "\n Location during time of incident: " + GetAnswer(5) +
+                 "\n Alibi: " + GetAnswer(6) +
+                 "\n Time of Arrival at home: " + GetAnswer(7) +
+                 "\n Method of Transportation home: " + GetAnswer(8) +
+                 "\n\n The suspect stated the following information when prompted with the incident:" +
+                 "\n Recognition of victim: " + GetAnswer(9) +
+                 "\n Accuse person of acting suspiciously: " + GetAnswer(10) +
+                 "\n Reason for accusation: " + GetAnswer(11);
         postReport.transform.GetChild(0).gameObject.GetComponent<Text>().text = report;
     }
 
     private string GetAnswer(int i)
     {
-		string answerIndex = dataController.GetAnswerIdByQuestionId(allQuestions[i].questionId);
-		string answer = allQuestions[i].answers.First(a => a.answerId.Equals(answerIndex)).answerText;
-	    return answer;
+        string answerIndex = dataController.GetAnswerIdByQuestionId(allQuestions[i].questionId);
+        string answer = allQuestions[i].answers.First(a => a.answerId.Equals(answerIndex)).answerText;
+        return answer;
     }
 
-	public void ContinuePostReport(){
-		LockCursor ();
-		playerCamera.GetComponent<PlayerLook> ().enabled = true;
-		postReport.SetActive (false);
-	}
+    public void ContinuePostReport()
+    {
+        LockCursor();
+        playerCamera.GetComponent<PlayerLook>().enabled = true;
+        postReport.SetActive(false);
+    }
 
     private void HandleEndOfAQuestion()
     {
@@ -891,10 +896,10 @@ public class GameController : MonoBehaviour
                 StartCoroutine(RunSequence());
         }
 
-		if (Input.GetKeyDown ("r")) 
-		{
-			LightsCameraAction ();
-		}
+        if (Input.GetKeyDown("r"))
+        {
+            LightsCameraAction();
+        }
 
         if (Input.GetKeyDown("t"))
         {
@@ -917,10 +922,10 @@ public class GameController : MonoBehaviour
                 !playerCamera.GetComponent<PostProcessingBehaviour>().enabled;
         }
 
-		if (Input.GetKeyDown ("i")) 
-		{
-			GeneratePostReport();
-		}
+        if (Input.GetKeyDown("i"))
+        {
+            GeneratePostReport();
+        }
 
 //        HandleWalking();
     }
