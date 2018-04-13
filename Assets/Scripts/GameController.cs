@@ -75,6 +75,7 @@ public class GameController : MonoBehaviour
     private int currentTimelineNo = 0;
     public RuntimeAnimatorController hansController;
     public RuntimeAnimatorController kiraController;
+    private Animator currentDetectiveAnimator;
 
     private int animationNoHash = Animator.StringToHash("animationNo");
 
@@ -148,10 +149,17 @@ public class GameController : MonoBehaviour
 
         if (!runTimeline)
         {
+            SetDetectiveAnimator();
             StartCoroutine(RunSequence());
-            detectiveObject.GetComponent<Animator>().runtimeAnimatorController =
-                detectiveObject == hans ? hansController : kiraController;
         }
+    }
+
+    private void SetDetectiveAnimator()
+    {
+        detectiveObject.GetComponent<Animator>().runtimeAnimatorController =
+            detectiveObject == hans ? hansController : kiraController;
+
+        currentDetectiveAnimator = detectiveObject.GetComponent<Animator>();
     }
 
     private IEnumerator PlayIntro()
@@ -164,17 +172,12 @@ public class GameController : MonoBehaviour
 
         while (playableDirector.state == PlayState.Playing)
         {
-//            if (playableDirector.time > 83)
             yield return null;
         }
 
         subtitleDisplay.SetActive(false);
 
-//        detectiveObject.GetComponent<Animator>().enabled = true;
-
-        detectiveObject.GetComponent<Animator>().runtimeAnimatorController =
-            detectiveObject == hans ? hansController : kiraController;
-
+        SetDetectiveAnimator();
         StartCoroutine(RunSequence());
     }
 
