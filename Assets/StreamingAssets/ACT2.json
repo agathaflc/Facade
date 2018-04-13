@@ -609,8 +609,20 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/BadCop/SENTENCES/S10 - I SPOKE TO EVERY",
+      "filePath": "audio/BadCop/SENTENCES/S9_2 - ASKING YOU",
+      "subtitleText": "Enough! I don’t know why I’m sitting here wasting my time asking you these questions.",
+      "animationNo": 2
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/BadCop/SENTENCES/S10_0 - I SPOKE TO EVERY",
       "subtitleText": "I spoke to every other witness from last night and they all say you were the one acting weirdly."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/BadCop/SENTENCES/S10_1 - AND THEY ALL",
+      "subtitleText": "I spoke to every other witness from last night and they all say you were the one acting weirdly.",
+      "animationNo": 1
     },
     {
       "sequenceType": "dialog",
