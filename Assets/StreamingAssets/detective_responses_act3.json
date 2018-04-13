@@ -54,15 +54,15 @@
   "suspiciousNegative": [
     {
       "text": "Right..",
-      "soundFilePath": "audio/BadCop/RESPONSES/right"
+      "soundFilePath": "audio/GoodCop/RESPONSES/right"
     },
     {
       "text": "Sure..",
-      "soundFilePath": "audio/BadCop/RESPONSES/sure"
+      "soundFilePath": "audio/GoodCop/RESPONSES/sure"
     },
     {
       "text": "* Scoff *",
-      "soundFilePath": "audio/BadCop/RESPONSES/scoff"
+      "soundFilePath": "audio/GoodCop/RESPONSES/scoff"
     },
     {
       "text": "Hmm..",
@@ -72,11 +72,11 @@
   "notSuspiciousNegative": [
     {
       "text": "K.",
-      "soundFilePath": "audio/BadCop/RESPONSES/k"
+      "soundFilePath": "audio/GoodCop/RESPONSES/k"
     },
     {
       "text": "Hmmm..",
-      "soundFilePath": "audio/BadCop/RESPONSES/hm"
+      "soundFilePath": "audio/GoodCop/RESPONSES/hm"
     }
   ],
   "clarifying": [
