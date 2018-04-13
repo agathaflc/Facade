@@ -181,7 +181,7 @@ ModelImporter:
     7400016: (6)LeanForward
     7400018: (8)SlamTable
     7400020: HansFormal|(9)GetUpLeanForward
-    7400022: HansFormal|(9)HandsOnTableGetUp_USETHIS
+    7400022: (9)HandsOnTableGetUp_USETHIS
     7400024: HansFormal|Chair.000Action
     7400026: ()NeutralSit
     7400028: HansFormal_Mesh|(9)GetUpLeanForward
@@ -195,6 +195,8 @@ ModelImporter:
     7400044: (1_c)PointHold
     7400046: (0_a)PutHandsOnTable
     7400048: (0_b)ActuallySitDown
+    7400050: (9)StayUp
+    7400052: (9)GetDown
     9500000: //RootNode
     13700000: HansFormal_Hairs
     13700002: HansFormal_Mesh
@@ -546,7 +548,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: HansFormal|(9)HandsOnTableGetUp_USETHIS
+      name: (9)HandsOnTableGetUp_USETHIS
       takeName: HansFormal|(9)HandsOnTableGetUp
       firstFrame: 4329
       lastFrame: 4409
@@ -922,6 +924,62 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: (9)StayUp
+      takeName: HansFormal|(9)HandsOnTableGetUp
+      firstFrame: 4366
+      lastFrame: 4376
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: (9)GetDown
+      takeName: HansFormal|(9)HandsOnTableGetUp
+      firstFrame: 4376
+      lastFrame: 4409
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0

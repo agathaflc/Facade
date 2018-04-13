@@ -616,28 +616,44 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/BadCop/SENTENCES/S10_0 - I SPOKE TO EVERY",
-      "subtitleText": "I spoke to every other witness from last night and they all say you were the one acting weirdly."
+      "subtitleText": "I spoke to every other witness from last night and they all say you were the one acting weird."
     },
     {
       "sequenceType": "dialog",
       "filePath": "audio/BadCop/SENTENCES/S10_1 - AND THEY ALL",
-      "subtitleText": "I spoke to every other witness from last night and they all say you were the one acting weirdly.",
+      "subtitleText": "I spoke to every other witness from last night and they all say you were the one acting weird.",
       "animationNo": 1
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/BadCop/SENTENCES/S11 - EVEN YOUR ALIBI",
-      "subtitleText": "Even your alibi claimed you were doing suspicious stuff. And now you’re trying to tell me that you had nothing to do with this murder?!"
+      "filePath": "audio/BadCop/SENTENCES/S11_0 - EVEN YOUR ALIBI",
+      "subtitleText": "Even your alibi claimed you were doing suspicious stuff. And now you’re trying to tell me that you had nothing to do with this murder?!",
+      "animationNo": 20,
+      "animatorLayer": 2
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/BadCop/SENTENCES/S11_1 - AND NOW YOU",
+      "subtitleText": "Even your alibi claimed you were doing suspicious stuff. And now you’re trying to tell me that you had nothing to do with this murder?!",
+      "animationNo": 9
     },
     {
       "sequenceType": "dialog",
       "filePath": "audio/BadCop/SENTENCES/S12 - WE BOTH KNOW",
-      "subtitleText": "We both know you’re guilty."
+      "subtitleText": "We both know you’re guilty.",
+      "animationNo": 4
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/BadCop/SENTENCES/S13 - HER COLD DEAD BODY",
-      "subtitleText": "Her cold dead body is being examined right now as we speak, and all we need is just a connection to you."
+      "filePath": "audio/BadCop/SENTENCES/S13_0 - HER COLD DEAD BODY",
+      "subtitleText": "Her cold dead body is being examined right now as we speak, and all we need is just a connection to you.",
+      "animationNo": 1
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/BadCop/SENTENCES/S13_0 - TO YOU",
+      "subtitleText": "Her cold dead body is being examined right now as we speak, and all we need is just a connection to you.",
+      "animationNo": 2
     },
     {
       "sequenceType": "dialog",
