@@ -80,12 +80,12 @@ public class GameController : MonoBehaviour
 
     private int animationNoHash = Animator.StringToHash("animationNo");
 
-    private AudioSource detectiveAudioSource;
+    private AudioSource detectiveVoice;
+    private AudioSource detectiveSoundEffect;
     private AudioSource bgmAudioSource1;
     private AudioSource bgmAudioSource2;
 
     private AudioSource currentBgmAudioSource;
-    public float volumeChangesPerSecond = 10;
 
     private DataController dataController;
     private ActData currentActData;
@@ -131,12 +131,17 @@ public class GameController : MonoBehaviour
         }
 
         currentActData = dataController.GetCurrentRoundData();
-        detectiveAudioSource = detectiveObject.GetComponent<AudioSource>();
+        
+        var detectiveAudioSources = detectiveObject.GetComponents<AudioSource>();
+        detectiveVoice = detectiveAudioSources[0];
+        detectiveSoundEffect = detectiveAudioSources[1];
+//        detectiveVoice = detectiveObject.GetComponent<AudioSource>();
 
         var audioSource = player.GetComponents<AudioSource>();
         bgmAudioSource1 = audioSource[0];
         bgmAudioSource2 = audioSource[1];
         currentBgmAudioSource = bgmAudioSource1;
+        
         postProcessingBehaviour = playerCamera.GetComponent<PostProcessingBehaviour>();
 
         PlayBgm(currentActData.bgmNeutralClip, MUSIC_NEUTRAL, currentActData.bgmNeutralFile.seek); // always start off with the base clip 
@@ -250,7 +255,7 @@ public class GameController : MonoBehaviour
             var exited = currentSequence.animationNo == 0;
             var exitTime = currentDetectiveAnimator.GetAnimatorTransitionInfo(currentSequence.animatorLayer).duration;
 
-            while (detectiveAudioSource.isPlaying)
+            while (detectiveVoice.isPlaying)
             {
                 if (!exited)
                 {
@@ -287,6 +292,16 @@ public class GameController : MonoBehaviour
         }
 
         sequenceIndex++;
+    }
+
+    public AudioSource GetDetectiveSoundEffectAudioSource()
+    {
+        return detectiveSoundEffect;
+    }
+
+    public Animator GetCurrentDetectiveAnimator()
+    {
+        return currentDetectiveAnimator;
     }
 
     private void PlayBgm(AudioClip clip, string musicType, float seek, bool fadeIn = true)
@@ -400,7 +415,7 @@ public class GameController : MonoBehaviour
 
     private void ShowAndPlayDialog(AudioClip audioClip, string subtitle)
     {
-        if (detectiveAudioSource == null)
+        if (detectiveVoice == null)
         {
             Debug.LogError("audio source not found!");
         }
@@ -410,8 +425,8 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            detectiveAudioSource.clip = audioClip;
-            detectiveAudioSource.Play();
+            detectiveVoice.clip = audioClip;
+            detectiveVoice.Play();
 
             if (string.IsNullOrEmpty(subtitle)) return;
             subtitleDisplay.SetActive(true);
@@ -513,7 +528,7 @@ public class GameController : MonoBehaviour
         ShowAndPlayDialog(clip, subtitle);
         questionDisplay.SetActive(false);
 
-        while (detectiveAudioSource.isPlaying)
+        while (detectiveVoice.isPlaying)
         {
             yield return null;
         }
@@ -686,7 +701,7 @@ public class GameController : MonoBehaviour
                     GetAndPlayDetectiveResponse(answerData.detectiveResponse);
                 }
 
-                while (detectiveAudioSource.isPlaying)
+                while (detectiveVoice.isPlaying)
                 {
                     yield return null;
                 }
@@ -697,7 +712,7 @@ public class GameController : MonoBehaviour
         else // was clarifying
         {
             GetAndPlayDetectiveResponse(DataController.DETECTIVE_RESPONSE_POST_CLARIFYING);
-            while (detectiveAudioSource.isPlaying)
+            while (detectiveVoice.isPlaying)
             {
                 yield return null;
             }
