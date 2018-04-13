@@ -233,13 +233,13 @@ public class GameController : MonoBehaviour
             currentDetectiveAnimator.SetInteger(animationNoHash, currentSequence.animationNo);
 
             var exited = currentSequence.animationNo == 0;
-            var exitTime = currentDetectiveAnimator.GetAnimatorTransitionInfo(0).duration;
+            var exitTime = currentDetectiveAnimator.GetAnimatorTransitionInfo(currentSequence.animatorLayer).duration;
 
             while (detectiveAudioSource.isPlaying)
             {
                 if (!exited)
                 {
-                    if (currentDetectiveAnimator.GetAnimatorTransitionInfo(0).normalizedTime > exitTime)
+                    if (currentDetectiveAnimator.GetAnimatorTransitionInfo(currentSequence.animatorLayer).normalizedTime > exitTime)
                     {
                         currentDetectiveAnimator.SetInteger(animationNoHash, 0);
                         exited = true;

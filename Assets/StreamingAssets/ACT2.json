@@ -19,12 +19,14 @@
   "sequence": [
     {
       "sequenceType": "dialog",
-      "filePath": "audio/BadCop/SENTENCES/S2 - AND I_M DEFINITELY",
-      "subtitleText": "And I’m definitely not interested in hearing any sob story bullshit from you, so don’t start any funny business with me."
+      "filePath": "audio/BadCop/SENTENCES/S2_0 - AND I'M DEFINITELY",
+      "subtitleText": "And I’m definitely not interested in hearing any sob story bullshit from you, so don’t start any funny business with me.",
+      "animationNo": 20,
+      "animatorLayer": 2
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/BadCop/SENTENCES/S2_2 - ANY SOB STORY",
+      "filePath": "audio/BadCop/SENTENCES/S2_2 - FROM YOU",
       "subtitleText": "And I’m definitely not interested in hearing any sob story bullshit from you, so don’t start any funny business with me.",
       "animationNo": 2
     },
@@ -534,7 +536,9 @@
       "sequenceType": "dialog",
       "filePath": "audio/BadCop/SENTENCES/S8 - YOU MUST HAVE HAD",
       "subtitleText": "You must have had a really bad relationship with the victim huh? You seem like the kinda guy who'd get rid of someone they didn't like..",
-      "effect": "vignette"
+      "effect": "vignette",
+      "animationNo": 15,
+      "animatorLayer": 1
     },
     {
       "sequenceType": "question",

@@ -378,17 +378,12 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Inbetween bone
-      rotation in copied configuration does not match rotation in animation file:\n\t'Spine1'
-      : rotation error = 3.074670 deg\n\t'Spine3' : rotation error = 3.120526 deg\n\t'LeftArmRoll'
-      : rotation error = 21.748564 deg\n\t'LeftForeArmRoll' : rotation error = 3.585932
-      deg\n\t'RightArmRoll' : rotation error = 26.445883 deg\n\t'RightForeArmRoll'
-      : rotation error = 19.282970 deg\n"
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
       might lower retargeting quality:\nNote: Activate translation DOF on avatar to
-      improve retargeting quality.\n\t'Spine1' is inbetween humanoid transforms and
-      has rotation animation that will be discarded.\n\t'Spine3' is inbetween humanoid
+      improve retargeting quality.\n\t'Spine2' is inbetween humanoid transforms and
+      has rotation animation that will be discarded.\n\t'Head' is inbetween humanoid
       transforms and has rotation animation that will be discarded.\n\t'LeftArmRoll'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'RightArmRoll'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'RightForeArmRoll'
@@ -408,18 +403,18 @@ ModelImporter:
       name: crossarms_00
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 720
+      lastFrame: 90
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 1

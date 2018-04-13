@@ -15,4 +15,5 @@ public class SequenceData
     
     public bool triggerTimeline;
     public int animationNo;
+    public int animatorLayer;
 }
