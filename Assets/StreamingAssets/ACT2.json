@@ -635,8 +635,7 @@
       "sequenceType": "dialog",
       "filePath": "audio/BadCop/SENTENCES/S11_1 - AND NOW YOU",
       "subtitleText": "Even your alibi claimed you were doing suspicious stuff. And now you’re trying to tell me that you had nothing to do with this murder?!",
-      "animationNo": 20,
-      "animatorLayer": 9
+      "animationNo": 9
     },
     {
       "sequenceType": "dialog",
@@ -652,7 +651,7 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/BadCop/SENTENCES/S13 - HER COLD DEAD BODY",
+      "filePath": "audio/BadCop/SENTENCES/S13_0 - TO YOU",
       "subtitleText": "Her cold dead body is being examined right now as we speak, and all we need is just a connection to you.",
       "animationNo": 2
     },
