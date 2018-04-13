@@ -35,7 +35,7 @@ public class GameController : MonoBehaviour
     private const float EMOTION_DISTANCE_THRESHOLD = 2.0f;
     private const float FADE_STEP = 0.1f;
     private const float FER_RECORDING_TIME = 4f;
-    private const float MAX_SUSPICION_SCORE = 10f;
+    private const float MAX_SUSPICION_SCORE = 60f;
 
     // testing variables
     public bool FER_is_On;
