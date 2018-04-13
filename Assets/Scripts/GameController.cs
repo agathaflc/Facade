@@ -181,6 +181,94 @@ public class GameController : MonoBehaviour
         StartCoroutine(RunSequence());
     }
 
+    /**
+     * Should only be called after the previous sequence is completed
+     **/
+
+    private IEnumerator RunSequence()
+    {
+        if (sequenceIndex >= currentActData.sequence.Length)
+        {
+            EndRound();
+            yield break;
+        }
+
+        currentSequence = currentActData.sequence[sequenceIndex];
+
+        if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
+        {
+            // Debug.Log ("RunSequence: current sequence is question");
+            questionPool = currentSequence.questions;
+            questionIndex = 0;
+
+            subtitleDisplay.SetActive(false);
+            BeginQuestions();
+        }
+        else if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_DIALOG))
+        {
+            // Debug.Log ("RunSequence: current sequence is dialog");
+            LockCursor();
+            isEventDone = false;
+
+            if (!string.IsNullOrEmpty(currentSequence.effect)) // show special effects if any
+            {
+                ShowSpecialEffect(currentSequence.effect);
+            }
+
+            ShowAndPlayDialog(DataController.LoadAudioFile(currentSequence.filePath), currentSequence.subtitleText);
+
+            if (currentSequence.bgm != null)
+            {
+                PlayBgm(DataController.LoadAudioFile(currentSequence.bgm.fileName), "special_bgm",
+                    currentSequence.bgm.seek);
+            }
+
+//            if (currentSequence.animationNo != 0)
+//            {
+//                detectiveObject.GetComponent<Animator>().SetInteger(animationNoHash, currentSequence.animationNo);
+////                detectiveObject.GetComponent<Animator>().SetInteger(animationNoHash, 0);
+//            }
+            
+            currentDetectiveAnimator.SetInteger(animationNoHash, currentSequence.animationNo);
+
+            var exited = currentSequence.animationNo == 0;
+            var exitTime = currentDetectiveAnimator.GetAnimatorTransitionInfo(0).duration;
+
+            while (detectiveAudioSource.isPlaying)
+            {
+                if (!exited)
+                {
+                    if (currentDetectiveAnimator.GetAnimatorTransitionInfo(0).normalizedTime > exitTime)
+                    {
+                        currentDetectiveAnimator.SetInteger(animationNoHash, 0);
+                        exited = true;
+                    }
+                }
+
+                yield return null;
+            }
+
+            if (currentSequence.readExpression)
+            {
+                // TODO create a pop-up that instructs player to put on an appropriate expression?
+                subtitleDisplay.SetActive(false);
+
+                DataController.StartFER();
+                Debug.Log("wait 3 seconds");
+                yield return new WaitForSecondsRealtime(FER_RECORDING_TIME);
+                DataController.StopFER();
+
+                string closestEmotion;
+                SaveAndDisplayScore(CalculateSuspicionScore_EmotionOnly(currentSequence.expectedExpressions,
+                    currentSequence.scoreWeight, out closestEmotion));
+            }
+            
+            ConcludeEvent();
+        }
+
+        sequenceIndex++;
+    }
+
     private void PlayBgm(AudioClip clip, string musicType, float seek, bool fadeIn = true)
     {
         if (clip == null)
@@ -243,81 +331,6 @@ public class GameController : MonoBehaviour
         }
 
         audioSource.Stop();
-    }
-
-    /**
-     * Should only be called after the previous sequence is completed
-     **/
-    private IEnumerator RunSequence()
-    {
-        if (sequenceIndex >= currentActData.sequence.Length)
-        {
-            EndRound();
-            yield break;
-        }
-
-        currentSequence = currentActData.sequence[sequenceIndex];
-
-        if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
-        {
-            // Debug.Log ("RunSequence: current sequence is question");
-            questionPool = currentSequence.questions;
-            questionIndex = 0;
-
-            subtitleDisplay.SetActive(false);
-            BeginQuestions();
-        }
-        else if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_DIALOG))
-        {
-            // Debug.Log ("RunSequence: current sequence is dialog");
-            LockCursor();
-            isEventDone = false;
-
-            if (!string.IsNullOrEmpty(currentSequence.effect)) // show special effects if any
-            {
-                ShowSpecialEffect(currentSequence.effect);
-            }
-
-            ShowAndPlayDialog(DataController.LoadAudioFile(currentSequence.filePath), currentSequence.subtitleText);
-
-            if (currentSequence.bgm != null)
-            {
-                PlayBgm(DataController.LoadAudioFile(currentSequence.bgm.fileName), "special_bgm",
-                    currentSequence.bgm.seek);
-            }
-
-//            if (currentSequence.animationNo != 0)
-//            {
-//                detectiveObject.GetComponent<Animator>().SetInteger(animationNoHash, currentSequence.animationNo);
-////                detectiveObject.GetComponent<Animator>().SetInteger(animationNoHash, 0);
-//            }
-            
-            detectiveObject.GetComponent<Animator>().SetInteger(animationNoHash, currentSequence.animationNo);
-
-            while (detectiveAudioSource.isPlaying)
-            {
-                yield return null;
-            }
-
-            if (currentSequence.readExpression)
-            {
-                // TODO create a pop-up that instructs player to put on an appropriate expression?
-                subtitleDisplay.SetActive(false);
-
-                DataController.StartFER();
-                Debug.Log("wait 3 seconds");
-                yield return new WaitForSecondsRealtime(FER_RECORDING_TIME);
-                DataController.StopFER();
-
-                string closestEmotion;
-                SaveAndDisplayScore(CalculateSuspicionScore_EmotionOnly(currentSequence.expectedExpressions,
-                    currentSequence.scoreWeight, out closestEmotion));
-            }
-            
-            ConcludeEvent();
-        }
-
-        sequenceIndex++;
     }
 
     private void ConcludeEvent()
