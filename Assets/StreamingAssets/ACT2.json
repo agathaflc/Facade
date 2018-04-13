@@ -18,12 +18,14 @@
   },
   "sequence": [
     {
+      "sequenceType": "timeline"
+    },
+    {
       "sequenceType": "dialog",
       "filePath": "audio/BadCop/SENTENCES/S2_0 - AND I'M DEFINITELY",
       "subtitleText": "And I’m definitely not interested in hearing any sob story bullshit from you, so don’t start any funny business with me.",
       "animationNo": 20,
-      "animatorLayer": 2,
-      "effect": "bloom"
+      "animatorLayer": 2
     },
     {
       "sequenceType": "dialog",
@@ -658,31 +660,6 @@
     },
     {
       "sequenceType": "timeline"
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/BadCop/SENTENCES/S14 - A GIRL WAS MURDER",
-      "subtitleText": "A girl was murdered..."
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/BadCop/SENTENCES/S15 - SHOT IN COLD BLOOD",
-      "subtitleText": "Shot in cold blood..."
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/BadCop/SENTENCES/S16 - A GIRL YOU HAVE SOME BAD HISTORY WITH",
-      "subtitleText": "A girl that you have some bad history with."
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/BadCop/SENTENCES/S17 - AND YOU_RE TRYING TO TELL ME",
-      "subtitleText": "And you’re trying to tell me, that you have nothing to do with this??"
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/BadCop/SENTENCES/S18 - THAN WHATS THAT",
-      "subtitleText": "Then what’s that?"
     },
     {
       "sequenceType": "dialog",

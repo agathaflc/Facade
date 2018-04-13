@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
     private const float MAX_SUSPICION_SCORE = 60f;
 
     // testing variables
-    public bool FER_is_On;
+    public bool FER_is_Off;
     public bool gameSceneOnly;
     public bool runTimeline;
 
@@ -73,7 +73,7 @@ public class GameController : MonoBehaviour
     // animation stuff
     public List<TimelineAsset> timelines;
     public PlayableDirector playableDirector;
-    private int currentTimelineNo = 0;
+    private int currentTimelineNo;
     public RuntimeAnimatorController hansController;
     public RuntimeAnimatorController kiraController;
     private Animator currentDetectiveAnimator;
@@ -144,13 +144,13 @@ public class GameController : MonoBehaviour
 
         displayedScore = 0;
         sequenceIndex = 0;
+        currentTimelineNo = 0;
 
         isTimerActive = false;
         isClarifying = false;
 
         if (!runTimeline)
         {
-            SetDetectiveAnimator();
             StartCoroutine(RunSequence());
         }
     }
@@ -180,12 +180,32 @@ public class GameController : MonoBehaviour
 
         SetDetectiveAnimator();
         StartCoroutine(RunSequence());
+        
+    }
+    
+    private IEnumerator RunTimeline()
+    {
+        subtitleDisplay.SetActive(true);
+        subtitleDisplayText.text = "";
+
+        playableDirector.playableAsset = timelines[currentTimelineNo];
+        PlayTimeline(playableDirector);
+
+        while (playableDirector.state == PlayState.Playing)
+        {
+            yield return null;
+        }
+
+        subtitleDisplay.SetActive(false);
+
+        if (currentTimelineNo == 0) SetDetectiveAnimator();
+        currentTimelineNo++;
+        StartCoroutine(RunSequence());
     }
 
     /**
      * Should only be called after the previous sequence is completed
      **/
-
     private IEnumerator RunSequence()
     {
         if (sequenceIndex >= currentActData.sequence.Length)
@@ -263,7 +283,7 @@ public class GameController : MonoBehaviour
         }
         else if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_TIMELINE))
         {
-            
+            StartCoroutine(RunTimeline());
         }
 
         sequenceIndex++;
@@ -369,7 +389,7 @@ public class GameController : MonoBehaviour
         var emotionDistance = dataController.ComputeEmotionDistance(expectedExpressions,
             DataController.ReadPlayerEmotion(), out closestEmotion);
 
-        if (FER_is_On)
+        if (!FER_is_Off)
         {
             dataController.DeleteFERDataFile();
         }
@@ -554,7 +574,7 @@ public class GameController : MonoBehaviour
         Debug.Log("closestEmotion: " + closestEmotion + ", distance: " + emotionDistance + ", score: " +
                   expressionScore);
 
-        if (FER_is_On)
+        if (!FER_is_Off)
         {
             dataController.DeleteFERDataFile();
         }
