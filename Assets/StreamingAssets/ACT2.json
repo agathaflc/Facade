@@ -19,12 +19,6 @@
   "sequence": [
     {
       "sequenceType": "dialog",
-      "filePath": "audio/BadCop/SENTENCES/S1 - ALRIGHT LISTEN UP",
-      "subtitleText": "Alright listen up, I’ve spent the last 18 hours working on this case, having to question a bunch of hysterical kids I don’t give a damn about.",
-      "animationNo": 1
-    },
-    {
-      "sequenceType": "dialog",
       "filePath": "audio/BadCop/SENTENCES/S2 - AND I_M DEFINITELY",
       "subtitleText": "And I’m definitely not interested in hearing any sob story bullshit from you, so don’t start any funny business with me."
     },

@@ -1688,6 +1688,8 @@ PlayableDirector:
     value: {fileID: 1321651007}
   - key: {fileID: 114781247767452276, guid: 6bf6405a86beea04dbd0b1889b9a8b4f, type: 2}
     value: {fileID: 442740192}
+  - key: {fileID: 114964661478035694, guid: 6bf6405a86beea04dbd0b1889b9a8b4f, type: 2}
+    value: {fileID: 460190874}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &261924091
@@ -4237,7 +4239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FER_is_On: 0
-  gameSceneOnly: 1
+  gameSceneOnly: 0
   runTimeline: 1
   questionDisplayText: {fileID: 1862245467}
   scoreDisplayerSlider: {fileID: 1720664495}
