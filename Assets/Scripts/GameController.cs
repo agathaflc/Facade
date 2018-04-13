@@ -850,33 +850,40 @@ public class GameController : MonoBehaviour
     {
         UnlockCursor();
         playerCamera.GetComponent<PlayerLook>().enabled = false;
-        Debug.Log(GetAnswer(0));
+        //Debug.Log(GetAnswer(0));
         postReport.SetActive(true);
         string report = "";
-        report = "Investigatation case #160418(HO4) status: on going. \nDocument classification: confidential." +
-                 "\nThe suspect was interviewed by detective warren at 1900HRS at MaryHill police station, interrogation room 5." +
-                 "\nThe following details the factual statement as recorded," +
-                 "\n The suspect stated the following information about themselves:" +
-                 "\n Name: " + GetAnswer(0) +
-                 "\n Age: " + GetAnswer(1) +
-                 "\n Country of Origin: " + GetAnswer(2) +
-                 "\n Dream Frequency: " + GetAnswer(4) +
-                 "\n\n The suspect stated the following information about their whereabouts:" +
-                 "\n Location during time of incident: " + GetAnswer(5) +
-                 "\n Alibi: " + GetAnswer(6) +
-                 "\n Time of Arrival at home: " + GetAnswer(7) +
-                 "\n Method of Transportation home: " + GetAnswer(8) +
-                 "\n\n The suspect stated the following information when prompted with the incident:" +
-                 "\n Recognition of victim: " + GetAnswer(9) +
-                 "\n Accuse person of acting suspiciously: " + GetAnswer(10) +
-                 "\n Reason for accusation: " + GetAnswer(11);
-        postReport.transform.GetChild(0).gameObject.GetComponent<Text>().text = report;
+		report = "Investigatation case #160418(HO4)" +
+		"\nStatus: On going " +
+		"\nDocument classification: Confidential" +
+		"\nDetective in Charge: Sgt Suzanna Warren" +
+		"\nTime of interrogration: 1900HRS" +
+		"\nLocation: Mary Hill police station, interrogation room 5" +
+		"\nThe following details the factual statement as recorded..." +
+		"\n\nThe suspect stated the following information about themselves...";
+//		"\n Name: " + GetAnswer (0) +
+//		"\n Age: " + GetAnswer (1) +
+//		"\n Country of Origin: " + GetAnswer (2) +
+//		"\n Dream Frequency: " + GetAnswer (4) +
+//
+//		"\n\nThe suspect claimed that they were at " + GetAnswer (5) + " during the time of the incident " +
+//		"along with " + GetAnswer (6) + " as their alibi." +
+//		" The suspect reported that they went home by " + GetAnswer (8) +
+//		" and arrived home at " + GetAnswer (7) +
+//            
+//		"\n\n The suspect stated that they, " + GetAnswer(9) +
+//		", recignise the victim when showed a picture of Lianne. When prompted to recall if anyone has acting suspicionsly during time of incident, the suspect accused " +
+//		GetAnswer(10) + " because of the reason that they " + GetAnswer(11);
+//      
+		postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
+		//postReport.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Text>().text = report;
     }
 
     private string GetAnswer(int i)
     {
         string answerIndex = dataController.GetAnswerIdByQuestionId(allQuestions[i].questionId);
         string answer = allQuestions[i].answers.First(a => a.answerId.Equals(answerIndex)).answerText;
+		answer = "<b>" + answer + "</b>";
         return answer;
     }
 
