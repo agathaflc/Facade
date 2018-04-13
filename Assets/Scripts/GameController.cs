@@ -217,8 +217,9 @@ public class GameController : MonoBehaviour
 
             ShowAndPlayDialog(DataController.LoadAudioFile(currentSequence.filePath), currentSequence.subtitleText);
 
-            if (currentSequence.bgm != null)
+            if (string.IsNullOrEmpty(currentSequence.bgm.fileName))
             {
+                Debug.Log("special bgm is not null: " + currentSequence.bgm.fileName);
                 PlayBgm(DataController.LoadAudioFile(currentSequence.bgm.fileName), "special_bgm",
                     currentSequence.bgm.seek);
             }

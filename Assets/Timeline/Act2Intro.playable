@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Name: AnimationPlayableAsset of (0_a)PutHandsOnTable
   m_EditorClassIdentifier: 
   m_Clip: {fileID: 7400046, guid: 98dae39106546764ea490a866eaf6ed0, type: 3}
-  m_Position: {x: 0.34830275, y: -0.15999219, z: 0.059916943}
+  m_Position: {x: 0.34830275, y: -0.14, z: 0.059916943}
   m_Rotation: {x: 0.046235166, y: 0, z: 0, w: 0.9989306}
   m_UseTrackMatchFields: 0
   m_MatchTargetFields: 63
@@ -295,19 +295,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -437,7 +425,19 @@ MonoBehaviour:
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -799,7 +799,7 @@ MonoBehaviour:
   m_Name: AnimationPlayableAsset of ()NeutralSit
   m_EditorClassIdentifier: 
   m_Clip: {fileID: 7400034, guid: 7f897d32d4a6ad349b2b049072567b19, type: 3}
-  m_Position: {x: -0.14237571, y: -0.15599392, z: 0.25979298}
+  m_Position: {x: -0.14237571, y: -0.15, z: 0.24312253}
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_UseTrackMatchFields: 0
   m_MatchTargetFields: 63

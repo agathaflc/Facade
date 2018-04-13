@@ -310,7 +310,8 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/BadCop/SENTENCES/S5 - SCOFF LISTEN KID",
-      "subtitleText": "Listen kid, you and I both know that you were definitely wasted last night. I can see how hungover you are right now."
+      "subtitleText": "Listen kid, you and I both know that you were definitely wasted last night. I can see how hungover you are right now.",
+      "animationNo": 5
     },
     {
       "sequenceType": "dialog",
@@ -321,7 +322,8 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/BadCop/SENTENCES/S7 - GOOD",
-      "subtitleText": "Good."
+      "subtitleText": "Good.",
+      "animationNo": 6
     },
     {
       "sequenceType": "question",
