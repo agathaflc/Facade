@@ -2981,7 +2981,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: c7ecdbdcd43af448f851bdefef757ddd, type: 2}
     - target: {fileID: 400004, guid: ec1dfd239de6347d1815e9ae364f145b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.47
+      value: 3.08
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: ec1dfd239de6347d1815e9ae364f145b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -4243,8 +4243,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FER_is_On: 0
-  gameSceneOnly: 1
-  runTimeline: 1
+  gameSceneOnly: 0
+  runTimeline: 0
   questionDisplayText: {fileID: 1862245467}
   scoreDisplayerSlider: {fileID: 1720664495}
   scoreDisplayText: {fileID: 1712600188}
@@ -4269,6 +4269,7 @@ MonoBehaviour:
   bloomEffect: {fileID: 11400000, guid: 2476016b9db4793459c550e08e6d4857, type: 2}
   player: {fileID: 65289683}
   timelines:
+  - {fileID: 11400000, guid: 6bf6405a86beea04dbd0b1889b9a8b4f, type: 2}
   - {fileID: 11400000, guid: 9b0f6f04e1ba46543935fb0b720ff13f, type: 2}
   playableDirector: {fileID: 261924090}
   hansController: {fileID: 9100000, guid: ced0da6be5d0a434480ae708bd8c3d54, type: 2}

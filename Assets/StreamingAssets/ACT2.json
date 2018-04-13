@@ -22,7 +22,8 @@
       "filePath": "audio/BadCop/SENTENCES/S2_0 - AND I'M DEFINITELY",
       "subtitleText": "And I’m definitely not interested in hearing any sob story bullshit from you, so don’t start any funny business with me.",
       "animationNo": 20,
-      "animatorLayer": 2
+      "animatorLayer": 2,
+      "effect": "bloom"
     },
     {
       "sequenceType": "dialog",
@@ -654,6 +655,9 @@
       "filePath": "audio/BadCop/SENTENCES/S13_0 - TO YOU",
       "subtitleText": "Her cold dead body is being examined right now as we speak, and all we need is just a connection to you.",
       "animationNo": 2
+    },
+    {
+      "sequenceType": "timeline"
     },
     {
       "sequenceType": "dialog",

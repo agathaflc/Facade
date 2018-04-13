@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
 {
     private const string SEQUENCE_TYPE_DIALOG = "dialog";
     private const string SEQUENCE_TYPE_QUESTION = "question";
+    private const string SEQUENCE_TYPE_TIMELINE = "timeline";
     private const string DEFAULT_EMOTION = "neutral";
     private const string HAPPY_EMOTION = "happy";
     private const string SAD_EMOTION = "sad";
@@ -223,12 +224,6 @@ public class GameController : MonoBehaviour
                 PlayBgm(DataController.LoadAudioFile(currentSequence.bgm.fileName), "special_bgm",
                     currentSequence.bgm.seek);
             }
-
-//            if (currentSequence.animationNo != 0)
-//            {
-//                detectiveObject.GetComponent<Animator>().SetInteger(animationNoHash, currentSequence.animationNo);
-////                detectiveObject.GetComponent<Animator>().SetInteger(animationNoHash, 0);
-//            }
             
             currentDetectiveAnimator.SetInteger(animationNoHash, currentSequence.animationNo);
 
@@ -265,6 +260,10 @@ public class GameController : MonoBehaviour
             }
             
             ConcludeEvent();
+        }
+        else if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_TIMELINE))
+        {
+            
         }
 
         sequenceIndex++;
