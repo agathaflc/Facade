@@ -22,6 +22,258 @@
     },
     {
       "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S16_0_Just_like_you",
+      "subtitleText": "Just like you.. We both know who’s really in control here.",
+      "animationNo": 2
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S16_1_hah",
+      "subtitleText": "Just like you.. We both know who’s really in control here.",
+      "animationNo": 8
+    },
+    {
+      "sequenceType": "question",
+      "questions": [
+        {
+          "questionDesc": "Player Death Feelings",
+          "questionId": "31",
+          "expressionWeight": 1,
+          "consistencyWeight": 0,
+          "considersEmotion": true,
+          "considersFact": false,
+          "filePath": "audio/Act3/Question/Q7_Have_you_ever_someone_close_die",
+          "questionText": "Have you ever had someone close to you die? How do you feel about death?",
+          "answers": [
+            {
+              "answerId": "310",
+              "answerText": "It happens to everyone",
+              "expectedExpressions": [
+                "neutral"
+              ],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "311",
+              "answerText": "It’s depressing",
+              "expectedExpressions": [
+                "sad"
+              ],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "312",
+              "answerText": "Some people deserve to die",
+              "expectedExpressions": [
+                "scared",
+                "angry"
+              ],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "313",
+              "answerText": "I’m scared to die",
+              "expectedExpressions": [
+                "sad",
+                "surprised",
+                "scared"
+              ],
+              "detectiveResponse": "negative"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/silence_splitsecond",
+      "subtitleText": "",
+      "animationNo": 90
+    },
+    {
+      "sequenceType": "question",
+      "questions": [
+        {
+          "questionDesc": "Player Gun",
+          "questionId": "24",
+          "expressionWeight": 0.5,
+          "consistencyWeight": 0.5,
+          "considersEmotion": true,
+          "considersFact": true,
+          "filePath": "audio/Act3/Question/Q8_Then_tell_me_WHY",
+          "questionText": "Then tell me, WHY did you have your gun on you last night? Was it really that necessary?",
+          "answers": [
+            {
+              "answerId": "240",
+              "answerText": "That's none of your business",
+              "expectedExpressions": [
+                "surprised",
+                "angry"
+              ],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "241",
+              "answerText": "It's not mine",
+              "expectedExpressions": [
+                "surprised",
+                "scared",
+                "sad"
+              ],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "242",
+              "answerText": "Defense Measure",
+              "expectedExpressions": [
+                "surprised",
+                "angry"
+              ],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "243",
+              "answerText": "I don't know",
+              "expectedExpressions": [
+                "surprised",
+                "scared",
+                "sad"
+              ],
+              "detectiveResponse": "negative"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S16_1_hah",
+      "subtitleText": "You ever go to church? There’s a quote that goes: “Do unto others as you would have them do unto you.”",
+      "animationNo": 91
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S17_0_You_ever_go_to_church",
+      "subtitleText": "You ever go to church? There’s a quote that goes: “Do unto others as you would have them do unto you.”"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S17_1_what_do_you_think",
+      "subtitleText": "What do you think?",
+      "animationNo": 92
+    },
+    {
+      "sequenceType": "question",
+      "questions": [
+        {
+          "questionDesc": "Player Karma Revenge",
+          "questionId": "33",
+          "expressionWeight": 1,
+          "consistencyWeight": 0,
+          "considersEmotion": true,
+          "considersFact": false,
+          "filePath": "audio/Act3/Question/Q9_Do_you_believe_Karma",
+          "questionText": "Do you think the universe and karma balances things? Or do we need to take matters into our own hands?",
+          "answers": [
+            {
+              "answerId": "330",
+              "answerText": "Karma will handle things",
+              "expectedExpressions": [
+                "neutral",
+                "angry"
+              ]
+            },
+            {
+              "answerId": "331",
+              "answerText": "It’s sometimes necessary",
+              "expectedExpressions": [
+                "angry"
+              ]
+            },
+            {
+              "answerId": "332",
+              "answerText": "I don’t know what you’re talking about",
+              "expectedExpressions": [
+                "scared",
+                "surprised"
+              ]
+            },
+            {
+              "answerId": "333",
+              "answerText": "Stop talking like that!",
+              "expectedExpressions": [
+                "scared",
+                "surprised"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S18_Hah_of_course",
+      "subtitleText": "Hah... of course you would say that.",
+      "animationNo": 41,
+      "animatorLayer": 1
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S19_You_re_a_prideful",
+      "subtitleText": "You’re a prideful person, aren’t you?"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S20_The_kinda_of_person",
+      "subtitleText": "The kind of person who wouldn’t be able to handle it if someone else was getting ahead of them..."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S21_0_You_used_to_be_the_one",
+      "subtitleText": "You used to be the one everyone loved, until you and Lianne had that fight. And then everyone took her side over yours."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S21_1_everyone_loved",
+      "subtitleText": "You used to be the one everyone loved, until you and Lianne had that fight. And then everyone took her side over yours.",
+      "animationNo": 93
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S21_2_and_everyone_took_her",
+      "subtitleText": "You used to be the one everyone loved, until you and Lianne had that fight. And then everyone took her side over yours.",
+      "animationNo": 94
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S22_It_must_have_really_bothered",
+      "subtitleText": "It must have really bothered you and I bet you couldn't handle it.",
+      "animationNo": 95
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S23_Is_that_why_you_followed",
+      "subtitleText": "Is that why you followed her to the bathroom last night?",
+      "animationNo": 96
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S24_And_made_sure_to_take",
+      "subtitleText": "And made sure to take your gun with you?"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S25_And_why_no_one",
+      "subtitleText": "And why no one could find you when the gunshot was heard?",
+      "animationNo": 97
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S26_You_couldn_t_even_look",
+      "subtitleText": "You couldn’t even look her in the eyes, you coward."
+    },
+    {
+      "sequenceType": "dialog",
       "filePath": "audio/silence_splitsecond",
       "subtitleText": "",
       "animationNo": 98
@@ -78,6 +330,9 @@
           ]
         }
       ]
+    },
+    {
+      "sequenceType": "timeline"
     },
     {
       "sequenceType": "dialog",
