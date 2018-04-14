@@ -254,6 +254,11 @@ public class GameController : MonoBehaviour
 
         currentSequence = currentActData.sequence[sequenceIndex];
 
+        if (currentSequence.ending)
+        {
+            detectiveObject.GetComponent<Animator>().runtimeAnimatorController = kiraStandUpController;
+            currentDetectiveAnimator = detectiveObject.GetComponent<Animator>();
+        }
         if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
         {
             // Debug.Log ("RunSequence: current sequence is question");

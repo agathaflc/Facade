@@ -13,7 +13,8 @@ public class SequenceData
     public string[] expectedExpressions;
     public QuestionData[] questions;
     
-    public bool triggerTimeline;
     public int animationNo;
     public int animatorLayer;
+
+    public bool ending;
 }
