@@ -631,18 +631,40 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/",
-      "subtitleText": "Look man, I know you don’t have anything to do with this, and I can tell you’re a good guy who was just in the wrong place at the wrong time."
+      "filePath": "audio/Act1/Sentences/S13_0_Look_I_know_you_don_t_have_anything",
+      "subtitleText": "Look, I know you don’t have anything to do with this, and I can tell."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/",
-      "subtitleText": "So you don’t have anything to be worried about. I’m gonna step out for a second to finish up some paperwork, and I’ll be back in a while."
+      "filePath": "audio/Act1/Sentences/S13_1_and_i_can_tell",
+      "subtitleText": "Look, I know you don’t have anything to do with this, and I can tell.",
+      "animationNo": 2
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/",
-      "subtitleText": "I just hope we can figure out this case together, so that poor girl’s parents can get some closure. I’ll see you in a bit!"
+      "filePath": "audio/Act1/Sentences/S13_2_you_seem_like",
+      "subtitleText": "You seem like a good person who was just in the wrong place at the wrong time.",
+      "animationNo": 40,
+      "animatorLayer": 1
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S14_0_So_don_t_worry",
+      "subtitleText": "So don't worry. I’m gonna step out for a second to finish up some paperwork, and I’ll be back in a while.",
+      "animationNo": 60,
+      "animatorLayer": 3
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S14_1_and_ill_be_back",
+      "subtitleText": "So don't worry. I’m gonna step out for a second to finish up some paperwork, and I’ll be back in a while.",
+      "animationNo": 18
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S15_I_just_hope",
+      "subtitleText": "I just hope we can figure out this case together, so that poor girl’s parents can get some closure. I’ll see you in a bit!",
+      "animationNo": 17
     }
   ]
 }
