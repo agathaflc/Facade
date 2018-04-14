@@ -627,7 +627,21 @@ public class GameController : MonoBehaviour
         Debug.Log("displayed score: " + displayedScore.ToString("F1"));
 
         scoreDisplayText.text = "Suspicion: " + displayedScore.ToString("F2");
-        scoreDisplayerSlider.value = displayedScore / 10;
+        scoreDisplayerSlider.value = displayedScore / 60 ;
+
+		if (scoreDisplayerSlider.value >= 0.8) {
+			
+			scoreDisplayerSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = new Color32(200,0,0,255);
+
+		} else if (scoreDisplayerSlider.value >= 0.5 && scoreDisplayerSlider.value < 0.8) {
+			
+			scoreDisplayerSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = new Color32(250,250,0,255);
+
+		} else {
+			
+			scoreDisplayerSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = new Color32(0,200,0,255);
+
+		}
     }
 
     private IEnumerator HandleAnswer(AnswerButton answerButton)
@@ -854,7 +868,7 @@ public class GameController : MonoBehaviour
         SpotLight2.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
     }
 
-	private void LightingChanges(int newIntensity,Color newColor){
+	private void LightingChanges(int newIntensity,Color32 newColor){
 		var Lightbulb = room.transform.Find("Lightbulb").gameObject;
 		var Lights = Lightbulb.transform.Find("Lamp").gameObject;
 
@@ -904,7 +918,7 @@ public class GameController : MonoBehaviour
 		" and arrived home at " + GetAnswer (7) +
             
 		"\n\n The suspect stated that they, " + GetAnswer(9) +
-		", recignise the victim when showed a picture of Lianne. When prompted to recall if anyone has acting suspicionsly during time of incident, the suspect accused " +
+		", recognise the victim when showed a picture of Lianne. When prompted to recall if anyone was acting suspiciously during time of incident, the suspect accused " +
 		GetAnswer(10) + " because of the reason that they " + GetAnswer(11);
      
 		postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
@@ -973,7 +987,7 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown("r"))
         {
             LightsCameraAction();
-			//LightingChanges(2, new Color(0,0,1,1));
+			//LightingChanges(2, new Color(0,0,200,255));
         }
 
         if (Input.GetKeyDown("t"))
