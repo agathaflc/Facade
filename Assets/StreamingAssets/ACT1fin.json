@@ -200,8 +200,16 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/S4_Ah_there_s_nothing_to",
-      "subtitleText": "Ah there’s nothing to be worried about! I’m pretty tired myself."
+      "filePath": "audio/Act1/Sentences/S4_0_Ah_there_s_nothing_to",
+      "subtitleText": "Ah there’s nothing to be worried about! I’m pretty tired myself.",
+      "animationNo": 19
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S4_1_im_pretty_tired",
+      "subtitleText": "Ah there’s nothing to be worried about! I’m pretty tired myself.",
+      "animationNo": 41,
+      "animatorLayer": 1
     },
     {
       "sequenceType": "dialog",
