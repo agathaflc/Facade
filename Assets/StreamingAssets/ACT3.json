@@ -208,7 +208,8 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/S14_1_and_she_seemed",
-      "subtitleText": "And she seemed to have a lot of inside information on you and your relationship with the victim."
+      "subtitleText": "And she seemed to have a lot of inside information on you and your relationship with the victim.",
+      "animationNo": 6
     },
     {
       "sequenceType": "question",
@@ -301,9 +302,15 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
+      "filePath": "audio/Act3/Sentence/S16_0_Just_like_you",
       "subtitleText": "Just like you.. We both know who’s really in control here.",
       "animationNo": 2
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S16_1_hah",
+      "subtitleText": "Just like you.. We both know who’s really in control here.",
+      "animationNo": 8
     },
     {
       "sequenceType": "question",
