@@ -129,15 +129,17 @@ public class GameController : MonoBehaviour
         dataController = FindObjectOfType<DataController>(); // store a ref to data controller
 
         currentActNo = dataController.GetCurrentActNo();
-        if (currentActNo != 0)
+        if (currentActNo != 1)
         {
-            detectiveObject = hans;
-            kira.SetActive(false);
+            detectiveObject = kira;
+            detectiveObject.SetActive(true);
+            hans.SetActive(false);
         }
         else
         {
-            detectiveObject = kira;
-            hans.SetActive(false);
+            detectiveObject = hans;
+            detectiveObject.SetActive(true);
+            kira.SetActive(false);
         }
 
         currentActData = dataController.GetCurrentRoundData();

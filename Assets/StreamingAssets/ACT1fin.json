@@ -231,8 +231,25 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/",
-      "subtitleText": "And I sure as hell wasn’t gonna let them catch me alive, so I ate the bullet. But it turns out it was all just a dream!"
+      "filePath": "audio/Act1/Sentences/S7_0_And_I_sure_as_hell",
+      "subtitleText": "And I sure as hell wasn’t gonna let them catch me alive, so you know what I did?",
+      "animationNo": 41,
+      "animatorLayer": 1
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S7_1_i_bit_the_bullet",
+      "subtitleText": "I bit the bullet."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S7_3_laugh",
+      "subtitleText": "*laughs*"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S7_2_but_it_turns_out",
+      "subtitleText": "But it turns out it was all just a dream!"
     },
     {
       "sequenceType": "dialog",
