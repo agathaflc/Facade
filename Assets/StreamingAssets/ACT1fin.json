@@ -256,7 +256,7 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/silence_1sec",
+      "filePath": "audio/silence_2sec",
       "subtitleText": "",
       "animationNo": 5
     },
@@ -311,8 +311,9 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/",
-      "subtitleText": "Okay, I don't think you want to hear about my weird dreams! Let's get back to the case."
+      "filePath": "audio/Act1/Sentences/S9_Anyways_you_don_t_want",
+      "subtitleText": "Anyways, you don’t want to hear me go on and on and on about my weird dreams! So let's get back to the case.",
+      "animationNo": 19
     },
     {
       "sequenceType": "question",
@@ -324,7 +325,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/Act1/Sentences/",
+          "filePath": "audio/Act1/Questions/Q6_So_tell_me_where",
           "questionText": "So tell me where you were last night?",
           "answers": [
             {
@@ -352,7 +353,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/Act1/Sentences/",
+          "filePath": "audio/Act1/Questions/Q7_And_were_you_with",
           "questionText": "And were you with anyone last night?",
           "answers": [
             {
@@ -384,7 +385,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/Act1/Sentences/",
+          "filePath": "audio/Act1/Questions/Q8_When_did_you_get_home",
           "questionText": "When did you get home last night?",
           "answers": [
             {
@@ -412,7 +413,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/Act1/Sentences/",
+          "filePath": "audio/Act1/Questions/Q9_How_did_you_get_home",
           "questionText": "Tell me, how did you get home last night?",
           "answers": [
             {
