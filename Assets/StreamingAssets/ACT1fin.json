@@ -354,7 +354,7 @@
           "considersEmotion": false,
           "considersFact": true,
           "filePath": "audio/Act1/Questions/Q7_And_were_you_with",
-          "questionText": "And were you with anyone last night?",
+          "questionText": "And were you with anyone?",
           "answers": [
             {
               "answerId": "070",
@@ -386,7 +386,7 @@
           "considersEmotion": false,
           "considersFact": true,
           "filePath": "audio/Act1/Questions/Q8_When_did_you_get_home",
-          "questionText": "When did you get home last night?",
+          "questionText": "When did you get home?",
           "answers": [
             {
               "answerId": "080",
@@ -414,7 +414,7 @@
           "considersEmotion": false,
           "considersFact": true,
           "filePath": "audio/Act1/Questions/Q9_How_did_you_get_home",
-          "questionText": "Tell me, how did you get home last night?",
+          "questionText": "How did you get home?",
           "answers": [
             {
               "answerId": "090",
@@ -454,7 +454,7 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act1/Sentences/S10_2_well_were_not_so_sure",
-      "subtitleText": "Well we’re not so sure it was an accident.",
+      "subtitleText": "Well we’re not sure it was an accident.",
       "animationNo": 41,
       "animatorLayer": 1
     },
@@ -536,7 +536,7 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act1/Sentences/S12_0_I_can_t_begin_to_imagine",
-      "subtitleText": "I can’t begin to imagine what her family is going through."
+      "subtitleText": "I can’t even begin to imagine what her family is going through."
     },
     {
       "sequenceType": "dialog",
@@ -617,7 +617,7 @@
             },
             {
               "answerId": "122",
-              "answerText": "They were taking pictures of random people",
+              "answerText": "Taking pictures of random people",
               "detectiveResponse": "neutral"
             },
             {
