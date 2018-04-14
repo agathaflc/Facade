@@ -447,7 +447,7 @@
           "considersEmotion": true,
           "considersFact": true,
           "filePath": "audio/BadCop/QUESTIONS/Q10",
-          "questionText": "And what about the victim. How did you know her?",
+          "questionText": "And what about the victim? How well did you know her?",
           "answers": [
             {
               "answerId": "100",
