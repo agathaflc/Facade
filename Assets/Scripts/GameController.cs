@@ -264,6 +264,7 @@ public class GameController : MonoBehaviour
             
             currentDetectiveAnimator.SetInteger(animationNoHash, currentSequence.animationNo);
 
+            Debug.Log("animation no:" + currentSequence.animationNo);
             var exited = currentSequence.animationNo == 0;
             var exitTime = currentDetectiveAnimator.GetAnimatorTransitionInfo(currentSequence.animatorLayer).duration;
 
