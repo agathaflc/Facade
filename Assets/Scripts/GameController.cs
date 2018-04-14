@@ -71,12 +71,17 @@ public class GameController : MonoBehaviour
     public GameObject player;
 
     // animation stuff
-    public List<TimelineAsset> timelines;
+    private readonly List<List<TimelineAsset>> allTimelines = new List<List<TimelineAsset>>();
+    public List<TimelineAsset> act1Timelines;
+    public List<TimelineAsset> act2Timelines;
+    public List<TimelineAsset> act3Timelines;
     public PlayableDirector playableDirector;
     private int currentTimelineNo;
     public RuntimeAnimatorController hansController;
     public RuntimeAnimatorController kiraController;
     private Animator currentDetectiveAnimator;
+
+    public int currentActNo; // FOR TESTING
 
     private int animationNoHash = Animator.StringToHash("animationNo");
 
@@ -110,6 +115,10 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        allTimelines.Add(act1Timelines);
+        allTimelines.Add(act2Timelines);
+        allTimelines.Add(act2Timelines);
+        
         if (runTimeline)
         {
             StartCoroutine(PlayIntro());
@@ -119,7 +128,8 @@ public class GameController : MonoBehaviour
 
         dataController = FindObjectOfType<DataController>(); // store a ref to data controller
 
-        if (dataController.GetCurrentActNo() != 1)
+        currentActNo = dataController.GetCurrentActNo();
+        if (currentActNo != 0)
         {
             detectiveObject = hans;
             kira.SetActive(false);
@@ -173,7 +183,7 @@ public class GameController : MonoBehaviour
         subtitleDisplay.SetActive(true);
         subtitleDisplayText.text = "";
 
-        playableDirector.playableAsset = timelines[0];
+        playableDirector.playableAsset = allTimelines[currentActNo][0];
         PlayTimeline(playableDirector);
 
         while (playableDirector.state == PlayState.Playing)
@@ -193,7 +203,7 @@ public class GameController : MonoBehaviour
         subtitleDisplay.SetActive(true);
         subtitleDisplayText.text = "";
 
-        playableDirector.playableAsset = timelines[currentTimelineNo];
+        playableDirector.playableAsset = allTimelines[currentActNo][currentTimelineNo];
         PlayTimeline(playableDirector);
 
         while (playableDirector.state == PlayState.Playing)
