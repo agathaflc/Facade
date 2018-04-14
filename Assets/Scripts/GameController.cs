@@ -46,7 +46,7 @@ public class GameController : MonoBehaviour
     public Text questionDisplayText;
     public Slider scoreDisplayerSlider;
     public Text scoreDisplayText;
-    public Text timeRemainingDisplayText;
+    //public Text timeRemainingDisplayText;
     public Slider timeRemainingDisplaySlider;
     public Text highScoreDisplayText;
     public Text subtitleDisplayText;
@@ -836,13 +836,9 @@ public class GameController : MonoBehaviour
     {
         if (isTimerActive)
         {
-            timeRemainingDisplayText.text = "Time: " + Mathf.Round(timeRemaining);
             timeRemainingDisplaySlider.value = timeRemaining / currentQuestion.timeLimitInSeconds;
         }
-        else
-        {
-            timeRemainingDisplayText.text = "Time: -";
-        }
+        
     }
 
     private void LightsCameraAction()
@@ -854,9 +850,18 @@ public class GameController : MonoBehaviour
         var SpotLight1 = room.transform.Find("Spot light 1").gameObject;
         var SpotLight2 = room.transform.Find("Spot light 2").gameObject;
 
-        SpotLight1.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
+        //SpotLight1.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
         SpotLight2.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
     }
+
+	private void LightingChanges(int newIntensity,Color newColor){
+		var Lightbulb = room.transform.Find("Lightbulb").gameObject;
+		var Lights = Lightbulb.transform.Find("Lamp").gameObject;
+
+		Lights.GetComponent<Light> ().intensity = newIntensity;
+		Lights.GetComponent<Light> ().color = newColor;
+		// TODO consider smoothing the changes in update() using e.g. docs.unity3d.com/ScriptReference/Light-color.html
+	}
 
     private void MotionBlur()
     {
@@ -887,24 +892,23 @@ public class GameController : MonoBehaviour
 		"\nTime of interrogration: 1900HRS" +
 		"\nLocation: Mary Hill police station, interrogation room 5" +
 		"\nThe following details the factual statement as recorded..." +
-		"\n\nThe suspect stated the following information about themselves...";
-//		"\n Name: " + GetAnswer (0) +
-//		"\n Age: " + GetAnswer (1) +
-//		"\n Country of Origin: " + GetAnswer (2) +
-//		"\n Dream Frequency: " + GetAnswer (4) +
-//
-//		"\n\nThe suspect claimed that they were at " + GetAnswer (5) + " during the time of the incident " +
-//		"along with " + GetAnswer (6) + " as their alibi." +
-//		" The suspect reported that they went home by " + GetAnswer (8) +
-//		" and arrived home at " + GetAnswer (7) +
-//            
-//		"\n\n The suspect stated that they, " + GetAnswer(9) +
-//		", recignise the victim when showed a picture of Lianne. When prompted to recall if anyone has acting suspicionsly during time of incident, the suspect accused " +
-//		GetAnswer(10) + " because of the reason that they " + GetAnswer(11);
-//      
+		"\n\nThe suspect stated the following information about themselves..." +
+		"\n Name: " + GetAnswer (0) +
+		"\n Age: " + GetAnswer (1) +
+		"\n Country of Origin: " + GetAnswer (2) +
+		"\n Dream Frequency: " + GetAnswer (4) +
+
+		"\n\nThe suspect claimed that they were at " + GetAnswer (5) + " during the time of the incident " +
+		"along with " + GetAnswer (6) + " as their alibi." +
+		" The suspect reported that they went home by " + GetAnswer (8) +
+		" and arrived home at " + GetAnswer (7) +
+            
+		"\n\n The suspect stated that they, " + GetAnswer(9) +
+		", recignise the victim when showed a picture of Lianne. When prompted to recall if anyone has acting suspicionsly during time of incident, the suspect accused " +
+		GetAnswer(10) + " because of the reason that they " + GetAnswer(11);
+     
 		postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
-		//postReport.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Text>().text = report;
-    }
+	}
 
     private string GetAnswer(int i)
     {
@@ -969,6 +973,7 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown("r"))
         {
             LightsCameraAction();
+			//LightingChanges(2, new Color(0,0,1,1));
         }
 
         if (Input.GetKeyDown("t"))
