@@ -6353,8 +6353,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FER_is_Off: 1
-  gameSceneOnly: 1
-  runTimeline: 1
+  gameSceneOnly: 0
+  runTimeline: 0
   questionDisplayText: {fileID: 1862245467}
   scoreDisplayerSlider: {fileID: 1720664495}
   scoreDisplayText: {fileID: 1712600188}

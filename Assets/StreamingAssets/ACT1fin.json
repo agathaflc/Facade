@@ -256,8 +256,21 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/",
-      "subtitleText": "It’s a bit dramatic to shoot myself, but at least I’m outta there now!"
+      "filePath": "audio/silence_1sec",
+      "subtitleText": "",
+      "animationNo": 5
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S8_0_It_s_abit_dramatic",
+      "subtitleText": "It’s a bit dramatic to shoot myself, but at least I’m outta there now, right?"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S8_1_but_at_least",
+      "subtitleText": "It’s a bit dramatic to shoot myself, but at least I’m outta there now, right?",
+      "animationNo": 50,
+      "animatorLayer": 2
     },
     {
       "sequenceType": "question",
@@ -269,7 +282,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/Act1/Sentences/",
+          "filePath": "audio/Act1/Questions/Q5_What_about_you",
           "questionText": "What about you? I hope you had enough sleep last night. How often do you dream?",
           "answers": [
             {
