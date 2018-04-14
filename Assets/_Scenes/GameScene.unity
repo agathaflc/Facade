@@ -6349,6 +6349,8 @@ MonoBehaviour:
   playableDirector: {fileID: 261924090}
   hansController: {fileID: 9100000, guid: ced0da6be5d0a434480ae708bd8c3d54, type: 2}
   kiraController: {fileID: 9100000, guid: 560c5d03be8502f409d6ef2c91f9d87c, type: 2}
+  kiraStandUpController: {fileID: 9100000, guid: f6f3e7632ac195b4894b2b97b0431724,
+    type: 2}
   selectedBoldAnswer: {fileID: 0}
 --- !u!4 &1022346134
 Transform:
@@ -10005,7 +10007,7 @@ Animator:
   m_Controller: {fileID: 0}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1

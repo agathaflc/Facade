@@ -82,6 +82,7 @@ public class GameController : MonoBehaviour
     private int currentTimelineNo;
     public RuntimeAnimatorController hansController;
     public RuntimeAnimatorController kiraController;
+    public RuntimeAnimatorController kiraStandUpController;
     private Animator currentDetectiveAnimator;
 
     private int currentActNo;
@@ -191,6 +192,12 @@ public class GameController : MonoBehaviour
 
         currentDetectiveAnimator = detectiveObject.GetComponent<Animator>();
     }
+    
+    private void UnsetDetectiveAnimator()
+    {
+        detectiveObject.GetComponent<Animator>().runtimeAnimatorController = null;
+        currentDetectiveAnimator = null;
+    }
 
     private IEnumerator PlayIntro()
     {
@@ -198,6 +205,7 @@ public class GameController : MonoBehaviour
         subtitleDisplayText.text = "";
 
         playableDirector.playableAsset = allTimelines[currentActNo][0];
+        UnsetDetectiveAnimator();
         PlayTimeline(playableDirector);
 
         while (playableDirector.state == PlayState.Playing)
@@ -218,6 +226,7 @@ public class GameController : MonoBehaviour
         subtitleDisplayText.text = "";
 
         playableDirector.playableAsset = allTimelines[currentActNo][currentTimelineNo];
+        UnsetDetectiveAnimator();
         PlayTimeline(playableDirector);
 
         while (playableDirector.state == PlayState.Playing)

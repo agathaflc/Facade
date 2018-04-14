@@ -231,7 +231,7 @@ ModelImporter:
     7400038: Kira|RecorderAction
     7400040: Kira|TableAction.002
     7400042: (22)TurnBack
-    7400044: (22)Shrug
+    7400044: (23)Shrug
     9500000: //RootNode
     13700000: KiraMesh
   externalObjects: {}
@@ -894,7 +894,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: (22)Shrug
+      name: (23)Shrug
       takeName: Kira|(22)TurnBackShurg
       firstFrame: 35
       lastFrame: 68
