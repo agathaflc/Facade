@@ -1940,7 +1940,7 @@ PlayableDirector:
   m_GameObject: {fileID: 261924088}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: d6b2aaa86956c584da9d2ebfd9a3f2a7, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 9b0f6f04e1ba46543935fb0b720ff13f, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -5035,7 +5035,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100080, guid: 1cd664fa02ced6e48af22b6df2472799, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400078, guid: 1cd664fa02ced6e48af22b6df2472799, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
