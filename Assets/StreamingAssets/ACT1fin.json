@@ -25,7 +25,7 @@
       "filePath": "audio/Act1/Sentences/S1_1_thanks_a_lot",
       "subtitleText": "Thanks a lot for coming in today.",
       "animationNo": 40,
-      "animatorLayer": 2
+      "animatorLayer": 1
     },
     {
       "sequenceType": "dialog",
@@ -40,8 +40,23 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/S3_I_Know_you_re_not",
-      "subtitleText": "I know you’re not involved with anything, but I’m just here trying to do my job as quickly as possible we can both go home. So let’s get started."
+      "filePath": "audio/Act1/Sentences/S3_0_0_I_Know_you_re_not",
+      "subtitleText": "I know you’re not involved with anything, but I’m just here trying to get this done as soon as possible we can both go home.",
+      "animationNo": 60,
+      "animatorLayer": 3
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S3_0_1_done_asap",
+      "subtitleText": "I know you’re not involved with anything, but I’m just here trying to get this done as soon as possible we can both go home.",
+      "animationNo": 40,
+      "animatorLayer": 1
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S3_1_so_lets_get_started",
+      "subtitleText": "So let's get started.",
+      "animationNo": 14
     },
     {
       "sequenceType": "question",
@@ -53,7 +68,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/Act1/Sentences/",
+          "filePath": "audio/Act1/Questions/Q1_What_is_your_name",
           "questionText": "What's your name?",
           "answers": [
             {
@@ -85,7 +100,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/Act1/Sentences/",
+          "filePath": "audio/Act1/Questions/Q2_How_old_are_you",
           "questionText": "How old are you?",
           "answers": [
             {
@@ -113,7 +128,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/Act1/Sentences/",
+          "filePath": "audio/Act1/Questions/Q3_Where_are_you_from",
           "questionText": "And where are you from?",
           "answers": [
             {
@@ -141,7 +156,7 @@
           "consistencyWeight": 0,
           "considersEmotion": true,
           "considersFact": false,
-          "filePath": "audio/Act1/Sentences/",
+          "filePath": "audio/Act1/Questions/Q4_How_are_you_feeling_today",
           "questionText": "So tell me, how are you feeling today?",
           "answers": [
             {
@@ -185,7 +200,7 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/",
+      "filePath": "audio/Act1/Sentences/S4_Ah_there_s_nothing_to",
       "subtitleText": "Ah there’s nothing to be worried about! I’m pretty tired myself."
     },
     {
