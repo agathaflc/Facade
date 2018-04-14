@@ -16,7 +16,7 @@
     "fileName": "audio/imperial-march",
     "seek": 0
   },
-  "sequence":[
+  "sequence": [
     {
       "sequenceType": "dialog",
       "filePath": "audio/silence_3sec",
@@ -52,7 +52,7 @@
           "consistencyWeight": 0,
           "considersEmotion": true,
           "considersFact": false,
-          "filePath": "audio/silence_3sec",
+          "filePath": "audio/Act3/Questions/Q1_Are_you_feeling_abit_uneasy",
           "questionText": "Are you feeling a bit uneasy?",
           "answers": [
             {
@@ -129,14 +129,15 @@
           "consistencyWeight": 0,
           "considersEmotion": true,
           "considersFact": false,
-          "filePath": "audio/silence_3sec",
+          "filePath": "audio/Act3/Questions/Q2_So_tell_me_how_do_you_even_feel",
           "questionText": "So tell me, how do you even feel about this whole incident?",
-          "answers":[
+          "answers": [
             {
               "answerId": "020",
               "answerText": "I don't care",
               "expectedExpressions": [
-                "neutral", "happy"
+                "neutral",
+                "happy"
               ],
               "detectiveResponse": "negative"
             },
@@ -144,7 +145,8 @@
               "answerId": "021",
               "answerText": "This is weird. I don’t know what’s going on",
               "expectedExpressions": [
-                "sad", "surprised"
+                "sad",
+                "surprised"
               ],
               "detectiveResponse": "neutral"
             },
@@ -183,9 +185,9 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/silence_3sec",
+          "filePath": "audio/Act3/Questions/Q3_Don_t_you_think_irresponsible",
           "questionText": "Don’t you think it was irresponsible of you to be so intoxicated?",
-          "answers":[
+          "answers": [
             {
               "answerId": "030",
               "answerText": "No, It’s my choice",
@@ -230,9 +232,9 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/silence_3sec",
+          "filePath": "audio/Act3/Questions/Q4_Do_you_even_trust",
           "questionText": "Do you even trust your alibi?",
-          "answers":[
+          "answers": [
             {
               "answerId": "040",
               "answerText": "Yes"
@@ -268,9 +270,9 @@
           "consistencyWeight": 0.7,
           "considersEmotion": true,
           "considersFact": true,
-          "filePath": "audio/silence_3sec",
+          "filePath": "audio/Act3/Questions/Q5_So_why_exactly_didn_t_like",
           "questionText": "So why exactly didn’t you like the victim?",
-          "answers":[
+          "answers": [
             {
               "answerId": "110",
               "answerText": "She was untrustworthy",
@@ -318,9 +320,9 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/silence_3sec",
+          "filePath": "audio/Act3/Questions/Q6_Wait_what_did_you_say",
           "questionText": "What did you say your name was again?",
-          "answers":[
+          "answers": [
             {
               "answerId": "010",
               "answerText": "Ella Wong"
@@ -361,9 +363,9 @@
           "consistencyWeight": 0,
           "considersEmotion": true,
           "considersFact": false,
-          "filePath": "audio/silence_3sec",
+          "filePath": "audio/Act3/Questions/Q7_Have_you_ever_someone_close_die",
           "questionText": "Have you ever had someone close to you die? How do you feel about death?",
-          "answers":[
+          "answers": [
             {
               "answerId": "070",
               "answerText": "It happens to everyone",
@@ -408,7 +410,7 @@
           "consistencyWeight": 0.5,
           "considersEmotion": true,
           "considersFact": true,
-          "filePath": "audio/silence_3sec",
+          "filePath": "audio/Act3/Questions/Q8_Then_tell_me_WHY",
           "questionText": "Then tell me, WHY did you have your gun on you last night? Was it really that necessary?",
           "answers": [
             {
@@ -468,9 +470,9 @@
           "consistencyWeight": 0,
           "considersEmotion": true,
           "considersFact": false,
-          "filePath": "audio/silence_3sec",
+          "filePath": "audio/Act3/Questions/Q9_Do_you_believe_Karma",
           "questionText": "Do you think the universe and karma balances things? Or do we need to take matters into our own hands?",
-          "answers":[
+          "answers": [
             {
               "answerId": "090",
               "answerText": "Karma will handle things",
@@ -509,22 +511,22 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/silence_3sec",
-      "subtitleText":"Hah... of course you would say that."
+      "subtitleText": "Hah... of course you would say that."
     },
     {
       "sequenceType": "dialog",
       "filePath": "audio/silence_3sec",
-      "subtitleText":"You’re a prideful person, aren’t you?"
+      "subtitleText": "You’re a prideful person, aren’t you?"
     },
     {
       "sequenceType": "dialog",
       "filePath": "audio/silence_3sec",
-      "subtitleText":"The kinda person who wouldn’t be able to handle it if someone else was getting ahead of them..."
+      "subtitleText": "The kinda person who wouldn’t be able to handle it if someone else was getting ahead of them..."
     },
     {
       "sequenceType": "dialog",
       "filePath": "audio/silence_3sec",
-      "subtitleText":"You used to be the one everyone loved, until you and Lianne had that fight. And then everyone took her side over yours."
+      "subtitleText": "You used to be the one everyone loved, until you and Lianne had that fight. And then everyone took her side over yours."
     },
     {
       "sequenceType": "dialog",
@@ -561,9 +563,9 @@
           "consistencyWeight": 0,
           "considersEmotion": true,
           "considersFact": false,
-          "filePath": "audio/silence_3sec",
+          "filePath": "audio/Act3/Questions/Q10_WHY_did_you_kill_Lianne",
           "questionText": "Why did you kill Lianne?!",
-          "answers":[
+          "answers": [
             {
               "answerId": "100",
               "answerText": "She deserved it!",
@@ -626,7 +628,7 @@
     },
     {
       "sequenceType": "question",
-      "questions":[
+      "questions": [
         {
           "questionDesc": "Detective Dream Exit",
           "questionId": "11",
@@ -634,7 +636,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/silence_3sec",
+          "filePath": "audio/Act3/Questions/Q11_Do_you_think_hadn_t_shoot_myself",
           "questionText": "Do you think if I didn’t shoot myself in my dream, would I still be trapped in that hell hole right now?",
           "answers": [
             {
@@ -656,7 +658,7 @@
     },
     {
       "sequenceType": "question",
-      "questions":[
+      "questions": [
         {
           "questionDesc": "Kill Yourself?",
           "questionId": "12",
@@ -664,7 +666,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/silence_3sec",
+          "filePath": "audio/Act3/Questions/",
           "questionText": "Will you kill yourself?",
           "answers": [
             {
