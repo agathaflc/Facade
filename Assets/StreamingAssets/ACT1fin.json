@@ -239,7 +239,8 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act1/Sentences/S7_1_i_bit_the_bullet",
-      "subtitleText": "I bit the bullet."
+      "subtitleText": "I bit the bullet.",
+      "animationNo": 21
     },
     {
       "sequenceType": "dialog",
@@ -249,7 +250,9 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act1/Sentences/S7_2_but_it_turns_out",
-      "subtitleText": "But it turns out it was all just a dream!"
+      "subtitleText": "But it turns out it was all just a dream!",
+      "animationNo": 60,
+      "animatorLayer": 3
     },
     {
       "sequenceType": "dialog",
