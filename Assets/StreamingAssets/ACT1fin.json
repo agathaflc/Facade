@@ -658,11 +658,16 @@
       "sequenceType": "dialog",
       "filePath": "audio/Act1/Sentences/S14_1_and_ill_be_back",
       "subtitleText": "So don't worry. I’m gonna step out for a second to finish up some paperwork, and I’ll be back in a while.",
-      "animationNo": 18
+      "animationNo": 14
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/S15_I_just_hope",
+      "filePath": "audio/Act1/Sentences/S15_0_I_just_hope",
+      "subtitleText": "I just hope we can figure out this case together, so that poor girl’s parents can get some closure. I’ll see you in a bit!"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S15_1_so_that",
       "subtitleText": "I just hope we can figure out this case together, so that poor girl’s parents can get some closure. I’ll see you in a bit!",
       "animationNo": 17
     }

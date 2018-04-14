@@ -22,115 +22,6 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/S11_You_see_this_girl",
-      "readExpression": true,
-      "scoreWeight": 3,
-      "expectedExpressions": [
-        "scared",
-        "surprised",
-        "angry",
-        "sad"
-      ],
-      "subtitleText": "You see.. this girl was found dead last night. Her name was Lianne. It’s a real tragedy."
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/S12_0_I_can_t_begin_to_imagine",
-      "subtitleText": "I can’t begin to imagine what her family is going through."
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/S12_1_i_would_be_devastated",
-      "subtitleText": "I would be devastated if something like this happened to my little girl.",
-      "animationNo": 3
-    },
-    {
-      "sequenceType": "question",
-      "questions": [
-        {
-          "questionDesc": "Witnesses Intro",
-          "questionId": "11",
-          "expressionWeight": 0.3,
-          "consistencyWeight": 0.7,
-          "considersEmotion": true,
-          "considersFact": true,
-          "pictureFileName": "wojak.jpg",
-          "filePath": "audio/Act1/Questions/Q11_Do_you_remember",
-          "questionText": "Do you remember any of these people acting suspiciously last night?",
-          "answers": [
-            {
-              "answerId": "110",
-              "answerText": "Jason Smith",
-              "expectedExpressions": [
-                "scared",
-                "angry"
-              ],
-              "detectiveResponse": "negative"
-            },
-            {
-              "answerId": "111",
-              "answerText": "Anna Wu",
-              "expectedExpressions": [
-                "scared",
-                "angry"
-              ],
-              "detectiveResponse": "negative"
-            },
-            {
-              "answerId": "112",
-              "answerText": "My alibi",
-              "expectedExpressions": [
-                "scared",
-                "angry"
-              ],
-              "detectiveResponse": "negative"
-            },
-            {
-              "answerId": "113",
-              "answerText": "No one",
-              "expectedExpressions": [
-                "neutral"
-              ],
-              "detectiveResponse": "negative"
-            }
-          ]
-        },
-        {
-          "questionDesc": "Witnesses Intro",
-          "questionId": "12",
-          "expressionWeight": 0,
-          "consistencyWeight": 1,
-          "considersEmotion": false,
-          "considersFact": true,
-          "filePath": "audio/Act1/Questions/Q12_And_why_did_they_seem",
-          "questionText": "And why exactly did they seem suspicious to you?",
-          "answers": [
-            {
-              "answerId": "120",
-              "answerText": "They were acting paranoid",
-              "detectiveResponse": "neutral"
-            },
-            {
-              "answerId": "121",
-              "answerText": "They brought a gun",
-              "detectiveResponse": "negative"
-            },
-            {
-              "answerId": "122",
-              "answerText": "They were taking pictures of random people",
-              "detectiveResponse": "neutral"
-            },
-            {
-              "answerId": "123",
-              "answerText": "They were taking drugs",
-              "detectiveResponse": "negative"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "sequenceType": "dialog",
       "filePath": "audio/Act1/Sentences/S13_0_Look_I_know_you_don_t_have_anything",
       "subtitleText": "Look, I know you don’t have anything to do with this, and I can tell."
     },
@@ -149,13 +40,27 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/",
-      "subtitleText": "So you don’t have anything to be worried about. I’m gonna step out for a second to finish up some paperwork, and I’ll be back in a while."
+      "filePath": "audio/Act1/Sentences/S14_0_So_don_t_worry",
+      "subtitleText": "So don't worry. I’m gonna step out for a second to finish up some paperwork, and I’ll be back in a while.",
+      "animationNo": 60,
+      "animatorLayer": 3
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/",
+      "filePath": "audio/Act1/Sentences/S14_1_and_ill_be_back",
+      "subtitleText": "So don't worry. I’m gonna step out for a second to finish up some paperwork, and I’ll be back in a while.",
+      "animationNo": 14
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S15_I_just_hope",
       "subtitleText": "I just hope we can figure out this case together, so that poor girl’s parents can get some closure. I’ll see you in a bit!"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S15_I_just_hope",
+      "subtitleText": "I just hope we can figure out this case together, so that poor girl’s parents can get some closure. I’ll see you in a bit!",
+      "animationNo": 17
     }
   ]
 }
