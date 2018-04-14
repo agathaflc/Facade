@@ -213,13 +213,21 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/",
-      "subtitleText": "I’ve been having the hardest time sleeping lately, cause I keep having the strangest dreams."
+      "filePath": "audio/Act1/Sentences/S5_0_I_ve_been_having",
+      "subtitleText": "I’ve been having the hardest time sleeping lately, cause I keep having this strange dream."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/",
-      "subtitleText": "Just last night I dreamt I was stuck in a war zone, surrounded by enemies, with only one bullet left. Doomed to be defeated and skinned alive by those bastards."
+      "filePath": "audio/Act1/Sentences/S5_1_cause_i_keep",
+      "subtitleText": "I’ve been having the hardest time sleeping lately, cause I keep having this strange dream.",
+      "animationNo": 50,
+      "animatorLayer": 2
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S6_You_know_what_just_last_night",
+      "subtitleText": "You know what, just last night I dreamt I was stuck in a war zone, surrounded by enemies, with only one bullet left. Doomed to be defeated and skinned alive by those bastards.",
+      "animationNo": 20
     },
     {
       "sequenceType": "dialog",
