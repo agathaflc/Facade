@@ -54,6 +54,13 @@ public class DataController : MonoBehaviour
         return currentActNo;
     }
 
+    public void SetCurrentActNo(int actNo)
+    {
+        currentActNo = actNo;
+        Debug.Log("SetCurrentActNo:" + currentActNo);
+        LoadRoundData(actFiles[currentActNo]);
+    }
+
     public void AddOverallScore(float score)
     {
         actualOverallScore += score;

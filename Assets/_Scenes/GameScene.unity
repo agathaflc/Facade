@@ -1940,7 +1940,7 @@ PlayableDirector:
   m_GameObject: {fileID: 261924088}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: cd8caecdc001b7346a6d1af3c97c4597, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: d6b2aaa86956c584da9d2ebfd9a3f2a7, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -2002,6 +2002,8 @@ PlayableDirector:
     value: {fileID: 1749480199}
   - key: {fileID: 114869388299421752, guid: d6b2aaa86956c584da9d2ebfd9a3f2a7, type: 2}
     value: {fileID: 460190874}
+  - key: {fileID: 114717973212285484, guid: 9538cdb8785fb2542859b1988b482831, type: 2}
+    value: {fileID: 1749480195}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &261924091
@@ -6292,6 +6294,8 @@ MonoBehaviour:
   FER_is_Off: 1
   gameSceneOnly: 0
   runTimeline: 0
+  skipAct: 1
+  skipToAct: 2
   questionDisplayText: {fileID: 1862245467}
   scoreDisplayerSlider: {fileID: 1720664495}
   scoreDisplayText: {fileID: 1712600188}
@@ -6321,10 +6325,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9b0f6f04e1ba46543935fb0b720ff13f, type: 2}
   act3Timelines:
   - {fileID: 11400000, guid: d6b2aaa86956c584da9d2ebfd9a3f2a7, type: 2}
+  - {fileID: 11400000, guid: 9538cdb8785fb2542859b1988b482831, type: 2}
   playableDirector: {fileID: 261924090}
   hansController: {fileID: 9100000, guid: ced0da6be5d0a434480ae708bd8c3d54, type: 2}
   kiraController: {fileID: 9100000, guid: 560c5d03be8502f409d6ef2c91f9d87c, type: 2}
-  currentActNo: 1
   selectedBoldAnswer: {fileID: 0}
 --- !u!4 &1022346134
 Transform:
