@@ -522,7 +522,7 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/i-wanna-discuss",
+      "filePath": "audio/Act1/Sentences/S11_You_see_this_girl",
       "readExpression": true,
       "scoreWeight": 3,
       "expectedExpressions": [
@@ -535,8 +535,14 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/",
-      "subtitleText": "I can’t begin to imagine what her family is going through. I would be devastated if something like this happened to my little girl."
+      "filePath": "audio/Act1/Sentences/S12_0_I_can_t_begin_to_imagine",
+      "subtitleText": "I can’t begin to imagine what her family is going through."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S12_1_i_would_be_devastated",
+      "subtitleText": "I would be devastated if something like this happened to my little girl.",
+      "animationNo": 3
     },
     {
       "sequenceType": "question",
@@ -549,7 +555,7 @@
           "considersEmotion": true,
           "considersFact": true,
           "pictureFileName": "wojak.jpg",
-          "filePath": "audio/Act1/Sentences/",
+          "filePath": "audio/Act1/Questions/Q11_Do_you_remember",
           "questionText": "Do you remember any of these people acting suspiciously last night?",
           "answers": [
             {
@@ -596,7 +602,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/Act1/Sentences/",
+          "filePath": "audio/Act1/Questions/Q12_And_why_did_they_seem",
           "questionText": "And why exactly did they seem suspicious to you?",
           "answers": [
             {
