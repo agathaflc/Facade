@@ -19,7 +19,82 @@
   "sequence": [
     {
       "sequenceType": "timeline"
-    },{
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S2_We_ve_had_a_long_day",
+      "subtitleText": "We’ve all had a long day, right? Don’t you wanna get back home?"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S3_I_know_I_do",
+      "subtitleText": "I know I do, so I can rest easy knowing you... "
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S4_I_mean_the_perpetrator",
+      "subtitleText": "I mean... the perpetrator, is locked up.",
+      "animationNo": 1
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S5_You_look_alittle_sick",
+      "subtitleText": "You look a little sick.",
+      "animationNo": 2
+    },
+    {
+      "sequenceType": "question",
+      "questions": [
+        {
+          "questionDesc": "Player Feelings",
+          "questionId": "25",
+          "expressionWeight": 1,
+          "consistencyWeight": 0,
+          "considersEmotion": true,
+          "considersFact": false,
+          "filePath": "audio/Act3/Questions/Q1_Are_you_feeling_abit_uneasy",
+          "questionText": "Are you feeling a bit uneasy?",
+          "answers": [
+            {
+              "answerId": "250",
+              "answerText": "Of course not",
+              "expectedExpressions": [
+                "neutral"
+              ],
+              "detectiveResponse": "positive"
+            },
+            {
+              "answerId": "251",
+              "answerText": "Yes!",
+              "expectedExpressions": [
+                "scared",
+                "angry",
+                "sad"
+              ],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "252",
+              "answerText": "No, I'm great!",
+              "expectedExpressions": [
+                "happy"
+              ],
+              "detectiveResponse": "positive"
+            },
+            {
+              "answerId": "253",
+              "answerText": "Should I be..?",
+              "expectedExpressions": [
+                "scared",
+                "surprised"
+              ],
+              "detectiveResponse": "neutral"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/S6_0_I_gotta_be_honest_with_you",
       "subtitleText": "I gotta be honest with you, this case is really getting to me."
@@ -66,7 +141,7 @@
       "questions": [
         {
           "questionDesc": "Player Indicent Feelings",
-          "questionId": "02",
+          "questionId": "26",
           "expressionWeight": 1,
           "consistencyWeight": 0,
           "considersEmotion": true,
@@ -75,7 +150,7 @@
           "questionText": "So tell me, how do you even feel about this whole incident?",
           "answers": [
             {
-              "answerId": "020",
+              "answerId": "260",
               "answerText": "I don't care",
               "expectedExpressions": [
                 "neutral",
@@ -84,7 +159,7 @@
               "detectiveResponse": "negative"
             },
             {
-              "answerId": "021",
+              "answerId": "261",
               "answerText": "This is weird. I don’t know what’s going on",
               "expectedExpressions": [
                 "sad",
@@ -93,7 +168,7 @@
               "detectiveResponse": "neutral"
             },
             {
-              "answerId": "022",
+              "answerId": "262",
               "answerText": "I don’t appreciate being interrogated!",
               "expectedExpressions": [
                 "angry"
@@ -101,7 +176,7 @@
               "detectiveResponse": "negative"
             },
             {
-              "answerId": "023",
+              "answerId": "263",
               "answerText": "This is a sad and unfortunate situation",
               "expectedExpressions": [
                 "sad"
@@ -114,15 +189,16 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "Your alibi was going on and on about how she had never seen you so drunk before last night."
+      "filePath": "audio/Act3/Sentence/S11_You_know_your_alibi_was",
+      "subtitleText": "You know your alibi was going on and on about how she had never seen you so drunk before last night.",
+      "animationNo": 4
     },
     {
       "sequenceType": "question",
       "questions": [
         {
           "questionDesc": "Player Intoxication",
-          "questionId": "03",
+          "questionId": "27",
           "expressionWeight": 0,
           "consistencyWeight": 1,
           "considersEmotion": false,
@@ -131,22 +207,22 @@
           "questionText": "Don’t you think it was irresponsible of you to be so intoxicated?",
           "answers": [
             {
-              "answerId": "030",
+              "answerId": "270",
               "answerText": "No, It’s my choice",
               "detectiveResponse": "negative"
             },
             {
-              "answerId": "031",
+              "answerId": "271",
               "answerText": "I was not drunk",
               "detectiveResponse": "neutral"
             },
             {
-              "answerId": "032",
+              "answerId": "272",
               "answerText": "Everyone was also drunk",
               "detectiveResponse": "negative"
             },
             {
-              "answerId": "033",
+              "answerId": "273",
               "answerText": "I was only a little drunk!",
               "detectiveResponse": "negative"
             }
@@ -156,20 +232,21 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
+      "filePath": "audio/Act3/Sentence/S12_I_see_It_seems_like",
       "subtitleText": "I see.. It seems like you and your alibi’s stories don’t exactly line up."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "To be honest, she didn’t have a lot of good things to say about you..."
+      "filePath": "audio/Act3/Sentence/S13_To_be_honest",
+      "subtitleText": "To be honest, she didn’t have a lot of good things to say about you...",
+      "animationNo": 5
     },
     {
       "sequenceType": "question",
       "questions": [
         {
           "questionDesc": "Player Trust Alibi",
-          "questionId": "04",
+          "questionId": "28",
           "expressionWeight": 0,
           "consistencyWeight": 1,
           "considersEmotion": false,
@@ -178,19 +255,19 @@
           "questionText": "Do you even trust your alibi?",
           "answers": [
             {
-              "answerId": "040",
+              "answerId": "280",
               "answerText": "Yes"
             },
             {
-              "answerId": "041",
+              "answerId": "281",
               "answerText": "No"
             },
             {
-              "answerId": "042",
+              "answerId": "282",
               "answerText": "Somewhat"
             },
             {
-              "answerId": "043",
+              "answerId": "283",
               "answerText": "I don’t trust them anymore"
             }
           ]
@@ -199,15 +276,21 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "Well, I thought she was a very open and nice person.  And she seemed to have a lot of inside information on you and your relationship with the victim."
+      "filePath": "audio/Act3/Sentence/S14_0_Well_I_thought_she",
+      "subtitleText": "Well, I thought she was a very nice and open person."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S14_1_and_she_seemed",
+      "subtitleText": "And she seemed to have a lot of inside information on you and your relationship with the victim.",
+      "animationNo": 6
     },
     {
       "sequenceType": "question",
       "questions": [
         {
           "questionDesc": "Player Victim Feelings",
-          "questionId": "05",
+          "questionId": "23",
           "expressionWeight": 0.3,
           "consistencyWeight": 0.7,
           "considersEmotion": true,
@@ -216,7 +299,7 @@
           "questionText": "So why exactly didn’t you like the victim?",
           "answers": [
             {
-              "answerId": "110",
+              "answerId": "230",
               "answerText": "She was untrustworthy",
               "expectedExpressions": [
                 "sad",
@@ -227,7 +310,7 @@
               "detectiveResponse": "negative"
             },
             {
-              "answerId": "111",
+              "answerId": "231",
               "answerText": "She also didn't like me",
               "expectedExpressions": [
                 "sad",
@@ -236,7 +319,7 @@
               "detectiveResponse": "negative"
             },
             {
-              "answerId": "112",
+              "answerId": "232",
               "answerText": "She is okay",
               "expectedExpressions": [
                 "neutral",
@@ -245,7 +328,7 @@
               "detectiveResponse": "neutral"
             },
             {
-              "answerId": "113",
+              "answerId": "233",
               "answerText": "That is not true! I didn't say that",
               "expectedExpressions": [
                 "surprised",
@@ -257,7 +340,7 @@
         },
         {
           "questionDesc": "Player Name",
-          "questionId": "06",
+          "questionId": "01",
           "expressionWeight": 0,
           "consistencyWeight": 1,
           "considersEmotion": false,
@@ -287,20 +370,28 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "Oh did I ask you that already? My bad.. I just want to make sure I have all my facts straight."
+      "filePath": "audio/Act3/Sentence/S15_Oh_did_I_ask_you_already",
+      "subtitleText": "Oh did I ask you that already? My bad.. I just want to make sure I have all my facts straight.",
+      "animationNo": 8
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "Just like you.. We both know who’s really in control here."
+      "filePath": "audio/Act3/Sentence/S16_0_Just_like_you",
+      "subtitleText": "Just like you.. We both know who’s really in control here.",
+      "animationNo": 2
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S16_1_hah",
+      "subtitleText": "Just like you.. We both know who’s really in control here.",
+      "animationNo": 8
     },
     {
       "sequenceType": "question",
       "questions": [
         {
           "questionDesc": "Player Death Feelings",
-          "questionId": "07",
+          "questionId": "31",
           "expressionWeight": 1,
           "consistencyWeight": 0,
           "considersEmotion": true,
@@ -309,7 +400,7 @@
           "questionText": "Have you ever had someone close to you die? How do you feel about death?",
           "answers": [
             {
-              "answerId": "070",
+              "answerId": "310",
               "answerText": "It happens to everyone",
               "expectedExpressions": [
                 "neutral"
@@ -317,7 +408,7 @@
               "detectiveResponse": "negative"
             },
             {
-              "answerId": "071",
+              "answerId": "311",
               "answerText": "It’s depressing",
               "expectedExpressions": [
                 "sad"
@@ -325,7 +416,7 @@
               "detectiveResponse": "negative"
             },
             {
-              "answerId": "072",
+              "answerId": "312",
               "answerText": "Some people deserve to die",
               "expectedExpressions": [
                 "scared",
@@ -334,7 +425,7 @@
               "detectiveResponse": "negative"
             },
             {
-              "answerId": "073",
+              "answerId": "313",
               "answerText": "I’m scared to die",
               "expectedExpressions": [
                 "sad",
@@ -347,7 +438,7 @@
         },
         {
           "questionDesc": "Player Gun",
-          "questionId": "08",
+          "questionId": "24",
           "expressionWeight": 0.5,
           "consistencyWeight": 0.5,
           "considersEmotion": true,
@@ -356,7 +447,7 @@
           "questionText": "Then tell me, WHY did you have your gun on you last night? Was it really that necessary?",
           "answers": [
             {
-              "answerId": "120",
+              "answerId": "240",
               "answerText": "That's none of your business",
               "expectedExpressions": [
                 "surprised",
@@ -365,7 +456,7 @@
               "detectiveResponse": "negative"
             },
             {
-              "answerId": "121",
+              "answerId": "241",
               "answerText": "It's not mine",
               "expectedExpressions": [
                 "surprised",
@@ -375,7 +466,7 @@
               "detectiveResponse": "negative"
             },
             {
-              "answerId": "122",
+              "answerId": "242",
               "answerText": "Defense Measure",
               "expectedExpressions": [
                 "surprised",
@@ -384,7 +475,7 @@
               "detectiveResponse": "negative"
             },
             {
-              "answerId": "123",
+              "answerId": "243",
               "answerText": "I don't know",
               "expectedExpressions": [
                 "surprised",
@@ -407,7 +498,7 @@
       "questions": [
         {
           "questionDesc": "Player Karma Revenge",
-          "questionId": "09",
+          "questionId": "33",
           "expressionWeight": 1,
           "consistencyWeight": 0,
           "considersEmotion": true,
@@ -416,7 +507,7 @@
           "questionText": "Do you think the universe and karma balances things? Or do we need to take matters into our own hands?",
           "answers": [
             {
-              "answerId": "090",
+              "answerId": "330",
               "answerText": "Karma will handle things",
               "expectedExpressions": [
                 "neutral",
@@ -424,14 +515,14 @@
               ]
             },
             {
-              "answerId": "091",
+              "answerId": "331",
               "answerText": "It’s sometimes necessary",
               "expectedExpressions": [
                 "angry"
               ]
             },
             {
-              "answerId": "092",
+              "answerId": "332",
               "answerText": "I don’t know what you’re talking about",
               "expectedExpressions": [
                 "scared",
@@ -439,7 +530,7 @@
               ]
             },
             {
-              "answerId": "093",
+              "answerId": "333",
               "answerText": "Stop talking like that!",
               "expectedExpressions": [
                 "scared",
@@ -500,7 +591,7 @@
       "questions": [
         {
           "questionDesc": "Player Kill Reason",
-          "questionId": "10",
+          "questionId": "34",
           "expressionWeight": 1,
           "consistencyWeight": 0,
           "considersEmotion": true,
@@ -509,7 +600,7 @@
           "questionText": "Why did you kill Lianne?!",
           "answers": [
             {
-              "answerId": "100",
+              "answerId": "340",
               "answerText": "She deserved it!",
               "expectedExpressions": [
                 "angry",
@@ -518,7 +609,7 @@
               ]
             },
             {
-              "answerId": "101",
+              "answerId": "341",
               "answerText": "I didn’t kill her!",
               "expectedExpressions": [
                 "scared",
@@ -526,7 +617,7 @@
               ]
             },
             {
-              "answerId": "102",
+              "answerId": "342",
               "answerText": "My alibi did it! Not me!",
               "expectedExpressions": [
                 "scared",
@@ -536,7 +627,7 @@
               ]
             },
             {
-              "answerId": "103",
+              "answerId": "343",
               "answerText": "I don’t know why I did it!",
               "expectedExpressions": [
                 "scared",
@@ -573,7 +664,7 @@
       "questions": [
         {
           "questionDesc": "Detective Dream Exit",
-          "questionId": "11",
+          "questionId": "35",
           "expressionWeight": 0,
           "consistencyWeight": 1,
           "considersEmotion": false,
@@ -582,11 +673,11 @@
           "questionText": "Do you think if I didn’t shoot myself in my dream, would I still be trapped in that hell hole right now?",
           "answers": [
             {
-              "answerId": "110",
+              "answerId": "350",
               "answerText": "Yes"
             },
             {
-              "answerId": "111",
+              "answerId": "351",
               "answerText": "No"
             }
           ]
@@ -603,7 +694,7 @@
       "questions": [
         {
           "questionDesc": "Kill Yourself?",
-          "questionId": "12",
+          "questionId": "36",
           "expressionWeight": 0,
           "consistencyWeight": 1,
           "considersEmotion": false,
@@ -612,11 +703,11 @@
           "questionText": "Will you kill yourself?",
           "answers": [
             {
-              "answerId": "120",
+              "answerId": "360",
               "answerText": "Yes"
             },
             {
-              "answerId": "121",
+              "answerId": "361",
               "answerText": "No"
             }
           ]
