@@ -230,11 +230,15 @@ ModelImporter:
     7400036: Kira|TableAction.002
     7400038: (30_1)LookUp
     7400040: (12)GunShapedHand
-    7400042: (12)FromGunToSlam
+    7400042: (98)FromGunToSlam
     7400044: (12)StaresIntensely
-    7400046: (11)TwoOpenHands
+    7400046: (94)TwoOpenHands
     7400048: (91)DubiousLaughter_Stare
     7400050: (92)TurnHeadToPlayer
+    7400052: (93)OneHandedScolding
+    7400054: (95)LeanBackInSeat
+    7400056: (96)FromLeanBackToGetUp
+    7400058: (97)MakesGunShape
     9500000: //RootNode
     13700000: KiraMesh
   externalObjects: {}
@@ -860,7 +864,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: (12)FromGunToSlam
+      name: (98)FromGunToSlam
       takeName: Kira|(12)ClimaxHandSlam
       firstFrame: 39
       lastFrame: 57
@@ -916,7 +920,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: (11)TwoOpenHands
+      name: (94)TwoOpenHands
       takeName: Kira|(11)DubiousHeadShake
       firstFrame: 33
       lastFrame: 37
@@ -976,6 +980,118 @@ ModelImporter:
       takeName: Kira|(10)DubiousLaughter
       firstFrame: 45
       lastFrame: 54
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: (93)OneHandedScolding
+      takeName: Kira|(11)DubiousHeadShake
+      firstFrame: 0
+      lastFrame: 11
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: (95)LeanBackInSeat
+      takeName: Kira|(11)DubiousHeadShake
+      firstFrame: 37
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: (96)FromLeanBackToGetUp
+      takeName: Kira|(12)ClimaxHandSlam
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: (97)MakesGunShape
+      takeName: Kira|(12)ClimaxHandSlam
+      firstFrame: 23
+      lastFrame: 39
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

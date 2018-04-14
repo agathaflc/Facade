@@ -441,7 +441,8 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/silence_splitsecond",
-      "subtitleText": ""
+      "subtitleText": "",
+      "animationNo": 90
     },
     {
       "sequenceType": "question",
@@ -500,8 +501,20 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "You ever go to church? There’s a quote that goes: “Do unto others as you would have them do unto you.” What do you think about that?"
+      "filePath": "audio/Act3/Sentence/S16_1_hah",
+      "subtitleText": "You ever go to church? There’s a quote that goes: “Do unto others as you would have them do unto you.”",
+      "animationNo": 91
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S17_0_You_ever_go_to_church",
+      "subtitleText": "You ever go to church? There’s a quote that goes: “Do unto others as you would have them do unto you.”"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S17_1_what_do_you_think",
+      "subtitleText": "What do you think?",
+      "animationNo": 92
     },
     {
       "sequenceType": "question",
@@ -553,48 +566,71 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "Hah... of course you would say that."
+      "filePath": "audio/Act3/Sentence/S18_Hah_of_course",
+      "subtitleText": "Hah... of course you would say that.",
+      "animationNo": 41,
+      "animatorLayer": 1
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
+      "filePath": "audio/Act3/Sentence/S19_You_re_a_prideful",
       "subtitleText": "You’re a prideful person, aren’t you?"
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "The kinda person who wouldn’t be able to handle it if someone else was getting ahead of them..."
+      "filePath": "audio/Act3/Sentence/S20_The_kinda_of_person",
+      "subtitleText": "The kind of person who wouldn’t be able to handle it if someone else was getting ahead of them..."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
+      "filePath": "audio/Act3/Sentence/S21_0_You_used_to_be_the_one",
       "subtitleText": "You used to be the one everyone loved, until you and Lianne had that fight. And then everyone took her side over yours."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "It must have really bothered you huh?"
+      "filePath": "audio/Act3/Sentence/S21_1_everyone_loved",
+      "subtitleText": "You used to be the one everyone loved, until you and Lianne had that fight. And then everyone took her side over yours.",
+      "animationNo": 93
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "Is that why you followed her to the bathroom last night?"
+      "filePath": "audio/Act3/Sentence/S21_2_and_everyone_took_her",
+      "subtitleText": "You used to be the one everyone loved, until you and Lianne had that fight. And then everyone took her side over yours.",
+      "animationNo": 94
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
+      "filePath": "audio/Act3/Sentence/S22_It_must_have_really_bothered",
+      "subtitleText": "It must have really bothered you and I bet you couldn't handle it.",
+      "animationNo": 95
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S23_Is_that_why_you_followed",
+      "subtitleText": "Is that why you followed her to the bathroom last night?",
+      "animationNo": 96
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S24_And_made_sure_to_take",
       "subtitleText": "And made sure to take your gun with you?"
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "And why no one could find you when the gunshot was heard?"
+      "filePath": "audio/Act3/Sentence/S25_And_why_no_one",
+      "subtitleText": "And why no one could find you when the gunshot was heard?",
+      "animationNo": 97
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
+      "filePath": "audio/Act3/Sentence/S26_You_couldn_t_even_look",
       "subtitleText": "You couldn’t even look her in the eyes, you coward."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/silence_splitsecond",
+      "subtitleText": "",
+      "animationNo": 98
     },
     {
       "sequenceType": "question",

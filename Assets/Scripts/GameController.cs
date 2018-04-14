@@ -42,6 +42,9 @@ public class GameController : MonoBehaviour
     public bool FER_is_Off;
     public bool gameSceneOnly;
     public bool runTimeline;
+    public bool skipAct;
+
+    public int skipToAct;
 
     public Text questionDisplayText;
     public Slider scoreDisplayerSlider;
@@ -81,7 +84,7 @@ public class GameController : MonoBehaviour
     public RuntimeAnimatorController kiraController;
     private Animator currentDetectiveAnimator;
 
-    public int currentActNo; // FOR TESTING
+    private int currentActNo;
 
     private int animationNoHash = Animator.StringToHash("animationNo");
 
@@ -117,7 +120,7 @@ public class GameController : MonoBehaviour
     {
         allTimelines.Add(act1Timelines);
         allTimelines.Add(act2Timelines);
-        allTimelines.Add(act2Timelines);
+        allTimelines.Add(act3Timelines);
         
         if (runTimeline)
         {
@@ -128,7 +131,16 @@ public class GameController : MonoBehaviour
 
         dataController = FindObjectOfType<DataController>(); // store a ref to data controller
 
-        currentActNo = dataController.GetCurrentActNo();
+        if (skipAct)
+        {
+            currentActNo = skipToAct;
+            dataController.SetCurrentActNo(currentActNo);
+        }
+        else
+        {
+            currentActNo = dataController.GetCurrentActNo();
+        }
+        
         if (currentActNo != 1)
         {
             detectiveObject = kira;
