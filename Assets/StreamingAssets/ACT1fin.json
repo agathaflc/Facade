@@ -239,7 +239,8 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act1/Sentences/S7_1_i_bit_the_bullet",
-      "subtitleText": "I bit the bullet."
+      "subtitleText": "I bit the bullet.",
+      "animationNo": 21
     },
     {
       "sequenceType": "dialog",
@@ -249,12 +250,27 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act1/Sentences/S7_2_but_it_turns_out",
-      "subtitleText": "But it turns out it was all just a dream!"
+      "subtitleText": "But it turns out it was all just a dream!",
+      "animationNo": 60,
+      "animatorLayer": 3
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/",
-      "subtitleText": "It’s a bit dramatic to shoot myself, but at least I’m outta there now!"
+      "filePath": "audio/silence_2sec",
+      "subtitleText": "",
+      "animationNo": 5
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S8_0_It_s_abit_dramatic",
+      "subtitleText": "It’s a bit dramatic to shoot myself, but at least I’m outta there now, right?"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S8_1_but_at_least",
+      "subtitleText": "It’s a bit dramatic to shoot myself, but at least I’m outta there now, right?",
+      "animationNo": 50,
+      "animatorLayer": 2
     },
     {
       "sequenceType": "question",
@@ -266,7 +282,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/Act1/Sentences/",
+          "filePath": "audio/Act1/Questions/Q5_What_about_you",
           "questionText": "What about you? I hope you had enough sleep last night. How often do you dream?",
           "answers": [
             {
@@ -295,8 +311,9 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/",
-      "subtitleText": "Okay, I don't think you want to hear about my weird dreams! Let's get back to the case."
+      "filePath": "audio/Act1/Sentences/S9_Anyways_you_don_t_want",
+      "subtitleText": "Anyways, you don’t want to hear me go on and on and on about my weird dreams! So let's get back to the case.",
+      "animationNo": 19
     },
     {
       "sequenceType": "question",
@@ -308,7 +325,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/Act1/Sentences/",
+          "filePath": "audio/Act1/Questions/Q6_So_tell_me_where",
           "questionText": "So tell me where you were last night?",
           "answers": [
             {
@@ -336,7 +353,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/Act1/Sentences/",
+          "filePath": "audio/Act1/Questions/Q7_And_were_you_with",
           "questionText": "And were you with anyone last night?",
           "answers": [
             {
@@ -368,7 +385,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/Act1/Sentences/",
+          "filePath": "audio/Act1/Questions/Q8_When_did_you_get_home",
           "questionText": "When did you get home last night?",
           "answers": [
             {
@@ -396,7 +413,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/Act1/Sentences/",
+          "filePath": "audio/Act1/Questions/Q9_How_did_you_get_home",
           "questionText": "Tell me, how did you get home last night?",
           "answers": [
             {
@@ -425,8 +442,27 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/",
-      "subtitleText": "Okay, so you must be wondering why I’m asking you all these questions. Well you see, last night there was an accident... Well we’re not so sure it was an accident."
+      "filePath": "audio/Act1/Sentences/S10_0_Okay_so_you_must_be_wondering",
+      "subtitleText": "Okay, so you must be wondering why I’m asking you all these questions.",
+      "animationNo": 4
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S10_1_well_you_see",
+      "subtitleText": "Well you see, last night there was an accident..."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S10_2_well_were_not_so_sure",
+      "subtitleText": "Well we’re not so sure it was an accident.",
+      "animationNo": 41,
+      "animatorLayer": 1
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/silence_splitsecond",
+      "subtitleText": "",
+      "animationNo": 6
     },
     {
       "sequenceType": "question",
@@ -439,7 +475,7 @@
           "considersEmotion": true,
           "considersFact": true,
           "pictureFileName": "wojak.jpg",
-          "filePath": "audio/Act1/Sentences/",
+          "filePath": "audio/Act1/Questions/Q10_Do_you_recognise",
           "questionText": "Do you recognize this person from last night?",
           "answers": [
             {
@@ -486,7 +522,7 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/i-wanna-discuss",
+      "filePath": "audio/Act1/Sentences/S11_You_see_this_girl",
       "readExpression": true,
       "scoreWeight": 3,
       "expectedExpressions": [
@@ -499,8 +535,14 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/",
-      "subtitleText": "I can’t begin to imagine what her family is going through. I would be devastated if something like this happened to my little girl."
+      "filePath": "audio/Act1/Sentences/S12_0_I_can_t_begin_to_imagine",
+      "subtitleText": "I can’t begin to imagine what her family is going through."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S12_1_i_would_be_devastated",
+      "subtitleText": "I would be devastated if something like this happened to my little girl.",
+      "animationNo": 3
     },
     {
       "sequenceType": "question",
@@ -513,7 +555,7 @@
           "considersEmotion": true,
           "considersFact": true,
           "pictureFileName": "wojak.jpg",
-          "filePath": "audio/Act1/Sentences/",
+          "filePath": "audio/Act1/Questions/Q11_Do_you_remember",
           "questionText": "Do you remember any of these people acting suspiciously last night?",
           "answers": [
             {
@@ -560,7 +602,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/Act1/Sentences/",
+          "filePath": "audio/Act1/Questions/Q12_And_why_did_they_seem",
           "questionText": "And why exactly did they seem suspicious to you?",
           "answers": [
             {
@@ -589,18 +631,45 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/",
-      "subtitleText": "Look man, I know you don’t have anything to do with this, and I can tell you’re a good guy who was just in the wrong place at the wrong time."
+      "filePath": "audio/Act1/Sentences/S13_0_Look_I_know_you_don_t_have_anything",
+      "subtitleText": "Look, I know you don’t have anything to do with this, and I can tell."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/",
-      "subtitleText": "So you don’t have anything to be worried about. I’m gonna step out for a second to finish up some paperwork, and I’ll be back in a while."
+      "filePath": "audio/Act1/Sentences/S13_1_and_i_can_tell",
+      "subtitleText": "Look, I know you don’t have anything to do with this, and I can tell.",
+      "animationNo": 2
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/",
+      "filePath": "audio/Act1/Sentences/S13_2_you_seem_like",
+      "subtitleText": "You seem like a good person who was just in the wrong place at the wrong time.",
+      "animationNo": 40,
+      "animatorLayer": 1
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S14_0_So_don_t_worry",
+      "subtitleText": "So don't worry. I’m gonna step out for a second to finish up some paperwork, and I’ll be back in a while.",
+      "animationNo": 60,
+      "animatorLayer": 3
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S14_1_and_ill_be_back",
+      "subtitleText": "So don't worry. I’m gonna step out for a second to finish up some paperwork, and I’ll be back in a while.",
+      "animationNo": 14
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S15_0_I_just_hope",
       "subtitleText": "I just hope we can figure out this case together, so that poor girl’s parents can get some closure. I’ll see you in a bit!"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S15_1_so_that",
+      "subtitleText": "I just hope we can figure out this case together, so that poor girl’s parents can get some closure. I’ll see you in a bit!",
+      "animationNo": 17
     }
   ]
 }

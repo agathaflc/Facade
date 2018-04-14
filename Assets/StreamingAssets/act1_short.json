@@ -18,344 +18,49 @@
   },
   "sequence": [
     {
-      "sequenceType": "dialog",
-      "filePath": "audio/seq0_000",
-      "subtitleText": "Hey there! I'm Detective Warren. Thanks a lot for coming in today. I'm here to just ask you few questions about the incident from last night."
+      "sequenceType": "timeline"
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/silence_3sec",
-      "subtitleText": "Look, I know it’s kinda troublesome, but we have to question all the witnesses that were present.",
-      "effect": "motionBlur"
+      "filePath": "audio/Act1/Sentences/S13_0_Look_I_know_you_don_t_have_anything",
+      "subtitleText": "Look, I know you don’t have anything to do with this, and I can tell."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/silence_3sec",
-      "subtitleText": "I know you’re not involved with anything, but I’m just here trying to do my job as quickly as possible we can both go home. So let’s get started.",
-      "effect": "motionBlur"
-    },
-    {
-      "sequenceType": "question",
-      "questions": [
-        {
-          "questionDesc": "Player Name",
-          "questionId": "01",
-          "expressionWeight": 0,
-          "consistencyWeight": 1,
-          "considersEmotion": false,
-          "considersFact": true,
-          "filePath": "audio/silence_3sec",
-          "questionText": "What's your name?",
-          "answers": [
-            {
-              "answerId": "010",
-              "answerText": "Ella Wong",
-              "detectiveResponse": "positive"
-            },
-            {
-              "answerId": "011",
-              "answerText": "James Peterson",
-              "detectiveResponse": "positive"
-            },
-            {
-              "answerId": "012",
-              "answerText": "Anya Patel",
-              "detectiveResponse": "positive"
-            },
-            {
-              "answerId": "013",
-              "answerText": "Charles Davis",
-              "detectiveResponse": "positive"
-            }
-          ]
-        },
-        {
-          "questionDesc": "Player Age",
-          "questionId": "02",
-          "expressionWeight": 0,
-          "consistencyWeight": 1,
-          "considersEmotion": false,
-          "considersFact": true,
-          "filePath": "audio/silence_3sec",
-          "questionText": "How old are you?",
-          "answers": [
-            {
-              "answerId": "020",
-              "answerText": "18"
-            },
-            {
-              "answerId": "021",
-              "answerText": "26"
-            },
-            {
-              "answerId": "022",
-              "answerText": "31"
-            },
-            {
-              "answerId": "023",
-              "answerText": "43"
-            }
-          ]
-        },
-        {
-          "questionDesc": "Player Location",
-          "questionId": "03",
-          "expressionWeight": 0,
-          "consistencyWeight": 1,
-          "considersEmotion": false,
-          "considersFact": true,
-          "filePath": "audio/silence_3sec",
-          "questionText": "And where are you from?",
-          "answers": [
-            {
-              "answerId": "030",
-              "answerText": "USA"
-            },
-            {
-              "answerId": "031",
-              "answerText": "India"
-            },
-            {
-              "answerId": "032",
-              "answerText": "France"
-            },
-            {
-              "answerId": "033",
-              "answerText": "South Africa"
-            }
-          ]
-        },
-        {
-          "questionDesc": "Player Feelings",
-          "questionId": "04",
-          "expressionWeight": 1,
-          "consistencyWeight": 0,
-          "considersEmotion": true,
-          "considersFact": false,
-          "filePath": "audio/silence_3sec",
-          "questionText": "So tell me, how are you feeling today?",
-          "answers": [
-            {
-              "answerId": "040",
-              "answerText": "Great!",
-              "expectedExpressions": [
-                "happy"
-              ],
-              "detectiveResponse": "positive"
-            },
-            {
-              "answerId": "041",
-              "answerText": "Alright",
-              "expectedExpressions": [
-                "happy",
-                "neutral"
-              ],
-              "detectiveResponse": "positive"
-            },
-            {
-              "answerId": "042",
-              "answerText": "Teribble",
-              "expectedExpressions": [
-                "angry",
-                "sad"
-              ],
-              "detectiveResponse": "negative"
-            },
-            {
-              "answerId": "043",
-              "answerText": "I'm scared!",
-              "expectedExpressions": [
-                "scared",
-                "surprised"
-              ],
-              "detectiveResponse": "negative"
-            }
-          ]
-        }
-      ]
+      "filePath": "audio/Act1/Sentences/S13_1_and_i_can_tell",
+      "subtitleText": "Look, I know you don’t have anything to do with this, and I can tell.",
+      "animationNo": 2
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/silence_3sec",
-      "subtitleText": "Just last night I dreamt I was stuck in a war zone, surrounded by enemies, with only one bullet left. Doomed to be defeated and skinned alive by those bastards."
+      "filePath": "audio/Act1/Sentences/S13_2_you_seem_like",
+      "subtitleText": "You seem like a good person who was just in the wrong place at the wrong time.",
+      "animationNo": 40,
+      "animatorLayer": 1
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/silence_3sec",
-      "subtitleText": "And I sure as hell wasn’t gonna let them catch me alive, so I ate the bullet. But it turns out it was all just a dream!"
+      "filePath": "audio/Act1/Sentences/S14_0_So_don_t_worry",
+      "subtitleText": "So don't worry. I’m gonna step out for a second to finish up some paperwork, and I’ll be back in a while.",
+      "animationNo": 60,
+      "animatorLayer": 3
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/silence_3sec",
-      "subtitleText": "It’s a bit dramatic to shoot myself, but at least I’m outta there now!"
-    },
-    {
-      "sequenceType": "question",
-      "questions": [
-        {
-          "questionDesc": "Dream Count",
-          "questionId": "05",
-          "expressionWeight": 0,
-          "consistencyWeight": 1,
-          "considersEmotion": false,
-          "considersFact": true,
-          "filePath": "audio/silence_3sec",
-          "questionText": "What about you? I hope you had enough sleep last night. How often do you dream?",
-          "answers": [
-            {
-              "answerId": "050",
-              "answerText": "Quite often",
-              "detectiveResponse": "positive"
-            },
-            {
-              "answerId": "051",
-              "answerText": "Only sometimes",
-              "detectiveResponse": "neutral"
-            },
-            {
-              "answerId": "052",
-              "answerText": "Never",
-              "detectiveResponse": "neutral"
-            },
-            {
-              "answerId": "053",
-              "answerText": "I can't remember",
-              "detectiveResponse": "negative"
-            }
-          ]
-        }
-      ]
+      "filePath": "audio/Act1/Sentences/S14_1_and_ill_be_back",
+      "subtitleText": "So don't worry. I’m gonna step out for a second to finish up some paperwork, and I’ll be back in a while.",
+      "animationNo": 14
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/silence_3sec",
-      "subtitleText": "Okay, I don't think you want to hear about my weird dreams! Let's get back to the case."
-    },
-    {
-      "sequenceType": "question",
-      "questions": [
-        {
-          "questionDesc": "Victim Intro",
-          "questionId": "10",
-          "expressionWeight": 0.3,
-          "consistencyWeight": 0.7,
-          "considersEmotion": true,
-          "considersFact": true,
-          "pictureFileName": "wojak.jpg",
-          "filePath": "audio/silence_3sec",
-          "questionText": "Do you recognize this person from last night?",
-          "answers": [
-            {
-              "answerId": "100",
-              "answerText": "Yes",
-              "expectedExpressions": [
-                "neutral",
-                "sad",
-                "scared"
-              ],
-              "detectiveResponse": "neutral"
-            },
-            {
-              "answerId": "101",
-              "answerText": "No",
-              "expectedExpressions": [
-                "neutral",
-                "scared"
-              ],
-              "detectiveResponse": "negative"
-            },
-            {
-              "answerId": "102",
-              "answerText": "Somewhat",
-              "expectedExpressions": [
-                "neutral",
-                "sad",
-                "scared"
-              ],
-              "detectiveResponse": "neutral"
-            },
-            {
-              "answerId": "103",
-              "answerText": "I don't remember",
-              "expectedExpressions": [
-                "neutral",
-                "scared"
-              ],
-              "detectiveResponse": "negative"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/i-wanna-discuss",
-      "readExpression": true,
-      "scoreWeight": 3,
-      "expectedExpressions": [
-        "scared",
-        "surprised",
-        "angry",
-        "sad"
-      ],
-      "subtitleText": "You see.. this girl was found dead last night. Her name was Lianne. It’s a real tragedy."
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/silence_3sec",
-      "subtitleText": "I can’t begin to imagine what her family is going through. I would be devastated if something like this happened to my little girl."
-    },
-    {
-      "sequenceType": "question",
-      "questions": [
-        {
-          "questionDesc": "Witnesses Intro",
-          "questionId": "12",
-          "expressionWeight": 0,
-          "consistencyWeight": 1,
-          "considersEmotion": false,
-          "considersFact": true,
-          "filePath": "audio/silence_3sec",
-          "questionText": "And why exactly did they seem suspicious to you?",
-          "answers": [
-            {
-              "answerId": "120",
-              "answerText": "They were acting paranoid",
-              "detectiveResponse": "neutral"
-            },
-            {
-              "answerId": "121",
-              "answerText": "They brought a gun",
-              "detectiveResponse": "negative"
-            },
-            {
-              "answerId": "122",
-              "answerText": "They were taking pictures of random people",
-              "detectiveResponse": "neutral"
-            },
-            {
-              "answerId": "123",
-              "answerText": "They were taking drugs",
-              "detectiveResponse": "negative"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/silence_3sec",
-      "subtitleText": "Look, I know you don’t have anything to do with this, and I can tell you’re a good guy who was just in the wrong place at the wrong time."
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/silence_3sec",
-      "subtitleText": "So you don’t have anything to be worried about. I’m gonna step out for a second to finish up some paperwork, and I’ll be back in a while."
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/silence_3sec",
+      "filePath": "audio/Act1/Sentences/S15_I_just_hope",
       "subtitleText": "I just hope we can figure out this case together, so that poor girl’s parents can get some closure. I’ll see you in a bit!"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S15_I_just_hope",
+      "subtitleText": "I just hope we can figure out this case together, so that poor girl’s parents can get some closure. I’ll see you in a bit!",
+      "animationNo": 17
     }
   ]
 }
