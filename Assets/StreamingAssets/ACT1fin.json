@@ -442,8 +442,27 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/",
-      "subtitleText": "Okay, so you must be wondering why I’m asking you all these questions. Well you see, last night there was an accident... Well we’re not so sure it was an accident."
+      "filePath": "audio/Act1/Sentences/S10_0_Okay_so_you_must_be_wondering",
+      "subtitleText": "Okay, so you must be wondering why I’m asking you all these questions.",
+      "animationNo": 4
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S10_1_well_you_see",
+      "subtitleText": "Well you see, last night there was an accident..."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S10_2_well_were_not_so_sure",
+      "subtitleText": "Well we’re not so sure it was an accident.",
+      "animationNo": 41,
+      "animatorLayer": 1
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/silence_splitsecond",
+      "subtitleText": "",
+      "animationNo": 6
     },
     {
       "sequenceType": "question",
@@ -456,7 +475,7 @@
           "considersEmotion": true,
           "considersFact": true,
           "pictureFileName": "wojak.jpg",
-          "filePath": "audio/Act1/Sentences/",
+          "filePath": "audio/Act1/Questions/Q10_Do_you_recognise",
           "questionText": "Do you recognize this person from last night?",
           "answers": [
             {
