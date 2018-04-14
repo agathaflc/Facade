@@ -22,80 +22,6 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S2_We_ve_had_a_long_day",
-      "subtitleText": "We’ve all had a long day, right? Don’t you wanna get back home?"
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S3_I_know_I_do",
-      "subtitleText": "I know I do, so I can rest easy knowing you... "
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S4_I_mean_the_perpetrator",
-      "subtitleText": "I mean... the perpetrator, is locked up.",
-      "animationNo": 1
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S5_You_look_alittle_sick",
-      "subtitleText": "You look a little sick.",
-      "animationNo": 2
-    },
-    {
-      "sequenceType": "question",
-      "questions": [
-        {
-          "questionDesc": "Player Feelings",
-          "questionId": "01",
-          "expressionWeight": 1,
-          "consistencyWeight": 0,
-          "considersEmotion": true,
-          "considersFact": false,
-          "filePath": "audio/Act3/Questions/Q1_Are_you_feeling_abit_uneasy",
-          "questionText": "Are you feeling a bit uneasy?",
-          "answers": [
-            {
-              "answerId": "010",
-              "answerText": "Of course not",
-              "expectedExpressions": [
-                "neutral"
-              ],
-              "detectiveResponse": "positive"
-            },
-            {
-              "answerId": "011",
-              "answerText": "Yes!",
-              "expectedExpressions": [
-                "scared",
-                "angry",
-                "sad"
-              ],
-              "detectiveResponse": "negative"
-            },
-            {
-              "answerId": "012",
-              "answerText": "No, I'm great!",
-              "expectedExpressions": [
-                "happy"
-              ],
-              "detectiveResponse": "positive"
-            },
-            {
-              "answerId": "013",
-              "answerText": "Should I be..?",
-              "expectedExpressions": [
-                "scared",
-                "surprised"
-              ],
-              "detectiveResponse": "neutral"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/S6_0_I_gotta_be_honest_with_you",
       "subtitleText": "I gotta be honest with you, this case is really getting to me."
     },
@@ -189,8 +115,9 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "Your alibi was going on and on about how she had never seen you so drunk before last night."
+      "filePath": "audio/Act3/Sentence/S11_You_know_your_alibi_was",
+      "subtitleText": "You know your alibi was going on and on about how she had never seen you so drunk before last night.",
+      "animationNo": 4
     },
     {
       "sequenceType": "question",
@@ -231,13 +158,14 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
+      "filePath": "audio/Act3/Sentence/S12_I_see_It_seems_like",
       "subtitleText": "I see.. It seems like you and your alibi’s stories don’t exactly line up."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "To be honest, she didn’t have a lot of good things to say about you..."
+      "filePath": "audio/Act3/Sentence/S13_To_be_honest",
+      "subtitleText": "To be honest, she didn’t have a lot of good things to say about you...",
+      "animationNo": 5
     },
     {
       "sequenceType": "question",
@@ -274,8 +202,13 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "Well, I thought she was a very open and nice person.  And she seemed to have a lot of inside information on you and your relationship with the victim."
+      "filePath": "audio/Act3/Sentence/S14_0_Well_I_thought_she",
+      "subtitleText": "Well, I thought she was a very nice and open person."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S14_1_and_she_seemed",
+      "subtitleText": "And she seemed to have a lot of inside information on you and your relationship with the victim."
     },
     {
       "sequenceType": "question",
@@ -362,13 +295,15 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "Oh did I ask you that already? My bad.. I just want to make sure I have all my facts straight."
+      "filePath": "audio/Act3/Sentence/S15_Oh_did_I_ask_you_already",
+      "subtitleText": "Oh did I ask you that already? My bad.. I just want to make sure I have all my facts straight.",
+      "animationNo": 8
     },
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "Just like you.. We both know who’s really in control here."
+      "subtitleText": "Just like you.. We both know who’s really in control here.",
+      "animationNo": 2
     },
     {
       "sequenceType": "question",
