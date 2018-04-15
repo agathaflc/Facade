@@ -64,6 +64,7 @@ public class GameController : MonoBehaviour
     public GameObject detectiveObject;
     public GameObject hans;
     public GameObject kira;
+    public GameObject tableGun;
 
     public GameObject room;
     public Camera playerCamera;
@@ -154,6 +155,11 @@ public class GameController : MonoBehaviour
             detectiveObject = hans;
             detectiveObject.SetActive(true);
             kira.SetActive(false);
+        }
+
+        if (currentActNo == 2) // show table gun only in act 3
+        {
+            tableGun.SetActive(true);
         }
 
         currentActData = dataController.GetCurrentRoundData();
@@ -859,7 +865,8 @@ public class GameController : MonoBehaviour
         highScoreDisplayText.text = dataController.GetHighestPlayerScore().ToString();
 
         questionDisplay.SetActive(false);
-        roundEndDisplay.SetActive(true); // activate (show) the round end display
+//        postReport.SetActive(true); // activate (show) the round end display
+        GeneratePostReport();
 
         questionPictureDisplay.GetComponent<ImageLoader>().DestroyMaterial();
     }

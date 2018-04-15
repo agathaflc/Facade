@@ -2,77 +2,77 @@
   "suspiciousPositive": [
     {
       "text": "Ok.",
-      "soundFilePath": "audio/silence_3sec"
+      "soundFilePath": "audio/Act1/Responses/okay_neutral"
     },
     {
       "text": "Noted.",
-      "soundFilePath": "audio/silence_3sec"
+      "soundFilePath": "audio/Act1/Responses/noted"
     }
   ],
   "suspiciousNeutral": [
     {
       "text": "Ok.",
-      "soundFilePath": "audio/silence_3sec"
+      "soundFilePath": "audio/Act1/Responses/okay_neutral"
     },
     {
       "text": "I see.",
-      "soundFilePath": "audio/silence_3sec"
+      "soundFilePath": "audio/Act1/Responses/i_see"
     },
     {
       "text": "Noted.",
-      "soundFilePath": "audio/silence_3sec"
+      "soundFilePath": "audio/Act1/Responses/noted"
     }
   ],
   "suspiciousNegative": [
     {
       "text": "Uh huh..",
-      "soundFilePath": "audio/silence_3sec"
+      "soundFilePath": "audio/Act1/Responses/uh_huh"
     },
     {
       "text": "Hmmm..",
-      "soundFilePath": "audio/silence_3sec"
+      "soundFilePath": "audio/Act1/Responses/hm"
     },
     {
       "text": "I see..",
-      "soundFilePath": "audio/silence_3sec"
+      "soundFilePath": "audio/Act1/Responses/i_see"
     }
   ],
   "notSuspiciousPositive": [
     {
       "text": "Alright.",
-      "soundFilePath": "audio/nice-work"
+      "soundFilePath": "audio/Act1/Responses/alright"
     },
     {
       "text": "Right.",
-      "soundFilePath": "audio/friday-rocks"
+      "soundFilePath": "audio/Act1/Responses/right"
     },
     {
       "text": "Ok.",
-      "soundFilePath": "audio/friday-rocks"
+      "soundFilePath": "audio/Act1/Responses/okay_happy"
     },
     {
       "text": "Got it.",
-      "soundFilePath": "audio/friday-rocks"
+      "soundFilePath": "audio/Act1/Responses/got_it"
     }
   ],
   "notSuspiciousNegative": [
     {
       "text": "Uh huh..",
-      "soundFilePath": "audio/oh-thats-okay"
+      "soundFilePath": "audio/Act1/Responses/uh_huh"
     },
     {
       "text": "I see..",
-      "soundFilePath": "audio/oh-thats-okay"
+      "soundFilePath": "audio/Act1/Responses/i_see"
     }
   ],
   "notSuspiciousNeutral": [
     {
       "text": "Ok.",
-      "soundFilePath": "audio/alright"
+      "soundFilePath": "audio/Act1/Responses/okay_neutral"
     },
     {
       "text": "Got it.",
-      "soundFilePath": "audio/alright"
+      "soundFilePath": "audio/Act1/Responses/got_it"
     }
   ],
   "clarifying": [
