@@ -878,7 +878,7 @@ public class GameController : MonoBehaviour
         
     }
 
-    private void LightsCameraAction()
+	private void LightsCameraAction(int Num)
     {
         var Lightbulb = room.transform.Find("Lightbulb").gameObject;
         var Lights = Lightbulb.transform.Find("Lamp").gameObject;
@@ -886,9 +886,11 @@ public class GameController : MonoBehaviour
 
         var SpotLight1 = room.transform.Find("Spot light 1").gameObject;
         var SpotLight2 = room.transform.Find("Spot light 2").gameObject;
-
-        //SpotLight1.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
-        SpotLight2.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
+		if (Num == 1) {
+			SpotLight1.GetComponent<Light> ().enabled = !Lights.GetComponent<Light> ().enabled;
+		}if (Num == 2) {
+			SpotLight2.GetComponent<Light> ().enabled = !Lights.GetComponent<Light> ().enabled;
+		}
     }
 
 	private void LightingChanges(int newIntensity,Color32 newColor){
@@ -919,14 +921,14 @@ public class GameController : MonoBehaviour
     {
         UnlockCursor();
         playerCamera.GetComponent<PlayerLook>().enabled = false;
-        //Debug.Log(GetAnswer(0));
+		//Debug.Log(GetAnswer(1));
         postReport.SetActive(true);
         string report = "";
 		report = "Investigation case #160418(HO4)" +
 		"\nStatus: On going " +
 		"\nDocument classification: Confidential" +
 		"\nDetective in Charge: Sgt Suzanna Warren" +
-        "\nDate: 15/06/2017 " +
+		"\nDate: 15/06/2017 " +
 		"\nTime of interrogration: 1900HRS" +
 		"\nLocation: Mary Hill police station, interrogation room 5" +
 		"\nThe following details the factual statement as recorded..." +
@@ -959,7 +961,9 @@ public class GameController : MonoBehaviour
             "\n\n The suspect has been cleared of all charges as it has been proven that " + GetAnswer (10) + 
             " is guilty of committing the murder of Lianna Armstrong. The events that transpired during the incident is that during the night of 14/05/2017, " + GetAnswer (10) + 
             ", followed the victim into the bathroom of " + GetAnswer (5) + ", and shot her with a 9mm pistol from behind in cold blood. ";
-        }
+
+			postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
+		}
 		//endnum 2 = Bad reality ending 
 		if (endnum == 2){
 			report = report + "\n\n--------------------New Entry--------------------" + 
@@ -969,8 +973,11 @@ public class GameController : MonoBehaviour
             "\nDetective in Charge: Sgt Suzanna Warren" +
             "\nDate: 17/07/2017 " +
             "\nThe following details the conclusion drawn from the investigation by the detective in charge…" +
-            "\n\n The suspect has been proven of being guilty of committing the murder of Lianna Armstrong. The events that transpired during the incident is that during the night of 14/05/2017,  the suspect followed the victim into the bathroom of " + GetAnswer (5) + ", and shot her with a 9mm pistol from behind in cold blood." +
+            "\n\n The suspect has been proven of being guilty of committing the murder of Lianna Armstrong. The events that transpired during the incident is that during the night of 14/05/2017,  the suspect followed the victim into the bathroom of " + 
+			GetAnswer (5) + ", and shot her with a 9mm pistol from behind in cold blood." +
             "The motivation of which, is because of a heated argument between the suspect and the victim caused jealousy and envy to get the better of the suspect.";
+
+			postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
 		}
 	}
 
@@ -1063,7 +1070,7 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyDown("r"))
         {
-			LightsCameraAction();
+			LightsCameraAction(2);
 			//LightingChanges(2, new Color(0,0,200,255));
         }
 
