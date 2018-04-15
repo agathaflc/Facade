@@ -17,11 +17,5 @@
     "seek": 40
   },
   "sequence": [
-    {
-      "sequenceType": "timeline"
-    },
-    {
-      "sequenceType": "timeline"
-    }
   ]
 }
