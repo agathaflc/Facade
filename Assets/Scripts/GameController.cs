@@ -64,6 +64,7 @@ public class GameController : MonoBehaviour
     public GameObject detectiveObject;
     public GameObject hans;
     public GameObject kira;
+    public GameObject tableGun;
 
     public GameObject room;
     public Camera playerCamera;
@@ -154,6 +155,11 @@ public class GameController : MonoBehaviour
             detectiveObject = hans;
             detectiveObject.SetActive(true);
             kira.SetActive(false);
+        }
+
+        if (currentActNo == 2) // show table gun only in act 3
+        {
+            tableGun.SetActive(true);
         }
 
         currentActData = dataController.GetCurrentRoundData();
@@ -255,6 +261,11 @@ public class GameController : MonoBehaviour
 
         currentSequence = currentActData.sequence[sequenceIndex];
 
+        if (currentSequence.ending)
+        {
+            detectiveObject.GetComponent<Animator>().runtimeAnimatorController = kiraStandUpController;
+            currentDetectiveAnimator = detectiveObject.GetComponent<Animator>();
+        }
         if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
         {
             // Debug.Log ("RunSequence: current sequence is question");
@@ -279,14 +290,14 @@ public class GameController : MonoBehaviour
 
             if (string.IsNullOrEmpty(currentSequence.bgm.fileName))
             {
-                Debug.Log("special bgm is not null: " + currentSequence.bgm.fileName);
+//                Debug.Log("special bgm is not null: " + currentSequence.bgm.fileName);
                 PlayBgm(DataController.LoadAudioFile(currentSequence.bgm.fileName), "special_bgm",
                     currentSequence.bgm.seek);
             }
             
             currentDetectiveAnimator.SetInteger(animationNoHash, currentSequence.animationNo);
 
-            Debug.Log("animation no:" + currentSequence.animationNo);
+//            Debug.Log("animation no:" + currentSequence.animationNo);
             var exited = currentSequence.animationNo == 0;
             var exitTime = currentDetectiveAnimator.GetAnimatorTransitionInfo(currentSequence.animatorLayer).duration;
 
@@ -343,7 +354,7 @@ public class GameController : MonoBehaviour
     {
         if (clip == null)
         {
-            Debug.LogError("Clip is empty!");
+//            Debug.LogError("Clip is empty!");
             return;
         }
 
@@ -407,11 +418,12 @@ public class GameController : MonoBehaviour
     {
         isEventDone = true;
         postProcessingBehaviour.enabled = false;
+    }
 
-        if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
-        {
-            allQuestions.Add(currentQuestion);
-        }
+    private void SaveQuestion(QuestionData question)
+    {
+        Debug.Log("save q: " + question.questionDesc);
+        allQuestions.Add(question);
     }
 
     private void ShowSpecialEffect(string currentSequenceEffect)
@@ -734,6 +746,8 @@ public class GameController : MonoBehaviour
                     dataController.GetAnswerIdByQuestionId(currentQuestion.questionId)));
                 yield break;
             }
+            
+            SaveQuestion(currentQuestion);
 
             if (string.IsNullOrEmpty(answerData.detectiveResponse)) // no specified detective response
             {
@@ -854,7 +868,8 @@ public class GameController : MonoBehaviour
         highScoreDisplayText.text = dataController.GetHighestPlayerScore().ToString();
 
         questionDisplay.SetActive(false);
-        roundEndDisplay.SetActive(true); // activate (show) the round end display
+//        postReport.SetActive(true); // activate (show) the round end display
+        GeneratePostReport();
 
         questionPictureDisplay.GetComponent<ImageLoader>().DestroyMaterial();
     }

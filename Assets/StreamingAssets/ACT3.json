@@ -85,6 +85,7 @@
           "considersFact": true,
           "filePath": "audio/Act3/Question/",
           "questionText": "Will you kill yourself?",
+          "timeLimitInSeconds": 20,
           "answers": [
             {
               "answerId": "360",
