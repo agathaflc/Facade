@@ -31,11 +31,13 @@ public class GameController : MonoBehaviour
     private const string EFFECT_MOTION_BLUR = "motionBlur";
     private const string EFFECT_VIGNETTE = "vignette";
 
-    private const float OVERALL_SCORE_THRESHOLD = 25f; // TODO: FINETUNE THIS
     private const float EMOTION_DISTANCE_THRESHOLD = 2.0f;
     private const float FADE_STEP = 0.1f;
     private const float FER_RECORDING_TIME = 4f;
-    private const float MAX_SUSPICION_SCORE = 60f;
+    private const float MAX_SUSPICION_SCORE = 45f;
+    private const float ENDING_DECISION_TIME_LIMIT = 25f;
+
+    public float OVERALL_SCORE_THRESHOLD = 25f; // TODO: FINETUNE THIS
 
     // testing variables
     public bool FER_is_Off;
@@ -51,6 +53,7 @@ public class GameController : MonoBehaviour
     public Text scoreDisplayText;
     //public Text timeRemainingDisplayText;
     public Slider timeRemainingDisplaySlider;
+    public Slider endingTimeRemainingSlider;
     public Text highScoreDisplayText;
     public Text subtitleDisplayText;
     public SimpleObjectPool answerButtonObjectPool;
@@ -61,6 +64,7 @@ public class GameController : MonoBehaviour
     public GameObject roundEndDisplay;
     public GameObject questionPictureDisplay;
     public GameObject subtitleDisplay;
+    public GameObject endingDecisionDisplay;
     public GameObject detectiveObject;
     public GameObject hans;
     public GameObject kira;
@@ -107,9 +111,11 @@ public class GameController : MonoBehaviour
     private List<QuestionData> allQuestions = new List<QuestionData>();
 
     private bool isTimerActive;
+    private bool isEndingTimerActive;
     private bool isEventDone;
     private bool isClarifying;
     private float timeRemaining;
+    private float decisionTimeRemaining;
     private int questionIndex;
     private int sequenceIndex;
     private float displayedScore;
@@ -184,6 +190,7 @@ public class GameController : MonoBehaviour
         currentTimelineNo = 0;
 
         isTimerActive = false;
+        isEndingTimerActive = false;
         isClarifying = false;
 
         if (!runTimeline)
@@ -270,10 +277,20 @@ public class GameController : MonoBehaviour
 
         if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_ENDING))
         {
+            UnlockCursor();
             detectiveObject.SetActive(false);
             ApplyEndingCamera();
+            endingDecisionDisplay.SetActive(true);
 //            LightsCameraAction(2);
             ShowSpecialEffect(EFFECT_VIGNETTE);
+
+            decisionTimeRemaining = ENDING_DECISION_TIME_LIMIT;
+            isEndingTimerActive = true;
+
+            while (isEndingTimerActive)
+            {
+                yield return null;
+            }
         }
         
         if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
@@ -1080,11 +1097,19 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (isEndingTimerActive)
+        {
+            decisionTimeRemaining -= Time.deltaTime;
+            if (decisionTimeRemaining <= 0f) EndingScene(false); // didn't shoot
+            endingTimeRemainingSlider.value = decisionTimeRemaining / ENDING_DECISION_TIME_LIMIT;
+        }
+        
         if (isTimerActive && questionDisplay.activeSelf)
         {
             timeRemaining -= Time.deltaTime;
 
             if (timeRemaining <= 0f) AnswerButtonClicked(selectedBoldAnswer);
+            
         }
 
         UpdateTimeRemainingDisplay();
