@@ -17,5 +17,145 @@
     "seek": 0
   },
   "sequence": [
+    {
+      "sequenceType": "question",
+      "questions": [
+        {
+          "questionDesc": "Player Name",
+          "questionId": "01",
+          "expressionWeight": 0,
+          "consistencyWeight": 1,
+          "considersEmotion": false,
+          "considersFact": true,
+          "filePath": "audio/Act1/Questions/Q1_What_is_your_name",
+          "questionText": "What's your name?",
+          "answers": [
+            {
+              "answerId": "010",
+              "answerText": "Ella Wong",
+              "detectiveResponse": "positive"
+            },
+            {
+              "answerId": "011",
+              "answerText": "James Peterson",
+              "detectiveResponse": "positive"
+            },
+            {
+              "answerId": "012",
+              "answerText": "Anya Patel",
+              "detectiveResponse": "positive"
+            },
+            {
+              "answerId": "013",
+              "answerText": "Charles Davis",
+              "detectiveResponse": "positive"
+            }
+          ]
+        },
+        {
+          "questionDesc": "Player Age",
+          "questionId": "02",
+          "expressionWeight": 0,
+          "consistencyWeight": 1,
+          "considersEmotion": false,
+          "considersFact": true,
+          "filePath": "audio/Act1/Questions/Q2_How_old_are_you",
+          "questionText": "How old are you?",
+          "answers": [
+            {
+              "answerId": "020",
+              "answerText": "18"
+            },
+            {
+              "answerId": "021",
+              "answerText": "26"
+            },
+            {
+              "answerId": "022",
+              "answerText": "31"
+            },
+            {
+              "answerId": "023",
+              "answerText": "43"
+            }
+          ]
+        },
+        {
+          "questionDesc": "Player Location",
+          "questionId": "03",
+          "expressionWeight": 0,
+          "consistencyWeight": 1,
+          "considersEmotion": false,
+          "considersFact": true,
+          "filePath": "audio/Act1/Questions/Q3_Where_are_you_from",
+          "questionText": "And where are you from?",
+          "answers": [
+            {
+              "answerId": "030",
+              "answerText": "USA"
+            },
+            {
+              "answerId": "031",
+              "answerText": "India"
+            },
+            {
+              "answerId": "032",
+              "answerText": "France"
+            },
+            {
+              "answerId": "033",
+              "answerText": "South Africa"
+            }
+          ]
+        },
+        {
+          "questionDesc": "Player Feelings",
+          "questionId": "04",
+          "expressionWeight": 1,
+          "consistencyWeight": 0,
+          "considersEmotion": true,
+          "considersFact": false,
+          "filePath": "audio/Act1/Questions/Q4_How_are_you_feeling_today",
+          "questionText": "So tell me, how are you feeling today?",
+          "answers": [
+            {
+              "answerId": "040",
+              "answerText": "Great!",
+              "expectedExpressions": [
+                "happy"
+              ],
+              "detectiveResponse": "positive"
+            },
+            {
+              "answerId": "041",
+              "answerText": "Alright",
+              "expectedExpressions": [
+                "happy",
+                "neutral"
+              ],
+              "detectiveResponse": "positive"
+            },
+            {
+              "answerId": "042",
+              "answerText": "Teribble",
+              "expectedExpressions": [
+                "angry",
+                "sad"
+              ],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "043",
+              "answerText": "I'm scared!",
+              "expectedExpressions": [
+                "scared",
+                "surprised"
+              ],
+              "detectiveResponse": "negative"
+            }
+          ]
+        }
+      ]
+    }
   ]
 }

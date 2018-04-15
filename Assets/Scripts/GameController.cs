@@ -72,7 +72,7 @@ public class GameController : MonoBehaviour
     public GameObject kira;
     public GameObject tableGun;
 
-    public GameObject FERIndicator;
+    public Image FERIndicator;
 
     public Camera playerCamera;
     public Camera finalCamera;
@@ -335,7 +335,7 @@ public class GameController : MonoBehaviour
                 : currentDetectiveAnimator.GetAnimatorTransitionInfo(currentSequence.animatorLayer).duration;
 
             // show indicator if needed
-            if (currentSequence.readExpression) FERIndicator.SetActive(true);
+            if (currentSequence.readExpression) FERIndicator.enabled = true;
 
             while (detectiveVoice.isPlaying)
             {
@@ -369,7 +369,7 @@ public class GameController : MonoBehaviour
                     currentSequence.scoreWeight, out closestEmotion));
             }
 
-            FERIndicator.SetActive(false);
+            FERIndicator.enabled = false;
             ConcludeEvent();
         }
         else if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_TIMELINE))
@@ -567,7 +567,7 @@ public class GameController : MonoBehaviour
 
         if (currentQuestion.considersEmotion)
         {
-            FERIndicator.SetActive(true);
+            FERIndicator.enabled = true;
         }
 
         if (!string.IsNullOrEmpty(currentQuestion.effect))
@@ -730,7 +730,7 @@ public class GameController : MonoBehaviour
     {
         if (currentQuestion.considersEmotion)
         {
-            FERIndicator.SetActive(false);
+            FERIndicator.enabled = false;
         }
 
         if (currentQuestion.considersEmotion && !isClarifying) // no need to record again if it's just clarifying

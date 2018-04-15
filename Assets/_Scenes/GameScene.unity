@@ -4662,7 +4662,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &666436611
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4687,7 +4687,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 666436610}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -6557,7 +6557,7 @@ MonoBehaviour:
   hans: {fileID: 442740191}
   kira: {fileID: 1749480195}
   tableGun: {fileID: 2125480158}
-  FERIndicator: {fileID: 666436610}
+  FERIndicator: {fileID: 666436612}
   playerCamera: {fileID: 1660801664}
   finalCamera: {fileID: 489868751}
   room: {fileID: 593331702}
