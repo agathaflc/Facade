@@ -18,50 +18,6 @@
   },
   "sequence": [
     {
-      "sequenceType": "timeline"
-    },
-    {
-      "sequenceType": "timeline"
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/silence_splitsecond",
-      "subtitleText": "",
-      "ending": true,
-      "animationNo": 22
-    },
-    {
-      "sequenceType": "question",
-      "questions": [
-        {
-          "questionDesc": "Detective Dream Exit",
-          "questionId": "35",
-          "expressionWeight": 0,
-          "consistencyWeight": 1,
-          "considersEmotion": false,
-          "considersFact": true,
-          "filePath": "audio/Act3/Question/Q11_Do_you_think_hadn_t_shoot_myself",
-          "questionText": "Do you think if I didn’t shoot myself in my dream, would I still be trapped in that hell hole right now?",
-          "answers": [
-            {
-              "answerId": "350",
-              "answerText": "Yes"
-            },
-            {
-              "answerId": "351",
-              "answerText": "No"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S31_I_guess_only_one_way",
-      "subtitleText": "I guess only one way to find out.",
-      "animationNo": 23
-    },
-    {
       "sequenceType": "endingDecision",
       "questions": [
         {

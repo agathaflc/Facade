@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.PostProcessing;
 using UnityEngine.SceneManagement;
 using UnityEngine.Timeline;
 using UnityEngine.UI;
-
 
 public class GameController : MonoBehaviour
 {
@@ -35,6 +31,7 @@ public class GameController : MonoBehaviour
     private const string EFFECT_MOTION_BLUR = "motionBlur";
     private const string EFFECT_VIGNETTE = "vignette";
 
+    private const float OVERALL_SCORE_THRESHOLD = 25f; // TODO: FINETUNE THIS
     private const float EMOTION_DISTANCE_THRESHOLD = 2.0f;
     private const float FADE_STEP = 0.1f;
     private const float FER_RECORDING_TIME = 4f;
@@ -68,10 +65,13 @@ public class GameController : MonoBehaviour
     public GameObject hans;
     public GameObject kira;
     public GameObject tableGun;
+    
+    
+    public Camera playerCamera;
+    public Camera finalCamera;
+    private Camera activeCamera;
 
     public GameObject room;
-    public Camera playerCamera;
-	public Camera finalCamera;
     public PostProcessingProfile motionBlurEffect;
     public PostProcessingProfile vignetteEffect;
     public PostProcessingProfile bloomEffect;
@@ -160,10 +160,7 @@ public class GameController : MonoBehaviour
             kira.SetActive(false);
         }
 
-        if (currentActNo == 2) // show table gun only in act 3
-        {
-            tableGun.SetActive(true);
-        }
+        tableGun.SetActive(currentActNo == 2);
 
         currentActData = dataController.GetCurrentRoundData();
         
@@ -275,6 +272,8 @@ public class GameController : MonoBehaviour
         {
             detectiveObject.SetActive(false);
             ApplyEndingCamera();
+//            LightsCameraAction(2);
+            ShowSpecialEffect(EFFECT_VIGNETTE);
         }
         
         if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
@@ -428,7 +427,7 @@ public class GameController : MonoBehaviour
     private void ConcludeEvent()
     {
         isEventDone = true;
-        postProcessingBehaviour.enabled = false;
+        if (postProcessingBehaviour != null) postProcessingBehaviour.enabled = false;
     }
 
     private void SaveQuestion(QuestionData question)
@@ -936,17 +935,17 @@ public class GameController : MonoBehaviour
 
     private void MotionBlur()
     {
-        playerCamera.GetComponent<PostProcessingBehaviour>().profile = motionBlurEffect;
+        activeCamera.GetComponent<PostProcessingBehaviour>().profile = motionBlurEffect;
     }
 
     private void Vignette()
     {
-        playerCamera.GetComponent<PostProcessingBehaviour>().profile = vignetteEffect;
+        activeCamera.GetComponent<PostProcessingBehaviour>().profile = vignetteEffect;
     }
 
     private void Bloom()
     {
-        playerCamera.GetComponent<PostProcessingBehaviour>().profile = bloomEffect;
+        activeCamera.GetComponent<PostProcessingBehaviour>().profile = bloomEffect;
     }
 
 	private void GeneratePostReport(int endnum = 0)
@@ -1055,29 +1054,27 @@ public class GameController : MonoBehaviour
 
 	private void ApplyEndingCamera()
 	{
-		playerCamera.GetComponent<PlayerLook>().enabled = false;
-		playerCamera.enabled = false;
-		finalCamera.enabled = true;
+	    playerCamera.GetComponent<PlayerLook>().enabled = false;
+	    playerCamera.enabled = false;
+	    finalCamera.enabled = true;
+	    activeCamera = finalCamera;
+	    postProcessingBehaviour = finalCamera.GetComponent<PostProcessingBehaviour>();
 	}
 
-	private void EndingScene(int i){
-		switch (i) {
-		case 1: //GD
-			Initiate.Fade ("Ending1", Color.black, 0.8f);
-			break;
-		case 2: //BD
-			Initiate.Fade ("Ending2", Color.black, 0.8f);
-			break;
-		case 3: //BR
-			Initiate.Fade ("Ending3", Color.black, 0.8f);
-			break;
-		case 4: //GR
-			Initiate.Fade ("Ending4", Color.black, 0.8f);
-			break;
-		default: 
-			break;
-		}
+    public void EndingScene(bool shoot)
+    {
+        EndingScene(shoot, dataController.GetOverallScore() <= OVERALL_SCORE_THRESHOLD);
+    }
 
+	private void EndingScene(bool shoot, bool consistent){
+	    if (shoot)
+	    {
+	        Initiate.Fade(consistent ? "Ending1" : "Ending3", Color.black, 0.8f);
+	    }
+	    else
+	    {
+	        Initiate.Fade(consistent ? "Ending4" : "Ending2", Color.black, 0.8f);
+	    }
 	}
 
     // Update is called once per frame
@@ -1140,7 +1137,7 @@ public class GameController : MonoBehaviour
 		if (Input.GetKeyDown("o"))
 		{
 
-			EndingScene (3);
+			EndingScene (true, false);
 
 		}
 
