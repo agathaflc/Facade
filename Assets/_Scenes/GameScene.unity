@@ -6396,7 +6396,7 @@ MonoBehaviour:
   FER_is_Off: 1
   gameSceneOnly: 0
   runTimeline: 0
-  skipAct: 1
+  skipAct: 0
   skipToAct: 1
   questionDisplayText: {fileID: 1862245467}
   scoreDisplayerSlider: {fileID: 1720664495}
