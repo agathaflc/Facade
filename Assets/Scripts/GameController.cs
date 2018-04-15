@@ -1095,7 +1095,7 @@ public class GameController : MonoBehaviour
 
 		if (Input.GetKeyDown("o"))
 		{
-			EndingScene (1);
+			EndingScene (4);
 			//StartEnding();
 		}
 
