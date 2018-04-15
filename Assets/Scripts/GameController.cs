@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     private const string SEQUENCE_TYPE_QUESTION = "question";
     private const string SEQUENCE_TYPE_TIMELINE = "timeline";
     private const string SEQUENCE_TYPE_ENDING = "endingDecision";
-    
+
     private const string DEFAULT_EMOTION = "neutral";
     private const string HAPPY_EMOTION = "happy";
     private const string SAD_EMOTION = "sad";
@@ -50,7 +50,9 @@ public class GameController : MonoBehaviour
 
     public Text questionDisplayText;
     public Slider scoreDisplayerSlider;
+
     public Text scoreDisplayText;
+
     //public Text timeRemainingDisplayText;
     public Slider timeRemainingDisplaySlider;
     public Slider endingTimeRemainingSlider;
@@ -69,8 +71,9 @@ public class GameController : MonoBehaviour
     public GameObject hans;
     public GameObject kira;
     public GameObject tableGun;
-    
-    
+
+    public GameObject FERIndicator;
+
     public Camera playerCamera;
     public Camera finalCamera;
     private Camera activeCamera;
@@ -133,7 +136,7 @@ public class GameController : MonoBehaviour
         allTimelines.Add(act1Timelines);
         allTimelines.Add(act2Timelines);
         allTimelines.Add(act3Timelines);
-        
+
         if (runTimeline)
         {
             StartCoroutine(PlayIntro());
@@ -152,7 +155,7 @@ public class GameController : MonoBehaviour
         {
             currentActNo = dataController.GetCurrentActNo();
         }
-        
+
         if (currentActNo != 1)
         {
             detectiveObject = kira;
@@ -169,7 +172,7 @@ public class GameController : MonoBehaviour
         tableGun.SetActive(currentActNo == 2);
 
         currentActData = dataController.GetCurrentRoundData();
-        
+
         var detectiveAudioSources = detectiveObject.GetComponents<AudioSource>();
         detectiveVoice = detectiveAudioSources[0];
         detectiveSoundEffect = detectiveAudioSources[1];
@@ -179,10 +182,11 @@ public class GameController : MonoBehaviour
         bgmAudioSource1 = audioSource[0];
         bgmAudioSource2 = audioSource[1];
         currentBgmAudioSource = bgmAudioSource1;
-        
+
         postProcessingBehaviour = playerCamera.GetComponent<PostProcessingBehaviour>();
 
-        PlayBgm(currentActData.bgmNeutralClip, MUSIC_NEUTRAL, currentActData.bgmNeutralFile.seek); // always start off with the base clip 
+        PlayBgm(currentActData.bgmNeutralClip, MUSIC_NEUTRAL,
+            currentActData.bgmNeutralFile.seek); // always start off with the base clip 
         currentBgm = MUSIC_NEUTRAL;
 
         displayedScore = 0;
@@ -206,7 +210,7 @@ public class GameController : MonoBehaviour
 
         currentDetectiveAnimator = detectiveObject.GetComponent<Animator>();
     }
-    
+
     private void UnsetDetectiveAnimator()
     {
         detectiveObject.GetComponent<Animator>().runtimeAnimatorController = null;
@@ -231,9 +235,8 @@ public class GameController : MonoBehaviour
 
         SetDetectiveAnimator();
         StartCoroutine(RunSequence());
-        
     }
-    
+
     private IEnumerator RunTimeline()
     {
         Debug.Log("run timeline, no: " + currentTimelineNo);
@@ -292,7 +295,7 @@ public class GameController : MonoBehaviour
                 yield return null;
             }
         }
-        
+
         if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
         {
             // Debug.Log ("RunSequence: current sequence is question");
@@ -321,21 +324,31 @@ public class GameController : MonoBehaviour
                 PlayBgm(DataController.LoadAudioFile(currentSequence.bgm.fileName), "special_bgm",
                     currentSequence.bgm.seek);
             }
-            
-            currentDetectiveAnimator.SetInteger(animationNoHash, currentSequence.animationNo);
+
+            if (currentDetectiveAnimator != null)
+                currentDetectiveAnimator.SetInteger(animationNoHash, currentSequence.animationNo);
 
 //            Debug.Log("animation no:" + currentSequence.animationNo);
             var exited = currentSequence.animationNo == 0;
-            var exitTime = currentDetectiveAnimator.GetAnimatorTransitionInfo(currentSequence.animatorLayer).duration;
+            var exitTime = (currentDetectiveAnimator == null)
+                ? 0
+                : currentDetectiveAnimator.GetAnimatorTransitionInfo(currentSequence.animatorLayer).duration;
+
+            // show indicator if needed
+            if (currentSequence.readExpression) FERIndicator.SetActive(true);
 
             while (detectiveVoice.isPlaying)
             {
-                if (!exited)
+                if (currentDetectiveAnimator != null)
                 {
-                    if (currentDetectiveAnimator.GetAnimatorTransitionInfo(currentSequence.animatorLayer).normalizedTime > exitTime)
+                    if (!exited)
                     {
-                        currentDetectiveAnimator.SetInteger(animationNoHash, 0);
-                        exited = true;
+                        if (currentDetectiveAnimator.GetAnimatorTransitionInfo(currentSequence.animatorLayer)
+                                .normalizedTime > exitTime)
+                        {
+                            currentDetectiveAnimator.SetInteger(animationNoHash, 0);
+                            exited = true;
+                        }
                     }
                 }
 
@@ -344,7 +357,6 @@ public class GameController : MonoBehaviour
 
             if (currentSequence.readExpression)
             {
-                // TODO create a pop-up that instructs player to put on an appropriate expression?
                 subtitleDisplay.SetActive(false);
 
                 DataController.StartFER();
@@ -356,7 +368,8 @@ public class GameController : MonoBehaviour
                 SaveAndDisplayScore(CalculateSuspicionScore_EmotionOnly(currentSequence.expectedExpressions,
                     currentSequence.scoreWeight, out closestEmotion));
             }
-            
+
+            FERIndicator.SetActive(false);
             ConcludeEvent();
         }
         else if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_TIMELINE))
@@ -552,6 +565,11 @@ public class GameController : MonoBehaviour
         currentQuestion = questionPool[questionIndex];
         questionDisplayText.text = currentQuestion.questionText;
 
+        if (currentQuestion.considersEmotion)
+        {
+            FERIndicator.SetActive(true);
+        }
+
         if (!string.IsNullOrEmpty(currentQuestion.effect))
         {
             ShowSpecialEffect(currentQuestion.effect);
@@ -689,25 +707,32 @@ public class GameController : MonoBehaviour
         Debug.Log("displayed score: " + displayedScore.ToString("F1"));
 
         scoreDisplayText.text = "Suspicion: " + displayedScore.ToString("F2");
-        scoreDisplayerSlider.value = displayedScore / 60 ;
+        scoreDisplayerSlider.value = displayedScore / 60;
 
-		if (scoreDisplayerSlider.value >= 0.8) {
-			
-			scoreDisplayerSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = new Color32(200,0,0,255);
-
-		} else if (scoreDisplayerSlider.value >= 0.5 && scoreDisplayerSlider.value < 0.8) {
-			
-			scoreDisplayerSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = new Color32(250,250,0,255);
-
-		} else {
-			
-			scoreDisplayerSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = new Color32(0,200,0,255);
-
-		}
+        if (scoreDisplayerSlider.value >= 0.8)
+        {
+            scoreDisplayerSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color =
+                new Color32(200, 0, 0, 255);
+        }
+        else if (scoreDisplayerSlider.value >= 0.5 && scoreDisplayerSlider.value < 0.8)
+        {
+            scoreDisplayerSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color =
+                new Color32(250, 250, 0, 255);
+        }
+        else
+        {
+            scoreDisplayerSlider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color =
+                new Color32(0, 200, 0, 255);
+        }
     }
 
     private IEnumerator HandleAnswer(AnswerButton answerButton)
     {
+        if (currentQuestion.considersEmotion)
+        {
+            FERIndicator.SetActive(false);
+        }
+
         if (currentQuestion.considersEmotion && !isClarifying) // no need to record again if it's just clarifying
         {
             DataController.StartFER();
@@ -773,7 +798,7 @@ public class GameController : MonoBehaviour
                     dataController.GetAnswerIdByQuestionId(currentQuestion.questionId)));
                 yield break;
             }
-            
+
             SaveQuestion(currentQuestion);
 
             if (string.IsNullOrEmpty(answerData.detectiveResponse)) // no specified detective response
@@ -897,7 +922,10 @@ public class GameController : MonoBehaviour
         questionDisplay.SetActive(false);
 //        postReport.SetActive(true); // activate (show) the round end display
 
-		if (currentActNo == 0 && !skipPostActReport) {GeneratePostReport();}
+        if (currentActNo == 0 && !skipPostActReport)
+        {
+            GeneratePostReport();
+        }
 
         else
         {
@@ -923,10 +951,9 @@ public class GameController : MonoBehaviour
         {
             timeRemainingDisplaySlider.value = timeRemaining / currentQuestion.timeLimitInSeconds;
         }
-        
     }
 
-	private void LightsCameraAction(int Num)
+    private void LightsCameraAction(int Num)
     {
         var Lightbulb = room.transform.Find("Lightbulb").gameObject;
         var Lights = Lightbulb.transform.Find("Lamp").gameObject;
@@ -934,21 +961,26 @@ public class GameController : MonoBehaviour
 
         var SpotLight1 = room.transform.Find("Spot light 1").gameObject;
         var SpotLight2 = room.transform.Find("Spot light 2").gameObject;
-		if (Num == 1) {
-			SpotLight1.GetComponent<Light> ().enabled = !Lights.GetComponent<Light> ().enabled;
-		}if (Num == 2) {
-			SpotLight2.GetComponent<Light> ().enabled = !Lights.GetComponent<Light> ().enabled;
-		}
+        if (Num == 1)
+        {
+            SpotLight1.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
+        }
+
+        if (Num == 2)
+        {
+            SpotLight2.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
+        }
     }
 
-	private void LightingChanges(int newIntensity,Color32 newColor){
-		var Lightbulb = room.transform.Find("Lightbulb").gameObject;
-		var Lights = Lightbulb.transform.Find("Lamp").gameObject;
+    private void LightingChanges(int newIntensity, Color32 newColor)
+    {
+        var Lightbulb = room.transform.Find("Lightbulb").gameObject;
+        var Lights = Lightbulb.transform.Find("Lamp").gameObject;
 
-		Lights.GetComponent<Light> ().intensity = newIntensity;
-		Lights.GetComponent<Light> ().color = newColor;
-		// TODO consider smoothing the changes in update() using e.g. docs.unity3d.com/ScriptReference/Light-color.html
-	}
+        Lights.GetComponent<Light>().intensity = newIntensity;
+        Lights.GetComponent<Light>().color = newColor;
+        // TODO consider smoothing the changes in update() using e.g. docs.unity3d.com/ScriptReference/Light-color.html
+    }
 
     private void MotionBlur()
     {
@@ -965,77 +997,80 @@ public class GameController : MonoBehaviour
         activeCamera.GetComponent<PostProcessingBehaviour>().profile = bloomEffect;
     }
 
-	private void GeneratePostReport(int endnum = 0)
+    private void GeneratePostReport(int endnum = 0)
     {
         UnlockCursor();
         playerCamera.GetComponent<PlayerLook>().enabled = false;
-		//Debug.Log(GetAnswer(1));
+        //Debug.Log(GetAnswer(1));
         postReport.SetActive(true);
         string report = "";
-		report = "Investigation case #160418(HO4)" +
-		"\nStatus: On going " +
-		"\nDocument classification: Confidential" +
-		"\nDetective in Charge: Sgt Suzanna Warren" +
-		"\nDate: 15/06/2017 " +
-		"\nTime of interrogration: 1900HRS" +
-		"\nLocation: Mary Hill police station, interrogation room 5" +
-		"\nThe following details the factual statement as recorded..." +
-		"\n\nThe suspect stated the following information about themselves..." +
-		"\n Name: " + GetAnswer (0) +
-		"\n Age: " + GetAnswer (1) +
-		"\n Country of Origin: " + GetAnswer (2) +
-		"\n Dream Frequency: " + GetAnswer (4) +
+        report = "Investigation case #160418(HO4)" +
+                 "\nStatus: On going " +
+                 "\nDocument classification: Confidential" +
+                 "\nDetective in Charge: Sgt Suzanna Warren" +
+                 "\nDate: 15/06/2017 " +
+                 "\nTime of interrogration: 1900HRS" +
+                 "\nLocation: Mary Hill police station, interrogation room 5" +
+                 "\nThe following details the factual statement as recorded..." +
+                 "\n\nThe suspect stated the following information about themselves..." +
+                 "\n Name: " + GetAnswer(0) +
+                 "\n Age: " + GetAnswer(1) +
+                 "\n Country of Origin: " + GetAnswer(2) +
+                 "\n Dream Frequency: " + GetAnswer(4) +
+                 "\n\nThe suspect claimed that they were at " + GetAnswer(5) + " during the time of the incident " +
+                 "along with " + GetAnswer(6) + " as their alibi." +
+                 " The suspect reported that they went home by " + GetAnswer(8) +
+                 " and arrived home at " + GetAnswer(7) +
+                 "\n\n The suspect stated that they, " + GetAnswer(9) +
+                 ", recognise the victim when showed a picture of Lianne. When prompted to recall if anyone was acting suspiciously during time of incident, the suspect accused " +
+                 GetAnswer(10) + " because of the reason that they " + GetAnswer(11);
 
-		"\n\nThe suspect claimed that they were at " + GetAnswer (5) + " during the time of the incident " +
-		"along with " + GetAnswer (6) + " as their alibi." +
-		" The suspect reported that they went home by " + GetAnswer (8) +
-		" and arrived home at " + GetAnswer (7) +
-            
-		"\n\n The suspect stated that they, " + GetAnswer(9) +
-		", recognise the victim when showed a picture of Lianne. When prompted to recall if anyone was acting suspiciously during time of incident, the suspect accused " +
-		GetAnswer(10) + " because of the reason that they " + GetAnswer(11);
-     
-		postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
+        postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
 
-		//endnum 1 = Good reality ending
-		if (endnum == 1) {
-			report = report + "\n\n--------------------New Entry--------------------" + 
-            "\nInvestigation case #160418(HO4)" +
-            "\nStatus: On going " +
-            "\nDocument classification: Confidential" +
-            "\nDetective in Charge: Sgt Suzanna Warren" +
-            "\nDate: 17/07/2017 " +
-            "\nThe following details the conclusion drawn from the investigation by the detective in charge…" +
-            "\n\n The suspect has been cleared of all charges as it has been proven that " + GetAnswer (10) + 
-            " is guilty of committing the murder of Lianna Armstrong. The events that transpired during the incident is that during the night of 14/05/2017, " + GetAnswer (10) + 
-            ", followed the victim into the bathroom of " + GetAnswer (5) + ", and shot her with a 9mm pistol from behind in cold blood. ";
-			DataController.Setfinalreport (report);
-			//finalreport = report;
-			//postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
-		}
-		//endnum 2 = Bad reality ending 
-		if (endnum == 2){
-			report = report + "\n\n--------------------New Entry--------------------" + 
-            "\nInvestigation case #160418(HO4)" +
-            "\nStatus: On going " +
-            "\nDocument classification: Confidential" +
-            "\nDetective in Charge: Sgt Suzanna Warren" +
-            "\nDate: 17/07/2017 " +
-            "\nThe following details the conclusion drawn from the investigation by the detective in charge…" +
-            "\n\n The suspect has been proven of being guilty of committing the murder of Lianna Armstrong. The events that transpired during the incident is that during the night of 14/05/2017,  the suspect followed the victim into the bathroom of " + 
-			GetAnswer (5) + ", and shot her with a 9mm pistol from behind in cold blood." +
-            "The motivation of which, is because of a heated argument between the suspect and the victim caused jealousy and envy to get the better of the suspect.";
-			DataController.Setfinalreport (report);
-			//finalreport = report;
-			//postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
-		}
-	}
+        //endnum 1 = Good reality ending
+        if (endnum == 1)
+        {
+            report = report + "\n\n--------------------New Entry--------------------" +
+                     "\nInvestigation case #160418(HO4)" +
+                     "\nStatus: On going " +
+                     "\nDocument classification: Confidential" +
+                     "\nDetective in Charge: Sgt Suzanna Warren" +
+                     "\nDate: 17/07/2017 " +
+                     "\nThe following details the conclusion drawn from the investigation by the detective in charge…" +
+                     "\n\n The suspect has been cleared of all charges as it has been proven that " + GetAnswer(10) +
+                     " is guilty of committing the murder of Lianna Armstrong. The events that transpired during the incident is that during the night of 14/05/2017, " +
+                     GetAnswer(10) +
+                     ", followed the victim into the bathroom of " + GetAnswer(5) +
+                     ", and shot her with a 9mm pistol from behind in cold blood. ";
+            DataController.Setfinalreport(report);
+            //finalreport = report;
+            //postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
+        }
+
+        //endnum 2 = Bad reality ending 
+        if (endnum == 2)
+        {
+            report = report + "\n\n--------------------New Entry--------------------" +
+                     "\nInvestigation case #160418(HO4)" +
+                     "\nStatus: On going " +
+                     "\nDocument classification: Confidential" +
+                     "\nDetective in Charge: Sgt Suzanna Warren" +
+                     "\nDate: 17/07/2017 " +
+                     "\nThe following details the conclusion drawn from the investigation by the detective in charge…" +
+                     "\n\n The suspect has been proven of being guilty of committing the murder of Lianna Armstrong. The events that transpired during the incident is that during the night of 14/05/2017,  the suspect followed the victim into the bathroom of " +
+                     GetAnswer(5) + ", and shot her with a 9mm pistol from behind in cold blood." +
+                     "The motivation of which, is because of a heated argument between the suspect and the victim caused jealousy and envy to get the better of the suspect.";
+            DataController.Setfinalreport(report);
+            //finalreport = report;
+            //postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
+        }
+    }
 
     private string GetAnswer(int i)
     {
         string answerIndex = dataController.GetAnswerIdByQuestionId(allQuestions[i].questionId);
         string answer = allQuestions[i].answers.First(a => a.answerId.Equals(answerIndex)).answerText;
-		answer = "<b>" + answer + "</b>";
+        answer = "<b>" + answer + "</b>";
         return answer;
     }
 
@@ -1069,30 +1104,31 @@ public class GameController : MonoBehaviour
         playableDirector.Play();
     }
 
-	private void ApplyEndingCamera()
-	{
-	    playerCamera.GetComponent<PlayerLook>().enabled = false;
-	    playerCamera.enabled = false;
-	    finalCamera.enabled = true;
-	    activeCamera = finalCamera;
-	    postProcessingBehaviour = finalCamera.GetComponent<PostProcessingBehaviour>();
-	}
+    private void ApplyEndingCamera()
+    {
+        playerCamera.GetComponent<PlayerLook>().enabled = false;
+        playerCamera.enabled = false;
+        finalCamera.enabled = true;
+        activeCamera = finalCamera;
+        postProcessingBehaviour = finalCamera.GetComponent<PostProcessingBehaviour>();
+    }
 
     public void EndingScene(bool shoot)
     {
         EndingScene(shoot, dataController.GetOverallScore() <= OVERALL_SCORE_THRESHOLD);
     }
 
-	private void EndingScene(bool shoot, bool consistent){
-	    if (shoot)
-	    {
-	        Initiate.Fade(consistent ? "Ending1" : "Ending3", Color.black, 0.8f);
-	    }
-	    else
-	    {
-	        Initiate.Fade(consistent ? "Ending4" : "Ending2", Color.black, 0.8f);
-	    }
-	}
+    private void EndingScene(bool shoot, bool consistent)
+    {
+        if (shoot)
+        {
+            Initiate.Fade(consistent ? "Ending1" : "Ending3", Color.black, 0.8f);
+        }
+        else
+        {
+            Initiate.Fade(consistent ? "Ending4" : "Ending2", Color.black, 0.8f);
+        }
+    }
 
     // Update is called once per frame
     private void Update()
@@ -1103,13 +1139,12 @@ public class GameController : MonoBehaviour
             if (decisionTimeRemaining <= 0f) EndingScene(false); // didn't shoot
             endingTimeRemainingSlider.value = decisionTimeRemaining / ENDING_DECISION_TIME_LIMIT;
         }
-        
+
         if (isTimerActive && questionDisplay.activeSelf)
         {
             timeRemaining -= Time.deltaTime;
 
             if (timeRemaining <= 0f) AnswerButtonClicked(selectedBoldAnswer);
-            
         }
 
         UpdateTimeRemainingDisplay();
@@ -1127,8 +1162,8 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyDown("r"))
         {
-			LightsCameraAction(2);
-			//LightingChanges(2, new Color(0,0,200,255));
+            LightsCameraAction(2);
+            //LightingChanges(2, new Color(0,0,200,255));
         }
 
         if (Input.GetKeyDown("t"))
@@ -1155,16 +1190,13 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown("i"))
         {
             GeneratePostReport();
-			GeneratePostReport(1);
-
+            GeneratePostReport(1);
         }
 
-		if (Input.GetKeyDown("o"))
-		{
-
-			EndingScene (true, false);
-
-		}
+        if (Input.GetKeyDown("o"))
+        {
+            EndingScene(true, false);
+        }
 
 //        HandleWalking();
     }
