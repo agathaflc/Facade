@@ -97,12 +97,12 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/S6_0_I_gotta_be_honest_with_you",
-      "subtitleText": "I gotta be honest with you, this case is really getting to me."
+      "subtitleText": "I gotta be honest with you, this case is really really starting to get to me."
     },
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/S6_1_is_rly_rly",
-      "subtitleText": "I gotta be honest with you, this case is really getting to me.",
+      "subtitleText": "I gotta be honest with you, this case is really really starting to get to me.",
       "animationNo": 9
     },
     {
@@ -346,7 +346,7 @@
           "considersEmotion": false,
           "considersFact": true,
           "filePath": "audio/Act3/Question/Q6_Wait_what_did_you_say",
-          "questionText": "What did you say your name was again?",
+          "questionText": "Wait, what did you say your name was again?",
           "answers": [
             {
               "answerId": "010",
@@ -377,13 +377,13 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/S16_0_Just_like_you",
-      "subtitleText": "Just like you.. We both know who’s really in control here.",
+      "subtitleText": "Just like you.. We both know who’s really in control here. Don’t we?",
       "animationNo": 2
     },
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/S16_1_hah",
-      "subtitleText": "Just like you.. We both know who’s really in control here.",
+      "subtitleText": "Just like you.. We both know who’s really in control here. Don’t we?",
       "animationNo": 8
     },
     {
@@ -527,7 +527,7 @@
           "considersEmotion": true,
           "considersFact": false,
           "filePath": "audio/Act3/Question/Q9_Do_you_believe_Karma",
-          "questionText": "Do you think the universe and karma balances things? Or do we need to take matters into our own hands?",
+          "questionText": "Do you believe in karma? Or do you believe in taking matters into your own hands?",
           "answers": [
             {
               "answerId": "330",
@@ -688,22 +688,22 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/",
+      "subtitleText": "Woah, I think things are getting a little out of hand."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/",
+      "subtitleText": "It’s been a long and weird day for me, and you."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/",
       "subtitleText": "Let’s take a break for today huh?"
     },
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "I think things are getting a little out of hand here."
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "It’s been a long and weird day, for me and you both."
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "Hey... one last thing"
+      "subtitleText": "Oh hey, one last thing.."
     },
     {
       "sequenceType": "question",
