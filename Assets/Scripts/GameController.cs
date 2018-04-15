@@ -881,7 +881,7 @@ public class GameController : MonoBehaviour
         questionDisplay.SetActive(false);
 //        postReport.SetActive(true); // activate (show) the round end display
 
-		if (currentActNo == 0 && !skipPostActReport) {GeneratePostReport();GeneratePostReport(1);GeneratePostReport(2);}
+		if (currentActNo == 0 && !skipPostActReport) {GeneratePostReport();}
 
         else
         {
@@ -1134,13 +1134,13 @@ public class GameController : MonoBehaviour
         {
             GeneratePostReport();
 			GeneratePostReport(1);
-			GeneratePostReport(2);
+
         }
 
 		if (Input.GetKeyDown("o"))
 		{
 
-			EndingScene (4);
+			EndingScene (3);
 
 		}
 
