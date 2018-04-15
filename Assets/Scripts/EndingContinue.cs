@@ -7,6 +7,7 @@ public class EndingContinue : MonoBehaviour {
 	public GameObject report;
 
 	public void StartScreen(){
+		DataController.ResetPlayerData();
 		Initiate.Fade ("MenuScreen", Color.black, 0.8f);
 	}
 	public void PostReport(){

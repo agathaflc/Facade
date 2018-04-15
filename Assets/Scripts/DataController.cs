@@ -24,15 +24,19 @@ public class DataController : MonoBehaviour
     private ActData currentActData;
     private DistanceData distanceMap;
     
-    private readonly Dictionary<string, string> questionIdToAnswerIdMap = new Dictionary<string, string>();
-    private float actualOverallScore;
+    private static Dictionary<string, string> questionIdToAnswerIdMap = new Dictionary<string, string>();
+    private static float actualOverallScore = 0;
 
     private PlayerProgress playerProgress;
 
     private static int currentActNo;
     private string[] actFiles;
 
-
+    public static void ResetPlayerData()
+    {
+        questionIdToAnswerIdMap = new Dictionary<string, string>();
+        actualOverallScore = 0;
+    }
 
     // Use this for initialization
     private void Start()
