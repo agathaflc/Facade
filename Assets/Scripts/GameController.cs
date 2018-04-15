@@ -67,6 +67,7 @@ public class GameController : MonoBehaviour
 
     public GameObject room;
     public Camera playerCamera;
+	public Camera finalCamera;
     public PostProcessingProfile motionBlurEffect;
     public PostProcessingProfile vignetteEffect;
     public PostProcessingProfile bloomEffect;
@@ -919,17 +920,18 @@ public class GameController : MonoBehaviour
         playerCamera.GetComponent<PostProcessingBehaviour>().profile = bloomEffect;
     }
 
-    private void GeneratePostReport()
+	private void GeneratePostReport(int endnum = 0)
     {
         UnlockCursor();
         playerCamera.GetComponent<PlayerLook>().enabled = false;
         //Debug.Log(GetAnswer(0));
         postReport.SetActive(true);
         string report = "";
-		report = "Investigatation case #160418(HO4)" +
+		report = "Investigation case #160418(HO4)" +
 		"\nStatus: On going " +
 		"\nDocument classification: Confidential" +
 		"\nDetective in Charge: Sgt Suzanna Warren" +
+        "\nDate: 15/06/2017 " +
 		"\nTime of interrogration: 1900HRS" +
 		"\nLocation: Mary Hill police station, interrogation room 5" +
 		"\nThe following details the factual statement as recorded..." +
@@ -949,6 +951,32 @@ public class GameController : MonoBehaviour
 		GetAnswer(10) + " because of the reason that they " + GetAnswer(11);
      
 		postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
+
+		//endnum 1 = Good reality ending
+		if (endnum == 1) {
+			report = report + "\n\n--------------------New Entry--------------------" + 
+            "\nInvestigation case #160418(HO4)" +
+            "\nStatus: On going " +
+            "\nDocument classification: Confidential" +
+            "\nDetective in Charge: Sgt Suzanna Warren" +
+            "\nDate: 17/07/2017 " +
+            "\nThe following details the conclusion drawn from the investigation by the detective in charge…" +
+            "\n\n The suspect has been cleared of all charges as it has been proven that " + GetAnswer (10) + 
+            " is guilty of committing the murder of Lianna Armstrong. The events that transpired during the incident is that during the night of 14/05/2017, " + GetAnswer (10) + 
+            ", followed the victim into the bathroom of " + GetAnswer (5) + ", and shot her with a 9mm pistol from behind in cold blood. ";
+        }
+		//endnum 2 = Bad reality ending 
+		if (endnum == 2){
+			report = report + "\n\n--------------------New Entry--------------------" + 
+            "\nInvestigation case #160418(HO4)" +
+            "\nStatus: On going " +
+            "\nDocument classification: Confidential" +
+            "\nDetective in Charge: Sgt Suzanna Warren" +
+            "\nDate: 17/07/2017 " +
+            "\nThe following details the conclusion drawn from the investigation by the detective in charge…" +
+            "\n\n The suspect has been proven of being guilty of committing the murder of Lianna Armstrong. The events that transpired during the incident is that during the night of 14/05/2017,  the suspect followed the victim into the bathroom of " + GetAnswer (5) + ", and shot her with a 9mm pistol from behind in cold blood." +
+            "The motivation of which, is because of a heated argument between the suspect and the victim caused jealousy and envy to get the better of the suspect.";
+		}
 	}
 
     private string GetAnswer(int i)
@@ -988,6 +1016,33 @@ public class GameController : MonoBehaviour
         playableDirector.Play();
     }
 
+	private void StartEnding()
+	{
+		playerCamera.GetComponent<PlayerLook>().enabled = false;
+		playerCamera.enabled = false;
+		finalCamera.enabled = true;
+	}
+
+	private void EndingScene(int i){
+		switch (i) {
+		case 1: //GD
+			Initiate.Fade ("Ending1", Color.black, 0.8f);
+			break;
+		case 2: //BD
+			Initiate.Fade ("Ending2", Color.black, 0.8f);
+			break;
+		case 3: //BR
+			Initiate.Fade ("Ending3", Color.black, 0.8f);
+			break;
+		case 4: //GR
+			Initiate.Fade ("Ending4", Color.black, 0.8f);
+			break;
+		default: 
+			break;
+		}
+
+	}
+
     // Update is called once per frame
     private void Update()
     {
@@ -1013,7 +1068,7 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyDown("r"))
         {
-            LightsCameraAction();
+			LightsCameraAction();
 			//LightingChanges(2, new Color(0,0,200,255));
         }
 
@@ -1042,6 +1097,12 @@ public class GameController : MonoBehaviour
         {
             GeneratePostReport();
         }
+
+		if (Input.GetKeyDown("o"))
+		{
+			EndingScene (4);
+			//StartEnding();
+		}
 
 //        HandleWalking();
     }
