@@ -358,7 +358,15 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.472
+        functionName: PlaySoundEffect
+        data: 
+        objectReferenceParameter: {fileID: 8300000, guid: 03ebbf749e90e454dbf63c6516b11b5b,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -498,7 +506,15 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.12349398
+        functionName: PlaySoundEffect
+        data: 
+        objectReferenceParameter: {fileID: 8300000, guid: 3fb17d26ff5cb459398392673ea9ee9b,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -694,7 +710,15 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.33755273
+        functionName: PlaySoundEffect
+        data: 
+        objectReferenceParameter: {fileID: 8300000, guid: e21e02da5a8ba4ccc8e8fe996e70ca6d,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -918,7 +942,15 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0
+        functionName: PlaySoundEffect
+        data: 
+        objectReferenceParameter: {fileID: 8300000, guid: ab264df1ba4a448719cc148d59fa92f8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

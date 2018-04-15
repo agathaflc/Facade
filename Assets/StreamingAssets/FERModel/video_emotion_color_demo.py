@@ -40,8 +40,8 @@ def read_expression():
     emotion_window = []
 
     # starting video streaming
-    #cv2.namedWindow('window_frame', 0)
-    #cv2.resizeWindow('window_frame', 500, 500)
+    cv2.namedWindow('window_frame', 0)
+    cv2.resizeWindow('window_frame', 500, 500)
     video_capture = cv2.VideoCapture(0)
     video_capture.set(cv2.CAP_PROP_BRIGHTNESS, 50)
 
@@ -143,9 +143,9 @@ def read_expression():
                 time.sleep(1)
 
         bgr_image = cv2.cvtColor(rgb_image, cv2.COLOR_RGB2BGR)
-        #cv2.imshow('window_frame', bgr_image)
-        #if cv2.waitKey(1) & 0xFF == ord('q'):
-            #break
+        cv2.imshow('window_frame', bgr_image)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
         
         print("COUNT:",c)
 
@@ -173,7 +173,7 @@ def write_output_to_file(emotion_conf, max_val, adj2noun):
     final_emotions_output = {}
     final_emotions_output['emotions'] = final_output_list
 
-    with open(os.path.join('..', '..', 'Assets', 'StreamingAssets', 'expression_data.json'), 'w') as fp:
+    with open(os.path.join('..', '..', 'expression_data.json'), 'w') as fp:
         json.dump(final_emotions_output, fp)
 
 def check_trigger():

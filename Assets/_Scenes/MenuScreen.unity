@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 4, y: -4}
+  m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
 --- !u!114 &210253544
 MonoBehaviour:
@@ -1532,13 +1532,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1228201768}
-  m_LocalRotation: {x: 0.12072446, y: -0.6849764, z: 0.045524377, w: 0.7170499}
-  m_LocalPosition: {x: 11.78, y: 3.74, z: -0.74}
+  m_LocalRotation: {x: 0.10229838, y: -0.6962432, z: 0.033102, w: 0.70970756}
+  m_LocalPosition: {x: 11.7801695, y: 3.7399974, z: -0.7400016}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 1166695695}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 13.621, y: -88.086006, z: -5.912}
+  m_LocalEulerAnglesHint: {x: 11.029, y: -89.442, z: -5.5810003}
 --- !u!108 &1228201770
 Light:
   m_ObjectHideFlags: 0
@@ -1549,9 +1549,9 @@ Light:
   serializedVersion: 8
   m_Type: 0
   m_Color: {r: 0.84313726, g: 0.84313726, b: 0.95686275, a: 1}
-  m_Intensity: 5
+  m_Intensity: 6
   m_Range: 20
-  m_SpotAngle: 30
+  m_SpotAngle: 32
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
