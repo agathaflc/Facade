@@ -451,7 +451,7 @@
           "answers": [
             {
               "answerId": "220",
-              "answerText": "Freind",
+              "answerText": "Friend",
               "expectedExpressions": [
                 "sad",
                 "scared",

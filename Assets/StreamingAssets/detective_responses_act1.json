@@ -1,26 +1,38 @@
 {
   "suspiciousPositive": [
     {
-      "text": "Ok.",
+      "text": "Ok",
       "soundFilePath": "audio/Act1/Responses/okay_neutral"
     },
     {
-      "text": "Noted.",
+      "text": "Noted",
       "soundFilePath": "audio/Act1/Responses/noted"
+    },
+    {
+      "text": "Alright",
+      "soundFilePath": "audio/Act1/Responses/alright"
+    },
+    {
+      "text": "Right",
+      "soundFilePath": "audio/Act1/Responses/right"
     }
   ],
   "suspiciousNeutral": [
     {
-      "text": "Ok.",
+      "text": "Ok",
       "soundFilePath": "audio/Act1/Responses/okay_neutral"
     },
     {
-      "text": "I see.",
+      "text": "I see",
       "soundFilePath": "audio/Act1/Responses/i_see"
     },
     {
-      "text": "Noted.",
+      "text": "Noted",
       "soundFilePath": "audio/Act1/Responses/noted"
+    },
+    {
+      "text": "Uh huh",
+      "soundFilePath": "audio/Act1/Responses/uh_huh"
     }
   ],
   "suspiciousNegative": [
@@ -35,24 +47,40 @@
     {
       "text": "I see..",
       "soundFilePath": "audio/Act1/Responses/i_see"
+    },
+    {
+      "text": "Ok",
+      "soundFilePath": "audio/Act1/Responses/okay_neutral"
     }
   ],
   "notSuspiciousPositive": [
     {
-      "text": "Alright.",
+      "text": "Alright",
       "soundFilePath": "audio/Act1/Responses/alright"
     },
     {
-      "text": "Right.",
+      "text": "Right",
       "soundFilePath": "audio/Act1/Responses/right"
     },
     {
-      "text": "Ok.",
+      "text": "Ok!",
       "soundFilePath": "audio/Act1/Responses/okay_happy"
     },
     {
-      "text": "Got it.",
+      "text": "Got it",
       "soundFilePath": "audio/Act1/Responses/got_it"
+    },
+    {
+      "text": "Great!",
+      "soundFilePath": "audio/Act1/Responses/great"
+    },
+    {
+      "text": "Good to hear",
+      "soundFilePath": "audio/Act1/Responses/good_to_hear"
+    },
+    {
+      "text": "Nice!",
+      "soundFilePath": "audio/Act1/Responses/nice"
     }
   ],
   "notSuspiciousNegative": [
@@ -63,36 +91,44 @@
     {
       "text": "I see..",
       "soundFilePath": "audio/Act1/Responses/i_see"
+    },
+    {
+      "text": "Oh no..",
+      "soundFilePath": "audio/Act1/Responses/oh_no"
+    },
+    {
+      "text": "Thats too bad",
+      "soundFilePath": "audio/Act1/Responses/thats_too_bad"
+    },
+    {
+      "text": "Sorry to hear",
+      "soundFilePath": "audio/Act1/Responses/sorry_to_hear"
     }
   ],
   "notSuspiciousNeutral": [
     {
-      "text": "Ok.",
+      "text": "Ok",
       "soundFilePath": "audio/Act1/Responses/okay_neutral"
     },
     {
-      "text": "Got it.",
+      "text": "Got it",
       "soundFilePath": "audio/Act1/Responses/got_it"
-    }
-  ],
-  "clarifying": [
-    {
-      "text": "Your answer doesn't match with our record. Now, tell me the truth.",
-      "soundFilePath": "audio/ill-tell-you-what-i-think"
     },
     {
-      "text": "LIES! You said something different earlier, you think I'm a fool?",
-      "soundFilePath": "audio/ill-tell-you-what-i-think"
-    }
-  ],
-  "postClarifying": [
-    {
-      "text": "You better stop lying if you don't wanna get in trouble.",
-      "soundFilePath": "audio/ill-tell-you-what-i-think"
+      "text": "Noted",
+      "soundFilePath": "audio/Act1/Responses/noted"
     },
     {
-      "text": "Try to think more clearly next time, okay?",
-      "soundFilePath": "audio/ill-tell-you-what-i-think"
+      "text": "Alright",
+      "soundFilePath": "audio/Act1/Responses/alright"
+    },
+    {
+      "text": "Right",
+      "soundFilePath": "audio/Act1/Responses/right"
+    },
+    {
+      "text": "Uh huh",
+      "soundFilePath": "audio/Act1/Responses/uh_huh"
     }
   ]
 }

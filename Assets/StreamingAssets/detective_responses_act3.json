@@ -1,110 +1,190 @@
 {
   "suspiciousPositive": [
     {
-      "text": "Nice",
-      "soundFilePath": "audio/GoodCop/RESPONSES/nice"
-    },
-    {
       "text": "Ok.",
-      "soundFilePath": "audio/GoodCop/RESPONSES/ok"
+      "soundFilePath": "audio/Act1/Responses/okay_neutral"
     },
     {
       "text": "Got it.",
-      "soundFilePath": "audio/GoodCop/RESPONSES/gotIt"
+      "soundFilePath": "audio/Act1/Responses/got_it_2"
+    },
+    {
+      "text": "K",
+      "soundFilePath": "audio/Act3/Response/k"
+    },
+    {
+      "text": "Mhmm..",
+      "soundFilePath": "audio/Act3/Response/mhm"
+    },
+    {
+      "text": "Sure..",
+      "soundFilePath": "audio/Act3/Response/sure"
+    },
+    {
+      "text": "Yeah..",
+      "soundFilePath": "audio/Act3/Response/yeah"
+    },
+    {
+      "text": "Alright",
+      "soundFilePath": "audio/Act1/Responses/alright"
+    },
+    {
+      "text": "I see",
+      "soundFilePath": "audio/Act1/Responses/i_see"
     }
-  ],
-  "notSuspiciousPositive": [
-    {
-      "text": "Great!",
-      "soundFilePath": "audio/GoodCop/RESPONSES/great"
-    },
-    {
-      "text": "Good to hear!",
-      "soundFilePath": "audio/GoodCop/RESPONSES/goodToHear"
-    },
   ],
   "suspiciousNeutral": [
     {
-      "text": "Ok.",
-      "soundFilePath": "audio/GoodCop/RESPONSES/ok"
-    },
-    {
-      "text": "Uh huh..",
-      "soundFilePath": "audio/GoodCop/RESPONSES/uhuh"
-    },
-    {
       "text": "Hmm..",
-      "soundFilePath": "audio/GoodCop/RESPONSES/hm"
-    }
-  ],
-  "notSuspiciousNeutral": [
-    {
-      "text": "Right.",
-      "soundFilePath": "audio/GoodCop/RESPONSES/right"
+      "soundFilePath": "audio/Act3/Response/hmm"
     },
     {
-      "text": "Noted.",
-      "soundFilePath": "audio/GoodCop/RESPONSES/noted"
+      "text": "Hah",
+      "soundFilePath": "audio/Act3/Response/hah"
     },
     {
-      "text": "Got it.",
-      "soundFilePath": "audio/GoodCop/RESPONSES/gotIt"
+      "text": "K",
+      "soundFilePath": "audio/Act3/Response/k"
+    },
+    {
+      "text": "Mhmm..",
+      "soundFilePath": "audio/Act3/Response/mhm"
+    },
+    {
+      "text": "Ok??",
+      "soundFilePath": "audio/Act3/Response/ok"
+    },
+    {
+      "text": "Right..",
+      "soundFilePath": "audio/Act3/Response/right"
+    },
+    {
+      "text": "Yeah..",
+      "soundFilePath": "audio/Act3/Response/yeah"
     }
   ],
   "suspiciousNegative": [
     {
       "text": "Right..",
-      "soundFilePath": "audio/GoodCop/RESPONSES/right"
+      "soundFilePath": "audio/Act3/Response/right"
     },
     {
       "text": "Sure..",
-      "soundFilePath": "audio/GoodCop/RESPONSES/sure"
-    },
-    {
-      "text": "* Scoff *",
-      "soundFilePath": "audio/GoodCop/RESPONSES/scoff"
+      "soundFilePath": "audio/Act3/Response/sure"
     },
     {
       "text": "Hmm..",
-      "soundFilePath": "audio/GoodCop/RESPONSES/hm"
+      "soundFilePath": "audio/Act3/Response/hmm"
+    },
+    {
+      "text": "Hah",
+      "soundFilePath": "audio/Act3/Response/hah"
+    },
+    {
+      "text": "Ok??",
+      "soundFilePath": "audio/Act3/Response/ok"
+    }
+  ],
+  "notSuspiciousPositive": [
+    {
+      "text": "Great!",
+      "soundFilePath": "audio/Act1/Responses/great"
+    },
+    {
+      "text": "Good to hear!",
+      "soundFilePath": "audio/Act1/Responses/good_to_hear"
+    },
+    {
+      "text": "Got it",
+      "soundFilePath": "audio/Act1/Responses/got_it"
+    },
+    {
+      "text": "Nice!",
+      "soundFilePath": "audio/Act1/Responses/nice"
+    },
+    {
+      "text": "Okay!",
+      "soundFilePath": "audio/Act1/Responses/okay_happy"
+    }
+  ],
+  "notSuspiciousNeutral": [
+    {
+      "text": "Uh huh",
+      "soundFilePath": "audio/Act1/Responses/uh_huh"
+    },
+    {
+      "text": "Okay",
+      "soundFilePath": "audio/Act1/Responses/okay_neutral"
+    },
+    {
+      "text": "Got it",
+      "soundFilePath": "audio/Act1/Responses/got_it"
+    },
+    {
+      "text": "I see",
+      "soundFilePath": "audio/Act1/Responses/i_see"
+    },
+    {
+      "text": "Hmm..",
+      "soundFilePath": "audio/Act1/Responses/hm"
+    },
+    {
+      "text": "Alright",
+      "soundFilePath": "audio/Act1/Responses/alright"
+    },
+    {
+      "text": "Noted",
+      "soundFilePath": "audio/Act1/Responses/noted"
     }
   ],
   "notSuspiciousNegative": [
     {
-      "text": "K.",
-      "soundFilePath": "audio/GoodCop/RESPONSES/k"
+      "text": "Uh huh",
+      "soundFilePath": "audio/Act1/Responses/uh_huh"
     },
     {
-      "text": "Hmmm..",
-      "soundFilePath": "audio/GoodCop/RESPONSES/hm"
+      "text": "Hmm..",
+      "soundFilePath": "audio/Act1/Responses/hm"
+    },
+    {
+      "text": "That's too bad",
+      "soundFilePath": "audio/Act1/Responses/thats_too_bad"
+    },
+    {
+      "text": "Sorry to hear",
+      "soundFilePath": "audio/Act1/Responses/sorry_to_hear"
+    },
+    {
+      "text": "Oh no..",
+      "soundFilePath": "audio/Act1/Responses/oh_no"
     }
   ],
   "clarifying": [
     {
       "text": "Your answer doesn't match with out record.",
-      "soundFilePath": "audio/GoodCop/CLARIFICATIONS/answer-doesnt-match"
+      "soundFilePath": "audio/Act3/Clarifications/C1"
     },
     {
       "text": "You said something different earlier...",
-      "soundFilePath": "audio/GoodCop/CLARIFICATIONS/you-said-something-different"
+      "soundFilePath": "audio/Act3/Clarifications/C2"
     },
     {
       "text": "Is that what you answered earlier?",
-      "soundFilePath": "audio/GoodCop/CLARIFICATIONS/is-that-what-you-answered"
+      "soundFilePath": "audio/Act3/Clarifications/C3"
     },
     {
       "text": "Wanna say that again?",
-      "soundFilePath": "audio/GoodCop/CLARIFICATIONS/say-that-again"
-    },
+      "soundFilePath": "audio/Act3/Clarifications/C4"
+    }
   ],
   "postClarifying": [
     {
       "text": "You better stop lying if you don't wanna get in trouble.",
-      "soundFilePath": "audio/GoodCop/CLARIFICATIONS/you-better-stop-lying"
+      "soundFilePath": "audio/Act3/Clarifications/PostC1"
     },
     {
       "text": "Try to think more clearly next time, okay?",
-      "soundFilePath": "audio/GoodCop/CLARIFICATIONS/try-to-think-more-clearly"
+      "soundFilePath": "audio/Act3/Clarifications/PostC2"
     }
   ]
 }
