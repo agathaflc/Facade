@@ -727,7 +727,7 @@
       "animationNo": 23
     },
     {
-      "sequenceType": "question",
+      "sequenceType": "endingDecision",
       "questions": [
         {
           "questionDesc": "Kill Yourself?",
@@ -736,7 +736,7 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/Act3/Question/",
+          "filePath": "audio/SoundEffects/door_close_1",
           "questionText": "Will you kill yourself?",
           "answers": [
             {

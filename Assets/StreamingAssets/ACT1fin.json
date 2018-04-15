@@ -244,6 +244,12 @@
     },
     {
       "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S7_2_pew_pew",
+      "subtitleText": "I bit the bullet.",
+      "animationNo": 22
+    },
+    {
+      "sequenceType": "dialog",
       "filePath": "audio/Act1/Sentences/S7_3_laugh",
       "subtitleText": "*laughs*"
     },
@@ -522,7 +528,12 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/S11_You_see_this_girl",
+      "filePath": "audio/Act1/Sentences/S11_0_You_see_this_girl",
+      "subtitleText": "You see.. this girl was found dead last night. Her name was Lianne. It’s a real tragedy."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S11_1_her_name",
       "readExpression": true,
       "scoreWeight": 3,
       "expectedExpressions": [
@@ -531,7 +542,9 @@
         "angry",
         "sad"
       ],
-      "subtitleText": "You see.. this girl was found dead last night. Her name was Lianne. It’s a real tragedy."
+      "subtitleText": "You see.. this girl was found dead last night. Her name was Lianne. It’s a real tragedy.",
+      "animationNo": 41,
+      "animatorLayer": 1
     },
     {
       "sequenceType": "dialog",

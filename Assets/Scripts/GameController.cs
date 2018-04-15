@@ -17,6 +17,8 @@ public class GameController : MonoBehaviour
     private const string SEQUENCE_TYPE_DIALOG = "dialog";
     private const string SEQUENCE_TYPE_QUESTION = "question";
     private const string SEQUENCE_TYPE_TIMELINE = "timeline";
+    private const string SEQUENCE_TYPE_ENDING = "endingDecision";
+    
     private const string DEFAULT_EMOTION = "neutral";
     private const string HAPPY_EMOTION = "happy";
     private const string SAD_EMOTION = "sad";
@@ -43,6 +45,7 @@ public class GameController : MonoBehaviour
     public bool gameSceneOnly;
     public bool runTimeline;
     public bool skipAct;
+    public bool skipPostActReport;
 
     public int skipToAct;
 
@@ -267,6 +270,13 @@ public class GameController : MonoBehaviour
             detectiveObject.GetComponent<Animator>().runtimeAnimatorController = kiraStandUpController;
             currentDetectiveAnimator = detectiveObject.GetComponent<Animator>();
         }
+
+        if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_ENDING))
+        {
+            detectiveObject.SetActive(false);
+            ApplyEndingCamera();
+        }
+        
         if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
         {
             // Debug.Log ("RunSequence: current sequence is question");
@@ -870,7 +880,7 @@ public class GameController : MonoBehaviour
 
         questionDisplay.SetActive(false);
 //        postReport.SetActive(true); // activate (show) the round end display
-        if (currentActNo == 0) GeneratePostReport();
+        if (currentActNo == 0 && !skipPostActReport) GeneratePostReport();
         else
         {
             ContinueToNextAct();
@@ -1039,7 +1049,7 @@ public class GameController : MonoBehaviour
         playableDirector.Play();
     }
 
-	private void StartEnding()
+	private void ApplyEndingCamera()
 	{
 		playerCamera.GetComponent<PlayerLook>().enabled = false;
 		playerCamera.enabled = false;
@@ -1124,7 +1134,7 @@ public class GameController : MonoBehaviour
 		if (Input.GetKeyDown("o"))
 		{
 			EndingScene (4);
-			//StartEnding();
+			//ApplyEndingCamera();
 		}
 
 //        HandleWalking();
