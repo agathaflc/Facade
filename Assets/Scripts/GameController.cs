@@ -1018,6 +1018,26 @@ public class GameController : MonoBehaviour
 		finalCamera.enabled = true;
 	}
 
+	private void EndingScene(int i){
+		switch (i) {
+		case 1: //GD
+			Initiate.Fade ("Ending1", Color.black, 0.8f);
+			break;
+		case 2: //BD
+			Initiate.Fade ("Ending2", Color.black, 0.8f);
+			break;
+		case 3: //BR
+			Initiate.Fade ("Ending3", Color.black, 0.8f);
+			break;
+		case 4: //GR
+			Initiate.Fade ("Ending4", Color.black, 0.8f);
+			break;
+		default: 
+			break;
+		}
+
+	}
+
     // Update is called once per frame
     private void Update()
     {
