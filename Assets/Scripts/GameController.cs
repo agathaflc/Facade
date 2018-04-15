@@ -73,6 +73,10 @@ public class GameController : MonoBehaviour
     public GameObject tableGun;
 
     public Image FERIndicator;
+    public Image FERCorrectness;
+    public Sprite tick;
+    public Sprite cross;
+    public Text expectedExpression;
 
     public Camera playerCamera;
     public Camera finalCamera;
@@ -681,12 +685,28 @@ public class GameController : MonoBehaviour
         Debug.Log("closestEmotion: " + closestEmotion + ", distance: " + emotionDistance + ", score: " +
                   expressionScore);
 
+        StartCoroutine(ShowFERCorrectness(expressionScore < 0, closestEmotion));
+
         if (!FER_is_Off)
         {
             dataController.DeleteFERDataFile();
         }
 
         return suspicionScore;
+    }
+
+    private IEnumerator ShowFERCorrectness(bool correct, string expected)
+    {
+        FERCorrectness.sprite = correct ? tick : cross;
+        FERCorrectness.enabled = true;
+        
+        expectedExpression.text = expected;
+        expectedExpression.enabled = true;
+
+        yield return new WaitForSecondsRealtime(1f);
+
+        FERCorrectness.enabled = false;
+        expectedExpression.enabled = false;
     }
 
     private void SaveAndDisplayScore(float suspicionScore)
@@ -728,17 +748,17 @@ public class GameController : MonoBehaviour
 
     private IEnumerator HandleAnswer(AnswerButton answerButton)
     {
-        if (currentQuestion.considersEmotion)
-        {
-            FERIndicator.enabled = false;
-        }
-
         if (currentQuestion.considersEmotion && !isClarifying) // no need to record again if it's just clarifying
         {
             DataController.StartFER();
             // TODO (maybe) detective writes some notes animation 
             yield return new WaitForSecondsRealtime(FER_RECORDING_TIME);
             DataController.StopFER();
+        }
+        
+        if (currentQuestion.considersEmotion)
+        {
+            FERIndicator.enabled = false;
         }
 
         float consistencyScore;
