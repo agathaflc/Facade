@@ -1002,6 +1002,7 @@ public class GameController : MonoBehaviour
         LockCursor();
         playerCamera.GetComponent<PlayerLook>().enabled = true;
         postReport.SetActive(false);
+        ContinueToNextAct();
     }
 
     private void HandleEndOfAQuestion()

@@ -660,16 +660,6 @@
     },
     {
       "sequenceType": "timeline"
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/BadCop/SENTENCES/S19 - YOU HAVE SOME AUDACITY",
-      "subtitleText": "You have some audacity coming in here with the very same gun you killed that poor girl with."
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/BadCop/SENTENCES/S20 - I AM SICK AND TIRED",
-      "subtitleText": "I am sick and tired of scum like you thinking you can smooth talk your way out of a fair judgement."
     }
   ]
 }
