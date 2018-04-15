@@ -642,6 +642,12 @@
     },
     {
       "sequenceType": "dialog",
+      "filePath": "audio/silence_splitsecond",
+      "subtitleText": "",
+      "animationNo": 91
+    },
+    {
+      "sequenceType": "dialog",
       "filePath": "audio/BadCop/SENTENCES/S12 - WE BOTH KNOW",
       "subtitleText": "We both know you’re guilty.",
       "animationNo": 4

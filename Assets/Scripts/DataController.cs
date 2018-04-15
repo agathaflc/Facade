@@ -88,6 +88,12 @@ public class DataController : MonoBehaviour
 
     private void StartCurrentAct()
     {
+        for (var i = 0; i < actFiles.Length; i++)
+        {
+            Debug.Log("act" + i + ": " + actFiles[i]);
+        }
+        
+        Debug.Log("current act no: " + currentActNo);
         LoadRoundData(actFiles[currentActNo]);
         Initiate.Fade ("GameScene", Color.black, 1f);
     }

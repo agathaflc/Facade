@@ -23,6 +23,6 @@ public class ImageLoader : MonoBehaviour
 
     public void DestroyMaterial()
     {
-        Destroy(material.mainTexture);
+        if (material != null) Destroy(material.mainTexture);
     }
 }

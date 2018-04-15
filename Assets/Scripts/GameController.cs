@@ -229,6 +229,7 @@ public class GameController : MonoBehaviour
     
     private IEnumerator RunTimeline()
     {
+        Debug.Log("run timeline, no: " + currentTimelineNo);
         subtitleDisplay.SetActive(true);
         subtitleDisplayText.text = "";
 
@@ -869,7 +870,11 @@ public class GameController : MonoBehaviour
 
         questionDisplay.SetActive(false);
 //        postReport.SetActive(true); // activate (show) the round end display
-        GeneratePostReport();
+        if (currentActNo == 0) GeneratePostReport();
+        else
+        {
+            ContinueToNextAct();
+        }
 
         questionPictureDisplay.GetComponent<ImageLoader>().DestroyMaterial();
     }
