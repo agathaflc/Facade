@@ -1095,7 +1095,8 @@ public class GameController : MonoBehaviour
 
 		if (Input.GetKeyDown("o"))
 		{
-			StartEnding();
+			EndingScene (1);
+			//StartEnding();
 		}
 
 //        HandleWalking();
