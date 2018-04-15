@@ -32,6 +32,8 @@ public class DataController : MonoBehaviour
     private static int currentActNo;
     private string[] actFiles;
 
+
+
     // Use this for initialization
     private void Start()
     {
@@ -364,4 +366,13 @@ public class DataController : MonoBehaviour
     {
         throw new System.NotImplementedException();
     }
+
+	public static string finalreport;
+
+	public static void Setfinalreport(string report){
+		finalreport = report;
+	}
+	public static string Getfinalreport(){
+		return finalreport;
+	}
 }

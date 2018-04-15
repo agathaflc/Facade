@@ -870,7 +870,7 @@ public class GameController : MonoBehaviour
 
         questionDisplay.SetActive(false);
 //        postReport.SetActive(true); // activate (show) the round end display
-        if (currentActNo == 0) GeneratePostReport();
+		if (currentActNo == 0) {GeneratePostReport();GeneratePostReport(1);GeneratePostReport(2);}
         else
         {
             ContinueToNextAct();
@@ -981,8 +981,9 @@ public class GameController : MonoBehaviour
             "\n\n The suspect has been cleared of all charges as it has been proven that " + GetAnswer (10) + 
             " is guilty of committing the murder of Lianna Armstrong. The events that transpired during the incident is that during the night of 14/05/2017, " + GetAnswer (10) + 
             ", followed the victim into the bathroom of " + GetAnswer (5) + ", and shot her with a 9mm pistol from behind in cold blood. ";
-
-			postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
+			DataController.Setfinalreport (report);
+			//finalreport = report;
+			//postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
 		}
 		//endnum 2 = Bad reality ending 
 		if (endnum == 2){
@@ -996,8 +997,9 @@ public class GameController : MonoBehaviour
             "\n\n The suspect has been proven of being guilty of committing the murder of Lianna Armstrong. The events that transpired during the incident is that during the night of 14/05/2017,  the suspect followed the victim into the bathroom of " + 
 			GetAnswer (5) + ", and shot her with a 9mm pistol from behind in cold blood." +
             "The motivation of which, is because of a heated argument between the suspect and the victim caused jealousy and envy to get the better of the suspect.";
-
-			postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
+			DataController.Setfinalreport (report);
+			//finalreport = report;
+			//postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
 		}
 	}
 
@@ -1119,12 +1121,14 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown("i"))
         {
             GeneratePostReport();
+			GeneratePostReport(1);
+			GeneratePostReport(2);
         }
 
 		if (Input.GetKeyDown("o"))
 		{
-			EndingScene (4);
-			//StartEnding();
+			//EndingScene (4);
+			StartEnding();
 		}
 
 //        HandleWalking();
