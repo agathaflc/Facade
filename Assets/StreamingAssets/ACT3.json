@@ -25,23 +25,10 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "Let’s take a break for today huh?"
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "I think things are getting a little out of hand here."
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "It’s been a long and weird day, for me and you both."
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "Hey... one last thing"
+      "filePath": "audio/silence_splitsecond",
+      "subtitleText": "",
+      "ending": true,
+      "animationNo": 22
     },
     {
       "sequenceType": "question",
@@ -70,11 +57,12 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/",
-      "subtitleText": "I guess only one way to find out."
+      "filePath": "audio/Act3/Sentence/S31_I_guess_only_one_way",
+      "subtitleText": "I guess only one way to find out.",
+      "animationNo": 23
     },
     {
-      "sequenceType": "question",
+      "sequenceType": "endingDecision",
       "questions": [
         {
           "questionDesc": "Kill Yourself?",
@@ -83,9 +71,8 @@
           "consistencyWeight": 1,
           "considersEmotion": false,
           "considersFact": true,
-          "filePath": "audio/Act3/Question/",
+          "filePath": "audio/SoundEffects/door_close_1",
           "questionText": "Will you kill yourself?",
-          "timeLimitInSeconds": 20,
           "answers": [
             {
               "answerId": "360",
