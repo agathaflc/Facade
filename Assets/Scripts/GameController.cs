@@ -290,14 +290,14 @@ public class GameController : MonoBehaviour
 
             if (string.IsNullOrEmpty(currentSequence.bgm.fileName))
             {
-                Debug.Log("special bgm is not null: " + currentSequence.bgm.fileName);
+//                Debug.Log("special bgm is not null: " + currentSequence.bgm.fileName);
                 PlayBgm(DataController.LoadAudioFile(currentSequence.bgm.fileName), "special_bgm",
                     currentSequence.bgm.seek);
             }
             
             currentDetectiveAnimator.SetInteger(animationNoHash, currentSequence.animationNo);
 
-            Debug.Log("animation no:" + currentSequence.animationNo);
+//            Debug.Log("animation no:" + currentSequence.animationNo);
             var exited = currentSequence.animationNo == 0;
             var exitTime = currentDetectiveAnimator.GetAnimatorTransitionInfo(currentSequence.animatorLayer).duration;
 
@@ -354,7 +354,7 @@ public class GameController : MonoBehaviour
     {
         if (clip == null)
         {
-            Debug.LogError("Clip is empty!");
+//            Debug.LogError("Clip is empty!");
             return;
         }
 
@@ -418,11 +418,12 @@ public class GameController : MonoBehaviour
     {
         isEventDone = true;
         postProcessingBehaviour.enabled = false;
+    }
 
-        if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
-        {
-            allQuestions.Add(currentQuestion);
-        }
+    private void SaveQuestion(QuestionData question)
+    {
+        Debug.Log("save q: " + question.questionDesc);
+        allQuestions.Add(question);
     }
 
     private void ShowSpecialEffect(string currentSequenceEffect)
@@ -745,6 +746,8 @@ public class GameController : MonoBehaviour
                     dataController.GetAnswerIdByQuestionId(currentQuestion.questionId)));
                 yield break;
             }
+            
+            SaveQuestion(currentQuestion);
 
             if (string.IsNullOrEmpty(answerData.detectiveResponse)) // no specified detective response
             {
