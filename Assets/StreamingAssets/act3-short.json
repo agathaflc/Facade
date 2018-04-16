@@ -1,4 +1,27 @@
 {
+  "useBgmLevels": true,
+  "bgmLevels": [
+    {
+      "fileName": "audio/cornfield_chase_1",
+      "seek": 16
+    },
+    {
+      "fileName": "audio/bgm/Level2_3p4",
+      "seek": 3.4
+    },
+    {
+      "fileName": "audio/Level3_7p4",
+      "seek": 7.4
+    },
+    {
+      "fileName": "audio/Level4_7p4",
+      "seek": 7.4
+    },
+    {
+      "fileName": "audio/Level5_7p9",
+      "seek": 7.9
+    }
+  ],
   "responsesPath": "detective_responses_act1.json",
   "bgmHappyFile": {
     "fileName": "audio/bgm_fast",

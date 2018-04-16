@@ -132,7 +132,7 @@ public class GameController : MonoBehaviour
     private static QuestionData currentQuestion;
     private static SequenceData currentSequence;
     private static string currentBgm;
-
+    private static int currentBgmLevel;
 
     // Use this for initialization
     private void Start()
@@ -200,6 +200,7 @@ public class GameController : MonoBehaviour
         isTimerActive = false;
         isEndingTimerActive = false;
         isClarifying = false;
+        currentBgmLevel = 0;
 
         if (!runTimeline)
         {
@@ -888,6 +889,34 @@ public class GameController : MonoBehaviour
         if (considerConsistency)
             if (!consistent)
             {
+                if (!currentActData.useBgmLevels)
+                {
+                    // todo play the foghorn thing??
+                    if (!currentBgm.Contains(SCARED_EMOTION))
+                    {
+                        PlayBgm(currentActData.bgmSadScaredClip, MUSIC_SAD_SCARED,
+                            currentActData.bgmSadScaredFile.seek);
+                    }
+
+                    return;
+                }
+                else
+                {
+                    currentBgmLevel++;
+                    if (currentBgmLevel < currentActData.bgmLevels.Length)
+                    {
+                        PlayBgm(currentActData.bgmLevelClips[currentBgmLevel], "level",
+                            currentActData.bgmLevels[currentBgmLevel].seek);
+                    }
+                }
+            }
+
+        if (!considerEmotion) return;
+
+        if (!correctExpression)
+        {
+            if (!currentActData.useBgmLevels)
+            {
                 // todo play the foghorn thing??
                 if (!currentBgm.Contains(SCARED_EMOTION))
                 {
@@ -897,15 +926,15 @@ public class GameController : MonoBehaviour
 
                 return;
             }
-
-        if (!considerEmotion) return;
-
-        if (!correctExpression)
-        {
-            // todo play the foghorn thing??
-            if (!currentBgm.Contains(SCARED_EMOTION))
-                PlayBgm(currentActData.bgmSadScaredClip, MUSIC_SAD_SCARED, currentActData.bgmSadScaredFile.seek);
-            return;
+            else
+            {
+                currentBgmLevel++;
+                if (currentBgmLevel < currentActData.bgmLevels.Length)
+                {
+                    PlayBgm(currentActData.bgmLevelClips[currentBgmLevel], "level",
+                        currentActData.bgmLevels[currentBgmLevel].seek);
+                }
+            }
         }
 
         Debug.Log("AdaptMusicAndLighting: correct expression.");

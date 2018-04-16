@@ -213,6 +213,14 @@ public class DataController : MonoBehaviour
         currentActData.bgmSadScaredClip = LoadAudioFile(currentActData.bgmSadScaredFile.fileName);
         currentActData.bgmNeutralClip = LoadAudioFile(currentActData.bgmNeutralFile.fileName);
         currentActData.bgmAngrySurprisedClip = LoadAudioFile(currentActData.bgmAngrySurprisedFile.fileName);
+
+        if (currentActData.useBgmLevels)
+        {
+            for (int i = 0; i < currentActData.bgmLevels.Length; i++)
+            {
+                currentActData.bgmLevelClips.Add(LoadAudioFile(currentActData.bgmLevels[i].fileName));
+            }
+        }
     }
 
     public static AudioClip LoadAudioFile(string relativeResourcePath)

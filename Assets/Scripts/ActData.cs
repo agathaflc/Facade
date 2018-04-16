@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -8,6 +9,10 @@ public class ActData
     public AudioClip bgmNeutralClip;
     public AudioClip bgmSadScaredClip;
     public AudioClip bgmAngrySurprisedClip;
+
+    public bool useBgmLevels;
+    public AudioData[] bgmLevels;
+    public List<AudioClip> bgmLevelClips;
 
     public AudioData bgmHappyFile;
     public AudioData bgmNeutralFile;
