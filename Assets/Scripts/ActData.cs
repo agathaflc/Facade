@@ -14,6 +14,8 @@ public class ActData
     public AudioData[] bgmLevels;
     public List<AudioClip> bgmLevelClips;
 
+    public bool showGun;
+
     public AudioData bgmHappyFile;
     public AudioData bgmNeutralFile;
     public AudioData bgmSadScaredFile;

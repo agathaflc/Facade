@@ -22,6 +22,7 @@
       "seek": 7.9
     }
   ],
+  "showGun": true,
   "responsesPath": "detective_responses_act1.json",
   "bgmHappyFile": {
     "fileName": "audio/bgm_fast",

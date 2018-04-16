@@ -16,6 +16,7 @@
     "fileName": "audio/bgm/Act1_Angry_Surprised_0",
     "seek": 0
   },
+  "showGun": false,
   "sequence": [
     {
       "sequenceType": "timeline"
@@ -178,7 +179,7 @@
             },
             {
               "answerId": "042",
-              "answerText": "Teribble",
+              "answerText": "Terrible!",
               "expectedExpressions": [
                 "angry",
                 "sad"

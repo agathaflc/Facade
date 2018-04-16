@@ -3087,7 +3087,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6690,12 +6690,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f6ee30676ced3847ace65eb5b5de8f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OVERALL_SCORE_THRESHOLD: 25
-  FER_is_Off: 1
+  OVERALL_SCORE_THRESHOLD: 10
+  FER_is_Off: 0
   gameSceneOnly: 0
   runTimeline: 0
   skipAct: 0
-  skipPostActReport: 1
+  skipPostActReport: 0
   skipToAct: 1
   questionDisplayText: {fileID: 1862245467}
   scoreDisplayerSlider: {fileID: 1720664495}

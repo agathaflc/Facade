@@ -137,6 +137,7 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        activeCamera = playerCamera;
         allTimelines.Add(act1Timelines);
         allTimelines.Add(act2Timelines);
         allTimelines.Add(act3Timelines);
@@ -173,9 +174,11 @@ public class GameController : MonoBehaviour
             kira.SetActive(false);
         }
 
-        tableGun.SetActive(currentActNo == 2);
 
         currentActData = dataController.GetCurrentRoundData();
+        
+//        if (cu)
+        tableGun.SetActive(currentActData.showGun);
 
         var detectiveAudioSources = detectiveObject.GetComponents<AudioSource>();
         detectiveVoice = detectiveAudioSources[0];
