@@ -6691,11 +6691,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OVERALL_SCORE_THRESHOLD: 10
-  FER_is_Off: 0
+  FER_is_Off: 1
   gameSceneOnly: 0
   runTimeline: 0
   skipAct: 0
-  skipPostActReport: 0
+  skipPostActReport: 1
   skipToAct: 1
   questionDisplayText: {fileID: 1862245467}
   scoreDisplayerSlider: {fileID: 1720664495}

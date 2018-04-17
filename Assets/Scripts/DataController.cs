@@ -364,6 +364,7 @@ public class DataController : MonoBehaviour
 
     public void StartNextAct()
     {
+        Debug.Log("StartNextAct");
         currentActNo++;
         if (currentActNo > actFiles.Length)
         {

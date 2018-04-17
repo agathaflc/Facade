@@ -174,10 +174,8 @@ public class GameController : MonoBehaviour
             kira.SetActive(false);
         }
 
-
         currentActData = dataController.GetCurrentRoundData();
         
-//        if (cu)
         tableGun.SetActive(currentActData.showGun);
 
         var detectiveAudioSources = detectiveObject.GetComponents<AudioSource>();
@@ -204,6 +202,8 @@ public class GameController : MonoBehaviour
         isEndingTimerActive = false;
         isClarifying = false;
         currentBgmLevel = 0;
+        
+        Debug.Log("# of sequence: " + currentActData.sequence.Length);
 
         if (!runTimeline)
         {
@@ -236,12 +236,14 @@ public class GameController : MonoBehaviour
 
         while (playableDirector.state == PlayState.Playing)
         {
+            Debug.Log("playing timeline");
             yield return null;
         }
 
         subtitleDisplay.SetActive(false);
 
         SetDetectiveAnimator();
+        currentTimelineNo++;
         StartCoroutine(RunSequence());
     }
 
@@ -257,6 +259,7 @@ public class GameController : MonoBehaviour
 
         while (playableDirector.state == PlayState.Playing)
         {
+//            Debug.Log("playing timeline");
             yield return null;
         }
 
@@ -264,7 +267,8 @@ public class GameController : MonoBehaviour
 
         if (currentTimelineNo == 0) SetDetectiveAnimator();
         currentTimelineNo++;
-        StartCoroutine(RunSequence());
+        isEventDone = true;
+//        StartCoroutine(RunSequence());
     }
 
     /**
@@ -274,13 +278,15 @@ public class GameController : MonoBehaviour
     {
         if (sequenceIndex >= currentActData.sequence.Length)
         {
+            isEventDone = true;
+            Debug.Log(sequenceIndex + " >= " + currentActData.sequence.Length);
             EndRound();
             yield break;
         }
 
         currentSequence = currentActData.sequence[sequenceIndex];
 
-        if (currentSequence.ending)
+        if (currentSequence.ending) // only for the animation when standing up
         {
             detectiveObject.GetComponent<Animator>().runtimeAnimatorController = kiraStandUpController;
             currentDetectiveAnimator = detectiveObject.GetComponent<Animator>();
@@ -304,7 +310,7 @@ public class GameController : MonoBehaviour
             }
         }
 
-        if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
+        else if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
         {
             // Debug.Log ("RunSequence: current sequence is question");
             questionPool = currentSequence.questions;
@@ -382,7 +388,14 @@ public class GameController : MonoBehaviour
         }
         else if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_TIMELINE))
         {
+            Debug.Log("current sequence is timeline");
+            isEventDone = false;
             StartCoroutine(RunTimeline());
+
+            while (!isEventDone)
+            {
+                yield return null;
+            }
         }
 
         sequenceIndex++;
@@ -966,6 +979,7 @@ public class GameController : MonoBehaviour
 
     private void EndRound()
     {
+        Debug.Log("EndRound");
         UnlockCursor();
         isTimerActive = false;
         dataController.SubmitNewPlayerScore(displayedScore);
@@ -978,7 +992,6 @@ public class GameController : MonoBehaviour
         {
             GeneratePostReport();
         }
-
         else
         {
             ContinueToNextAct();
@@ -995,6 +1008,7 @@ public class GameController : MonoBehaviour
     public void ContinueToNextAct()
     {
         dataController.StartNextAct();
+        Destroy(this);
     }
 
     private void UpdateTimeRemainingDisplay()

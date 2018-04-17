@@ -16,5 +16,217 @@
     "fileName": "audio/bgm/Act2_Angry_Surprised_40",
     "seek": 40
   },
-  "sequence": []
+  "sequence": [
+    {
+      "sequenceType": "timeline"
+    },
+    {
+      "sequenceType": "question",
+      "questions": [
+        {
+          "questionDesc": "Player Disappear Reason",
+          "questionId": "20",
+          "expressionWeight": 0.2,
+          "consistencyWeight": 0.8,
+          "considersEmotion": true,
+          "considersFact": true,
+          "filePath": "audio/BadCop/QUESTIONS/Q8",
+          "questionText": "Your alibi claimed you disappeared at 12:45 AM last night. What exactly were you doing?",
+          "effect": "motionBlur",
+          "answers": [
+            {
+              "answerId": "200",
+              "answerText": "Finding someone",
+              "expectedExpressions": [
+                "happy",
+                "neutral"
+              ],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "201",
+              "answerText": "Going to the bathroom",
+              "expectedExpressions": [
+                "scared",
+                "surprised"
+              ],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "202",
+              "answerText": "Finding something",
+              "expectedExpressions": [
+                "happy",
+                "neutral"
+              ],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "203",
+              "answerText": "I don't remember",
+              "expectedExpressions": [
+                "scared",
+                "surprised"
+              ],
+              "detectiveResponse": "negative"
+            }
+          ]
+        },
+        {
+          "questionDesc": "Player Alibi Feelings",
+          "questionId": "21",
+          "expressionWeight": 1,
+          "consistencyWeight": 0,
+          "considersEmotion": true,
+          "considersFact": false,
+          "filePath": "audio/BadCop/QUESTIONS/Q9",
+          "questionText": "You and your alibi don’t seem to be very close. How do you feel about them?",
+          "answers": [
+            {
+              "answerId": "210",
+              "answerText": "We have a good relationship",
+              "expectedExpressions": [
+                "happy",
+                "neutral"
+              ],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "211",
+              "answerText": "They are not trustworthy",
+              "expectedExpressions": [
+                "angry",
+                "sad",
+                "scared"
+              ],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "212",
+              "answerText": "I hardly know them",
+              "expectedExpressions": [
+                "neutral",
+                "sad"
+              ],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "213",
+              "answerText": "I don't like them",
+              "expectedExpressions": [
+                "angry",
+                "sad",
+                "scared",
+                "surprised"
+              ],
+              "detectiveResponse": "neutral"
+            }
+          ]
+        },
+        {
+          "questionDesc": "Player Victim Relationship",
+          "questionId": "22",
+          "expressionWeight": 0.5,
+          "consistencyWeight": 0.5,
+          "considersEmotion": true,
+          "considersFact": true,
+          "filePath": "audio/BadCop/QUESTIONS/Q10",
+          "questionText": "And what about the victim? How well did you know her?",
+          "answers": [
+            {
+              "answerId": "220",
+              "answerText": "Friend",
+              "expectedExpressions": [
+                "sad",
+                "scared",
+                "surprised"
+              ],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "221",
+              "answerText": "Colleague",
+              "expectedExpressions": [
+                "sad",
+                "scared",
+                "surprised"
+              ],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "222",
+              "answerText": "Ex-lover",
+              "expectedExpressions": [
+                "sad",
+                "scared",
+                "surprised"
+              ],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "223",
+              "answerText": "I didn't know her",
+              "expectedExpressions": [
+                "neutral"
+              ],
+              "detectiveResponse": "neutral"
+            }
+          ]
+        },
+        {
+          "questionDesc": "Player Victim Feelings",
+          "questionId": "23",
+          "expressionWeight": 1,
+          "consistencyWeight": 0,
+          "considersEmotion": true,
+          "considersFact": false,
+          "filePath": "audio/BadCop/QUESTIONS/Q11",
+          "questionText": "Your alibi claimed you were not on good terms with the victim. Why is that?",
+          "answers": [
+            {
+              "answerId": "230",
+              "answerText": "She was untrustworthy",
+              "expectedExpressions": [
+                "sad",
+                "scared",
+                "surprised",
+                "angry"
+              ],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "231",
+              "answerText": "She also didn't like me",
+              "expectedExpressions": [
+                "sad",
+                "angry"
+              ],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "232",
+              "answerText": "She is okay",
+              "expectedExpressions": [
+                "neutral",
+                "happy"
+              ],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "233",
+              "answerText": "That is not true! I didn't say that",
+              "expectedExpressions": [
+                "surprised",
+                "angry"
+              ],
+              "detectiveResponse": "negative"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sequenceType": "timeline"
+    }
+  ]
 }
