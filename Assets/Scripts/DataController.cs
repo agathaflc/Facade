@@ -63,7 +63,6 @@ public class DataController : MonoBehaviour
     public void SetCurrentActNo(int actNo)
     {
         currentActNo = actNo;
-        Debug.Log("SetCurrentActNo:" + currentActNo);
         LoadRoundData(actFiles[currentActNo]);
     }
 
@@ -94,12 +93,6 @@ public class DataController : MonoBehaviour
 
     private void StartCurrentAct()
     {
-        for (var i = 0; i < actFiles.Length; i++)
-        {
-            Debug.Log("act" + i + ": " + actFiles[i]);
-        }
-        
-        Debug.Log("current act no: " + currentActNo);
         LoadRoundData(actFiles[currentActNo]);
         Initiate.Fade ("GameScene", Color.black, 1f);
     }
@@ -364,7 +357,6 @@ public class DataController : MonoBehaviour
 
     public void StartNextAct()
     {
-        Debug.Log("StartNextAct");
         currentActNo++;
         if (currentActNo > actFiles.Length)
         {

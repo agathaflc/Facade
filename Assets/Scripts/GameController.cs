@@ -181,7 +181,6 @@ public class GameController : MonoBehaviour
         var detectiveAudioSources = detectiveObject.GetComponents<AudioSource>();
         detectiveVoice = detectiveAudioSources[0];
         detectiveSoundEffect = detectiveAudioSources[1];
-//        detectiveVoice = detectiveObject.GetComponent<AudioSource>();
 
         var audioSource = player.GetComponents<AudioSource>();
         bgmAudioSource1 = audioSource[0];
@@ -203,8 +202,6 @@ public class GameController : MonoBehaviour
         isClarifying = false;
         currentBgmLevel = 0;
         
-        Debug.Log("# of sequence: " + currentActData.sequence.Length);
-
         if (!runTimeline)
         {
             StartCoroutine(RunSequence());
@@ -236,7 +233,6 @@ public class GameController : MonoBehaviour
 
         while (playableDirector.state == PlayState.Playing)
         {
-            Debug.Log("playing timeline");
             yield return null;
         }
 
@@ -249,7 +245,6 @@ public class GameController : MonoBehaviour
 
     private IEnumerator RunTimeline()
     {
-        Debug.Log("run timeline, no: " + currentTimelineNo);
         subtitleDisplay.SetActive(true);
         subtitleDisplayText.text = "";
 
@@ -259,7 +254,6 @@ public class GameController : MonoBehaviour
 
         while (playableDirector.state == PlayState.Playing)
         {
-//            Debug.Log("playing timeline");
             yield return null;
         }
 
@@ -268,7 +262,6 @@ public class GameController : MonoBehaviour
         if (currentTimelineNo == 0) SetDetectiveAnimator();
         currentTimelineNo++;
         isEventDone = true;
-//        StartCoroutine(RunSequence());
     }
 
     /**
@@ -279,7 +272,6 @@ public class GameController : MonoBehaviour
         if (sequenceIndex >= currentActData.sequence.Length)
         {
             isEventDone = true;
-            Debug.Log(sequenceIndex + " >= " + currentActData.sequence.Length);
             EndRound();
             yield break;
         }
@@ -298,7 +290,6 @@ public class GameController : MonoBehaviour
             detectiveObject.SetActive(false);
             ApplyEndingCamera();
             endingDecisionDisplay.SetActive(true);
-//            LightsCameraAction(2);
             ShowSpecialEffect(EFFECT_VIGNETTE);
 
             decisionTimeRemaining = ENDING_DECISION_TIME_LIMIT;
@@ -312,7 +303,6 @@ public class GameController : MonoBehaviour
 
         else if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
         {
-            // Debug.Log ("RunSequence: current sequence is question");
             questionPool = currentSequence.questions;
             questionIndex = 0;
 
@@ -321,7 +311,6 @@ public class GameController : MonoBehaviour
         }
         else if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_DIALOG))
         {
-            // Debug.Log ("RunSequence: current sequence is dialog");
             LockCursor();
             isEventDone = false;
 
@@ -334,7 +323,6 @@ public class GameController : MonoBehaviour
 
             if (string.IsNullOrEmpty(currentSequence.bgm.fileName))
             {
-//                Debug.Log("special bgm is not null: " + currentSequence.bgm.fileName);
                 PlayBgm(DataController.LoadAudioFile(currentSequence.bgm.fileName), "special_bgm",
                     currentSequence.bgm.seek);
             }
@@ -342,7 +330,6 @@ public class GameController : MonoBehaviour
             if (currentDetectiveAnimator != null)
                 currentDetectiveAnimator.SetInteger(animationNoHash, currentSequence.animationNo);
 
-//            Debug.Log("animation no:" + currentSequence.animationNo);
             var exited = currentSequence.animationNo == 0;
             var exitTime = (currentDetectiveAnimator == null)
                 ? 0
@@ -374,7 +361,7 @@ public class GameController : MonoBehaviour
                 subtitleDisplay.SetActive(false);
 
                 DataController.StartFER();
-                Debug.Log("wait 3 seconds");
+                Debug.Log("wait " + FER_RECORDING_TIME + " seconds");
                 yield return new WaitForSecondsRealtime(FER_RECORDING_TIME);
                 DataController.StopFER();
 
@@ -388,7 +375,6 @@ public class GameController : MonoBehaviour
         }
         else if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_TIMELINE))
         {
-            Debug.Log("current sequence is timeline");
             isEventDone = false;
             StartCoroutine(RunTimeline());
 
@@ -415,7 +401,6 @@ public class GameController : MonoBehaviour
     {
         if (clip == null)
         {
-//            Debug.LogError("Clip is empty!");
             return;
         }
 
@@ -483,7 +468,6 @@ public class GameController : MonoBehaviour
 
     private void SaveQuestion(QuestionData question)
     {
-        Debug.Log("save q: " + question.questionDesc);
         allQuestions.Add(question);
     }
 
@@ -690,11 +674,9 @@ public class GameController : MonoBehaviour
         }
 
         if (!considersEmotion) return suspicionScore;
-        // Debug.Log ("considers emotion");
         var emotionDistance = dataController.ComputeEmotionDistance(expectedExpression,
             DataController.ReadPlayerEmotion(), out closestEmotion);
 
-        // Debug.Log ("emotion distance: " + emotionDistance.ToString());
         expressionScore =
             ScoreCalculator.CalculateExpressionScore(emotionDistance, currentQuestion.expressionWeight, closestEmotion);
         suspicionScore += expressionScore;
@@ -741,7 +723,6 @@ public class GameController : MonoBehaviour
 
         // don't let displayedScore go below 0
         if (displayedScore < 0) displayedScore = 0;
-        Debug.Log("displayed score: " + displayedScore.ToString("F1"));
 
         scoreDisplayText.text = "Suspicion: " + displayedScore.ToString("F2");
         scoreDisplayerSlider.value = displayedScore / 60;
@@ -979,14 +960,12 @@ public class GameController : MonoBehaviour
 
     private void EndRound()
     {
-        Debug.Log("EndRound");
         UnlockCursor();
         isTimerActive = false;
         dataController.SubmitNewPlayerScore(displayedScore);
         highScoreDisplayText.text = dataController.GetHighestPlayerScore().ToString();
 
         questionDisplay.SetActive(false);
-//        postReport.SetActive(true); // activate (show) the round end display
 
         if (currentActNo == 0 && !skipPostActReport)
         {
@@ -1067,7 +1046,6 @@ public class GameController : MonoBehaviour
     {
         UnlockCursor();
         playerCamera.GetComponent<PlayerLook>().enabled = false;
-        //Debug.Log(GetAnswer(1));
         postReport.SetActive(true);
         string report = "";
         report = "Investigation case #160418(HO4)" +
@@ -1153,13 +1131,11 @@ public class GameController : MonoBehaviour
         // show another question if there are still questions to ask
         if (questionPool.Length > questionIndex + 1)
         {
-            // Debug.Log ("show another question");
             questionIndex++;
             ShowQuestion();
         }
         else
         {
-            // Debug.Log ("end of questions");
             questionDisplay.SetActive(false);
             StartCoroutine(RunSequence());
         }
@@ -1263,7 +1239,5 @@ public class GameController : MonoBehaviour
         {
             EndingScene(true, false);
         }
-
-//        HandleWalking();
     }
 }
