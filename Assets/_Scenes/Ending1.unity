@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -239,7 +239,7 @@ MonoBehaviour:
     But dreams can also put you in a hell hole of eternal torment and an escape back
     to reality is so desired yet impossible. It takes a keen sense and absolute confidences
     in ones judgement to identify that it is all a facade, to take the leap and break
-    the spell of a nightmare.\n\r\nCongratulation on being certain of yourself and
+    the spell of a nightmare.\n\r\nCongratulations on being certain of yourself and
     committing to it, you have woken up from a nightmare back into the real world
     -  the only kind of reality.  \r\n"
 --- !u!222 &146531573
@@ -569,6 +569,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aacab61f87df5384c8df0892d97619a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endreport: {fileID: 0}
+  report: {fileID: 0}
 --- !u!4 &839067833
 Transform:
   m_ObjectHideFlags: 0

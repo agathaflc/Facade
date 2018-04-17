@@ -175,8 +175,13 @@ public class GameController : MonoBehaviour
         }
 
         currentActData = dataController.GetCurrentRoundData();
-        
+
         tableGun.SetActive(currentActData.showGun);
+        if (currentActData.showGun)
+        {
+            // deactivate the collider until ending decision is shown
+            tableGun.GetComponent<Collider>().enabled = false;
+        }
 
         var detectiveAudioSources = detectiveObject.GetComponents<AudioSource>();
         detectiveVoice = detectiveAudioSources[0];
@@ -201,7 +206,7 @@ public class GameController : MonoBehaviour
         isEndingTimerActive = false;
         isClarifying = false;
         currentBgmLevel = 0;
-        
+
         if (!runTimeline)
         {
             StartCoroutine(RunSequence());
@@ -294,11 +299,14 @@ public class GameController : MonoBehaviour
 
             decisionTimeRemaining = ENDING_DECISION_TIME_LIMIT;
             isEndingTimerActive = true;
+            isEventDone = false;
 
             while (isEndingTimerActive)
             {
                 yield return null;
             }
+
+            isEventDone = true;
         }
 
         else if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
@@ -698,7 +706,7 @@ public class GameController : MonoBehaviour
     {
         FERCorrectness.sprite = correct ? tick : cross;
         FERCorrectness.enabled = true;
-        
+
         expectedExpression.text = expected;
         expectedExpression.enabled = true;
 
@@ -753,7 +761,7 @@ public class GameController : MonoBehaviour
             yield return new WaitForSecondsRealtime(FER_RECORDING_TIME);
             DataController.StopFER();
         }
-        
+
         if (currentQuestion.considersEmotion)
         {
             FERIndicator.enabled = false;
@@ -1153,6 +1161,7 @@ public class GameController : MonoBehaviour
         finalCamera.enabled = true;
         activeCamera = finalCamera;
         postProcessingBehaviour = finalCamera.GetComponent<PostProcessingBehaviour>();
+        tableGun.GetComponent<Collider>().enabled = true;
     }
 
     public void EndingScene(bool shoot)
@@ -1178,6 +1187,7 @@ public class GameController : MonoBehaviour
         if (isEndingTimerActive)
         {
             decisionTimeRemaining -= Time.deltaTime;
+            Debug.Log("decision time: " + decisionTimeRemaining);
             if (decisionTimeRemaining <= 0f) EndingScene(false); // didn't shoot
             endingTimeRemainingSlider.value = decisionTimeRemaining / ENDING_DECISION_TIME_LIMIT;
         }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2002,7 +2002,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u201CGuilt, it\u2019s written all over your face, or what\u2019s left
-    of it anyways.\u201D detective warren thought to herself, after she has had sufficient
+    of it anyways,\u201D Detective Warren thought to herself, after she has had sufficient
     time to visually process the messy, blood-ridden scene...\r\n\nIf there were one
     reason a person would take their own life, it would be to look for an escape.
     An escape from reality, because reality does not favor you anymore, but do you
