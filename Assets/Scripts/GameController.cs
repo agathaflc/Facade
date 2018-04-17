@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -38,6 +39,7 @@ public class GameController : MonoBehaviour
     private const float ENDING_DECISION_TIME_LIMIT = 25f;
 
     public float OVERALL_SCORE_THRESHOLD = 25f; // TODO: FINETUNE THIS
+    public float musicVolume = 1.0f;
 
     // testing variables
     public bool FER_is_Off;
@@ -107,8 +109,9 @@ public class GameController : MonoBehaviour
 
     private AudioSource detectiveVoice;
     private AudioSource detectiveSoundEffect;
-    private AudioSource bgmAudioSource1;
-    private AudioSource bgmAudioSource2;
+
+    private AudioSource bgmAudioSourceA;
+    private AudioSource bgmAudioSourceB;
 
     private AudioSource currentBgmAudioSource;
 
@@ -187,10 +190,11 @@ public class GameController : MonoBehaviour
         detectiveVoice = detectiveAudioSources[0];
         detectiveSoundEffect = detectiveAudioSources[1];
 
-        var audioSource = player.GetComponents<AudioSource>();
-        bgmAudioSource1 = audioSource[0];
-        bgmAudioSource2 = audioSource[1];
-        currentBgmAudioSource = bgmAudioSource1;
+        bgmAudioSourceA = player.AddComponent<AudioSource>();
+        bgmAudioSourceB = player.AddComponent<AudioSource>();
+        bgmAudioSourceA.volume = musicVolume;
+        bgmAudioSourceB.volume = 0.0f;
+        currentBgmAudioSource = bgmAudioSourceA;
 
         postProcessingBehaviour = playerCamera.GetComponent<PostProcessingBehaviour>();
 
@@ -405,7 +409,48 @@ public class GameController : MonoBehaviour
         return currentDetectiveAnimator;
     }
 
-    private void PlayBgm(AudioClip clip, string musicType, float seek, bool fadeIn = true)
+    private IEnumerator CrossFade(AudioSource a, AudioSource b, float seconds)
+    {
+        // calculate the duration for each step
+        var stepInterval = seconds / 20.0f;
+        var volumeInterval = musicVolume / 20.0f;
+        
+        b.Play();
+        
+        // fade betwene the two, taking A to 0 volume and B to musicVolume
+        for (var i = 0; i < 20; i++)
+        {
+            a.volume -= volumeInterval;
+            b.volume += volumeInterval;
+            
+            // wait for one interval then continue the loop
+            yield return new WaitForSecondsRealtime(stepInterval);
+        }
+        
+        if (a.isPlaying) a.Stop();
+    }
+    
+    private IEnumerator SwitchTracks(AudioClip clip, float seek)
+    {
+        var playA = !(Math.Abs(bgmAudioSourceB.volume) < 0.01);
+
+        if (playA)
+        {
+            bgmAudioSourceA.clip = clip;
+            bgmAudioSourceA.loop = true;
+            bgmAudioSourceA.time = seek;
+            yield return StartCoroutine(CrossFade(bgmAudioSourceB, bgmAudioSourceA, 8.0f));
+        }
+        else
+        {
+            bgmAudioSourceB.clip = clip;
+            bgmAudioSourceB.loop = true;
+            bgmAudioSourceB.time = seek;
+            yield return StartCoroutine(CrossFade(bgmAudioSourceA, bgmAudioSourceB, 8.0f));
+        }
+    }
+    
+    private void PlayBgm(AudioClip clip, string musicType, float seek)
     {
         if (clip == null)
         {
@@ -414,58 +459,7 @@ public class GameController : MonoBehaviour
 
         currentBgm = musicType;
 
-        AudioSource toBeFadedOut;
-        AudioSource toBeFadedIn;
-        if (currentBgmAudioSource == bgmAudioSource1)
-        {
-            toBeFadedIn = bgmAudioSource2;
-            toBeFadedOut = bgmAudioSource1;
-            currentBgmAudioSource = bgmAudioSource2;
-        }
-        else
-        {
-            toBeFadedIn = bgmAudioSource1;
-            toBeFadedOut = bgmAudioSource2;
-            currentBgmAudioSource = bgmAudioSource1;
-        }
-
-        toBeFadedIn.clip = clip;
-        toBeFadedIn.loop = true;
-        toBeFadedIn.time = seek;
-
-        if (fadeIn)
-        {
-            StartCoroutine(FadeInAudio(toBeFadedIn));
-            StartCoroutine(FadeOutAudio(toBeFadedOut));
-        }
-        else
-        {
-            toBeFadedIn.Play();
-            toBeFadedOut.Stop();
-        }
-    }
-
-    private IEnumerator FadeInAudio(AudioSource audioSource)
-    {
-        audioSource.volume = 0f;
-        audioSource.Play();
-
-        while (audioSource.volume < 1f)
-        {
-            audioSource.volume += Time.deltaTime;
-            yield return null;
-        }
-    }
-
-    private IEnumerator FadeOutAudio(AudioSource audioSource)
-    {
-        while (audioSource.volume > 0f)
-        {
-            audioSource.volume -= Time.deltaTime;
-            yield return null;
-        }
-
-        audioSource.Stop();
+        StartCoroutine(SwitchTracks(clip, seek));
     }
 
     private void ConcludeEvent()
