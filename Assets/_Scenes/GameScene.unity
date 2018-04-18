@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -6690,18 +6690,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f6ee30676ced3847ace65eb5b5de8f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OVERALL_SCORE_THRESHOLD: 25
-  FER_is_Off: 1
+  FER_is_Off: 0
   gameSceneOnly: 0
   runTimeline: 0
   skipAct: 0
-  skipPostActReport: 1
+  skipPostActReport: 0
   skipToAct: 1
   questionDisplayText: {fileID: 1862245467}
   scoreDisplayerSlider: {fileID: 1720664495}
   scoreDisplayText: {fileID: 1712600188}
   timeRemainingDisplaySlider: {fileID: 1896754238}
-  endingTimeRemainingSlider: {fileID: 1849033634}
   highScoreDisplayText: {fileID: 1505539985}
   subtitleDisplayText: {fileID: 460190874}
   answerButtonObjectPool: {fileID: 1612681095}
@@ -6711,19 +6709,13 @@ MonoBehaviour:
   roundEndDisplay: {fileID: 1082332932}
   questionPictureDisplay: {fileID: 133389439}
   subtitleDisplay: {fileID: 1450822783}
-  endingDecisionDisplay: {fileID: 1181717258}
   detectiveObject: {fileID: 1604754582}
   hans: {fileID: 442740191}
   kira: {fileID: 1749480195}
   tableGun: {fileID: 2125480158}
-  FERIndicator: {fileID: 666436612}
-  FERCorrectness: {fileID: 1411356734}
-  tick: {fileID: 21300000, guid: 5c63c326096dfcd459750dce8ff5affa, type: 3}
-  cross: {fileID: 21300000, guid: 17738894cf6034246aaf8cab1d0697be, type: 3}
-  expectedExpression: {fileID: 188015950}
+  room: {fileID: 593331702}
   playerCamera: {fileID: 1660801664}
   finalCamera: {fileID: 489868751}
-  room: {fileID: 593331702}
   motionBlurEffect: {fileID: 11400000, guid: 1d576b4f9b60cae4f82b38009d0b3138, type: 2}
   vignetteEffect: {fileID: 11400000, guid: fad07c4624af9aa4cb21a9eaf4cf912c, type: 2}
   bloomEffect: {fileID: 11400000, guid: 2476016b9db4793459c550e08e6d4857, type: 2}
