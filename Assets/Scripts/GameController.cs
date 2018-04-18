@@ -1183,7 +1183,6 @@ public class GameController : MonoBehaviour
         if (isEndingTimerActive)
         {
             decisionTimeRemaining -= Time.deltaTime;
-            Debug.Log("decision time: " + decisionTimeRemaining);
             if (decisionTimeRemaining <= 0f) EndingScene(false); // didn't shoot
             endingTimeRemainingSlider.value = decisionTimeRemaining / ENDING_DECISION_TIME_LIMIT;
         }
