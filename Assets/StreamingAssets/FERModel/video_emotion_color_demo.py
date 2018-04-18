@@ -45,7 +45,7 @@ def read_expression():
     video_capture = cv2.VideoCapture(0)
     video_capture.set(cv2.CAP_PROP_BRIGHTNESS, 50)
 
-    timeout = time.time() + 3 # 5 seconds from now
+    timeout = time.time() + 2.8 # 2.8 seconds from now
     sleep_index = 0
 
     # initialise dictionary of emotion confidences
@@ -173,7 +173,7 @@ def write_output_to_file(emotion_conf, max_val, adj2noun):
     final_emotions_output = {}
     final_emotions_output['emotions'] = final_output_list
 
-    with open(os.path.join('..', '..', 'expression_data.json'), 'w') as fp:
+    with open(os.path.join('..', 'expression_data.json'), 'w') as fp:
         json.dump(final_emotions_output, fp)
 
 def check_trigger():

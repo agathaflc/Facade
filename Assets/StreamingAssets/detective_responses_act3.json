@@ -9,7 +9,7 @@
       "soundFilePath": "audio/Act1/Responses/got_it_2"
     },
     {
-      "text": "K",
+      "text": "K.",
       "soundFilePath": "audio/Act3/Response/k"
     },
     {
@@ -25,11 +25,11 @@
       "soundFilePath": "audio/Act3/Response/yeah"
     },
     {
-      "text": "Alright",
+      "text": "Alright.",
       "soundFilePath": "audio/Act1/Responses/alright"
     },
     {
-      "text": "I see",
+      "text": "I see.",
       "soundFilePath": "audio/Act1/Responses/i_see"
     }
   ],
@@ -39,11 +39,11 @@
       "soundFilePath": "audio/Act3/Response/hmm"
     },
     {
-      "text": "Hah",
+      "text": "Hah.",
       "soundFilePath": "audio/Act3/Response/hah"
     },
     {
-      "text": "K",
+      "text": "K.",
       "soundFilePath": "audio/Act3/Response/k"
     },
     {
@@ -77,7 +77,7 @@
       "soundFilePath": "audio/Act3/Response/hmm"
     },
     {
-      "text": "Hah",
+      "text": "Hah.",
       "soundFilePath": "audio/Act3/Response/hah"
     },
     {
@@ -95,7 +95,7 @@
       "soundFilePath": "audio/Act1/Responses/good_to_hear"
     },
     {
-      "text": "Got it",
+      "text": "Got it.",
       "soundFilePath": "audio/Act1/Responses/got_it"
     },
     {
@@ -109,19 +109,19 @@
   ],
   "notSuspiciousNeutral": [
     {
-      "text": "Uh huh",
+      "text": "Uh huh.",
       "soundFilePath": "audio/Act1/Responses/uh_huh"
     },
     {
-      "text": "Okay",
+      "text": "Okay.",
       "soundFilePath": "audio/Act1/Responses/okay_neutral"
     },
     {
-      "text": "Got it",
+      "text": "Got it.",
       "soundFilePath": "audio/Act1/Responses/got_it"
     },
     {
-      "text": "I see",
+      "text": "I see.",
       "soundFilePath": "audio/Act1/Responses/i_see"
     },
     {
@@ -129,17 +129,17 @@
       "soundFilePath": "audio/Act1/Responses/hm"
     },
     {
-      "text": "Alright",
+      "text": "Alright.",
       "soundFilePath": "audio/Act1/Responses/alright"
     },
     {
-      "text": "Noted",
+      "text": "Noted.",
       "soundFilePath": "audio/Act1/Responses/noted"
     }
   ],
   "notSuspiciousNegative": [
     {
-      "text": "Uh huh",
+      "text": "Uh huh.",
       "soundFilePath": "audio/Act1/Responses/uh_huh"
     },
     {
@@ -147,11 +147,11 @@
       "soundFilePath": "audio/Act1/Responses/hm"
     },
     {
-      "text": "That's too bad",
+      "text": "That's too bad.",
       "soundFilePath": "audio/Act1/Responses/thats_too_bad"
     },
     {
-      "text": "Sorry to hear",
+      "text": "Sorry to hear.",
       "soundFilePath": "audio/Act1/Responses/sorry_to_hear"
     },
     {

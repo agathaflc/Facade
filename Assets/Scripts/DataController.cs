@@ -21,7 +21,7 @@ public class DataController : MonoBehaviour
     private const string FER_FLAG_FILE_NAME = "flag.txt";
 
     private const string RECORD_EXPRESSION = "record";
-    private ActData currentActData;
+    private static ActData currentActData;
     private DistanceData distanceMap;
     
     private static Dictionary<string, string> questionIdToAnswerIdMap = new Dictionary<string, string>();
@@ -30,12 +30,17 @@ public class DataController : MonoBehaviour
     private PlayerProgress playerProgress;
 
     private static int currentActNo;
-    private string[] actFiles;
+    private static string[] actFiles;
 
     public static void ResetPlayerData()
     {
         questionIdToAnswerIdMap = new Dictionary<string, string>();
         actualOverallScore = 0;
+        
+        currentActNo = 0;
+        actFiles = ReadActFileNames(ACT_FILE_PATH);
+
+        LoadRoundData(actFiles[currentActNo]);
     }
 
     // Use this for initialization
@@ -46,11 +51,7 @@ public class DataController : MonoBehaviour
         LoadPlayerProgress();
         ReadDistanceMap();
 
-        actualOverallScore = 0;
-        currentActNo = 0;
-        actFiles = ReadActFileNames(ACT_FILE_PATH);
-
-        LoadRoundData(actFiles[currentActNo]);
+        ResetPlayerData();
         
         SceneManager.LoadScene(MENU_SCREEN);
     }
@@ -63,7 +64,6 @@ public class DataController : MonoBehaviour
     public void SetCurrentActNo(int actNo)
     {
         currentActNo = actNo;
-        Debug.Log("SetCurrentActNo:" + currentActNo);
         LoadRoundData(actFiles[currentActNo]);
     }
 
@@ -94,12 +94,6 @@ public class DataController : MonoBehaviour
 
     private void StartCurrentAct()
     {
-        for (var i = 0; i < actFiles.Length; i++)
-        {
-            Debug.Log("act" + i + ": " + actFiles[i]);
-        }
-        
-        Debug.Log("current act no: " + currentActNo);
         LoadRoundData(actFiles[currentActNo]);
         Initiate.Fade ("GameScene", Color.black, 1f);
     }
@@ -181,7 +175,7 @@ public class DataController : MonoBehaviour
             Debug.LogError("FER data file doesn't exist");
     }
 
-    private void LoadRoundData(string fileName)
+    private static void LoadRoundData(string fileName)
     {
         var filePath =
             Path.Combine(Application.streamingAssetsPath,
@@ -201,7 +195,7 @@ public class DataController : MonoBehaviour
         }
     }
 
-    private void LoadBgms()
+    private static void LoadBgms()
     {
         if (currentActData == null)
         {
@@ -264,25 +258,33 @@ public class DataController : MonoBehaviour
                 break;
         }
 
-        // Debug.Log (responseData);
-        var index = Random.Range(0, responseData.Length);
-
-        if (responseData[index].clip != null)
+        if (responseData != null)
         {
-            Debug.Log("LoadDetectiveRespClip: clip HAS been saved before");
-            clip = responseData[index].clip;
+            var index = Random.Range(0, responseData.Length);
+
+            if (responseData[index].clip != null)
+            {
+                Debug.Log("LoadDetectiveRespClip: clip HAS been saved before");
+                clip = responseData[index].clip;
+            }
+            else
+            {
+                // Debug.Log ("LoadDetectiveRespClip: clip has NOT been saved before");
+                clip = Resources.Load<AudioClip>(responseData[index].soundFilePath);
+                responseData[index].clip = clip;
+            }
+
+            subtitle = responseData[index].text;
         }
         else
         {
-            // Debug.Log ("LoadDetectiveRespClip: clip has NOT been saved before");
-            clip = Resources.Load<AudioClip>(responseData[index].soundFilePath);
-            responseData[index].clip = clip;
+            Debug.Log("LoadDetectiveRespClip: response data is null!");
+            clip = null;
+            subtitle = "";
         }
-
-        subtitle = responseData[index].text;
     }
 
-    private void LoadAllDetectiveResponses(string fileName)
+    private static void LoadAllDetectiveResponses(string fileName)
     {
         var filePath = Path.Combine(Application.streamingAssetsPath, fileName);
         // Debug.Log ("responses path: " + filePath);

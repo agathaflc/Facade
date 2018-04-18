@@ -10,25 +10,26 @@
       "seek": 3.4
     },
     {
-      "fileName": "audio/Level3_7p4",
+      "fileName": "audio/bgm/Level3_7p4",
       "seek": 7.4
     },
     {
-      "fileName": "audio/Level4_7p4",
+      "fileName": "audio/bgm/Level4_7p4",
       "seek": 7.4
     },
     {
-      "fileName": "audio/Level5_7p9",
+      "fileName": "audio/bgm/Level5_7p9",
       "seek": 7.9
     }
   ],
+  "showGun": true,
   "responsesPath": "detective_responses_act1.json",
   "bgmHappyFile": {
-    "fileName": "audio/bgm_fast",
+    "fileName": "audio/bgm/Level2_3p4",
     "seek": 0
   },
   "bgmSadScaredFile": {
-    "fileName": "audio/bgm_slow",
+    "fileName": "audio/bgm/Level3_7p4",
     "seek": 0
   },
   "bgmNeutralFile": {
@@ -36,7 +37,7 @@
     "seek": 16
   },
   "bgmAngrySurprisedFile": {
-    "fileName": "audio/imperial-march",
+    "fileName": "audio/bgm/Level4_7p4",
     "seek": 0
   },
   "sequence": [

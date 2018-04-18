@@ -57,9 +57,12 @@ public static class ScoreCalculator
                     expectedMapping.x,
                     expectedMapping.y);
 
-                if (!(currentDistance < minDistance)) continue;
-                minDistance = currentDistance;
-                closestEmotionIndex = i;
+                if (currentDistance < minDistance)
+                {
+                    minDistance = currentDistance;
+                    closestEmotionIndex = i;
+                    Debug.Log("new min distance: " + minDistance + ", updated");
+                }
             }
         }
 

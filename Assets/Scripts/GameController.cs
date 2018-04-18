@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -38,6 +39,7 @@ public class GameController : MonoBehaviour
     private const float ENDING_DECISION_TIME_LIMIT = 25f;
 
     public float OVERALL_SCORE_THRESHOLD = 25f; // TODO: FINETUNE THIS
+    public float musicVolume = 1.0f;
 
     // testing variables
     public bool FER_is_Off;
@@ -107,8 +109,9 @@ public class GameController : MonoBehaviour
 
     private AudioSource detectiveVoice;
     private AudioSource detectiveSoundEffect;
-    private AudioSource bgmAudioSource1;
-    private AudioSource bgmAudioSource2;
+
+    private AudioSource bgmAudioSourceA;
+    private AudioSource bgmAudioSourceB;
 
     private AudioSource currentBgmAudioSource;
 
@@ -137,6 +140,7 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        activeCamera = playerCamera;
         allTimelines.Add(act1Timelines);
         allTimelines.Add(act2Timelines);
         allTimelines.Add(act3Timelines);
@@ -173,19 +177,24 @@ public class GameController : MonoBehaviour
             kira.SetActive(false);
         }
 
-        tableGun.SetActive(currentActNo == 2);
-
         currentActData = dataController.GetCurrentRoundData();
+
+        tableGun.SetActive(currentActData.showGun);
+        if (currentActData.showGun)
+        {
+            // deactivate the collider until ending decision is shown
+            tableGun.GetComponent<Collider>().enabled = false;
+        }
 
         var detectiveAudioSources = detectiveObject.GetComponents<AudioSource>();
         detectiveVoice = detectiveAudioSources[0];
         detectiveSoundEffect = detectiveAudioSources[1];
-//        detectiveVoice = detectiveObject.GetComponent<AudioSource>();
 
-        var audioSource = player.GetComponents<AudioSource>();
-        bgmAudioSource1 = audioSource[0];
-        bgmAudioSource2 = audioSource[1];
-        currentBgmAudioSource = bgmAudioSource1;
+        bgmAudioSourceA = player.AddComponent<AudioSource>();
+        bgmAudioSourceB = player.AddComponent<AudioSource>();
+        bgmAudioSourceA.volume = musicVolume;
+        bgmAudioSourceB.volume = 0.0f;
+        currentBgmAudioSource = bgmAudioSourceA;
 
         postProcessingBehaviour = playerCamera.GetComponent<PostProcessingBehaviour>();
 
@@ -239,12 +248,12 @@ public class GameController : MonoBehaviour
         subtitleDisplay.SetActive(false);
 
         SetDetectiveAnimator();
+        currentTimelineNo++;
         StartCoroutine(RunSequence());
     }
 
     private IEnumerator RunTimeline()
     {
-        Debug.Log("run timeline, no: " + currentTimelineNo);
         subtitleDisplay.SetActive(true);
         subtitleDisplayText.text = "";
 
@@ -261,7 +270,7 @@ public class GameController : MonoBehaviour
 
         if (currentTimelineNo == 0) SetDetectiveAnimator();
         currentTimelineNo++;
-        StartCoroutine(RunSequence());
+        isEventDone = true;
     }
 
     /**
@@ -271,13 +280,14 @@ public class GameController : MonoBehaviour
     {
         if (sequenceIndex >= currentActData.sequence.Length)
         {
+            isEventDone = true;
             EndRound();
             yield break;
         }
 
         currentSequence = currentActData.sequence[sequenceIndex];
 
-        if (currentSequence.ending)
+        if (currentSequence.ending) // only for the animation when standing up
         {
             detectiveObject.GetComponent<Animator>().runtimeAnimatorController = kiraStandUpController;
             currentDetectiveAnimator = detectiveObject.GetComponent<Animator>();
@@ -289,21 +299,22 @@ public class GameController : MonoBehaviour
             detectiveObject.SetActive(false);
             ApplyEndingCamera();
             endingDecisionDisplay.SetActive(true);
-//            LightsCameraAction(2);
             ShowSpecialEffect(EFFECT_VIGNETTE);
 
             decisionTimeRemaining = ENDING_DECISION_TIME_LIMIT;
             isEndingTimerActive = true;
+            isEventDone = false;
 
             while (isEndingTimerActive)
             {
                 yield return null;
             }
+
+            isEventDone = true;
         }
 
-        if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
+        else if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
         {
-            // Debug.Log ("RunSequence: current sequence is question");
             questionPool = currentSequence.questions;
             questionIndex = 0;
 
@@ -312,7 +323,6 @@ public class GameController : MonoBehaviour
         }
         else if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_DIALOG))
         {
-            // Debug.Log ("RunSequence: current sequence is dialog");
             LockCursor();
             isEventDone = false;
 
@@ -325,7 +335,6 @@ public class GameController : MonoBehaviour
 
             if (string.IsNullOrEmpty(currentSequence.bgm.fileName))
             {
-//                Debug.Log("special bgm is not null: " + currentSequence.bgm.fileName);
                 PlayBgm(DataController.LoadAudioFile(currentSequence.bgm.fileName), "special_bgm",
                     currentSequence.bgm.seek);
             }
@@ -333,7 +342,6 @@ public class GameController : MonoBehaviour
             if (currentDetectiveAnimator != null)
                 currentDetectiveAnimator.SetInteger(animationNoHash, currentSequence.animationNo);
 
-//            Debug.Log("animation no:" + currentSequence.animationNo);
             var exited = currentSequence.animationNo == 0;
             var exitTime = (currentDetectiveAnimator == null)
                 ? 0
@@ -365,7 +373,7 @@ public class GameController : MonoBehaviour
                 subtitleDisplay.SetActive(false);
 
                 DataController.StartFER();
-                Debug.Log("wait 3 seconds");
+                Debug.Log("wait " + FER_RECORDING_TIME + " seconds");
                 yield return new WaitForSecondsRealtime(FER_RECORDING_TIME);
                 DataController.StopFER();
 
@@ -379,7 +387,13 @@ public class GameController : MonoBehaviour
         }
         else if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_TIMELINE))
         {
+            isEventDone = false;
             StartCoroutine(RunTimeline());
+
+            while (!isEventDone)
+            {
+                yield return null;
+            }
         }
 
         sequenceIndex++;
@@ -395,68 +409,57 @@ public class GameController : MonoBehaviour
         return currentDetectiveAnimator;
     }
 
-    private void PlayBgm(AudioClip clip, string musicType, float seek, bool fadeIn = true)
+    private IEnumerator CrossFade(AudioSource a, AudioSource b, float seconds)
+    {
+        // calculate the duration for each step
+        var stepInterval = seconds / 20.0f;
+        var volumeInterval = musicVolume / 20.0f;
+        
+        b.Play();
+        
+        // fade betwene the two, taking A to 0 volume and B to musicVolume
+        for (var i = 0; i < 20; i++)
+        {
+            a.volume -= volumeInterval;
+            b.volume += volumeInterval;
+            
+            // wait for one interval then continue the loop
+            yield return new WaitForSecondsRealtime(stepInterval);
+        }
+        
+        if (a.isPlaying) a.Stop();
+    }
+    
+    private IEnumerator SwitchTracks(AudioClip clip, float seek)
+    {
+        var playA = !(Math.Abs(bgmAudioSourceB.volume) < 0.01);
+
+        if (playA)
+        {
+            bgmAudioSourceA.clip = clip;
+            bgmAudioSourceA.loop = true;
+            bgmAudioSourceA.time = seek;
+            yield return StartCoroutine(CrossFade(bgmAudioSourceB, bgmAudioSourceA, 8.0f));
+        }
+        else
+        {
+            bgmAudioSourceB.clip = clip;
+            bgmAudioSourceB.loop = true;
+            bgmAudioSourceB.time = seek;
+            yield return StartCoroutine(CrossFade(bgmAudioSourceA, bgmAudioSourceB, 8.0f));
+        }
+    }
+    
+    private void PlayBgm(AudioClip clip, string musicType, float seek)
     {
         if (clip == null)
         {
-//            Debug.LogError("Clip is empty!");
             return;
         }
 
         currentBgm = musicType;
 
-        AudioSource toBeFadedOut;
-        AudioSource toBeFadedIn;
-        if (currentBgmAudioSource == bgmAudioSource1)
-        {
-            toBeFadedIn = bgmAudioSource2;
-            toBeFadedOut = bgmAudioSource1;
-            currentBgmAudioSource = bgmAudioSource2;
-        }
-        else
-        {
-            toBeFadedIn = bgmAudioSource1;
-            toBeFadedOut = bgmAudioSource2;
-            currentBgmAudioSource = bgmAudioSource1;
-        }
-
-        toBeFadedIn.clip = clip;
-        toBeFadedIn.loop = true;
-        toBeFadedIn.time = seek;
-
-        if (fadeIn)
-        {
-            StartCoroutine(FadeInAudio(toBeFadedIn));
-            StartCoroutine(FadeOutAudio(toBeFadedOut));
-        }
-        else
-        {
-            toBeFadedIn.Play();
-            toBeFadedOut.Stop();
-        }
-    }
-
-    private IEnumerator FadeInAudio(AudioSource audioSource)
-    {
-        audioSource.volume = 0f;
-        audioSource.Play();
-
-        while (audioSource.volume < 1f)
-        {
-            audioSource.volume += Time.deltaTime;
-            yield return null;
-        }
-    }
-
-    private IEnumerator FadeOutAudio(AudioSource audioSource)
-    {
-        while (audioSource.volume > 0f)
-        {
-            audioSource.volume -= Time.deltaTime;
-            yield return null;
-        }
-
-        audioSource.Stop();
+        StartCoroutine(SwitchTracks(clip, seek));
     }
 
     private void ConcludeEvent()
@@ -467,7 +470,6 @@ public class GameController : MonoBehaviour
 
     private void SaveQuestion(QuestionData question)
     {
-        Debug.Log("save q: " + question.questionDesc);
         allQuestions.Add(question);
     }
 
@@ -674,11 +676,9 @@ public class GameController : MonoBehaviour
         }
 
         if (!considersEmotion) return suspicionScore;
-        // Debug.Log ("considers emotion");
         var emotionDistance = dataController.ComputeEmotionDistance(expectedExpression,
             DataController.ReadPlayerEmotion(), out closestEmotion);
 
-        // Debug.Log ("emotion distance: " + emotionDistance.ToString());
         expressionScore =
             ScoreCalculator.CalculateExpressionScore(emotionDistance, currentQuestion.expressionWeight, closestEmotion);
         suspicionScore += expressionScore;
@@ -700,7 +700,7 @@ public class GameController : MonoBehaviour
     {
         FERCorrectness.sprite = correct ? tick : cross;
         FERCorrectness.enabled = true;
-        
+
         expectedExpression.text = expected;
         expectedExpression.enabled = true;
 
@@ -725,7 +725,6 @@ public class GameController : MonoBehaviour
 
         // don't let displayedScore go below 0
         if (displayedScore < 0) displayedScore = 0;
-        Debug.Log("displayed score: " + displayedScore.ToString("F1"));
 
         scoreDisplayText.text = "Suspicion: " + displayedScore.ToString("F2");
         scoreDisplayerSlider.value = displayedScore / 60;
@@ -756,7 +755,7 @@ public class GameController : MonoBehaviour
             yield return new WaitForSecondsRealtime(FER_RECORDING_TIME);
             DataController.StopFER();
         }
-        
+
         if (currentQuestion.considersEmotion)
         {
             FERIndicator.enabled = false;
@@ -905,6 +904,7 @@ public class GameController : MonoBehaviour
                     currentBgmLevel++;
                     if (currentBgmLevel < currentActData.bgmLevels.Length)
                     {
+                        Debug.Log("current bgm level: " + currentBgmLevel);
                         PlayBgm(currentActData.bgmLevelClips[currentBgmLevel], "level",
                             currentActData.bgmLevels[currentBgmLevel].seek);
                     }
@@ -931,6 +931,7 @@ public class GameController : MonoBehaviour
                 currentBgmLevel++;
                 if (currentBgmLevel < currentActData.bgmLevels.Length)
                 {
+                    Debug.Log("current bgm level: " + currentBgmLevel);
                     PlayBgm(currentActData.bgmLevelClips[currentBgmLevel], "level",
                         currentActData.bgmLevels[currentBgmLevel].seek);
                 }
@@ -969,13 +970,11 @@ public class GameController : MonoBehaviour
         highScoreDisplayText.text = dataController.GetHighestPlayerScore().ToString();
 
         questionDisplay.SetActive(false);
-//        postReport.SetActive(true); // activate (show) the round end display
 
         if (currentActNo == 0 && !skipPostActReport)
         {
             GeneratePostReport();
         }
-
         else
         {
             ContinueToNextAct();
@@ -992,6 +991,7 @@ public class GameController : MonoBehaviour
     public void ContinueToNextAct()
     {
         dataController.StartNextAct();
+        Destroy(this);
     }
 
     private void UpdateTimeRemainingDisplay()
@@ -1050,7 +1050,6 @@ public class GameController : MonoBehaviour
     {
         UnlockCursor();
         playerCamera.GetComponent<PlayerLook>().enabled = false;
-        //Debug.Log(GetAnswer(1));
         postReport.SetActive(true);
         string report = "";
         report = "Investigation case #160418(HO4)" +
@@ -1136,13 +1135,11 @@ public class GameController : MonoBehaviour
         // show another question if there are still questions to ask
         if (questionPool.Length > questionIndex + 1)
         {
-            // Debug.Log ("show another question");
             questionIndex++;
             ShowQuestion();
         }
         else
         {
-            // Debug.Log ("end of questions");
             questionDisplay.SetActive(false);
             StartCoroutine(RunSequence());
         }
@@ -1160,6 +1157,7 @@ public class GameController : MonoBehaviour
         finalCamera.enabled = true;
         activeCamera = finalCamera;
         postProcessingBehaviour = finalCamera.GetComponent<PostProcessingBehaviour>();
+        tableGun.GetComponent<Collider>().enabled = true;
     }
 
     public void EndingScene(bool shoot)
@@ -1246,7 +1244,5 @@ public class GameController : MonoBehaviour
         {
             EndingScene(true, false);
         }
-
-//        HandleWalking();
     }
 }
