@@ -904,6 +904,7 @@ public class GameController : MonoBehaviour
                     currentBgmLevel++;
                     if (currentBgmLevel < currentActData.bgmLevels.Length)
                     {
+                        Debug.Log("current bgm level: " + currentBgmLevel);
                         PlayBgm(currentActData.bgmLevelClips[currentBgmLevel], "level",
                             currentActData.bgmLevels[currentBgmLevel].seek);
                     }
@@ -930,6 +931,7 @@ public class GameController : MonoBehaviour
                 currentBgmLevel++;
                 if (currentBgmLevel < currentActData.bgmLevels.Length)
                 {
+                    Debug.Log("current bgm level: " + currentBgmLevel);
                     PlayBgm(currentActData.bgmLevelClips[currentBgmLevel], "level",
                         currentActData.bgmLevels[currentBgmLevel].seek);
                 }

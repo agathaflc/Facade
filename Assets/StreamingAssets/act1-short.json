@@ -20,6 +20,43 @@
   "sequence": [
     {
       "sequenceType": "timeline"
+    },
+    {
+      "sequenceType": "question",
+      "questions": [
+        {
+          "questionDesc": "Player Name",
+          "questionId": "01",
+          "expressionWeight": 0,
+          "consistencyWeight": 1,
+          "considersEmotion": false,
+          "considersFact": true,
+          "filePath": "audio/Act1/Questions/Q1_What_is_your_name",
+          "questionText": "What's your name?",
+          "answers": [
+            {
+              "answerId": "010",
+              "answerText": "Ella Wong",
+              "detectiveResponse": "positive"
+            },
+            {
+              "answerId": "011",
+              "answerText": "James Peterson",
+              "detectiveResponse": "positive"
+            },
+            {
+              "answerId": "012",
+              "answerText": "Anya Patel",
+              "detectiveResponse": "positive"
+            },
+            {
+              "answerId": "013",
+              "answerText": "Charles Davis",
+              "detectiveResponse": "positive"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

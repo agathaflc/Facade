@@ -173,7 +173,7 @@ def write_output_to_file(emotion_conf, max_val, adj2noun):
     final_emotions_output = {}
     final_emotions_output['emotions'] = final_output_list
 
-    with open(os.path.join('..', '..', 'expression_data.json'), 'w') as fp:
+    with open(os.path.join('..', 'expression_data.json'), 'w') as fp:
         json.dump(final_emotions_output, fp)
 
 def check_trigger():
