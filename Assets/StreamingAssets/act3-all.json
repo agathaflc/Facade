@@ -23,7 +23,7 @@
     }
   ],
   "showGun": true,
-  "responsesPath": "detective_responses_act1.json",
+  "responsesPath": "detective_responses_act3.json",
   "bgmHappyFile": {
     "fileName": "audio/bgm/Level2_3p4",
     "seek": 0
