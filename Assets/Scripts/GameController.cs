@@ -35,7 +35,7 @@ public class GameController : MonoBehaviour
     private const float EMOTION_DISTANCE_THRESHOLD = 2.0f;
     private const float FADE_STEP = 0.1f;
     private const float FER_RECORDING_TIME = 4f;
-    private const float MAX_SUSPICION_SCORE = 45f;
+    public const float MAX_SUSPICION_SCORE = 45f;
     private const float ENDING_DECISION_TIME_LIMIT = 25f;
 
     public float OVERALL_SCORE_THRESHOLD = 25f; // TODO: FINETUNE THIS
@@ -69,9 +69,9 @@ public class GameController : MonoBehaviour
     public GameObject questionPictureDisplay;
     public GameObject subtitleDisplay;
     public GameObject endingDecisionDisplay;
-    public GameObject detectiveObject;
-    public GameObject hans;
-    public GameObject kira;
+    private GameObject detectiveObject;
+    public GameObject badCop;
+    public GameObject goodCop;
     public GameObject tableGun;
 
     public Image FERIndicator;
@@ -166,15 +166,15 @@ public class GameController : MonoBehaviour
 
         if (currentActNo != 1)
         {
-            detectiveObject = kira;
+            detectiveObject = goodCop;
             detectiveObject.SetActive(true);
-            hans.SetActive(false);
+            badCop.SetActive(false);
         }
         else
         {
-            detectiveObject = hans;
+            detectiveObject = badCop;
             detectiveObject.SetActive(true);
-            kira.SetActive(false);
+            goodCop.SetActive(false);
         }
 
         currentActData = dataController.GetCurrentRoundData();
@@ -220,7 +220,7 @@ public class GameController : MonoBehaviour
     private void SetDetectiveAnimator()
     {
         detectiveObject.GetComponent<Animator>().runtimeAnimatorController =
-            detectiveObject == hans ? hansController : kiraController;
+            detectiveObject == badCop ? hansController : kiraController;
 
         currentDetectiveAnimator = detectiveObject.GetComponent<Animator>();
     }
@@ -417,7 +417,7 @@ public class GameController : MonoBehaviour
         
         b.Play();
         
-        // fade betwene the two, taking A to 0 volume and B to musicVolume
+        // fade between the two, taking A to 0 volume and B to musicVolume
         for (var i = 0; i < 20; i++)
         {
             a.volume -= volumeInterval;

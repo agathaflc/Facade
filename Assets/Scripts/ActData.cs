@@ -24,5 +24,4 @@ public class ActData
     public DetectiveResponses detectiveResponses;
     public string responsesPath;
     public SequenceData[] sequence;
-    public float suspicionLevel = 0;
 }
