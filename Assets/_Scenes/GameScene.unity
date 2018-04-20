@@ -2061,7 +2061,7 @@ PlayableDirector:
   m_GameObject: {fileID: 261924088}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: cd8caecdc001b7346a6d1af3c97c4597, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 6bf6405a86beea04dbd0b1889b9a8b4f, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -5264,7 +5264,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100080, guid: 1cd664fa02ced6e48af22b6df2472799, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400078, guid: 1cd664fa02ced6e48af22b6df2472799, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6568,7 +6568,7 @@ MonoBehaviour:
   gameSceneOnly: 0
   runTimeline: 0
   skipAct: 0
-  skipPostActReport: 0
+  skipPostActReport: 1
   skipToAct: 1
   questionDisplayText: {fileID: 1862245467}
   scoreDisplayerSlider: {fileID: 1720664495}
