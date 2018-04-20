@@ -665,7 +665,8 @@
       "animationNo": 2
     },
     {
-      "sequenceType": "timeline"
+      "sequenceType": "timeline",
+      "earlyFade": true
     }
   ]
 }

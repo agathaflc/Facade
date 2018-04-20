@@ -18,6 +18,7 @@ MonoBehaviour:
   - {fileID: 114922747299125486}
   - {fileID: 114969371832991138}
   - {fileID: 114382986462427748}
+  - {fileID: 114242890452571912}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
@@ -79,11 +80,24 @@ MonoBehaviour:
   m_Name: AnimationPlayableAsset of HansFormal|NeutralSit
   m_EditorClassIdentifier: 
   m_Clip: {fileID: 7400026, guid: 98dae39106546764ea490a866eaf6ed0, type: 3}
-  m_Position: {x: -0.12, y: -0.15, z: 0.25}
+  m_Position: {x: -0.13999048, y: -0.15, z: 0.25}
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_UseTrackMatchFields: 0
   m_MatchTargetFields: 63
   m_RemoveStartOffset: 1
+--- !u!114 &114112933426545100
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0445258a5c40b364ab21547784905327, type: 3}
+  m_Name: ScreenFaderClip
+  m_EditorClassIdentifier: 
+  template:
+    color: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &114149702218291538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -590,6 +604,82 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: S20 - I AM SICK AND TIRED
     m_Version: 1
+--- !u!114 &114242890452571912
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8190b9dc143d64ab3322e49af85f7b, type: 3}
+  m_Name: Screen Fader Track
+  m_EditorClassIdentifier: 
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_AnimClip: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips:
+  - m_Start: 32.983333333333334
+    m_ClipIn: 0
+    m_Asset: {fileID: 114112933426545100}
+    m_UnderlyingAsset: {fileID: 114112933426545100}
+    m_Duration: 6.883333333333333
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: 114242890452571912}
+    m_EaseInDuration: 2
+    m_EaseOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: ScreenFaderClip
+    m_Version: 1
 --- !u!114 &114249542746643660
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1027,8 +1117,8 @@ MonoBehaviour:
   m_Name: AnimationPlayableAsset of idle_01
   m_EditorClassIdentifier: 
   m_Clip: {fileID: 7400000, guid: b2d9d9ba574aa914bbce6771406b31e4, type: 3}
-  m_Position: {x: 0.98661375, y: -0.24384323, z: 1.2496895}
-  m_Rotation: {x: 0, y: 0.6299984, z: 0, w: -0.7765964}
+  m_Position: {x: 0.9866137, y: -0.14710611, z: 1.2496895}
+  m_Rotation: {x: 0, y: -0.6299984, z: 0, w: 0.7765964}
   m_UseTrackMatchFields: 0
   m_MatchTargetFields: 63
   m_RemoveStartOffset: 1
@@ -1557,19 +1647,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -1889,7 +1967,19 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -1917,13 +2007,37 @@ MonoBehaviour:
     m_BlendOutDuration: 1.0666666666666664
     m_MixInCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -2081,11 +2195,11 @@ MonoBehaviour:
   m_Parent: {fileID: 11400000}
   m_Children: []
   m_Clips:
-  - m_Start: 13.683333333333334
+  - m_Start: 13.45
     m_ClipIn: 0
     m_Asset: {fileID: 114433761390387068}
     m_UnderlyingAsset: {fileID: 114433761390387068}
-    m_Duration: 19.3
+    m_Duration: 26.416666666666668
     m_TimeScale: 1
     m_ParentTrack: {fileID: 114969371832991138}
     m_EaseInDuration: 0

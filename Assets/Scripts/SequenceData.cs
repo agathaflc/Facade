@@ -17,4 +17,5 @@ public class SequenceData
     public int animatorLayer;
 
     public bool ending;
+    public bool earlyFade;
 }

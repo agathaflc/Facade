@@ -69,7 +69,8 @@ public class GameController : MonoBehaviour
     public GameObject questionPictureDisplay;
     public GameObject subtitleDisplay;
     public GameObject endingDecisionDisplay;
-    private GameObject detectiveObject;
+    public Image BlackScreenDisplay;
+    public GameObject detectiveObject;
     public GameObject badCop;
     public GameObject goodCop;
     public GameObject tableGun;
@@ -147,7 +148,7 @@ public class GameController : MonoBehaviour
 
         if (runTimeline)
         {
-            StartCoroutine(PlayIntro());
+            StartCoroutine(PlayCurrentTimelineAsset());
         }
 
         if (gameSceneOnly) return;
@@ -231,12 +232,11 @@ public class GameController : MonoBehaviour
         currentDetectiveAnimator = null;
     }
 
-    private IEnumerator PlayIntro()
+    private IEnumerator PlayCurrentTimelineAsset()
     {
         subtitleDisplay.SetActive(true);
         subtitleDisplayText.text = "";
 
-        playableDirector.playableAsset = allTimelines[currentActNo][0];
         UnsetDetectiveAnimator();
         PlayTimeline(playableDirector);
 
@@ -247,9 +247,8 @@ public class GameController : MonoBehaviour
 
         subtitleDisplay.SetActive(false);
 
-        SetDetectiveAnimator();
         currentTimelineNo++;
-        StartCoroutine(RunSequence());
+//        StartCoroutine(RunSequence());
     }
 
     private IEnumerator RunTimeline()
@@ -263,13 +262,20 @@ public class GameController : MonoBehaviour
 
         while (playableDirector.state == PlayState.Playing)
         {
+            if (currentSequence.earlyFade && playableDirector.time >= playableDirector.playableAsset.duration - 1)
+            {
+                BlackScreenDisplay.CrossFadeAlpha(1, 0.1f, true);
+                EndRound();
+            }
             yield return null;
         }
 
         subtitleDisplay.SetActive(false);
 
-        if (currentTimelineNo == 0) SetDetectiveAnimator();
         currentTimelineNo++;
+        
+        // re-set the detective animator only when it's not the last timeline
+        if (currentTimelineNo < allTimelines[currentActNo].Count) SetDetectiveAnimator();
         isEventDone = true;
     }
 
@@ -414,22 +420,22 @@ public class GameController : MonoBehaviour
         // calculate the duration for each step
         var stepInterval = seconds / 20.0f;
         var volumeInterval = musicVolume / 20.0f;
-        
+
         b.Play();
-        
+
         // fade between the two, taking A to 0 volume and B to musicVolume
         for (var i = 0; i < 20; i++)
         {
             a.volume -= volumeInterval;
             b.volume += volumeInterval;
-            
+
             // wait for one interval then continue the loop
             yield return new WaitForSecondsRealtime(stepInterval);
         }
-        
+
         if (a.isPlaying) a.Stop();
     }
-    
+
     private IEnumerator SwitchTracks(AudioClip clip, float seek)
     {
         var playA = !(Math.Abs(bgmAudioSourceB.volume) < 0.01);
@@ -449,7 +455,7 @@ public class GameController : MonoBehaviour
             yield return StartCoroutine(CrossFade(bgmAudioSourceA, bgmAudioSourceB, 8.0f));
         }
     }
-    
+
     private void PlayBgm(AudioClip clip, string musicType, float seek)
     {
         if (clip == null)
@@ -686,7 +692,7 @@ public class GameController : MonoBehaviour
         Debug.Log("closestEmotion: " + closestEmotion + ", distance: " + emotionDistance + ", score: " +
                   expressionScore);
 
-        StartCoroutine(ShowFERCorrectness(expressionScore < 0, closestEmotion));
+        StartCoroutine(ShowFERCorrectness(expressionScore <= 0, closestEmotion));
 
         if (!FER_is_Off)
         {
@@ -935,6 +941,7 @@ public class GameController : MonoBehaviour
                     PlayBgm(currentActData.bgmLevelClips[currentBgmLevel], "level",
                         currentActData.bgmLevels[currentBgmLevel].seek);
                 }
+                return;
             }
         }
 
@@ -964,8 +971,8 @@ public class GameController : MonoBehaviour
 
     private void EndRound()
     {
-        UnlockCursor();
         isTimerActive = false;
+        isEventDone = false;
         dataController.SubmitNewPlayerScore(displayedScore);
         highScoreDisplayText.text = dataController.GetHighestPlayerScore().ToString();
 
@@ -1048,7 +1055,7 @@ public class GameController : MonoBehaviour
 
     private void GeneratePostReport(int endnum = 0)
     {
-        UnlockCursor();
+        if (Cursor.lockState.Equals(CursorLockMode.Locked)) UnlockCursor();
         playerCamera.GetComponent<PlayerLook>().enabled = false;
         postReport.SetActive(true);
         string report = "";
@@ -1124,9 +1131,7 @@ public class GameController : MonoBehaviour
 
     public void ContinuePostReport()
     {
-        LockCursor();
         playerCamera.GetComponent<PlayerLook>().enabled = true;
-        postReport.SetActive(false);
         ContinueToNextAct();
     }
 
@@ -1201,7 +1206,7 @@ public class GameController : MonoBehaviour
         {
             subtitleDisplay.SetActive(false);
 
-            if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
+            if (currentSequence != null && currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
                 HandleEndOfAQuestion();
             else
                 StartCoroutine(RunSequence());
