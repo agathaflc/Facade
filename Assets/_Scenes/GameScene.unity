@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -6564,7 +6564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OVERALL_SCORE_THRESHOLD: 25
   musicVolume: 1
-  FER_is_Off: 0
+  FER_is_Off: 1
   gameSceneOnly: 0
   runTimeline: 0
   skipAct: 0
@@ -6574,7 +6574,7 @@ MonoBehaviour:
   scoreDisplayerSlider: {fileID: 1720664495}
   scoreDisplayText: {fileID: 1712600188}
   timeRemainingDisplaySlider: {fileID: 1896754238}
-  endingTimeRemainingSlider: {fileID: 1849033634}
+  endingTimeRemainingSlider: {fileID: 0}
   highScoreDisplayText: {fileID: 1505539985}
   subtitleDisplayText: {fileID: 460190874}
   answerButtonObjectPool: {fileID: 1612681095}
