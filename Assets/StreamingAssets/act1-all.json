@@ -481,7 +481,7 @@
           "consistencyWeight": 0.7,
           "considersEmotion": true,
           "considersFact": true,
-          "pictureFileName": "lianne_cut.png",
+          "pictureFileName": "lianne_polaroid.png",
           "filePath": "audio/Act1/Questions/Q10_Do_you_recognise",
           "questionText": "Do you recognize this person from last night?",
           "answers": [
