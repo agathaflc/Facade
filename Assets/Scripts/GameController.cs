@@ -32,6 +32,8 @@ public class GameController : MonoBehaviour
     private const string EFFECT_MOTION_BLUR = "motionBlur";
     private const string EFFECT_VIGNETTE = "vignette";
 
+    private const float BLOOM_INTENSITY_STEP = 0.5f;
+
     private const float EMOTION_DISTANCE_THRESHOLD = 2.0f;
     private const float FADE_STEP = 0.1f;
     private const float FER_RECORDING_TIME = 4f;
@@ -267,13 +269,14 @@ public class GameController : MonoBehaviour
                 BlackScreenDisplay.CrossFadeAlpha(1, 0.1f, true);
                 EndRound();
             }
+
             yield return null;
         }
 
         subtitleDisplay.SetActive(false);
 
         currentTimelineNo++;
-        
+
         // re-set the detective animator only when it's not the last timeline
         if (currentTimelineNo < allTimelines[currentActNo].Count) SetDetectiveAnimator();
         isEventDone = true;
@@ -941,6 +944,7 @@ public class GameController : MonoBehaviour
                     PlayBgm(currentActData.bgmLevelClips[currentBgmLevel], "level",
                         currentActData.bgmLevels[currentBgmLevel].seek);
                 }
+
                 return;
             }
         }
@@ -1036,6 +1040,8 @@ public class GameController : MonoBehaviour
         Lights.GetComponent<Light>().intensity = newIntensity;
         Lights.GetComponent<Light>().color = newColor;
         // TODO consider smoothing the changes in update() using e.g. docs.unity3d.com/ScriptReference/Light-color.html
+        var lightComponent = Lights.GetComponent<Light>();
+        Color.Lerp(lightComponent.color, newColor, 3f);
     }
 
     private void MotionBlur()
@@ -1050,7 +1056,27 @@ public class GameController : MonoBehaviour
 
     private void Bloom()
     {
-        activeCamera.GetComponent<PostProcessingBehaviour>().profile = bloomEffect;
+//        activeCamera.GetComponent<PostProcessingBehaviour>().profile = bloomEffect;
+        StartCoroutine(FadeBloomIn(6f));
+    }
+
+    private IEnumerator FadeBloomIn(float targetIntensity)
+    {
+        if (postProcessingBehaviour.profile == null)
+        {
+            Debug.Log("postProcessingBehaviour profile is null, creating profile");
+            postProcessingBehaviour.profile = ScriptableObject.CreateInstance<PostProcessingProfile>();
+        }
+        
+        postProcessingBehaviour.profile.bloom.enabled = true;
+        var settings = activeCamera.GetComponent<PostProcessingBehaviour>().profile.bloom.settings;
+//        postProcessingBehaviour.profile.vignette.settings.in
+        while (settings.bloom.intensity < targetIntensity)
+        {
+            settings.bloom.intensity += BLOOM_INTENSITY_STEP;
+            postProcessingBehaviour.profile.bloom.settings = settings;
+            yield return new WaitForSecondsRealtime(0.25f);
+        }
     }
 
     private void GeneratePostReport(int endnum = 0)
