@@ -62,7 +62,7 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S5_You_look_alittle_sick",
+      "filePath": "audio/Act3/Sentence/VC3/YouLookaLittleSick",
       "subtitleText": "You look a little sick.",
       "animationNo": 2
     },
@@ -131,7 +131,7 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S7_Such_a_tragic",
+      "filePath": "audio/Act3/Sentence/VC3/SuchATragicThing",
       "subtitleText": "Such a tragic thing to happen to such a promising young girl.",
       "animationNo": 30
     },
@@ -148,14 +148,14 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S9_By_someone_who_clearly",
+      "filePath": "audio/Act3/Sentence/VC3/BySomeoneWhoHadSome",
       "subtitleText": "By someone who clearly had some kind of malicious grudge, but wasn’t man enough to look her in the eyes as she died.",
       "animationNo": 41,
       "animatorLayer": 1
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S10_A_goodshot_to_the_back",
+      "filePath": "audio/Act3/Sentence/VC3/aGunshotToTheBack",
       "subtitleText": "A gunshot to the back really says a lot about a person...",
       "animationNo": 40,
       "animatorLayer": 1
@@ -256,12 +256,12 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S12_I_see_It_seems_like",
+      "filePath": "audio/Act3/Sentence/VC3/ISeeItSeemsLike",
       "subtitleText": "I see.. It seems like you and your alibi’s stories don’t exactly line up."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S13_To_be_honest",
+      "filePath": "audio/Act3/Sentence/VC3/tbhSheDidntHave",
       "subtitleText": "To be honest, she didn’t have a lot of good things to say about you...",
       "animationNo": 5
     },
@@ -394,13 +394,13 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S15_Oh_did_I_ask_you_already",
+      "filePath": "audio/Act3/Sentence/VC3/S15_Oh_did_I_ask_you_already R",
       "subtitleText": "Oh did I ask you that already? My bad.. I just want to make sure I have all my facts straight.",
       "animationNo": 8
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S16_0_Just_like_you",
+      "filePath": "audio/Act3/Sentence/VC3/JUST LIKE YOU REV",
       "subtitleText": "Just like you.. We both know who’s really in control here.",
       "animationNo": 2
     },
@@ -590,64 +590,64 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S18_Hah_of_course",
+      "filePath": "audio/Act3/Sentence/VC3/S18_Hah_of_course R",
       "subtitleText": "Hah... of course you would say that.",
       "animationNo": 41,
       "animatorLayer": 1
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S19_You_re_a_prideful",
+      "filePath": "audio/Act3/Sentence/VC3/YoureAPrideful",
       "subtitleText": "You’re a prideful person, aren’t you?"
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S20_The_kinda_of_person",
+      "filePath": "audio/Act3/Sentence/VC3/theKindaPersonWhoWouldnt",
       "subtitleText": "The kind of person who wouldn’t be able to handle it if someone else was getting ahead of them..."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S21_0_You_used_to_be_the_one",
+      "filePath": "audio/Act3/Sentence/VC3/YouUsedToBeTheOne1",
       "subtitleText": "You used to be the one everyone loved, until you and Lianne had that fight. And then everyone took her side over yours."
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S21_1_everyone_loved",
+      "filePath": "audio/Act3/Sentence/VC3/YouUsedToBeTheOne2",
       "subtitleText": "You used to be the one everyone loved, until you and Lianne had that fight. And then everyone took her side over yours.",
       "animationNo": 93
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S21_2_and_everyone_took_her",
+      "filePath": "audio/Act3/Sentence/VC3/YouUsedToBeTheOne3",
       "subtitleText": "You used to be the one everyone loved, until you and Lianne had that fight. And then everyone took her side over yours.",
       "animationNo": 94
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S22_It_must_have_really_bothered",
+      "filePath": "audio/Act3/Sentence/VC3/S22_It_must_have_really_bothered R",
       "subtitleText": "It must have really bothered you and I bet you couldn't handle it.",
       "animationNo": 95
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S23_Is_that_why_you_followed",
+      "filePath": "audio/Act3/Sentence/VC3/isThatWhyYouFOloowedher",
       "subtitleText": "Is that why you followed her to the bathroom last night?",
       "animationNo": 96
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S24_And_made_sure_to_take",
+      "filePath": "audio/Act3/Sentence/VC3/andMadeSuretoTakeYourGun",
       "subtitleText": "And made sure to take your gun with you?"
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S25_And_why_no_one",
+      "filePath": "audio/Act3/Sentence/VC3/andWhyNooneCouldFindYOuwhen",
       "subtitleText": "And why no one could find you when the gunshot was heard?",
       "animationNo": 97
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S26_You_couldn_t_even_look",
+      "filePath": "audio/Act3/Sentence/VC3/youCouldn'tEvenLookher",
       "subtitleText": "You couldn’t even look her in the eyes, you coward."
     },
     {
@@ -666,7 +666,7 @@
           "consistencyWeight": 0,
           "considersEmotion": true,
           "considersFact": false,
-          "filePath": "audio/Act3/Question/Q10_WHY_did_you_kill_Lianne",
+          "filePath": "audio/Act3/Question/q10",
           "questionText": "Why did you kill Lianne?!",
           "answers": [
             {
