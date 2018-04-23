@@ -35,6 +35,7 @@ public class GameController : MonoBehaviour
     private const string EFFECT_STATUS_OFF = "off";
     private const string EFFECT_STATUS_INTENSIFY = "intensify";
 
+    private const float LIGHT_INTENSITY_STEP = 0.25f;
     private const float BLOOM_INTENSITY_STEP = 0.5f;
     private const float VIGNETTE_INTENSITY_STEP = 0.005f;
     private const float MOTION_BLUR_SHUTTER_ANGLE_STEP = 10f;
@@ -367,7 +368,7 @@ public class GameController : MonoBehaviour
 
                 StartCoroutine(LightingChanges(new Color32(currentLighting.colorR, currentLighting.colorG,
                     currentLighting.colorB,
-                    currentLighting.colorA)));
+                    currentLighting.colorA), currentLighting.intensity));
             }
 
             ShowAndPlayDialog(DataController.LoadAudioFile(currentSequence.filePath), currentSequence.subtitleText);
@@ -687,6 +688,9 @@ public class GameController : MonoBehaviour
 
 //        mainLight.GetComponent<Light>().color = newColor;
 //        yield break;
+
+        StartCoroutine(GraduallyChangeLightIntensity(newIntensity));
+
         var lightLerp = 0f;
         while (lightLerp < 1)
         {
@@ -695,8 +699,26 @@ public class GameController : MonoBehaviour
             lightLerp += 0.05f; // waiting time: 0.15 / 0.05 = 3 secs
             Debug.Log("lerp: " + lightLerp);
         }
+    }
 
-//        mainLight.intensity = newIntensity; // TODO make this smooth
+    private IEnumerator GraduallyChangeLightIntensity(float newIntensity)
+    {
+        if (mainLight.intensity < newIntensity)
+        {
+            while (mainLight.intensity + LIGHT_INTENSITY_STEP < newIntensity)
+            {
+                mainLight.intensity += LIGHT_INTENSITY_STEP;
+                yield return new WaitForSecondsRealtime(0.25f);
+            }
+        }
+        else
+        {
+            while (mainLight.intensity - LIGHT_INTENSITY_STEP > newIntensity)
+            {
+                mainLight.intensity -= LIGHT_INTENSITY_STEP;
+                yield return new WaitForSecondsRealtime(0.25f);
+            }
+        }
     }
 
     private void LightsCameraAction(int Num)

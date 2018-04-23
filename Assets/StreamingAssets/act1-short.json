@@ -27,11 +27,11 @@
       "subtitleText": "Well you see, last night there was an accident...",
       "hasLightingEffect": true,
       "lighting": {
-        "intensity": 1,
-        "colorR": 224,
-        "colorG": 38,
-        "colorB": 199,
-        "colorA": 150
+        "intensity": 3,
+        "colorR": 245,
+        "colorG": 255,
+        "colorB": 173,
+        "colorA": 200
       }
     },
     {
