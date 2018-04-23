@@ -1075,17 +1075,18 @@ public class GameController : MonoBehaviour
 
         postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
 
+		// call GeneratePostReport(1/2) at corresponding times. 
         //endnum 1 = Good reality ending
         if (endnum == 1)
         {
-            report = report + "\n\n--------------------New Entry--------------------" +
+			report = report + "\n\n-----------------------------New Entry-----------------------------" +
                      "\nInvestigation case #160418(HO4)" +
-                     "\nStatus: On going " +
+                     "\nStatus: Closed " +
                      "\nDocument classification: Confidential" +
                      "\nDetective in Charge: Sgt Suzanna Warren" +
                      "\nDate: 17/07/2017 " +
                      "\nThe following details the conclusion drawn from the investigation by the detective in charge…" +
-                     "\n\n The suspect has been cleared of all charges as it has been proven that " + GetAnswer(10) +
+                     "\n\nThe suspect has been cleared of all charges as it has been proven that " + GetAnswer(10) +
                      " is guilty of committing the murder of Lianna Armstrong. The events that transpired during the incident is that during the night of 14/05/2017, " +
                      GetAnswer(10) +
                      ", followed the victim into the bathroom of " + GetAnswer(5) +
@@ -1098,20 +1099,21 @@ public class GameController : MonoBehaviour
         //endnum 2 = Bad reality ending 
         if (endnum == 2)
         {
-            report = report + "\n\n--------------------New Entry--------------------" +
+			report = report + "\n\n-----------------------------New Entry-----------------------------" +
                      "\nInvestigation case #160418(HO4)" +
-                     "\nStatus: On going " +
+                     "\nStatus: Closed " +
                      "\nDocument classification: Confidential" +
                      "\nDetective in Charge: Sgt Suzanna Warren" +
                      "\nDate: 17/07/2017 " +
                      "\nThe following details the conclusion drawn from the investigation by the detective in charge…" +
-                     "\n\n The suspect has been proven of being guilty of committing the murder of Lianna Armstrong. The events that transpired during the incident is that during the night of 14/05/2017,  the suspect followed the victim into the bathroom of " +
+                     "\n\nThe suspect has been proven of being guilty of committing the murder of Lianna Armstrong. The events that transpired during the incident is that during the night of 14/05/2017,  the suspect followed the victim into the bathroom of " +
                      GetAnswer(5) + ", and shot her with a 9mm pistol from behind in cold blood." +
                      "The motivation of which, is because of a heated argument between the suspect and the victim caused jealousy and envy to get the better of the suspect.";
             DataController.Setfinalreport(report);
             //finalreport = report;
             //postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
         }
+		//postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
     }
 
     private string GetAnswer(int i)
@@ -1169,10 +1171,12 @@ public class GameController : MonoBehaviour
     {
         if (shoot)
         {
+			GeneratePostReport (2);
             Initiate.Fade(consistent ? "Ending1" : "Ending3", Color.black, 0.8f);
         }
         else
         {
+			GeneratePostReport (1);
             Initiate.Fade(consistent ? "Ending4" : "Ending2", Color.black, 0.8f);
         }
     }
@@ -1236,8 +1240,8 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyDown("i"))
         {
-            GeneratePostReport();
-            GeneratePostReport(1);
+			GeneratePostReport();
+            //GeneratePostReport(1);
         }
 
         if (Input.GetKeyDown("o"))

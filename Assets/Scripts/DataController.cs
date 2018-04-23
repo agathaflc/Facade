@@ -381,12 +381,14 @@ public class DataController : MonoBehaviour
         throw new System.NotImplementedException();
     }
 
-	public static string finalreport;
+	public static string finalreport = "";
 
 	public static void Setfinalreport(string report){
 		finalreport = report;
+		Debug.Log ("final report set as:" + finalreport);
 	}
 	public static string Getfinalreport(){
+		Debug.Log ("returning:" + finalreport);
 		return finalreport;
 	}
 }
