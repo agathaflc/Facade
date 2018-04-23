@@ -1,5 +1,5 @@
-# QnA
-[game_name] is a game we develop to explore a new way of achieving high level of immersion: emotion detection. By reading player's facial expression during the game, the in-game characters will use the facial expression reading to communicate better with the player.
+# Facade
+_Facade_ is a game we develop to explore a new way of achieving high level of immersion: emotion detection. By reading player's facial expression during the game, the in-game characters will use the facial expression reading to communicate better with the player.
 
 ## Facial Expression Recognition (FER)
 The requirements to use FER in this game are:
@@ -39,8 +39,14 @@ If you see [whatever the intended output is] then FER is working!
 
 ![wow](https://pics.me.me/such-problem-much-fix-very-tech-such-support-wow-2737205.png)
 
+### Step 6: Run the FER
+Go to the `StreamingAssets/FERModel` folder, then run the following command:
 
-### Step 6: Deactivate the Environment
+```python video_emotion_color_demo.py```
+
+If you see a bunch of print statements about TensorFlow library, you're on the right track. If you see the message saying `Compiled loaded model`, then FER is ready!
+
+### Step 7: Deactivate the Environment
 This should be obvious but do this only when you're done playing around with FER.
 
 ```conda deactivate```

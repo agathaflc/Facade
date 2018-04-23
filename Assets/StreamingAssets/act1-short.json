@@ -19,123 +19,82 @@
   "showGun": false,
   "sequence": [
     {
-      "sequenceType": "timeline"
-    },
-    {
       "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/S1_1_thanks_a_lot",
-      "subtitleText": "Thanks a lot for coming in today.",
-      "animationNo": 40,
-      "animatorLayer": 1
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/S1_2_im_here_to",
-      "subtitleText": "I'm here to just ask you few questions about the incident from last night."
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/S2_Look_I_Know",
-      "subtitleText": "Look, I know it’s kinda troublesome, but we have to question all the witnesses that were present.",
-      "animationNo": 17
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/S3_0_0_I_Know_you_re_not",
-      "subtitleText": "I know you’re not involved with anything, but I’m just here trying to get this done as soon as possible we can both go home.",
-      "animationNo": 60,
-      "animatorLayer": 3
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/S3_0_1_done_asap",
-      "subtitleText": "I know you’re not involved with anything, but I’m just here trying to get this done as soon as possible we can both go home.",
-      "animationNo": 40,
-      "animatorLayer": 1
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/S3_1_so_lets_get_started",
-      "subtitleText": "So let's get started.",
-      "animationNo": 14
+      "filePath": "audio/Act1/Sentences/S10_2_well_were_not_so_sure",
+      "subtitleText": "Well we’re not sure it was an accident.",
+      "animationNo": 41,
+      "animatorLayer": 1,
+      "effects": [
+        {
+          "type": "vignette",
+          "intensity": 0.8,
+          "colorR": 0,
+          "colorG": 0,
+          "colorB": 0,
+          "colorA": 1,
+          "smoothness": 0.5,
+          "roundness": 0.4
+        }
+      ]
     },
     {
       "sequenceType": "question",
       "questions": [
         {
-          "questionDesc": "Player Name",
-          "questionId": "01",
-          "expressionWeight": 0,
-          "consistencyWeight": 1,
-          "considersEmotion": false,
-          "considersFact": true,
-          "filePath": "audio/Act1/Questions/Q1_What_is_your_name",
-          "questionText": "What's your name?",
-          "answers": [
-            {
-              "answerId": "010",
-              "answerText": "Ella Wong",
-              "detectiveResponse": "positive"
-            },
-            {
-              "answerId": "011",
-              "answerText": "James Peterson",
-              "detectiveResponse": "positive"
-            },
-            {
-              "answerId": "012",
-              "answerText": "Anya Patel",
-              "detectiveResponse": "positive"
-            },
-            {
-              "answerId": "013",
-              "answerText": "Charles Davis",
-              "detectiveResponse": "positive"
-            }
-          ]
-        },
-        {
-          "questionDesc": "Player Feelings",
-          "questionId": "04",
-          "expressionWeight": 1,
-          "consistencyWeight": 0,
+          "questionDesc": "Victim Intro",
+          "questionId": "10",
+          "expressionWeight": 0.3,
+          "consistencyWeight": 0.7,
           "considersEmotion": true,
-          "considersFact": false,
-          "filePath": "audio/Act1/Questions/Q4_How_are_you_feeling_today",
-          "questionText": "So tell me, how are you feeling today?",
+          "considersFact": true,
+          "filePath": "audio/Act1/Questions/Q10_Do_you_recognise",
+          "questionText": "Do you recognize this person from last night?",
+          "effects": [
+            {
+              "type": "bloom",
+              "intensity": 5.3
+            },
+            {
+              "type": "motionBlur",
+              "status": "on"
+            }
+          ],
           "answers": [
             {
-              "answerId": "040",
-              "answerText": "Great!",
+              "answerId": "100",
+              "answerText": "Yes",
               "expectedExpressions": [
-                "happy"
+                "neutral",
+                "sad",
+                "scared"
               ],
-              "detectiveResponse": "positive"
+              "detectiveResponse": "neutral"
             },
             {
-              "answerId": "041",
-              "answerText": "Alright",
+              "answerId": "101",
+              "answerText": "No",
               "expectedExpressions": [
-                "happy",
-                "neutral"
-              ],
-              "detectiveResponse": "positive"
-            },
-            {
-              "answerId": "042",
-              "answerText": "Terrible!",
-              "expectedExpressions": [
-                "angry",
-                "sad"
+                "neutral",
+                "scared"
               ],
               "detectiveResponse": "negative"
             },
             {
-              "answerId": "043",
-              "answerText": "I'm scared!",
+              "answerId": "102",
+              "answerText": "Somewhat",
               "expectedExpressions": [
-                "scared",
-                "surprised"
+                "neutral",
+                "sad",
+                "scared"
+              ],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "103",
+              "answerText": "I don't remember",
+              "expectedExpressions": [
+                "neutral",
+                "scared"
               ],
               "detectiveResponse": "negative"
             }

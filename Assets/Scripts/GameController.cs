@@ -31,6 +31,14 @@ public class GameController : MonoBehaviour
     private const string EFFECT_BLOOM = "bloom";
     private const string EFFECT_MOTION_BLUR = "motionBlur";
     private const string EFFECT_VIGNETTE = "vignette";
+    private const string EFFECT_STATUS_ON = "on";
+    private const string EFFECT_STATUS_OFF = "off";
+    private const string EFFECT_STATUS_INTENSIFY = "intensify";
+
+    private const float BLOOM_INTENSITY_STEP = 0.5f;
+    private const float VIGNETTE_INTENSITY_STEP = 0.005f;
+    private const float MOTION_BLUR_SHUTTER_ANGLE_STEP = 10f;
+    private const float MOTION_BLUR_DEFAULT_SHUTTER_ANGLE = 210f;
 
     private const float EMOTION_DISTANCE_THRESHOLD = 2.0f;
     private const float FADE_STEP = 0.1f;
@@ -69,7 +77,8 @@ public class GameController : MonoBehaviour
     public GameObject questionPictureDisplay;
     public GameObject subtitleDisplay;
     public GameObject endingDecisionDisplay;
-    private GameObject detectiveObject;
+    public Image BlackScreenDisplay;
+    public GameObject detectiveObject;
     public GameObject badCop;
     public GameObject goodCop;
     public GameObject tableGun;
@@ -88,7 +97,6 @@ public class GameController : MonoBehaviour
     public PostProcessingProfile motionBlurEffect;
     public PostProcessingProfile vignetteEffect;
     public PostProcessingProfile bloomEffect;
-    private PostProcessingBehaviour postProcessingBehaviour;
     public GameObject player;
 
     // animation stuff
@@ -141,13 +149,15 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         activeCamera = playerCamera;
+        SetDefaultProcessingBehaviourProfiles();
+
         allTimelines.Add(act1Timelines);
         allTimelines.Add(act2Timelines);
         allTimelines.Add(act3Timelines);
 
         if (runTimeline)
         {
-            StartCoroutine(PlayIntro());
+            StartCoroutine(PlayCurrentTimelineAsset());
         }
 
         if (gameSceneOnly) return;
@@ -196,8 +206,6 @@ public class GameController : MonoBehaviour
         bgmAudioSourceB.volume = 0.0f;
         currentBgmAudioSource = bgmAudioSourceA;
 
-        postProcessingBehaviour = playerCamera.GetComponent<PostProcessingBehaviour>();
-
         PlayBgm(currentActData.bgmNeutralClip, MUSIC_NEUTRAL,
             currentActData.bgmNeutralFile.seek); // always start off with the base clip 
         currentBgm = MUSIC_NEUTRAL;
@@ -231,12 +239,11 @@ public class GameController : MonoBehaviour
         currentDetectiveAnimator = null;
     }
 
-    private IEnumerator PlayIntro()
+    private IEnumerator PlayCurrentTimelineAsset()
     {
         subtitleDisplay.SetActive(true);
         subtitleDisplayText.text = "";
 
-        playableDirector.playableAsset = allTimelines[currentActNo][0];
         UnsetDetectiveAnimator();
         PlayTimeline(playableDirector);
 
@@ -247,9 +254,8 @@ public class GameController : MonoBehaviour
 
         subtitleDisplay.SetActive(false);
 
-        SetDetectiveAnimator();
         currentTimelineNo++;
-        StartCoroutine(RunSequence());
+//        StartCoroutine(RunSequence());
     }
 
     private IEnumerator RunTimeline()
@@ -263,13 +269,21 @@ public class GameController : MonoBehaviour
 
         while (playableDirector.state == PlayState.Playing)
         {
+            if (currentSequence.earlyFade && playableDirector.time >= playableDirector.playableAsset.duration - 1)
+            {
+                BlackScreenDisplay.CrossFadeAlpha(1, 0.1f, true);
+                EndRound();
+            }
+
             yield return null;
         }
 
         subtitleDisplay.SetActive(false);
 
-        if (currentTimelineNo == 0) SetDetectiveAnimator();
         currentTimelineNo++;
+
+        // re-set the detective animator only when it's not the last timeline
+        if (currentTimelineNo < allTimelines[currentActNo].Count) SetDetectiveAnimator();
         isEventDone = true;
     }
 
@@ -326,9 +340,13 @@ public class GameController : MonoBehaviour
             LockCursor();
             isEventDone = false;
 
-            if (!string.IsNullOrEmpty(currentSequence.effect)) // show special effects if any
+            var currentEffects = currentSequence.effects;
+            if (currentEffects != null && currentEffects.Length > 0) // show special effects if any
             {
-                ShowSpecialEffect(currentSequence.effect);
+                foreach (var effect in currentEffects)
+                {
+                    ShowSpecialEffect(effect);
+                }
             }
 
             ShowAndPlayDialog(DataController.LoadAudioFile(currentSequence.filePath), currentSequence.subtitleText);
@@ -414,22 +432,22 @@ public class GameController : MonoBehaviour
         // calculate the duration for each step
         var stepInterval = seconds / 20.0f;
         var volumeInterval = musicVolume / 20.0f;
-        
+
         b.Play();
-        
+
         // fade between the two, taking A to 0 volume and B to musicVolume
         for (var i = 0; i < 20; i++)
         {
             a.volume -= volumeInterval;
             b.volume += volumeInterval;
-            
+
             // wait for one interval then continue the loop
             yield return new WaitForSecondsRealtime(stepInterval);
         }
-        
+
         if (a.isPlaying) a.Stop();
     }
-    
+
     private IEnumerator SwitchTracks(AudioClip clip, float seek)
     {
         var playA = !(Math.Abs(bgmAudioSourceB.volume) < 0.01);
@@ -449,7 +467,7 @@ public class GameController : MonoBehaviour
             yield return StartCoroutine(CrossFade(bgmAudioSourceA, bgmAudioSourceB, 8.0f));
         }
     }
-    
+
     private void PlayBgm(AudioClip clip, string musicType, float seek)
     {
         if (clip == null)
@@ -465,7 +483,6 @@ public class GameController : MonoBehaviour
     private void ConcludeEvent()
     {
         isEventDone = true;
-        if (postProcessingBehaviour != null) postProcessingBehaviour.enabled = false;
     }
 
     private void SaveQuestion(QuestionData question)
@@ -475,22 +492,244 @@ public class GameController : MonoBehaviour
 
     private void ShowSpecialEffect(string currentSequenceEffect)
     {
-        if (currentSequenceEffect.Equals(EFFECT_BLOOM))
-        {
-            Bloom();
-            postProcessingBehaviour.enabled = true;
-        }
-        else if (currentSequenceEffect.Equals(EFFECT_MOTION_BLUR))
-        {
-            MotionBlur();
-            postProcessingBehaviour.enabled = true;
-        }
-        else if (currentSequenceEffect.Equals(EFFECT_VIGNETTE))
+        if (currentSequenceEffect.Equals(EFFECT_VIGNETTE))
         {
             Vignette();
-            postProcessingBehaviour.enabled = true;
+            activeCamera.GetComponent<PostProcessingBehaviour>().enabled = true;
         }
     }
+
+    private void SetDefaultProcessingBehaviourProfiles()
+    {
+        var postProcessingBehaviour = activeCamera.GetComponent<PostProcessingBehaviour>();
+
+        if (postProcessingBehaviour.enabled == false)
+        {
+            postProcessingBehaviour.enabled = true;
+        }
+
+        if (postProcessingBehaviour.profile == null)
+        {
+            Debug.Log("postProcessingBehaviour profile is null, creating profile");
+            postProcessingBehaviour.profile = ScriptableObject.CreateInstance<PostProcessingProfile>();
+        }
+
+        postProcessingBehaviour.profile.motionBlur.settings = motionBlurEffect.motionBlur.settings;
+        postProcessingBehaviour.profile.motionBlur.enabled = false;
+
+        postProcessingBehaviour.profile.vignette.settings = vignetteEffect.vignette.settings;
+        postProcessingBehaviour.profile.vignette.enabled = true;
+
+        postProcessingBehaviour.profile.bloom.settings = bloomEffect.bloom.settings;
+        postProcessingBehaviour.profile.bloom.enabled = true;
+    }
+
+    private void ShowSpecialEffect(SpecialEffect effect)
+    {
+        var postProcessingBehaviour = activeCamera.GetComponent<PostProcessingBehaviour>();
+
+        switch (effect.type)
+        {
+            case EFFECT_BLOOM:
+                StartCoroutine(GraduallyChangeBloomIntensity(postProcessingBehaviour,
+                    postProcessingBehaviour.profile.bloom.settings.bloom.intensity < effect.intensity,
+                    effect.intensity));
+                break;
+            case EFFECT_MOTION_BLUR:
+                switch (effect.status)
+                {
+                    case EFFECT_STATUS_ON:
+                        StartCoroutine(GraduallyChangeMotionBlur(postProcessingBehaviour, true,
+                            MOTION_BLUR_DEFAULT_SHUTTER_ANGLE));
+                        break;
+                    case EFFECT_STATUS_OFF:
+                        StartCoroutine(GraduallyChangeMotionBlur(postProcessingBehaviour, false, 0f));
+                        break;
+                    case EFFECT_STATUS_INTENSIFY:
+                        StartCoroutine(GraduallyChangeMotionBlur(postProcessingBehaviour, true, 360f));
+                        break;
+                    default:
+                        break;
+                }
+
+                break;
+            case EFFECT_VIGNETTE:
+                var vignetteSettings = postProcessingBehaviour.profile.vignette.settings;
+
+                // set color, smoothness and roundness
+                vignetteSettings.color = new Color(effect.colorR, effect.colorG, effect.colorB, effect.colorA);
+                vignetteSettings.smoothness = effect.smoothness;
+                vignetteSettings.roundness = effect.roundness;
+
+                postProcessingBehaviour.profile.vignette.settings = vignetteSettings;
+
+                StartCoroutine(GraduallyChangeVignetteIntensity(postProcessingBehaviour,
+                    vignetteSettings.intensity < effect.intensity, effect.intensity));
+                break;
+            default:
+                break;
+        }
+    }
+
+    private static IEnumerator GraduallyChangeVignetteIntensity(PostProcessingBehaviour postProcessingBehaviour,
+        bool increase, float targetIntensity)
+    {
+        var settings = postProcessingBehaviour.profile.vignette.settings;
+
+        if (increase)
+        {
+            while (settings.intensity + VIGNETTE_INTENSITY_STEP <= targetIntensity)
+            {
+                settings.intensity += VIGNETTE_INTENSITY_STEP;
+                postProcessingBehaviour.profile.vignette.settings = settings;
+                yield return new WaitForSecondsRealtime(0.03f);
+            }
+        }
+        else
+        {
+            while (settings.intensity - VIGNETTE_INTENSITY_STEP >= targetIntensity)
+            {
+                settings.intensity -= VIGNETTE_INTENSITY_STEP;
+                postProcessingBehaviour.profile.vignette.settings = settings;
+                yield return new WaitForSecondsRealtime(0.03f);
+            }
+        }
+    }
+
+    private static IEnumerator GraduallyChangeBloomIntensity(PostProcessingBehaviour postProcessingBehaviour,
+        bool increase, float targetIntensity)
+    {
+        var settings = postProcessingBehaviour.profile.bloom.settings;
+
+        if (increase)
+        {
+            while (settings.bloom.intensity + BLOOM_INTENSITY_STEP <= targetIntensity)
+            {
+                settings.bloom.intensity += BLOOM_INTENSITY_STEP;
+                postProcessingBehaviour.profile.bloom.settings = settings;
+                yield return new WaitForSecondsRealtime(0.25f);
+            }
+        }
+        else
+        {
+            while (settings.bloom.intensity - BLOOM_INTENSITY_STEP >= targetIntensity)
+            {
+                settings.bloom.intensity -= BLOOM_INTENSITY_STEP;
+                postProcessingBehaviour.profile.bloom.settings = settings;
+                yield return new WaitForSecondsRealtime(0.25f);
+            }
+        }
+    }
+
+    private static IEnumerator GraduallyChangeMotionBlur(PostProcessingBehaviour postProcessingBehaviour, bool increase,
+        float targetShutterAngle)
+    {
+        postProcessingBehaviour.profile.motionBlur.enabled = true;
+        var settings = postProcessingBehaviour.profile.motionBlur.settings;
+
+        if (increase)
+        {
+            while (settings.shutterAngle + MOTION_BLUR_SHUTTER_ANGLE_STEP <= targetShutterAngle)
+            {
+                settings.shutterAngle += MOTION_BLUR_SHUTTER_ANGLE_STEP;
+                postProcessingBehaviour.profile.motionBlur.settings = settings;
+                yield return new WaitForSecondsRealtime(0.25f);
+            }
+        }
+        else
+        {
+            while (settings.shutterAngle - MOTION_BLUR_SHUTTER_ANGLE_STEP >= targetShutterAngle)
+            {
+                settings.shutterAngle -= MOTION_BLUR_SHUTTER_ANGLE_STEP;
+                postProcessingBehaviour.profile.motionBlur.settings = settings;
+                yield return new WaitForSecondsRealtime(0.25f);
+            }
+        }
+
+        if (settings.shutterAngle <= MOTION_BLUR_SHUTTER_ANGLE_STEP)
+        {
+            postProcessingBehaviour.profile.motionBlur.enabled = false;
+        }
+    }
+//
+//    private IEnumerator FadeMotionBlurIn(PostProcessingBehaviour postProcessingBehaviour, float shutterAngle)
+//    {
+//        postProcessingBehaviour.profile.motionBlur.settings = motionBlurEffect.motionBlur.settings;
+//        var settings = postProcessingBehaviour.profile.motionBlur.settings;
+//
+//        settings.shutterAngle = 0;
+//        postProcessingBehaviour.profile.motionBlur.enabled = true;
+//
+//        while (settings.shutterAngle < shutterAngle)
+//        {
+//            settings.shutterAngle += MOTION_BLUR_SHUTTER_ANGLE_STEP;
+//            postProcessingBehaviour.profile.motionBlur.settings = settings;
+//            yield return new WaitForSecondsRealtime(0.25f);
+//        }
+//    }
+//
+//    private IEnumerator FadeBloomIn(PostProcessingBehaviour postProcessingBehaviour, float targetIntensity)
+//    {
+//        postProcessingBehaviour.profile.bloom.enabled = true;
+//        var settings = activeCamera.GetComponent<PostProcessingBehaviour>().profile.bloom.settings;
+//        settings.bloom.intensity = 0;
+//        while (settings.bloom.intensity < targetIntensity)
+//        {
+//            settings.bloom.intensity += BLOOM_INTENSITY_STEP;
+//            postProcessingBehaviour.profile.bloom.settings = settings;
+//            yield return new WaitForSecondsRealtime(0.25f);
+//        }
+//    }
+//
+//    private IEnumerator FadeBloomOut(PostProcessingBehaviour postProcessingBehaviour)
+//    {
+//        postProcessingBehaviour.profile.bloom.enabled = true;
+//        var settings = activeCamera.GetComponent<PostProcessingBehaviour>().profile.bloom.settings;
+//        while (settings.bloom.intensity - BLOOM_INTENSITY_STEP > 0)
+//        {
+//            settings.bloom.intensity -= BLOOM_INTENSITY_STEP;
+//            postProcessingBehaviour.profile.bloom.settings = settings;
+//            yield return new WaitForSecondsRealtime(0.25f);
+//        }
+//    }
+
+    private void Vignette()
+    {
+        activeCamera.GetComponent<PostProcessingBehaviour>().profile = vignetteEffect;
+    }
+
+    private void LightsCameraAction(int Num)
+    {
+        var Lightbulb = room.transform.Find("Lightbulb").gameObject;
+        var Lights = Lightbulb.transform.Find("Lamp").gameObject;
+        Lights.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
+
+        var SpotLight1 = room.transform.Find("Spot light 1").gameObject;
+        var SpotLight2 = room.transform.Find("Spot light 2").gameObject;
+        if (Num == 1)
+        {
+            SpotLight1.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
+        }
+
+        if (Num == 2)
+        {
+            SpotLight2.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
+        }
+    }
+
+
+    private void LightingChanges(int newIntensity, Color32 newColor)
+    {
+        var Lightbulb = room.transform.Find("Lightbulb").gameObject;
+        var Lights = Lightbulb.transform.Find("Lamp").gameObject;
+
+        Lights.GetComponent<Light>().intensity = newIntensity;
+        Lights.GetComponent<Light>().color = newColor;
+        // TODO consider smoothing the changes in update() using e.g. docs.unity3d.com/ScriptReference/Light-color.html
+        var lightComponent = Lights.GetComponent<Light>();
+        Color.Lerp(lightComponent.color, newColor, 3f);
+    }
+
 
     private float CalculateSuspicionScore_EmotionOnly(string[] expectedExpressions, float weight,
         out string closestEmotion)
@@ -577,9 +816,13 @@ public class GameController : MonoBehaviour
             FERIndicator.enabled = true;
         }
 
-        if (!string.IsNullOrEmpty(currentQuestion.effect))
+        var currentEffects = currentQuestion.effects;
+        if (currentEffects != null && currentEffects.Length > 0) // show special effects if any
         {
-            ShowSpecialEffect(currentQuestion.effect);
+            foreach (var effect in currentEffects)
+            {
+                ShowSpecialEffect(effect);
+            }
         }
 
         DisplayAnswers(currentQuestion.answers);
@@ -686,7 +929,7 @@ public class GameController : MonoBehaviour
         Debug.Log("closestEmotion: " + closestEmotion + ", distance: " + emotionDistance + ", score: " +
                   expressionScore);
 
-        StartCoroutine(ShowFERCorrectness(expressionScore < 0, closestEmotion));
+        StartCoroutine(ShowFERCorrectness(expressionScore <= 0, closestEmotion));
 
         if (!FER_is_Off)
         {
@@ -935,6 +1178,8 @@ public class GameController : MonoBehaviour
                     PlayBgm(currentActData.bgmLevelClips[currentBgmLevel], "level",
                         currentActData.bgmLevels[currentBgmLevel].seek);
                 }
+
+                return;
             }
         }
 
@@ -964,8 +1209,8 @@ public class GameController : MonoBehaviour
 
     private void EndRound()
     {
-        UnlockCursor();
         isTimerActive = false;
+        isEventDone = false;
         dataController.SubmitNewPlayerScore(displayedScore);
         highScoreDisplayText.text = dataController.GetHighestPlayerScore().ToString();
 
@@ -1002,53 +1247,9 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void LightsCameraAction(int Num)
-    {
-        var Lightbulb = room.transform.Find("Lightbulb").gameObject;
-        var Lights = Lightbulb.transform.Find("Lamp").gameObject;
-        Lights.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
-
-        var SpotLight1 = room.transform.Find("Spot light 1").gameObject;
-        var SpotLight2 = room.transform.Find("Spot light 2").gameObject;
-        if (Num == 1)
-        {
-            SpotLight1.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
-        }
-
-        if (Num == 2)
-        {
-            SpotLight2.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
-        }
-    }
-
-    private void LightingChanges(int newIntensity, Color32 newColor)
-    {
-        var Lightbulb = room.transform.Find("Lightbulb").gameObject;
-        var Lights = Lightbulb.transform.Find("Lamp").gameObject;
-
-        Lights.GetComponent<Light>().intensity = newIntensity;
-        Lights.GetComponent<Light>().color = newColor;
-        // TODO consider smoothing the changes in update() using e.g. docs.unity3d.com/ScriptReference/Light-color.html
-    }
-
-    private void MotionBlur()
-    {
-        activeCamera.GetComponent<PostProcessingBehaviour>().profile = motionBlurEffect;
-    }
-
-    private void Vignette()
-    {
-        activeCamera.GetComponent<PostProcessingBehaviour>().profile = vignetteEffect;
-    }
-
-    private void Bloom()
-    {
-        activeCamera.GetComponent<PostProcessingBehaviour>().profile = bloomEffect;
-    }
-
     private void GeneratePostReport(int endnum = 0)
     {
-        UnlockCursor();
+        if (Cursor.lockState.Equals(CursorLockMode.Locked)) UnlockCursor();
         playerCamera.GetComponent<PlayerLook>().enabled = false;
         postReport.SetActive(true);
         string report = "";
@@ -1126,9 +1327,7 @@ public class GameController : MonoBehaviour
 
     public void ContinuePostReport()
     {
-        LockCursor();
         playerCamera.GetComponent<PlayerLook>().enabled = true;
-        postReport.SetActive(false);
         ContinueToNextAct();
     }
 
@@ -1158,7 +1357,6 @@ public class GameController : MonoBehaviour
         playerCamera.enabled = false;
         finalCamera.enabled = true;
         activeCamera = finalCamera;
-        postProcessingBehaviour = finalCamera.GetComponent<PostProcessingBehaviour>();
         tableGun.GetComponent<Collider>().enabled = true;
     }
 
@@ -1205,7 +1403,7 @@ public class GameController : MonoBehaviour
         {
             subtitleDisplay.SetActive(false);
 
-            if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
+            if (currentSequence != null && currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
                 HandleEndOfAQuestion();
             else
                 StartCoroutine(RunSequence());
@@ -1219,7 +1417,8 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyDown("t"))
         {
-            MotionBlur();
+            StartCoroutine(GraduallyChangeMotionBlur(activeCamera.GetComponent<PostProcessingBehaviour>(), true,
+                MOTION_BLUR_DEFAULT_SHUTTER_ANGLE));
             playerCamera.GetComponent<PostProcessingBehaviour>().enabled =
                 !playerCamera.GetComponent<PostProcessingBehaviour>().enabled;
         }
@@ -1233,7 +1432,8 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyDown("u"))
         {
-            Bloom();
+            StartCoroutine(
+                GraduallyChangeBloomIntensity(activeCamera.GetComponent<PostProcessingBehaviour>(), true, 8f));
             playerCamera.GetComponent<PostProcessingBehaviour>().enabled =
                 !playerCamera.GetComponent<PostProcessingBehaviour>().enabled;
         }

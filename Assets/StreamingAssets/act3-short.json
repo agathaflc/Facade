@@ -10,8 +10,8 @@
       "seek": 3.4
     },
     {
-      "fileName": "audio/bgm/Level3_7p4",
-      "seek": 7.4
+      "fileName": "audio/bgm/Level3_4p1",
+      "seek": 4.1
     },
     {
       "fileName": "audio/bgm/Level4_7p4",
@@ -23,7 +23,7 @@
     }
   ],
   "showGun": true,
-  "responsesPath": "detective_responses_act1.json",
+  "responsesPath": "detective_responses_act3.json",
   "bgmHappyFile": {
     "fileName": "audio/bgm/Level2_3p4",
     "seek": 0
