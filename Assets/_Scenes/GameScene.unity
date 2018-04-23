@@ -6594,6 +6594,7 @@ MonoBehaviour:
   badCop: {fileID: 442740191}
   goodCop: {fileID: 1749480195}
   tableGun: {fileID: 2125480158}
+  mainLight: {fileID: 1822074343}
   FERIndicator: {fileID: 666436612}
   FERCorrectness: {fileID: 1411356734}
   tick: {fileID: 21300000, guid: 5c63c326096dfcd459750dce8ff5affa, type: 3}

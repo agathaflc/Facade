@@ -15,4 +15,6 @@ public class QuestionData
     public int timeLimitInSeconds = 10;
     public string filePath;
     public SpecialEffect[] effects;
+    public bool hasLightingEffect;
+    public LightingEffect lighting = null;
 }

@@ -9,7 +9,7 @@
     "seek": 0
   },
   "bgmNeutralFile": {
-    "fileName": "audio/bgm/Act1_Original_0",
+    "fileName": "audio/bgm/Level5_7p9",
     "seek": 0
   },
   "bgmAngrySurprisedFile": {
@@ -18,6 +18,34 @@
   },
   "showGun": false,
   "sequence": [
+    {
+      "sequenceType": "timeline"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S1_1_thanks_a_lot",
+      "subtitleText": "Thanks a lot for coming in today.",
+      "animationNo": 40,
+      "animatorLayer": 1
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S10_0_Okay_so_you_must_be_wondering",
+      "subtitleText": "Okay, so you must be wondering why I’m asking you all these questions.",
+      "animationNo": 4
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S10_1_well_you_see",
+      "subtitleText": "Well you see, last night there was an accident...",
+      "lighting": {
+        "intensity": 1,
+        "colorR": 194,
+        "colorG": 255,
+        "colorB": 186,
+        "colorA": 1
+      }
+    },
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act1/Sentences/S10_2_well_were_not_so_sure",
@@ -101,6 +129,59 @@
           ]
         }
       ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S11_0_You_see_this_girl",
+      "subtitleText": "You see.. this girl was found dead last night. Her name was Lianne. It’s a real tragedy."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S11_1_her_name",
+      "readExpression": true,
+      "scoreWeight": 3,
+      "expectedExpressions": [
+        "scared",
+        "surprised",
+        "angry",
+        "sad"
+      ],
+      "subtitleText": "You see.. this girl was found dead last night. Her name was Lianne. It’s a real tragedy.",
+      "animationNo": 41,
+      "animatorLayer": 1,
+      "effects": [
+        {
+          "type": "bloom",
+          "intensity": 0
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S12_0_I_can_t_begin_to_imagine",
+      "subtitleText": "I can’t even begin to imagine what her family is going through.",
+      "effects": [
+        {
+          "type": "vignette",
+          "intensity": 0,
+          "colorR": 0,
+          "colorG": 0,
+          "colorB": 0,
+          "colorA": 1,
+          "smoothness": 0.5,
+          "roundness": 0.4
+        },
+        {
+          "type": "motionBlur",
+          "status": "off"
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S12_1_i_would_be_devastated",
+      "subtitleText": "I would be devastated if something like this happened to my little girl.",
+      "animationNo": 3
     }
   ]
 }

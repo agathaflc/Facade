@@ -19,5 +19,6 @@ public class SequenceData
     public bool earlyFade;
 
     public SpecialEffect[] effects;
-    public LightingEffect lighting;
+    public bool hasLightingEffect;
+    public LightingEffect lighting = null;
 }

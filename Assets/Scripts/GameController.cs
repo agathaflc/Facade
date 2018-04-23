@@ -83,6 +83,10 @@ public class GameController : MonoBehaviour
     public GameObject goodCop;
     public GameObject tableGun;
 
+    public Light mainLight;
+    public Color oldLightingColor;
+    public Color newLightingColor;
+
     public Image FERIndicator;
     public Image FERCorrectness;
     public Sprite tick;
@@ -128,6 +132,10 @@ public class GameController : MonoBehaviour
     private QuestionData[] questionPool;
     private List<QuestionData> allQuestions = new List<QuestionData>();
 
+    private float lightingColorTimer;
+    private const float COLOR_FADE_TIME = 2.5F;
+    private const float MAX_COLOR_TIMER = 1f;
+
     private bool isTimerActive;
     private bool isEndingTimerActive;
     private bool isEventDone;
@@ -150,6 +158,8 @@ public class GameController : MonoBehaviour
     {
         activeCamera = playerCamera;
         SetDefaultProcessingBehaviourProfiles();
+
+        lightingColorTimer = MAX_COLOR_TIMER;
 
         allTimelines.Add(act1Timelines);
         allTimelines.Add(act2Timelines);
@@ -227,6 +237,7 @@ public class GameController : MonoBehaviour
 
     private void SetDetectiveAnimator()
     {
+        Debug.Log("SetDetectiveAnimator");
         detectiveObject.GetComponent<Animator>().runtimeAnimatorController =
             detectiveObject == badCop ? hansController : kiraController;
 
@@ -283,7 +294,7 @@ public class GameController : MonoBehaviour
         currentTimelineNo++;
 
         // re-set the detective animator only when it's not the last timeline
-        if (currentTimelineNo < allTimelines[currentActNo].Count) SetDetectiveAnimator();
+        if (currentTimelineNo <= allTimelines[currentActNo].Count) SetDetectiveAnimator();
         isEventDone = true;
     }
 
@@ -347,6 +358,14 @@ public class GameController : MonoBehaviour
                 {
                     ShowSpecialEffect(effect);
                 }
+            }
+
+            if (currentSequence.hasLightingEffect)
+            {
+                var currentLighting = currentSequence.lighting;
+
+                LightingChanges(new Color(currentLighting.colorR, currentLighting.colorG, currentLighting.colorB,
+                    currentLighting.colorA));
             }
 
             ShowAndPlayDialog(DataController.LoadAudioFile(currentSequence.filePath), currentSequence.subtitleText);
@@ -651,51 +670,22 @@ public class GameController : MonoBehaviour
             postProcessingBehaviour.profile.motionBlur.enabled = false;
         }
     }
-//
-//    private IEnumerator FadeMotionBlurIn(PostProcessingBehaviour postProcessingBehaviour, float shutterAngle)
-//    {
-//        postProcessingBehaviour.profile.motionBlur.settings = motionBlurEffect.motionBlur.settings;
-//        var settings = postProcessingBehaviour.profile.motionBlur.settings;
-//
-//        settings.shutterAngle = 0;
-//        postProcessingBehaviour.profile.motionBlur.enabled = true;
-//
-//        while (settings.shutterAngle < shutterAngle)
-//        {
-//            settings.shutterAngle += MOTION_BLUR_SHUTTER_ANGLE_STEP;
-//            postProcessingBehaviour.profile.motionBlur.settings = settings;
-//            yield return new WaitForSecondsRealtime(0.25f);
-//        }
-//    }
-//
-//    private IEnumerator FadeBloomIn(PostProcessingBehaviour postProcessingBehaviour, float targetIntensity)
-//    {
-//        postProcessingBehaviour.profile.bloom.enabled = true;
-//        var settings = activeCamera.GetComponent<PostProcessingBehaviour>().profile.bloom.settings;
-//        settings.bloom.intensity = 0;
-//        while (settings.bloom.intensity < targetIntensity)
-//        {
-//            settings.bloom.intensity += BLOOM_INTENSITY_STEP;
-//            postProcessingBehaviour.profile.bloom.settings = settings;
-//            yield return new WaitForSecondsRealtime(0.25f);
-//        }
-//    }
-//
-//    private IEnumerator FadeBloomOut(PostProcessingBehaviour postProcessingBehaviour)
-//    {
-//        postProcessingBehaviour.profile.bloom.enabled = true;
-//        var settings = activeCamera.GetComponent<PostProcessingBehaviour>().profile.bloom.settings;
-//        while (settings.bloom.intensity - BLOOM_INTENSITY_STEP > 0)
-//        {
-//            settings.bloom.intensity -= BLOOM_INTENSITY_STEP;
-//            postProcessingBehaviour.profile.bloom.settings = settings;
-//            yield return new WaitForSecondsRealtime(0.25f);
-//        }
-//    }
 
     private void Vignette()
     {
         activeCamera.GetComponent<PostProcessingBehaviour>().profile = vignetteEffect;
+    }
+
+    private void LightingChanges(Color newColor, float newIntensity = 1)
+    {
+        Debug.Log("LightingChanges");
+//        
+//        oldLightingColor = mainLight.color;
+//        newLightingColor = newColor;
+//        
+//        lightingColorTimer = 0; // reset timer
+//        
+//        mainLight.intensity = newIntensity; // TODO make this smooth
     }
 
     private void LightsCameraAction(int Num)
@@ -715,19 +705,6 @@ public class GameController : MonoBehaviour
         {
             SpotLight2.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
         }
-    }
-
-
-    private void LightingChanges(int newIntensity, Color32 newColor)
-    {
-        var Lightbulb = room.transform.Find("Lightbulb").gameObject;
-        var Lights = Lightbulb.transform.Find("Lamp").gameObject;
-
-        Lights.GetComponent<Light>().intensity = newIntensity;
-        Lights.GetComponent<Light>().color = newColor;
-        // TODO consider smoothing the changes in update() using e.g. docs.unity3d.com/ScriptReference/Light-color.html
-        var lightComponent = Lights.GetComponent<Light>();
-        Color.Lerp(lightComponent.color, newColor, 3f);
     }
 
 
@@ -1378,6 +1355,12 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (lightingColorTimer < MAX_COLOR_TIMER) // if end color has not been reached
+        {
+            lightingColorTimer += Time.deltaTime / COLOR_FADE_TIME;
+            mainLight.color = Color.Lerp(oldLightingColor, newLightingColor, lightingColorTimer);
+        }
+
         if (isEndingTimerActive)
         {
             decisionTimeRemaining -= Time.deltaTime;
