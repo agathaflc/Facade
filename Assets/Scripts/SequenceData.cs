@@ -6,7 +6,6 @@ public class SequenceData
     public string filePath;
     public string sequenceType;
     public string subtitleText;
-    public string effect;
     public AudioData bgm;
     public bool readExpression;
     public float scoreWeight;
@@ -18,4 +17,7 @@ public class SequenceData
 
     public bool ending;
     public bool earlyFade;
+
+    public SpecialEffect[] effects;
+    public LightingEffect lighting;
 }

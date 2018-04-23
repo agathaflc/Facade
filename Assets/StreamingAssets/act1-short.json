@@ -19,6 +19,25 @@
   "showGun": false,
   "sequence": [
     {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S10_2_well_were_not_so_sure",
+      "subtitleText": "Well we’re not sure it was an accident.",
+      "animationNo": 41,
+      "animatorLayer": 1,
+      "effects": [
+        {
+          "type": "vignette",
+          "intensity": 0.8,
+          "colorR": 0,
+          "colorG": 0,
+          "colorB": 0,
+          "colorA": 1,
+          "smoothness": 0.5,
+          "roundness": 0.4
+        }
+      ]
+    },
+    {
       "sequenceType": "question",
       "questions": [
         {
@@ -28,9 +47,18 @@
           "consistencyWeight": 0.7,
           "considersEmotion": true,
           "considersFact": true,
-          "pictureFileName": "lianne_polaroid.png",
           "filePath": "audio/Act1/Questions/Q10_Do_you_recognise",
           "questionText": "Do you recognize this person from last night?",
+          "effects": [
+            {
+              "type": "bloom",
+              "intensity": 5.3
+            },
+            {
+              "type": "motionBlur",
+              "status": "on"
+            }
+          ],
           "answers": [
             {
               "answerId": "100",
