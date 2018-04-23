@@ -84,8 +84,8 @@ public class GameController : MonoBehaviour
     public GameObject tableGun;
 
     public Light mainLight;
-    public Color oldLightingColor;
-    public Color newLightingColor;
+    public Color32 oldLightingColor;
+    public Color32 newLightingColor;
 
     public Image FERIndicator;
     public Image FERCorrectness;
@@ -134,6 +134,7 @@ public class GameController : MonoBehaviour
 
     private float lightingColorTimer;
     private const float COLOR_FADE_TIME = 2.5F;
+    private const float COLOR_CHANGE_DURATION = 2.5f;
     private const float MAX_COLOR_TIMER = 1f;
 
     private bool isTimerActive;
@@ -364,8 +365,9 @@ public class GameController : MonoBehaviour
             {
                 var currentLighting = currentSequence.lighting;
 
-                LightingChanges(new Color(currentLighting.colorR, currentLighting.colorG, currentLighting.colorB,
-                    currentLighting.colorA));
+                StartCoroutine(LightingChanges(new Color32(currentLighting.colorR, currentLighting.colorG,
+                    currentLighting.colorB,
+                    currentLighting.colorA)));
             }
 
             ShowAndPlayDialog(DataController.LoadAudioFile(currentSequence.filePath), currentSequence.subtitleText);
@@ -576,7 +578,7 @@ public class GameController : MonoBehaviour
                 var vignetteSettings = postProcessingBehaviour.profile.vignette.settings;
 
                 // set color, smoothness and roundness
-                vignetteSettings.color = new Color(effect.colorR, effect.colorG, effect.colorB, effect.colorA);
+                vignetteSettings.color = new Color32(effect.colorR, effect.colorG, effect.colorB, effect.colorA);
                 vignetteSettings.smoothness = effect.smoothness;
                 vignetteSettings.roundness = effect.roundness;
 
@@ -676,15 +678,24 @@ public class GameController : MonoBehaviour
         activeCamera.GetComponent<PostProcessingBehaviour>().profile = vignetteEffect;
     }
 
-    private void LightingChanges(Color newColor, float newIntensity = 1)
+    private IEnumerator LightingChanges(Color32 newColor, float newIntensity = 1)
     {
         Debug.Log("LightingChanges");
-//        
-//        oldLightingColor = mainLight.color;
-//        newLightingColor = newColor;
-//        
-//        lightingColorTimer = 0; // reset timer
-//        
+
+        oldLightingColor = mainLight.color;
+        newLightingColor = newColor;
+
+//        mainLight.GetComponent<Light>().color = newColor;
+//        yield break;
+        var lightLerp = 0f;
+        while (lightLerp < 1)
+        {
+            mainLight.GetComponent<Light>().color = Color32.Lerp(oldLightingColor, newColor, lightLerp);
+            yield return new WaitForSecondsRealtime(0.15f);
+            lightLerp += 0.05f; // waiting time: 0.15 / 0.05 = 3 secs
+            Debug.Log("lerp: " + lightLerp);
+        }
+
 //        mainLight.intensity = newIntensity; // TODO make this smooth
     }
 
@@ -1355,12 +1366,6 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (lightingColorTimer < MAX_COLOR_TIMER) // if end color has not been reached
-        {
-            lightingColorTimer += Time.deltaTime / COLOR_FADE_TIME;
-            mainLight.color = Color.Lerp(oldLightingColor, newLightingColor, lightingColorTimer);
-        }
-
         if (isEndingTimerActive)
         {
             decisionTimeRemaining -= Time.deltaTime;
