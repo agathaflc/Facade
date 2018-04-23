@@ -380,7 +380,7 @@
             },
             {
               "answerId": "073",
-              "answerText": "No one",
+              "answerText": "I can't remember",
               "detectiveResponse": "negative"
             }
           ]
@@ -497,7 +497,7 @@
             },
             {
               "answerId": "101",
-              "answerText": "No",
+              "answerText": "Not really",
               "expectedExpressions": [
                 "neutral",
                 "scared"
@@ -600,7 +600,7 @@
             },
             {
               "answerId": "113",
-              "answerText": "No one",
+              "answerText": "I can't remember",
               "expectedExpressions": [
                 "neutral"
               ],
