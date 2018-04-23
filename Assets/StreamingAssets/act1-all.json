@@ -203,14 +203,34 @@
       "sequenceType": "dialog",
       "filePath": "audio/Act1/Sentences/S4_0_Ah_there_s_nothing_to",
       "subtitleText": "Ah there’s nothing to be worried about! I’m pretty tired myself.",
-      "animationNo": 19
+      "animationNo": 19,
+      "hasLightingEffect": true,
+      "lighting": {
+        "intensity": 3.4,
+        "colorR": 47,
+        "colorG": 255,
+        "colorB": 230,
+        "colorA": 204
+      }
     },
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act1/Sentences/S4_1_im_pretty_tired",
       "subtitleText": "Ah there’s nothing to be worried about! I’m pretty tired myself.",
       "animationNo": 41,
-      "animatorLayer": 1
+      "animatorLayer": 1,
+      "effects": [
+        {
+          "type": "vignette",
+          "intensity": 0.4,
+          "colorR": 134,
+          "colorG": 225,
+          "colorB": 221,
+          "colorA": 0.5,
+          "smoothness": 0.8,
+          "roundness": 0.4
+        }
+      ]
     },
     {
       "sequenceType": "dialog",
@@ -320,7 +340,26 @@
       "sequenceType": "dialog",
       "filePath": "audio/Act1/Sentences/S9_Anyways_you_don_t_want",
       "subtitleText": "Anyways, you don’t want to hear me go on and on and on about my weird dreams! So let's get back to the case.",
-      "animationNo": 19
+      "animationNo": 19,
+      "lighting": {
+        "intensity": 0,
+        "colorR": 100,
+        "colorG": 75,
+        "colorB": 22,
+        "colorA": 0
+      },
+      "effects": [
+        {
+          "type": "vignette",
+          "intensity": 0,
+          "colorR": 100,
+          "colorG": 75,
+          "colorB": 22,
+          "colorA": 0.8,
+          "smoothness": 0.5,
+          "roundness": 0.4
+        }
+      ]
     },
     {
       "sequenceType": "question",
