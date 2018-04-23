@@ -65,6 +65,26 @@
     {
       "text": "Do you think I’m an idiot?",
       "soundFilePath": "audio/BadCop/CLARIFICATIONS/you-think-im-an-idiot"
+    },
+    {
+      "text": "Hah",
+      "soundFilePath": "audio/BadCop/RESPONSES/scoff"
+    },
+    {
+      "text": "K.",
+      "soundFilePath": "audio/BadCop/RESPONSES/k"
+    },
+    {
+      "text": "Uh huh.",
+      "soundFilePath": "audio/BadCop/RESPONSES/uh-huh"
+    },
+    {
+      "text": "Right..",
+      "soundFilePath": "audio/BadCop/RESPONSES/right"
+    },
+    {
+      "text": "Yeahhh..",
+      "soundFilePath": "audio/BadCop/RESPONSES/yeah"
     }
   ]
 }
