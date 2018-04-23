@@ -5,9 +5,9 @@ using UnityEngine;
 public class LightingEffect
 {
     public float intensity;
-    public Color color;
-    public float colorR;
-    public float colorG;
-    public float colorB;
-    public float colorA;
+    public Color32 color;
+    public byte colorR;
+    public byte colorG;
+    public byte colorB;
+    public byte colorA;
 }

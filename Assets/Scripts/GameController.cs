@@ -35,6 +35,7 @@ public class GameController : MonoBehaviour
     private const string EFFECT_STATUS_OFF = "off";
     private const string EFFECT_STATUS_INTENSIFY = "intensify";
 
+    private const float LIGHT_INTENSITY_STEP = 0.25f;
     private const float BLOOM_INTENSITY_STEP = 0.5f;
     private const float VIGNETTE_INTENSITY_STEP = 0.005f;
     private const float MOTION_BLUR_SHUTTER_ANGLE_STEP = 10f;
@@ -83,6 +84,10 @@ public class GameController : MonoBehaviour
     public GameObject goodCop;
     public GameObject tableGun;
 
+    public Light mainLight;
+    public Color32 oldLightingColor;
+    public Color32 newLightingColor;
+
     public Image FERIndicator;
     public Image FERCorrectness;
     public Sprite tick;
@@ -128,6 +133,11 @@ public class GameController : MonoBehaviour
     private QuestionData[] questionPool;
     private List<QuestionData> allQuestions = new List<QuestionData>();
 
+    private float lightingColorTimer;
+    private const float COLOR_FADE_TIME = 2.5F;
+    private const float COLOR_CHANGE_DURATION = 2.5f;
+    private const float MAX_COLOR_TIMER = 1f;
+
     private bool isTimerActive;
     private bool isEndingTimerActive;
     private bool isEventDone;
@@ -150,6 +160,8 @@ public class GameController : MonoBehaviour
     {
         activeCamera = playerCamera;
         SetDefaultProcessingBehaviourProfiles();
+
+        lightingColorTimer = MAX_COLOR_TIMER;
 
         allTimelines.Add(act1Timelines);
         allTimelines.Add(act2Timelines);
@@ -227,6 +239,7 @@ public class GameController : MonoBehaviour
 
     private void SetDetectiveAnimator()
     {
+        Debug.Log("SetDetectiveAnimator");
         detectiveObject.GetComponent<Animator>().runtimeAnimatorController =
             detectiveObject == badCop ? hansController : kiraController;
 
@@ -283,7 +296,7 @@ public class GameController : MonoBehaviour
         currentTimelineNo++;
 
         // re-set the detective animator only when it's not the last timeline
-        if (currentTimelineNo < allTimelines[currentActNo].Count) SetDetectiveAnimator();
+        if (currentTimelineNo <= allTimelines[currentActNo].Count) SetDetectiveAnimator();
         isEventDone = true;
     }
 
@@ -347,6 +360,15 @@ public class GameController : MonoBehaviour
                 {
                     ShowSpecialEffect(effect);
                 }
+            }
+
+            if (currentSequence.hasLightingEffect)
+            {
+                var currentLighting = currentSequence.lighting;
+
+                StartCoroutine(LightingChanges(new Color32(currentLighting.colorR, currentLighting.colorG,
+                    currentLighting.colorB,
+                    currentLighting.colorA), currentLighting.intensity));
             }
 
             ShowAndPlayDialog(DataController.LoadAudioFile(currentSequence.filePath), currentSequence.subtitleText);
@@ -557,7 +579,7 @@ public class GameController : MonoBehaviour
                 var vignetteSettings = postProcessingBehaviour.profile.vignette.settings;
 
                 // set color, smoothness and roundness
-                vignetteSettings.color = new Color(effect.colorR, effect.colorG, effect.colorB, effect.colorA);
+                vignetteSettings.color = new Color32(effect.colorR, effect.colorG, effect.colorB, effect.colorA);
                 vignetteSettings.smoothness = effect.smoothness;
                 vignetteSettings.roundness = effect.roundness;
 
@@ -651,51 +673,52 @@ public class GameController : MonoBehaviour
             postProcessingBehaviour.profile.motionBlur.enabled = false;
         }
     }
-//
-//    private IEnumerator FadeMotionBlurIn(PostProcessingBehaviour postProcessingBehaviour, float shutterAngle)
-//    {
-//        postProcessingBehaviour.profile.motionBlur.settings = motionBlurEffect.motionBlur.settings;
-//        var settings = postProcessingBehaviour.profile.motionBlur.settings;
-//
-//        settings.shutterAngle = 0;
-//        postProcessingBehaviour.profile.motionBlur.enabled = true;
-//
-//        while (settings.shutterAngle < shutterAngle)
-//        {
-//            settings.shutterAngle += MOTION_BLUR_SHUTTER_ANGLE_STEP;
-//            postProcessingBehaviour.profile.motionBlur.settings = settings;
-//            yield return new WaitForSecondsRealtime(0.25f);
-//        }
-//    }
-//
-//    private IEnumerator FadeBloomIn(PostProcessingBehaviour postProcessingBehaviour, float targetIntensity)
-//    {
-//        postProcessingBehaviour.profile.bloom.enabled = true;
-//        var settings = activeCamera.GetComponent<PostProcessingBehaviour>().profile.bloom.settings;
-//        settings.bloom.intensity = 0;
-//        while (settings.bloom.intensity < targetIntensity)
-//        {
-//            settings.bloom.intensity += BLOOM_INTENSITY_STEP;
-//            postProcessingBehaviour.profile.bloom.settings = settings;
-//            yield return new WaitForSecondsRealtime(0.25f);
-//        }
-//    }
-//
-//    private IEnumerator FadeBloomOut(PostProcessingBehaviour postProcessingBehaviour)
-//    {
-//        postProcessingBehaviour.profile.bloom.enabled = true;
-//        var settings = activeCamera.GetComponent<PostProcessingBehaviour>().profile.bloom.settings;
-//        while (settings.bloom.intensity - BLOOM_INTENSITY_STEP > 0)
-//        {
-//            settings.bloom.intensity -= BLOOM_INTENSITY_STEP;
-//            postProcessingBehaviour.profile.bloom.settings = settings;
-//            yield return new WaitForSecondsRealtime(0.25f);
-//        }
-//    }
 
     private void Vignette()
     {
         activeCamera.GetComponent<PostProcessingBehaviour>().profile = vignetteEffect;
+    }
+
+    private IEnumerator LightingChanges(Color32 newColor, float newIntensity = 1)
+    {
+        Debug.Log("LightingChanges");
+
+        oldLightingColor = mainLight.color;
+        newLightingColor = newColor;
+
+//        mainLight.GetComponent<Light>().color = newColor;
+//        yield break;
+
+        StartCoroutine(GraduallyChangeLightIntensity(newIntensity));
+
+        var lightLerp = 0f;
+        while (lightLerp < 1)
+        {
+            mainLight.GetComponent<Light>().color = Color32.Lerp(oldLightingColor, newColor, lightLerp);
+            yield return new WaitForSecondsRealtime(0.15f);
+            lightLerp += 0.05f; // waiting time: 0.15 / 0.05 = 3 secs
+            Debug.Log("lerp: " + lightLerp);
+        }
+    }
+
+    private IEnumerator GraduallyChangeLightIntensity(float newIntensity)
+    {
+        if (mainLight.intensity < newIntensity)
+        {
+            while (mainLight.intensity + LIGHT_INTENSITY_STEP < newIntensity)
+            {
+                mainLight.intensity += LIGHT_INTENSITY_STEP;
+                yield return new WaitForSecondsRealtime(0.25f);
+            }
+        }
+        else
+        {
+            while (mainLight.intensity - LIGHT_INTENSITY_STEP > newIntensity)
+            {
+                mainLight.intensity -= LIGHT_INTENSITY_STEP;
+                yield return new WaitForSecondsRealtime(0.25f);
+            }
+        }
     }
 
     private void LightsCameraAction(int Num)
@@ -715,19 +738,6 @@ public class GameController : MonoBehaviour
         {
             SpotLight2.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
         }
-    }
-
-
-    private void LightingChanges(int newIntensity, Color32 newColor)
-    {
-        var Lightbulb = room.transform.Find("Lightbulb").gameObject;
-        var Lights = Lightbulb.transform.Find("Lamp").gameObject;
-
-        Lights.GetComponent<Light>().intensity = newIntensity;
-        Lights.GetComponent<Light>().color = newColor;
-        // TODO consider smoothing the changes in update() using e.g. docs.unity3d.com/ScriptReference/Light-color.html
-        var lightComponent = Lights.GetComponent<Light>();
-        Color.Lerp(lightComponent.color, newColor, 3f);
     }
 
 
