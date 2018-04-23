@@ -9,7 +9,6 @@ import os
 
 # shutil copytree helper function (copy directories and subdirectories without files)
 def ig_f(dir, files):
-
     return [f for f in files if os.path.isfile(os.path.join(dir, f))]
 
 # normalize using target amplitude matching
