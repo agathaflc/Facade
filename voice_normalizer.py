@@ -32,9 +32,9 @@ if __name__ == "__main__":
     NEW_ROOT = "Assets/Resources/audio/normalized_voices"
     new_wav_filepaths = n_files = [NEW_ROOT + x.split('/audio')[1] for x in orig_wav_filepaths]
 
-    shutil.copytree('Assets/Resources/audio/Act1', 'Assets/Resources/audio/normalized_voices/Act1', ignore=ig_f)
-    shutil.copytree('Assets/Resources/audio/BadCop', 'Assets/Resources/audio/normalized_voices/BadCop', ignore=ig_f)
-    shutil.copytree('Assets/Resources/audio/Act3', 'Assets/Resources/audio/normalized_voices/Act3', ignore=ig_f)
+    # shutil.copytree('Assets/Resources/audio/Act1', 'Assets/Resources/audio/normalized_voices/Act1', ignore=ig_f)
+    # shutil.copytree('Assets/Resources/audio/BadCop', 'Assets/Resources/audio/normalized_voices/BadCop', ignore=ig_f)
+    # shutil.copytree('Assets/Resources/audio/Act3', 'Assets/Resources/audio/normalized_voices/Act3', ignore=ig_f)
 
     AVG_TARGET_AMPLITUDE = -15.0
 
