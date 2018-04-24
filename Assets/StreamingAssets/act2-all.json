@@ -25,7 +25,7 @@
       "effects": [
         {
           "type": "vignette",
-          "intensity": 0.37,
+          "intensity": 0.32,
           "colorR": 0,
           "colorG": 0,
           "colorB": 0,
@@ -284,7 +284,17 @@
           "considersEmotion": true,
           "considersFact": true,
           "filePath": "audio/BadCop/QUESTIONS/Q7",
+          "bgm": {
+            "fileName": "audio/bgm/Act2_Sad_Scared_50",
+            "seek": 50
+          },
           "questionText": "And were you intoxicated in any way?",
+          "effect": [
+            {
+              "type": "motionBlur",
+              "status": "on"
+            }
+          ],
           "answers": [
             {
               "answerId": "190",
@@ -346,7 +356,12 @@
       "sequenceType": "dialog",
       "filePath": "audio/BadCop/SENTENCES/S6 - THESE BRIGHT LIGHTS",
       "subtitleText": "These bright lights must be bothering you huh?",
-      "effect": "bloom"
+      "effects": [
+        {
+          "type": "bloom",
+          "intensity": 0.25
+        }
+      ]
     },
     {
       "sequenceType": "dialog",
@@ -563,9 +578,24 @@
       "sequenceType": "dialog",
       "filePath": "audio/BadCop/SENTENCES/S8 - YOU MUST HAVE HAD",
       "subtitleText": "You must have had a really bad relationship with the victim huh? You seem like the kinda guy who'd get rid of someone they didn't like..",
-      "effect": "vignette",
       "animationNo": 15,
-      "animatorLayer": 1
+      "animatorLayer": 1,
+      "effects": [
+        {
+          "type": "bloom",
+          "intensity": 0
+        },
+        {
+          "type": "vignette",
+          "intensity": 0.45,
+          "colorR": 0,
+          "colorG": 0,
+          "colorB": 0,
+          "colorA": 255,
+          "smoothness": 1,
+          "roundness": 1
+        }
+      ]
     },
     {
       "sequenceType": "question",
@@ -626,7 +656,26 @@
       "sequenceType": "dialog",
       "filePath": "audio/BadCop/SENTENCES/enoughReverb1",
       "subtitleText": "Enough! I don’t know why I’m sitting here wasting my time asking you these questions.",
-      "animationNo": 8
+      "animationNo": 8,
+      "effect": [
+        {
+          "type": "motionBlur",
+          "status": "intensify"
+        }
+      ],
+      "hasLightingEffect": true,
+      "lighting": {
+        "intensity": 1,
+        "colorR": 72,
+        "colorG": 0,
+        "colorB": 0,
+        "colorA": 255
+      },
+      "playCustomBgm": true,
+      "bgm": {
+        "fileName": "audio/bgm/Act2_Angry_Surprised_40",
+        "seek": 40
+      }
     },
     {
       "sequenceType": "dialog",
@@ -680,7 +729,15 @@
       "sequenceType": "dialog",
       "filePath": "audio/BadCop/SENTENCES/S13_0 - TO YOU",
       "subtitleText": "Her cold dead body is being examined right now as we speak, and all we need is just a connection to you.",
-      "animationNo": 2
+      "animationNo": 2,
+      "hasLightingEffect": true,
+      "lighting": {
+        "intensity": 1,
+        "colorR": 183,
+        "colorG": 0,
+        "colorB": 0,
+        "colorA": 255
+      }
     },
     {
       "sequenceType": "timeline",

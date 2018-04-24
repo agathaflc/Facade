@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour
     private const string EFFECT_STATUS_INTENSIFY = "intensify";
 
     private const float LIGHT_INTENSITY_STEP = 0.25f;
-    private const float BLOOM_INTENSITY_STEP = 0.5f;
+    private const float BLOOM_INTENSITY_STEP = 0.05f;
     private const float VIGNETTE_INTENSITY_STEP = 0.005f;
     private const float MOTION_BLUR_SHUTTER_ANGLE_STEP = 10f;
     private const float MOTION_BLUR_DEFAULT_SHUTTER_ANGLE = 210f;
@@ -54,6 +54,7 @@ public class GameController : MonoBehaviour
     public bool runTimeline;
     public bool skipAct;
     public bool skipPostActReport;
+    public bool bgmOff;
 
     public int skipToAct;
 
@@ -282,11 +283,13 @@ public class GameController : MonoBehaviour
         UnsetDetectiveAnimator();
         PlayTimeline(playableDirector);
 
+        var crossFaded = false;
         while (playableDirector.state == PlayState.Playing)
         {
-            if (currentSequence.earlyFade && playableDirector.time >= playableDirector.playableAsset.duration - 1)
+            if (currentSequence.earlyFade && !crossFaded && playableDirector.time >= playableDirector.playableAsset.duration - 4.5)
             {
-                BlackScreenDisplay.CrossFadeAlpha(1, 0.1f, true);
+                BlackScreenDisplay.CrossFadeAlpha(1, 2.5f, true);
+                crossFaded = true;
                 EndRound();
             }
 
@@ -381,8 +384,9 @@ public class GameController : MonoBehaviour
 
             ShowAndPlayDialog(DataController.LoadAudioFile(currentSequence.filePath), currentSequence.subtitleText);
 
-            if (string.IsNullOrEmpty(currentSequence.bgm.fileName))
+            if (currentSequence.playCustomBgm)
             {
+                Debug.Log("playCustomBgm in dialog");
                 PlayBgm(DataController.LoadAudioFile(currentSequence.bgm.fileName), "special_bgm",
                     currentSequence.bgm.seek);
             }
@@ -519,7 +523,7 @@ public class GameController : MonoBehaviour
 
         currentBgm = musicType;
 
-        StartCoroutine(SwitchTracks(clip, seek));
+        if (!bgmOff) StartCoroutine(SwitchTracks(clip, seek));
     }
 
     private void ConcludeEvent()
@@ -833,6 +837,21 @@ public class GameController : MonoBehaviour
         currentQuestion = questionPool[questionIndex];
         questionDisplayText.text = currentQuestion.questionText;
 
+        if (currentQuestion.playCustomBgm)
+        {
+            PlayBgm(DataController.LoadAudioFile(currentQuestion.bgm.fileName), "special_bgm",
+                currentQuestion.bgm.seek);
+        }
+        
+        if (currentQuestion.hasLightingEffect)
+        {
+            var currentLighting = currentQuestion.lighting;
+
+            StartCoroutine(LightingChanges(new Color32(currentLighting.colorR, currentLighting.colorG,
+                currentLighting.colorB,
+                currentLighting.colorA), currentLighting.intensity));
+        }
+        
         if (currentQuestion.considersEmotion)
         {
             FERIndicator.enabled = true;
@@ -992,7 +1011,7 @@ public class GameController : MonoBehaviour
         if (displayedScore < 0) displayedScore = 0;
 
         scoreDisplayText.text = "Suspicion: " + displayedScore.ToString("F2");
-        scoreDisplayerSlider.value = displayedScore / 60;
+        scoreDisplayerSlider.value = displayedScore / MAX_SUSPICION_SCORE;
 
         if (scoreDisplayerSlider.value >= 0.8)
         {

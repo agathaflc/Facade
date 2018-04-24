@@ -6,6 +6,7 @@ public class SequenceData
     public string filePath;
     public string sequenceType;
     public string subtitleText;
+    public bool playCustomBgm;
     public AudioData bgm;
     public bool readExpression;
     public float scoreWeight;

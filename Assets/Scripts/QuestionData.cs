@@ -17,4 +17,7 @@ public class QuestionData
     public SpecialEffect[] effects;
     public bool hasLightingEffect;
     public LightingEffect lighting = null;
+    
+    public bool playCustomBgm;
+    public AudioData bgm;
 }
