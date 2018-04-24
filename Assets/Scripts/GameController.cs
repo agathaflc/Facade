@@ -41,13 +41,11 @@ public class GameController : MonoBehaviour
     private const float MOTION_BLUR_SHUTTER_ANGLE_STEP = 10f;
     private const float MOTION_BLUR_DEFAULT_SHUTTER_ANGLE = 210f;
 
-    private const float EMOTION_DISTANCE_THRESHOLD = 2.0f;
-    private const float FADE_STEP = 0.1f;
     private const float FER_RECORDING_TIME = 4f;
-    public const float MAX_SUSPICION_SCORE = 45f;
     private const float ENDING_DECISION_TIME_LIMIT = 25f;
 
-    public float OVERALL_SCORE_THRESHOLD = 25f; // TODO: FINETUNE THIS
+    public float MAX_SUSPICION_SCORE;
+    public float OVERALL_SCORE_THRESHOLD; // TODO: FINETUNE THIS
     public float musicVolume = 1.0f;
 
     // testing variables
@@ -134,8 +132,6 @@ public class GameController : MonoBehaviour
     private List<QuestionData> allQuestions = new List<QuestionData>();
 
     private float lightingColorTimer;
-    private const float COLOR_FADE_TIME = 2.5F;
-    private const float COLOR_CHANGE_DURATION = 2.5f;
     private const float MAX_COLOR_TIMER = 1f;
 
     private bool isMusicAdaptive;
@@ -1267,36 +1263,41 @@ public class GameController : MonoBehaviour
 
     private void GeneratePostReport(int endnum = 0)
     {
-        if (Cursor.lockState.Equals(CursorLockMode.Locked)) UnlockCursor();
-        playerCamera.GetComponent<PlayerLook>().enabled = false;
-        postReport.SetActive(true);
         string report = "";
-        report = "Investigation case #160418(HO4)" +
-                 "\nStatus: On going " +
-                 "\nDocument classification: Confidential" +
-                 "\nDetective in Charge: Sgt Suzanna Warren" +
-                 "\nDate: 15/06/2017 " +
-                 "\nTime of interrogration: 1900HRS" +
-                 "\nLocation: Mary Hill police station, interrogation room 5" +
-                 "\nThe following details the factual statement as recorded..." +
-                 "\n\nThe suspect stated the following information about themselves..." +
-                 "\n Name: " + GetAnswer(0) +
-                 "\n Age: " + GetAnswer(1) +
-                 "\n Country of Origin: " + GetAnswer(2) +
-                 "\n Dream Frequency: " + GetAnswer(4) +
-                 "\n\nThe suspect claimed that they were at " + GetAnswer(5) + " during the time of the incident " +
-                 "along with " + GetAnswer(6) + " as their alibi." +
-                 " The suspect reported that they went home by " + GetAnswer(8) +
-                 " and arrived home at " + GetAnswer(7) +
-                 "\n\n The suspect stated that they, " + GetAnswer(9) +
-                 ", recognise the victim when showed a picture of Lianne. When prompted to recall if anyone was acting suspiciously during time of incident, the suspect accused " +
-                 GetAnswer(10) + " because of the reason that they " + GetAnswer(11);
 
-        postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
+        if (endnum == 0)
+        {
+            if (Cursor.lockState.Equals(CursorLockMode.Locked)) UnlockCursor();
+            playerCamera.GetComponent<PlayerLook>().enabled = false;
+            postReport.SetActive(true);
+            report = "Investigation case #160418(HO4)" +
+                     "\nStatus: On going " +
+                     "\nDocument classification: Confidential" +
+                     "\nDetective in Charge: Sgt Suzanna Warren" +
+                     "\nDate: 15/06/2017 " +
+                     "\nTime of interrogration: 1900HRS" +
+                     "\nLocation: Mary Hill police station, interrogation room 5" +
+                     "\nThe following details the factual statement as recorded..." +
+                     "\n\nThe suspect stated the following information about themselves..." +
+                     "\n Name: " + GetAnswer(0) +
+                     "\n Age: " + GetAnswer(1) +
+                     "\n Country of Origin: " + GetAnswer(2) +
+                     "\n Dream Frequency: " + GetAnswer(4) +
+                     "\n\nThe suspect claimed that they were at " + GetAnswer(5) + " during the time of the incident " +
+                     "along with " + GetAnswer(6) + " as their alibi." +
+                     " The suspect reported that they went home by " + GetAnswer(8) +
+                     " and arrived home at " + GetAnswer(7) +
+                     "\n\n The suspect stated that they, " + GetAnswer(9) +
+                     ", recognise the victim when showed a picture of Lianne. When prompted to recall if anyone was acting suspiciously during time of incident, the suspect accused " +
+                     GetAnswer(10) + " because of the reason that they " + GetAnswer(11);
+
+            postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text =
+                report;
+        }
 
         // call GeneratePostReport(1/2) at corresponding times. 
         //endnum 1 = Good reality ending
-        if (endnum == 1)
+        else if (endnum == 1)
         {
             report = report + "\n\n-----------------------------New Entry-----------------------------" +
                      "\nInvestigation case #160418(HO4)" +
@@ -1316,7 +1317,7 @@ public class GameController : MonoBehaviour
         }
 
         //endnum 2 = Bad reality ending 
-        if (endnum == 2)
+        else if (endnum == 2)
         {
             report = report + "\n\n-----------------------------New Entry-----------------------------" +
                      "\nInvestigation case #160418(HO4)" +
@@ -1388,12 +1389,12 @@ public class GameController : MonoBehaviour
     {
         if (shoot)
         {
-            GeneratePostReport(2);
+            if (!skipPostActReport) GeneratePostReport(2);
             Initiate.Fade(consistent ? "Ending1" : "Ending3", Color.black, 0.8f);
         }
         else
         {
-            GeneratePostReport(1);
+            if (!skipPostActReport) GeneratePostReport(1);
             Initiate.Fade(consistent ? "Ending4" : "Ending2", Color.black, 0.8f);
         }
     }

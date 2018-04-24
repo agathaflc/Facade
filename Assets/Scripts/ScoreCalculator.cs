@@ -61,7 +61,7 @@ public static class ScoreCalculator
                 {
                     minDistance = currentDistance;
                     closestEmotionIndex = i;
-                    Debug.Log("new min distance: " + minDistance + ", updated");
+//                    Debug.Log("new min distance: " + minDistance + ", updated");
                 }
             }
         }
