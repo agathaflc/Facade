@@ -11,7 +11,6 @@ public class SpecialEffect
     public float intensity; // for bloom (0~infinity (i'd say max 8)), vignette (0~1)
     
     // for vignette
-    public Color32 color;
     public byte colorR;
     public byte colorG;
     public byte colorB;

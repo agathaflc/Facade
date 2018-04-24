@@ -117,6 +117,9 @@ public class GameController : MonoBehaviour
     public RuntimeAnimatorController kiraStandUpController;
     private Animator currentDetectiveAnimator;
 
+    public AudioClip gunShot;
+    public AudioSource soundEffectAudioSource;
+
     private int currentActNo;
 
     private int animationNoHash = Animator.StringToHash("animationNo");
@@ -286,7 +289,8 @@ public class GameController : MonoBehaviour
         var crossFaded = false;
         while (playableDirector.state == PlayState.Playing)
         {
-            if (currentSequence.earlyFade && !crossFaded && playableDirector.time >= playableDirector.playableAsset.duration - 7)
+            if (currentSequence.earlyFade && !crossFaded &&
+                playableDirector.time >= playableDirector.playableAsset.duration - 7)
             {
                 BlackScreenDisplay.CrossFadeAlpha(1, 2.5f, true);
                 crossFaded = true;
@@ -332,7 +336,20 @@ public class GameController : MonoBehaviour
             detectiveObject.SetActive(false);
             ApplyEndingCamera();
             endingDecisionDisplay.SetActive(true);
-            ShowSpecialEffect(EFFECT_VIGNETTE);
+
+            var vignette = new SpecialEffect
+            {
+                type = EFFECT_VIGNETTE,
+                intensity = 0.6f,
+                colorR = 0,
+                colorG = 0,
+                colorB = 0,
+                colorA = 1,
+                roundness = 1,
+                smoothness = 1
+            };
+
+            ShowSpecialEffect(vignette);
 
             decisionTimeRemaining = ENDING_DECISION_TIME_LIMIT;
             isEndingTimerActive = true;
@@ -342,8 +359,6 @@ public class GameController : MonoBehaviour
             {
                 yield return null;
             }
-
-            isEventDone = true;
         }
 
         else if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_QUESTION))
@@ -453,6 +468,7 @@ public class GameController : MonoBehaviour
             {
                 BlackScreenDisplay.CrossFadeAlpha(0, 1f, true);
             }
+
             StartCoroutine(RunTimeline());
 
             while (!isEventDone)
@@ -843,7 +859,7 @@ public class GameController : MonoBehaviour
             PlayBgm(DataController.LoadAudioFile(currentQuestion.bgm.fileName), "special_bgm",
                 currentQuestion.bgm.seek);
         }
-        
+
         if (currentQuestion.hasLightingEffect)
         {
             var currentLighting = currentQuestion.lighting;
@@ -852,7 +868,7 @@ public class GameController : MonoBehaviour
                 currentLighting.colorB,
                 currentLighting.colorA), currentLighting.intensity));
         }
-        
+
         if (currentQuestion.considersEmotion)
         {
             FERIndicator.enabled = true;
@@ -1408,19 +1424,31 @@ public class GameController : MonoBehaviour
         playerCamera.enabled = false;
         finalCamera.enabled = true;
         activeCamera = finalCamera;
+        SetDefaultProcessingBehaviourProfiles();
+
         tableGun.GetComponent<Collider>().enabled = true;
     }
 
     public void EndingScene(bool shoot)
     {
-        EndingScene(shoot, dataController.GetOverallScore() <= OVERALL_SCORE_THRESHOLD);
+        StartCoroutine(EndingScene(shoot, dataController.GetOverallScore() <= OVERALL_SCORE_THRESHOLD));
     }
 
-    private void EndingScene(bool shoot, bool consistent)
+    private IEnumerator EndingScene(bool shoot, bool consistent)
     {
         if (shoot)
         {
+            isEndingTimerActive = false;
             if (!skipPostActReport) GeneratePostReport(2);
+            BlackScreenDisplay.CrossFadeAlpha(1, 2f, true);
+
+            yield return new WaitForSecondsRealtime(4f);
+
+            soundEffectAudioSource.clip = gunShot;
+            soundEffectAudioSource.Play();
+
+            yield return new WaitForSecondsRealtime(4f);
+
             Initiate.Fade(consistent ? "Ending1" : "Ending3", Color.black, 0.8f);
         }
         else

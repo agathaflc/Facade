@@ -42,6 +42,9 @@
   },
   "sequence": [
     {
+      "sequenceType": "timeline"
+    },
+    {
       "sequenceType": "endingDecision",
       "questions": [
         {

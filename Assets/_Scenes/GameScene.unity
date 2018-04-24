@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -663,9 +663,8 @@ Transform:
   m_LocalScale: {x: 0.10000006, y: 0.1, z: 0.10000006}
   m_Children:
   - {fileID: 1660801659}
-  - {fileID: 489868754}
   m_Father: {fileID: 874671094}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 359.6205, z: 0}
 --- !u!95 &65289691
 Animator:
@@ -3472,11 +3471,11 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 489868750}
-  m_LocalRotation: {x: 0.21263106, y: 0.67437977, z: -0.21263106, w: 0.67437977}
-  m_LocalPosition: {x: 3, y: -1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: 0.95371693, z: -0.30070573, w: 0}
+  m_LocalPosition: {x: 0.03099981, y: 0.15378815, z: -0.30793726}
+  m_LocalScale: {x: 0.10000015, y: 0.10000004, z: 0.10000012}
   m_Children: []
-  m_Father: {fileID: 65289689}
+  m_Father: {fileID: 874671094}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 35, y: 90, z: 0}
 --- !u!114 &489868755
@@ -4611,7 +4610,7 @@ RectTransform:
   - {fileID: 666436611}
   - {fileID: 111432938}
   m_Father: {fileID: 1530422157}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -6011,6 +6010,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1321651009}
+  - {fileID: 489868754}
   - {fileID: 65289689}
   m_Father: {fileID: 0}
   m_RootOrder: 10
@@ -6630,6 +6630,8 @@ MonoBehaviour:
   kiraController: {fileID: 9100000, guid: 560c5d03be8502f409d6ef2c91f9d87c, type: 2}
   kiraStandUpController: {fileID: 9100000, guid: f6f3e7632ac195b4894b2b97b0431724,
     type: 2}
+  gunShot: {fileID: 8300000, guid: 8076aa402a84e914a86c9d8e4707ffa1, type: 3}
+  soundEffectAudioSource: {fileID: 1970018988}
   selectedBoldAnswer: {fileID: 0}
 --- !u!4 &1022346134
 Transform:
@@ -7449,14 +7451,14 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1181717258}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 109030375}
   - {fileID: 1849033633}
-  m_Father: {fileID: 1530422157}
-  m_RootOrder: 5
+  m_Father: {fileID: 1814613340}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8843,7 +8845,6 @@ RectTransform:
   - {fileID: 1814613340}
   - {fileID: 386745627}
   - {fileID: 278261093}
-  - {fileID: 1181717259}
   - {fileID: 649938491}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -10804,6 +10805,7 @@ RectTransform:
   - {fileID: 1712600186}
   - {fileID: 1450822784}
   - {fileID: 1720664494}
+  - {fileID: 1181717259}
   - {fileID: 2119917730}
   m_Father: {fileID: 1530422157}
   m_RootOrder: 2
@@ -11649,7 +11651,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -12376,7 +12378,7 @@ RectTransform:
   m_LocalScale: {x: 2.2587433, y: 17.043264, z: 2.258743}
   m_Children: []
   m_Father: {fileID: 1814613340}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
