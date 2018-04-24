@@ -18,21 +18,5 @@
   },
   "showGun": false,
   "sequence": [
-    {
-      "sequenceType": "timeline"
-    },
-    {
-      "sequenceType": "dialog",
-      "filePath": "audio/Act1/Sentences/S10_1_well_you_see",
-      "subtitleText": "Well you see, last night there was an accident...",
-      "hasLightingEffect": true,
-      "lighting": {
-        "intensity": 3,
-        "colorR": 245,
-        "colorG": 255,
-        "colorB": 173,
-        "colorA": 200
-      }
-    }
   ]
 }

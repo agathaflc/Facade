@@ -18,6 +18,24 @@
   },
   "sequence": [
     {
+      "sequenceType": "dialog",
+      "filePath": "audio/SoundEffects/metalic_door_slam_short",
+      "turnOnSpotlight": true,
+      "subtitleText": "",
+      "effects": [
+        {
+          "type": "vignette",
+          "intensity": 0.37,
+          "colorR": 0,
+          "colorG": 0,
+          "colorB": 0,
+          "colorA": 255,
+          "smoothness": 1,
+          "roundness": 1
+        }
+      ]
+    },
+    {
       "sequenceType": "timeline"
     },
     {

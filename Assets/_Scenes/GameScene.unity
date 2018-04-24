@@ -6596,6 +6596,8 @@ MonoBehaviour:
   goodCop: {fileID: 1749480195}
   tableGun: {fileID: 2125480158}
   mainLight: {fileID: 1822074343}
+  spotLight1: {fileID: 1322763238}
+  spotLight2: {fileID: 1472231129}
   oldLightingColor:
     serializedVersion: 2
     rgba: 0

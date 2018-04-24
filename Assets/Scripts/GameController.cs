@@ -83,6 +83,8 @@ public class GameController : MonoBehaviour
     public GameObject tableGun;
 
     public Light mainLight;
+    public Light spotLight1;
+    public Light spotLight2;
     public Color32 oldLightingColor;
     public Color32 newLightingColor;
 
@@ -157,6 +159,8 @@ public class GameController : MonoBehaviour
     {
         activeCamera = playerCamera;
         SetDefaultProcessingBehaviourProfiles();
+
+        BlackScreenDisplay.color = new Color32(0, 0, 0, 255);
 
         lightingColorTimer = MAX_COLOR_TIMER;
 
@@ -351,6 +355,12 @@ public class GameController : MonoBehaviour
             LockCursor();
             isEventDone = false;
 
+            if (currentSequence.turnOnSpotlight)
+            {
+                LightsCameraAction(1);
+                LightsCameraAction(2);
+            }
+
             var currentEffects = currentSequence.effects;
             if (currentEffects != null && currentEffects.Length > 0) // show special effects if any
             {
@@ -433,6 +443,11 @@ public class GameController : MonoBehaviour
         else if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_TIMELINE))
         {
             isEventDone = false;
+
+            if (BlackScreenDisplay.color.a > 0)
+            {
+                BlackScreenDisplay.CrossFadeAlpha(0, 1f, true);
+            }
             StartCoroutine(RunTimeline());
 
             while (!isEventDone)
@@ -724,20 +739,16 @@ public class GameController : MonoBehaviour
 
     private void LightsCameraAction(int Num)
     {
-        var Lightbulb = room.transform.Find("Lightbulb").gameObject;
-        var Lights = Lightbulb.transform.Find("Lamp").gameObject;
-        Lights.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
-
-        var SpotLight1 = room.transform.Find("Spot light 1").gameObject;
-        var SpotLight2 = room.transform.Find("Spot light 2").gameObject;
-        if (Num == 1)
+        switch (Num)
         {
-            SpotLight1.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
-        }
-
-        if (Num == 2)
-        {
-            SpotLight2.GetComponent<Light>().enabled = !Lights.GetComponent<Light>().enabled;
+            case 1:
+                spotLight1.enabled = true;
+                break;
+            case 2:
+                spotLight2.enabled = true;
+                break;
+            default:
+                break;
         }
     }
 

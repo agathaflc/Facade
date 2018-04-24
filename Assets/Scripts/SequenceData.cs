@@ -21,5 +21,6 @@ public class SequenceData
     public SpecialEffect[] effects;
     public bool hasLightingEffect;
     public bool usemaxBgm;
+    public bool turnOnSpotlight;
     public LightingEffect lighting = null;
 }
