@@ -18,5 +18,158 @@
   },
   "showGun": false,
   "sequence": [
+    {
+      "sequenceType": "timeline"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S10_1_well_you_see",
+      "subtitleText": "Well you see, last night there was an accident...",
+      "hasLightingEffect": true,
+      "lighting": {
+        "intensity": 0.8,
+        "colorR": 249,
+        "colorG": 198,
+        "colorB": 189,
+        "colorA": 224
+      }
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S10_2_well_were_not_so_sure",
+      "subtitleText": "Well we’re not sure it was an accident.",
+      "animationNo": 41,
+      "animatorLayer": 1,
+      "effects": [
+        {
+          "type": "vignette",
+          "intensity": 0.5,
+          "colorR": 0,
+          "colorG": 72,
+          "colorB": 126,
+          "colorA": 178,
+          "smoothness": 0.3,
+          "roundness": 0.5
+        }
+      ]
+    },
+    {
+      "sequenceType": "question",
+      "questions": [
+        {
+          "questionDesc": "Victim Intro",
+          "questionId": "10",
+          "expressionWeight": 0.3,
+          "consistencyWeight": 0.7,
+          "considersEmotion": true,
+          "considersFact": true,
+          "filePath": "audio/Act1/Questions/Q10_Do_you_recognise",
+          "questionText": "Do you recognize this person from last night?",
+          "effects": [
+            {
+              "type": "bloom",
+              "intensity": 5.3
+            },
+            {
+              "type": "motionBlur",
+              "status": "on"
+            }
+          ],
+          "answers": [
+            {
+              "answerId": "100",
+              "answerText": "Yes",
+              "expectedExpressions": [
+                "neutral",
+                "sad",
+                "scared"
+              ],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "101",
+              "answerText": "No",
+              "expectedExpressions": [
+                "neutral",
+                "scared"
+              ],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "102",
+              "answerText": "Somewhat",
+              "expectedExpressions": [
+                "neutral",
+                "sad",
+                "scared"
+              ],
+              "detectiveResponse": "neutral"
+            },
+            {
+              "answerId": "103",
+              "answerText": "I don't remember",
+              "expectedExpressions": [
+                "neutral",
+                "scared"
+              ],
+              "detectiveResponse": "negative"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S11_0_You_see_this_girl",
+      "subtitleText": "You see.. this girl was found dead last night. Her name was Lianne. It’s a real tragedy."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S11_1_her_name",
+      "readExpression": true,
+      "scoreWeight": 3,
+      "expectedExpressions": [
+        "scared",
+        "surprised",
+        "angry",
+        "sad"
+      ],
+      "subtitleText": "You see.. this girl was found dead last night. Her name was Lianne. It’s a real tragedy.",
+      "animationNo": 41,
+      "animatorLayer": 1,
+      "effects": [
+        {
+          "type": "bloom",
+          "intensity": 0
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S12_0_I_can_t_begin_to_imagine",
+      "subtitleText": "I can’t even begin to imagine what her family is going through.",
+      "effects": [
+        {
+          "type": "vignette",
+          "intensity": 0,
+          "colorR": 0,
+          "colorG": 0,
+          "colorB": 0,
+          "colorA": 1,
+          "smoothness": 0.5,
+          "roundness": 0.4
+        },
+        {
+          "type": "motionBlur",
+          "status": "off"
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S12_1_i_would_be_devastated",
+      "subtitleText": "I would be devastated if something like this happened to my little girl.",
+      "animationNo": 3
+    }
   ]
 }
