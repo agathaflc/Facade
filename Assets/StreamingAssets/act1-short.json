@@ -27,11 +27,11 @@
       "subtitleText": "Well you see, last night there was an accident...",
       "hasLightingEffect": true,
       "lighting": {
-        "intensity": 3,
-        "colorR": 245,
-        "colorG": 255,
-        "colorB": 173,
-        "colorA": 200
+        "intensity": 0.8,
+        "colorR": 249,
+        "colorG": 198,
+        "colorB": 189,
+        "colorA": 224
       }
     },
     {
@@ -43,13 +43,13 @@
       "effects": [
         {
           "type": "vignette",
-          "intensity": 0.8,
+          "intensity": 0.5,
           "colorR": 0,
-          "colorG": 50,
-          "colorB": 132,
-          "colorA": 180,
-          "smoothness": 0.5,
-          "roundness": 0.4
+          "colorG": 72,
+          "colorB": 126,
+          "colorA": 178,
+          "smoothness": 0.3,
+          "roundness": 0.5
         }
       ]
     },

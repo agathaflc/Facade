@@ -206,10 +206,10 @@
       "animationNo": 19,
       "hasLightingEffect": true,
       "lighting": {
-        "intensity": 3.4,
-        "colorR": 237,
-        "colorG": 244,
-        "colorB": 152,
+        "intensity": 1.5,
+        "colorR": 248,
+        "colorG": 251,
+        "colorB": 212,
         "colorA": 51
       }
     },
@@ -223,12 +223,12 @@
         {
           "type": "vignette",
           "intensity": 0.6,
-          "colorR": 52,
-          "colorG": 106,
-          "colorB": 125,
-          "colorA": 153,
-          "smoothness": 0.6,
-          "roundness": 0.4
+          "colorR": 0,
+          "colorG": 72,
+          "colorB": 126,
+          "colorA": 178,
+          "smoothness": 0.5,
+          "roundness": 0.5
         }
       ]
     },
@@ -341,23 +341,24 @@
       "filePath": "audio/Act1/Sentences/S9_Anyways_you_don_t_want",
       "subtitleText": "Anyways, you don’t want to hear me go on and on and on about my weird dreams! So let's get back to the case.",
       "animationNo": 19,
+      "hasLightingEffect": true,
       "lighting": {
-        "intensity": 0,
-        "colorR": 100,
-        "colorG": 75,
-        "colorB": 22,
-        "colorA": 0
+        "intensity": 1,
+        "colorR": 255,
+        "colorG": 255,
+        "colorB": 255,
+        "colorA": 255
       },
       "effects": [
         {
           "type": "vignette",
           "intensity": 0,
-          "colorR": 100,
-          "colorG": 75,
-          "colorB": 22,
-          "colorA": 0.8,
+          "colorR": 0,
+          "colorG": 72,
+          "colorB": 126,
+          "colorA": 178,
           "smoothness": 0.5,
-          "roundness": 0.4
+          "roundness": 0.5
         }
       ]
     },

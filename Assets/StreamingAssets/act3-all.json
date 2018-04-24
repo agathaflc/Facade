@@ -42,12 +42,29 @@
   },
   "sequence": [
     {
+      "sequenceType": "dialog",
+      "filePath": "audio/silence_splitsecond",
+      "subtitleText": "",
+      "effects": [
+        {
+          "type": "bloom",
+          "intensity": 8
+        }
+      ]
+    },
+    {
       "sequenceType": "timeline"
     },
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/S2_We_ve_had_a_long_day",
-      "subtitleText": "We’ve all had a long day, right? Don’t you wanna get back home?"
+      "subtitleText": "We’ve all had a long day, right? Don’t you wanna get back home?",
+      "effects":[
+        {
+          "type": "bloom",
+          "intensity": 0
+        }
+      ]
     },
     {
       "sequenceType": "dialog",
@@ -64,7 +81,21 @@
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/VC3/YouLookaLittleSick",
       "subtitleText": "You look a little sick.",
-      "animationNo": 2
+      "animationNo": 2,
+      "hasLightingEffect": true,
+      "lighting": {
+        "intensity": 0.8,
+        "colorR": 204,
+        "colorG": 243,
+        "colorB": 154,
+        "colorA": 200
+      },
+      "effects": [
+        {
+          "type": "motionBlur",
+          "status": "on"
+        }
+      ]
     },
     {
       "sequenceType": "question",
@@ -121,7 +152,23 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/S6_0_I_gotta_be_honest_with_you",
-      "subtitleText": "I gotta be honest with you, this case is really getting to me."
+      "subtitleText": "I gotta be honest with you, this case is really getting to me.",
+      "effects": [
+        {
+          "type": "motionBlur",
+          "status": "off"
+        },
+        {
+          "type": "vignette",
+          "intensity": 0.6,
+          "colorR": 81,
+          "colorG": 39,
+          "colorB": 0,
+          "colorA": 224,
+          "smoothness": 0.8,
+          "roundness": 0.5
+        }
+      ]
     },
     {
       "sequenceType": "dialog",
@@ -158,7 +205,15 @@
       "filePath": "audio/Act3/Sentence/VC3/aGunshotToTheBack",
       "subtitleText": "A gunshot to the back really says a lot about a person...",
       "animationNo": 40,
-      "animatorLayer": 1
+      "animatorLayer": 1,
+      "hasLightingEffect": true,
+      "lighting": {
+        "intensity": 1,
+        "colorR": 255,
+        "colorG": 255,
+        "colorB": 255,
+        "colorA": 255
+      }
     },
     {
       "sequenceType": "question",
@@ -213,9 +268,15 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/youKnowYourAlibi",
+      "filePath": "audio/Act3/Sentence/VC3/youKnowYourAlibi",
       "subtitleText": "You know your alibi was going on and on about how she had never seen you so drunk before last night.",
-      "animationNo": 4
+      "animationNo": 4,
+      "effects": [
+        {
+          "type": "motionBlur",
+          "status": "on"
+        }
+      ]
     },
     {
       "sequenceType": "question",
@@ -396,13 +457,39 @@
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/VC3/S15_Oh_did_I_ask_you_already R",
       "subtitleText": "Oh did I ask you that already? My bad.. I just want to make sure I have all my facts straight.",
-      "animationNo": 8
+      "animationNo": 8,
+      "hasLightingEffect": true,
+      "lighting": {
+        "intensity": 0.9,
+        "colorR": 252,
+        "colorG": 230,
+        "colorB": 226,
+        "colorA": 245
+      },
+      "effects":[
+        {
+          "type": "vignette",
+          "intensity": 0.4,
+          "colorR": 81,
+          "colorG": 39,
+          "colorB": 0,
+          "colorA": 245,
+          "smoothness": 0.8,
+          "roundness": 0.5
+        }
+      ]
     },
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/VC3/JUST LIKE YOU REV",
       "subtitleText": "Just like you.. We both know who’s really in control here.",
-      "animationNo": 2
+      "animationNo": 2,
+      "effects": [
+        {
+          "type": "bloom",
+          "intensity": 8
+        }
+      ]
     },
     {
       "sequenceType": "dialog",
@@ -479,6 +566,12 @@
           "considersEmotion": true,
           "considersFact": true,
           "filePath": "audio/Act3/Question/Q8_Then_tell_me_WHY",
+          "effects": [
+            {
+              "type": "bloom",
+              "intensity": 0
+            }
+          ],
           "questionText": "Then tell me, WHY did you have your gun on you last night? Was it really that necessary?",
           "answers": [
             {
@@ -593,17 +686,62 @@
       "filePath": "audio/Act3/Sentence/VC3/S18_Hah_of_course R",
       "subtitleText": "Hah... of course you would say that.",
       "animationNo": 41,
-      "animatorLayer": 1
+      "animatorLayer": 1,
+      "effects":[
+        {
+          "type": "motionBlur",
+          "status": "intensify"
+        },
+        {
+          "type": "vignette",
+          "intensity": 0.8,
+          "colorR": 81,
+          "colorG": 39,
+          "colorB": 0,
+          "colorA": 245,
+          "smoothness": 0.9,
+          "roundness": 0.5
+        },
+        {
+          "type": "bloom",
+          "intensity": 7
+        }
+      ],
+      "usemaxBgm": true
     },
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/VC3/YoureAPrideful",
-      "subtitleText": "You’re a prideful person, aren’t you?"
+      "subtitleText": "You’re a prideful person, aren’t you?",
+      "effects": [
+        {
+          "type": "vignette",
+          "intensity": 0.6,
+          "colorR": 81,
+          "colorG": 39,
+          "colorB": 0,
+          "colorA": 245,
+          "smoothness": 0.9,
+          "roundness": 0.5
+        }
+      ]
     },
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/VC3/theKindaPersonWhoWouldnt",
-      "subtitleText": "The kind of person who wouldn’t be able to handle it if someone else was getting ahead of them..."
+      "subtitleText": "The kind of person who wouldn’t be able to handle it if someone else was getting ahead of them...",
+      "effects": [
+        {
+          "type": "vignette",
+          "intensity": 0.8,
+          "colorR": 81,
+          "colorG": 39,
+          "colorB": 0,
+          "colorA": 245,
+          "smoothness": 0.9,
+          "roundness": 0.5
+        }
+      ]
     },
     {
       "sequenceType": "dialog",
@@ -614,7 +752,19 @@
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/VC3/YouUsedToBeTheOne2",
       "subtitleText": "You used to be the one everyone loved, until you and Lianne had that fight. And then everyone took her side over yours.",
-      "animationNo": 93
+      "animationNo": 93,
+      "effects": [
+        {
+          "type": "vignette",
+          "intensity": 0.4,
+          "colorR": 81,
+          "colorG": 39,
+          "colorB": 0,
+          "colorA": 245,
+          "smoothness": 0.9,
+          "roundness": 0.5
+        }
+      ]
     },
     {
       "sequenceType": "dialog",
@@ -632,18 +782,54 @@
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/VC3/isThatWhyYouFOloowedher",
       "subtitleText": "Is that why you followed her to the bathroom last night?",
-      "animationNo": 96
+      "animationNo": 96,
+      "effects": [
+        {
+          "type": "vignette",
+          "intensity": 0.9,
+          "colorR": 81,
+          "colorG": 39,
+          "colorB": 0,
+          "colorA": 245,
+          "smoothness": 0.9,
+          "roundness": 0.5
+        }
+      ]
     },
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/VC3/andMadeSuretoTakeYourGun",
-      "subtitleText": "And made sure to take your gun with you?"
+      "subtitleText": "And made sure to take your gun with you?",
+      "effects": [
+        {
+          "type": "vignette",
+          "intensity": 0.7,
+          "colorR": 81,
+          "colorG": 39,
+          "colorB": 0,
+          "colorA": 245,
+          "smoothness": 0.9,
+          "roundness": 0.5
+        }
+      ]
     },
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/VC3/andWhyNooneCouldFindYOuwhen",
       "subtitleText": "And why no one could find you when the gunshot was heard?",
-      "animationNo": 97
+      "animationNo": 97,
+      "effects": [
+        {
+          "type": "vignette",
+          "intensity": 0.9,
+          "colorR": 81,
+          "colorG": 39,
+          "colorB": 0,
+          "colorA": 245,
+          "smoothness": 0.9,
+          "roundness": 0.5
+        }
+      ]
     },
     {
       "sequenceType": "dialog",
@@ -706,6 +892,39 @@
               ]
             }
           ]
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/silence_splitsecond",
+      "subtitleText": "",
+      "hasLightingEffect": true,
+      "lighting": {
+        "intensity": 1,
+        "colorR": 255,
+        "colorG": 255,
+        "colorB": 255,
+        "colorA": 255
+      },
+      "effects":[
+        {
+          "type": "motionBlur",
+          "status": "off"
+        },
+        {
+          "type": "vignette",
+          "intensity": 0,
+          "colorR": 81,
+          "colorG": 39,
+          "colorB": 0,
+          "colorA": 245,
+          "smoothness": 0.9,
+          "roundness": 0.5
+        },
+        {
+          "type": "bloom",
+          "intensity": 0
         }
       ]
     },
