@@ -138,6 +138,7 @@ public class GameController : MonoBehaviour
     private const float COLOR_CHANGE_DURATION = 2.5f;
     private const float MAX_COLOR_TIMER = 1f;
 
+    private bool isMusicAdaptive;
     private bool isTimerActive;
     private bool isEndingTimerActive;
     private bool isEventDone;
@@ -226,6 +227,7 @@ public class GameController : MonoBehaviour
         sequenceIndex = 0;
         currentTimelineNo = 0;
 
+        isMusicAdaptive = true;
         isTimerActive = false;
         isEndingTimerActive = false;
         isClarifying = false;
@@ -377,6 +379,13 @@ public class GameController : MonoBehaviour
             {
                 PlayBgm(DataController.LoadAudioFile(currentSequence.bgm.fileName), "special_bgm",
                     currentSequence.bgm.seek);
+            }
+
+            if (currentSequence.usemaxBgm)
+            {
+                isMusicAdaptive = false;
+                PlayBgm(currentActData.bgmLevelClips[currentActData.bgmLevels.Length - 1], "level",
+                    currentActData.bgmLevels[currentBgmLevel].seek);
             }
 
             if (currentDetectiveAnimator != null)
@@ -686,9 +695,6 @@ public class GameController : MonoBehaviour
         oldLightingColor = mainLight.color;
         newLightingColor = newColor;
 
-//        mainLight.GetComponent<Light>().color = newColor;
-//        yield break;
-
         StartCoroutine(GraduallyChangeLightIntensity(newIntensity));
 
         var lightLerp = 0f;
@@ -697,7 +703,6 @@ public class GameController : MonoBehaviour
             mainLight.GetComponent<Light>().color = Color32.Lerp(oldLightingColor, newColor, lightLerp);
             yield return new WaitForSecondsRealtime(0.15f);
             lightLerp += 0.05f; // waiting time: 0.15 / 0.05 = 3 secs
-            Debug.Log("lerp: " + lightLerp);
         }
     }
 
@@ -1057,13 +1062,16 @@ public class GameController : MonoBehaviour
         {
             // if consistencyScore <= 0, it means answer is consistent (consistent = true)
             // if expressionScore <= 0, it means expression is correct (correctExpression = true)
-            AdaptMusicAndLighting(
-                currentQuestion.considersFact,
-                currentQuestion.considersEmotion,
-                closestEmotion,
-                consistencyScore <= 0f,
-                expressionScore <= 0f
-            );
+            if (isMusicAdaptive)
+            {
+                AdaptMusic(
+                    currentQuestion.considersFact,
+                    currentQuestion.considersEmotion,
+                    closestEmotion,
+                    consistencyScore <= 0f,
+                    expressionScore <= 0f
+                );
+            }
 
             if (considerPrevFact && !consistentFact) // player answers inconsistent fact
             {
@@ -1130,7 +1138,7 @@ public class GameController : MonoBehaviour
     /**
      * follows the algorithm here: https://trello.com/c/TDz6Ixgb/31-dream-building-algorithm
      * */
-    private void AdaptMusicAndLighting(
+    private void AdaptMusic(
         bool considerConsistency,
         bool considerEmotion,
         string emotion = DEFAULT_EMOTION,
@@ -1193,7 +1201,7 @@ public class GameController : MonoBehaviour
             }
         }
 
-        Debug.Log("AdaptMusicAndLighting: correct expression.");
+        Debug.Log("AdaptMusic: correct expression.");
 
         // if the current music is the same emotion, don't change
         if (currentBgm.Contains(emotion)) return;
@@ -1286,11 +1294,11 @@ public class GameController : MonoBehaviour
 
         postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
 
-		// call GeneratePostReport(1/2) at corresponding times. 
+        // call GeneratePostReport(1/2) at corresponding times. 
         //endnum 1 = Good reality ending
         if (endnum == 1)
         {
-			report = report + "\n\n-----------------------------New Entry-----------------------------" +
+            report = report + "\n\n-----------------------------New Entry-----------------------------" +
                      "\nInvestigation case #160418(HO4)" +
                      "\nStatus: Closed " +
                      "\nDocument classification: Confidential" +
@@ -1310,7 +1318,7 @@ public class GameController : MonoBehaviour
         //endnum 2 = Bad reality ending 
         if (endnum == 2)
         {
-			report = report + "\n\n-----------------------------New Entry-----------------------------" +
+            report = report + "\n\n-----------------------------New Entry-----------------------------" +
                      "\nInvestigation case #160418(HO4)" +
                      "\nStatus: Closed " +
                      "\nDocument classification: Confidential" +
@@ -1324,7 +1332,8 @@ public class GameController : MonoBehaviour
             //finalreport = report;
             //postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
         }
-		//postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
+
+        //postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
     }
 
     private string GetAnswer(int i)
@@ -1379,12 +1388,12 @@ public class GameController : MonoBehaviour
     {
         if (shoot)
         {
-			GeneratePostReport (2);
+            GeneratePostReport(2);
             Initiate.Fade(consistent ? "Ending1" : "Ending3", Color.black, 0.8f);
         }
         else
         {
-			GeneratePostReport (1);
+            GeneratePostReport(1);
             Initiate.Fade(consistent ? "Ending4" : "Ending2", Color.black, 0.8f);
         }
     }
@@ -1450,7 +1459,7 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyDown("i"))
         {
-			GeneratePostReport();
+            GeneratePostReport();
             //GeneratePostReport(1);
         }
 
