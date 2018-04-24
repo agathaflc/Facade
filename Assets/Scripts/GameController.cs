@@ -286,10 +286,11 @@ public class GameController : MonoBehaviour
         var crossFaded = false;
         while (playableDirector.state == PlayState.Playing)
         {
-            if (currentSequence.earlyFade && !crossFaded && playableDirector.time >= playableDirector.playableAsset.duration - 4.5)
+            if (currentSequence.earlyFade && !crossFaded && playableDirector.time >= playableDirector.playableAsset.duration - 7)
             {
                 BlackScreenDisplay.CrossFadeAlpha(1, 2.5f, true);
                 crossFaded = true;
+                yield return new WaitForSecondsRealtime(6.5f);
                 EndRound();
             }
 
@@ -448,7 +449,7 @@ public class GameController : MonoBehaviour
         {
             isEventDone = false;
 
-            if (BlackScreenDisplay.color.a > 0)
+            if (BlackScreenDisplay.color.a > 0 && !currentSequence.earlyFade)
             {
                 BlackScreenDisplay.CrossFadeAlpha(0, 1f, true);
             }
