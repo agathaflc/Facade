@@ -606,13 +606,13 @@
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/BadCop/SENTENCES/S9 - ENOUGH",
+      "filePath": "audio/BadCop/SENTENCES/enoughReverb1",
       "subtitleText": "Enough! I don’t know why I’m sitting here wasting my time asking you these questions.",
       "animationNo": 8
     },
     {
       "sequenceType": "dialog",
-      "filePath": "audio/BadCop/SENTENCES/S9_2 - ASKING YOU",
+      "filePath": "audio/BadCop/SENTENCES/enoughReverb2",
       "subtitleText": "Enough! I don’t know why I’m sitting here wasting my time asking you these questions.",
       "animationNo": 2
     },

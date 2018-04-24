@@ -207,10 +207,10 @@
       "hasLightingEffect": true,
       "lighting": {
         "intensity": 3.4,
-        "colorR": 47,
-        "colorG": 255,
-        "colorB": 230,
-        "colorA": 204
+        "colorR": 237,
+        "colorG": 244,
+        "colorB": 152,
+        "colorA": 51
       }
     },
     {
@@ -222,12 +222,12 @@
       "effects": [
         {
           "type": "vignette",
-          "intensity": 0.4,
-          "colorR": 134,
-          "colorG": 225,
-          "colorB": 221,
-          "colorA": 0.5,
-          "smoothness": 0.8,
+          "intensity": 0.6,
+          "colorR": 52,
+          "colorG": 106,
+          "colorB": 125,
+          "colorA": 153,
+          "smoothness": 0.6,
           "roundness": 0.4
         }
       ]
