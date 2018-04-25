@@ -6630,6 +6630,7 @@ MonoBehaviour:
   kiraController: {fileID: 9100000, guid: 560c5d03be8502f409d6ef2c91f9d87c, type: 2}
   kiraStandUpController: {fileID: 9100000, guid: f6f3e7632ac195b4894b2b97b0431724,
     type: 2}
+  silenceClip: {fileID: 8300000, guid: 0cf122088f6b81c4b9b000d6630f91ae, type: 3}
   gunShot: {fileID: 8300000, guid: 8076aa402a84e914a86c9d8e4707ffa1, type: 3}
   soundEffectAudioSource: {fileID: 1970018988}
   selectedBoldAnswer: {fileID: 0}

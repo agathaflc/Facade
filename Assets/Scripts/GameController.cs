@@ -117,6 +117,7 @@ public class GameController : MonoBehaviour
     public RuntimeAnimatorController kiraStandUpController;
     private Animator currentDetectiveAnimator;
 
+    public AudioClip silenceClip;
     public AudioClip gunShot;
     public AudioSource soundEffectAudioSource;
 
@@ -334,7 +335,7 @@ public class GameController : MonoBehaviour
         {
             UnlockCursor();
             detectiveObject.SetActive(false);
-            ApplyEndingCamera();
+            ApplyEndingSettings();
             endingDecisionDisplay.SetActive(true);
 
             var vignette = new SpecialEffect
@@ -511,7 +512,7 @@ public class GameController : MonoBehaviour
         if (a.isPlaying) a.Stop();
     }
 
-    private IEnumerator SwitchTracks(AudioClip clip, float seek)
+    private IEnumerator SwitchTracks(AudioClip clip, float seek, float seconds = 4.0f)
     {
         var playA = !(Math.Abs(bgmAudioSourceB.volume) < 0.01);
 
@@ -520,14 +521,14 @@ public class GameController : MonoBehaviour
             bgmAudioSourceA.clip = clip;
             bgmAudioSourceA.loop = true;
             bgmAudioSourceA.time = seek;
-            yield return StartCoroutine(CrossFade(bgmAudioSourceB, bgmAudioSourceA, 8.0f));
+            yield return StartCoroutine(CrossFade(bgmAudioSourceB, bgmAudioSourceA, seconds));
         }
         else
         {
             bgmAudioSourceB.clip = clip;
             bgmAudioSourceB.loop = true;
             bgmAudioSourceB.time = seek;
-            yield return StartCoroutine(CrossFade(bgmAudioSourceA, bgmAudioSourceB, 8.0f));
+            yield return StartCoroutine(CrossFade(bgmAudioSourceA, bgmAudioSourceB, seconds));
         }
     }
 
@@ -1417,14 +1418,16 @@ public class GameController : MonoBehaviour
     {
         playableDirector.Play();
     }
-
-    private void ApplyEndingCamera()
+    
+    private void ApplyEndingSettings()
     {
         playerCamera.GetComponent<PlayerLook>().enabled = false;
         playerCamera.enabled = false;
         finalCamera.enabled = true;
         activeCamera = finalCamera;
         SetDefaultProcessingBehaviourProfiles();
+
+        StartCoroutine(SwitchTracks(silenceClip, 0f, 0.5f));
 
         tableGun.GetComponent<Collider>().enabled = true;
     }
