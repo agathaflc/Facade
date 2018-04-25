@@ -21,6 +21,11 @@ public class ActData
     public AudioData bgmSadScaredFile;
     public AudioData bgmAngrySurprisedFile;
 
+    public LightingEffect happyLighting;
+    public LightingEffect neutralLighting;
+    public LightingEffect sadScaredLighting;
+    public LightingEffect angrySurprisedLighting;
+
     public DetectiveResponses detectiveResponses;
     public string responsesPath;
     public SequenceData[] sequence;

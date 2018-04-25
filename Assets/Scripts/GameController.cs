@@ -721,6 +721,13 @@ public class GameController : MonoBehaviour
         activeCamera.GetComponent<PostProcessingBehaviour>().profile = vignetteEffect;
     }
 
+    private void LightingChanges(LightingEffect lightingEffect)
+    {
+        StartCoroutine(LightingChanges(
+            new Color32(lightingEffect.colorR, lightingEffect.colorG, lightingEffect.colorB, lightingEffect.colorA),
+            lightingEffect.intensity));
+    }
+
     private IEnumerator LightingChanges(Color32 newColor, float newIntensity = 1)
     {
         Debug.Log("LightingChanges");
@@ -1108,7 +1115,7 @@ public class GameController : MonoBehaviour
             // if expressionScore <= 0, it means expression is correct (correctExpression = true)
             if (isMusicAdaptive)
             {
-                AdaptMusic(
+                AdaptMusicAndLighting(
                     currentQuestion.considersFact,
                     currentQuestion.considersEmotion,
                     closestEmotion,
@@ -1182,7 +1189,7 @@ public class GameController : MonoBehaviour
     /**
      * follows the algorithm here: https://trello.com/c/TDz6Ixgb/31-dream-building-algorithm
      * */
-    private void AdaptMusic(
+    private void AdaptMusicAndLighting(
         bool considerConsistency,
         bool considerEmotion,
         string emotion = DEFAULT_EMOTION,
@@ -1196,10 +1203,12 @@ public class GameController : MonoBehaviour
                 if (!currentActData.useBgmLevels)
                 {
                     // todo play the foghorn thing??
-                    if (!currentBgm.Contains(SCARED_EMOTION))
+                    if (!currentBgm.Contains(SURPRISED_EMOTION))
                     {
-                        PlayBgm(currentActData.bgmSadScaredClip, MUSIC_SAD_SCARED,
-                            currentActData.bgmSadScaredFile.seek);
+                        PlayBgm(currentActData.bgmAngrySurprisedClip, MUSIC_SURPRISED_ANGRY,
+                            currentActData.bgmAngrySurprisedFile.seek);
+                        
+                        LightingChanges(currentActData.angrySurprisedLighting);
                     }
 
                     return;
@@ -1227,6 +1236,8 @@ public class GameController : MonoBehaviour
                 {
                     PlayBgm(currentActData.bgmSadScaredClip, MUSIC_SAD_SCARED,
                         currentActData.bgmSadScaredFile.seek);
+                    
+                    LightingChanges(currentActData.sadScaredLighting);
                 }
 
                 return;
@@ -1245,7 +1256,7 @@ public class GameController : MonoBehaviour
             }
         }
 
-        Debug.Log("AdaptMusic: correct expression.");
+        Debug.Log("AdaptMusicAndLighting: correct expression.");
 
         // if the current music is the same emotion, don't change
         if (currentBgm.Contains(emotion)) return;
@@ -1253,19 +1264,23 @@ public class GameController : MonoBehaviour
         if (MUSIC_HAPPY.Contains(emotion))
         {
             PlayBgm(currentActData.bgmHappyClip, MUSIC_HAPPY, currentActData.bgmHappyFile.seek);
+            LightingChanges(currentActData.happyLighting);
         }
         else if (MUSIC_NEUTRAL.Contains(emotion))
         {
             PlayBgm(currentActData.bgmNeutralClip, MUSIC_NEUTRAL, currentActData.bgmNeutralFile.seek);
+            LightingChanges(currentActData.neutralLighting);
         }
         else if (MUSIC_SAD_SCARED.Contains(emotion))
         {
             PlayBgm(currentActData.bgmSadScaredClip, MUSIC_SAD_SCARED, currentActData.bgmSadScaredFile.seek);
+            LightingChanges(currentActData.sadScaredLighting);
         }
         else if (MUSIC_SURPRISED_ANGRY.Contains(emotion))
         {
             PlayBgm(currentActData.bgmAngrySurprisedClip, MUSIC_SURPRISED_ANGRY,
                 currentActData.bgmAngrySurprisedFile.seek);
+            LightingChanges(currentActData.angrySurprisedLighting);
         }
     }
 
@@ -1418,7 +1433,7 @@ public class GameController : MonoBehaviour
     {
         playableDirector.Play();
     }
-    
+
     private void ApplyEndingSettings()
     {
         playerCamera.GetComponent<PlayerLook>().enabled = false;

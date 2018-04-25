@@ -16,6 +16,34 @@
     "fileName": "audio/bgm/Act1_Angry_Surprised_0",
     "seek": 0
   },
+  "happyLighting": {
+    "intensity": 1,
+    "colorR": 254,
+    "colorG": 255,
+    "colorB": 203,
+    "colorA": 255
+  },
+  "sadScaredLighting": {
+    "intensity": 1,
+    "colorR": 171,
+    "colorG": 255,
+    "colorB": 231,
+    "colorA": 255
+  },
+  "neutralLighting": {
+    "intensity": 1,
+    "colorR": 255,
+    "colorG": 255,
+    "colorB": 255,
+    "colorA": 255
+  },
+  "angrySurprisedLighting": {
+    "intensity": 1,
+    "colorR": 225,
+    "colorG": 169,
+    "colorB": 169,
+    "colorA": 255
+  },
   "showGun": false,
   "sequence": [
     {
@@ -349,6 +377,11 @@
         "colorB": 255,
         "colorA": 255
       },
+      "playCustomBgm": true,
+      "bgm": {
+        "fileName": "audio/bgm/Act1_Angry_Surprised_0",
+        "seek": 0
+      },
       "effects": [
         {
           "type": "vignette",
@@ -570,7 +603,12 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act1/Sentences/S11_0_You_see_this_girl",
-      "subtitleText": "You see.. this girl was found dead last night. Her name was Lianne. It’s a real tragedy."
+      "subtitleText": "You see.. this girl was found dead last night. Her name was Lianne. It’s a real tragedy.",
+      "playCustomBgm": true,
+      "bgm": {
+        "fileName": "audio/silence_2sec",
+        "seek": 0
+      }
     },
     {
       "sequenceType": "dialog",
@@ -590,7 +628,12 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act1/Sentences/S12_0_I_can_t_begin_to_imagine",
-      "subtitleText": "I can’t even begin to imagine what her family is going through."
+      "subtitleText": "I can’t even begin to imagine what her family is going through.",
+      "playCustomBgm": true,
+      "bgm": {
+        "fileName": "audio/bgm/Act1_Sad_Scared_0",
+        "seek": 0
+      }
     },
     {
       "sequenceType": "dialog",
