@@ -2,7 +2,7 @@
   "useBgmLevels": true,
   "bgmLevels": [
     {
-      "fileName": "audio/bgm/cornfield_chase_1",
+      "fileName": "audio/cornfield_chase_1",
       "seek": 16
     },
     {
@@ -61,7 +61,7 @@
     "seek": 0
   },
   "bgmNeutralFile": {
-    "fileName": "audio/bgm/cornfield_chase_1",
+    "fileName": "audio/cornfield_chase_1",
     "seek": 16
   },
   "bgmAngrySurprisedFile": {
