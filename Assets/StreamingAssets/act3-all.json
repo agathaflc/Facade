@@ -510,7 +510,7 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/VC3/JUST LIKE YOU REV",
-      "subtitleText": "Just like you.. We both know who’s really in control here.",
+      "subtitleText": "Just like you.. We both know who’s really in control here, don't we?",
       "animationNo": 2,
       "effects": [
         {
@@ -522,7 +522,7 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/S16_1_hah",
-      "subtitleText": "Just like you.. We both know who’s really in control here.",
+      "subtitleText": "Just like you.. We both know who’s really in control here, don't we?",
       "animationNo": 8
     },
     {
