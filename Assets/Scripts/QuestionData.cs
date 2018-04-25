@@ -19,5 +19,6 @@ public class QuestionData
     public LightingEffect lighting = null;
     
     public bool playCustomBgm;
+    public bool dontAdaptLighting;
     public AudioData bgm;
 }

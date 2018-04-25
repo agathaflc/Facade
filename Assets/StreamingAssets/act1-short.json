@@ -63,6 +63,65 @@
     },
     {
       "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S3_1_so_lets_get_started",
+      "subtitleText": "So let's get started.",
+      "animationNo": 14
+    },
+    {
+      "sequenceType": "question",
+      "questions": [
+        {
+          "questionDesc": "Player Feelings",
+          "questionId": "04",
+          "expressionWeight": 1,
+          "consistencyWeight": 0,
+          "considersEmotion": true,
+          "considersFact": false,
+          "filePath": "audio/Act1/Questions/Q4_How_are_you_feeling_today",
+          "questionText": "So tell me, how are you feeling today?",
+          "dontAdaptLighting": true,
+          "answers": [
+            {
+              "answerId": "040",
+              "answerText": "Great!",
+              "expectedExpressions": [
+                "happy"
+              ],
+              "detectiveResponse": "positive"
+            },
+            {
+              "answerId": "041",
+              "answerText": "Alright",
+              "expectedExpressions": [
+                "happy",
+                "neutral"
+              ],
+              "detectiveResponse": "positive"
+            },
+            {
+              "answerId": "042",
+              "answerText": "Terrible!",
+              "expectedExpressions": [
+                "angry",
+                "sad"
+              ],
+              "detectiveResponse": "negative"
+            },
+            {
+              "answerId": "043",
+              "answerText": "I'm scared!",
+              "expectedExpressions": [
+                "scared",
+                "surprised"
+              ],
+              "detectiveResponse": "negative"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
       "filePath": "audio/Act1/Sentences/S15_1_so_that",
       "subtitleText": "I just hope we can figure out this case together, so that poor girl’s parents can get some closure. I’ll see you in a bit!",
       "animationNo": 17

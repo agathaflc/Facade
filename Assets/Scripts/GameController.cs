@@ -553,6 +553,7 @@ public class GameController : MonoBehaviour
     {
         if (clip == null)
         {
+            Debug.LogError("clip is empty");
             return;
         }
 
@@ -1137,7 +1138,8 @@ public class GameController : MonoBehaviour
                     currentQuestion.considersEmotion,
                     closestEmotion,
                     consistencyScore <= 0f,
-                    expressionScore <= 0f
+                    expressionScore <= 0f,
+                    !currentQuestion.dontAdaptLighting
                 );
             }
 
@@ -1211,7 +1213,8 @@ public class GameController : MonoBehaviour
         bool considerEmotion,
         string emotion = DEFAULT_EMOTION,
         bool consistent = true,
-        bool correctExpression = true
+        bool correctExpression = true,
+        bool adaptLighting = true
     )
     {
         if (considerConsistency)
@@ -1225,7 +1228,7 @@ public class GameController : MonoBehaviour
                         PlayBgm(currentActData.bgmAngrySurprisedClip, MUSIC_SURPRISED_ANGRY,
                             currentActData.bgmAngrySurprisedFile.seek);
                         
-                        AdaptLightingByEmotion(currentActData.angrySurprisedLighting);
+                        if (adaptLighting) AdaptLightingByEmotion(currentActData.angrySurprisedLighting);
                     }
 
                     return;
@@ -1254,7 +1257,7 @@ public class GameController : MonoBehaviour
                     PlayBgm(currentActData.bgmSadScaredClip, MUSIC_SAD_SCARED,
                         currentActData.bgmSadScaredFile.seek);
                     
-                    AdaptLightingByEmotion(currentActData.sadScaredLighting);
+                    if (adaptLighting) AdaptLightingByEmotion(currentActData.sadScaredLighting);
                 }
 
                 return;
@@ -1273,7 +1276,7 @@ public class GameController : MonoBehaviour
             }
         }
 
-        Debug.Log("AdaptMusicAndLighting: correct expression.");
+        Debug.Log("AdaptLightingByEmotion: correct expression.");
 
         // if the current music is the same emotion, don't change
         if (currentBgm.Contains(emotion)) return;
@@ -1281,23 +1284,23 @@ public class GameController : MonoBehaviour
         if (MUSIC_HAPPY.Contains(emotion))
         {
             PlayBgm(currentActData.bgmHappyClip, MUSIC_HAPPY, currentActData.bgmHappyFile.seek);
-            AdaptLightingByEmotion(currentActData.happyLighting);
+            if (adaptLighting) AdaptLightingByEmotion(currentActData.happyLighting);
         }
         else if (MUSIC_NEUTRAL.Contains(emotion))
         {
             PlayBgm(currentActData.bgmNeutralClip, MUSIC_NEUTRAL, currentActData.bgmNeutralFile.seek);
-            AdaptLightingByEmotion(currentActData.neutralLighting);
+            if (adaptLighting) AdaptLightingByEmotion(currentActData.neutralLighting);
         }
         else if (MUSIC_SAD_SCARED.Contains(emotion))
         {
             PlayBgm(currentActData.bgmSadScaredClip, MUSIC_SAD_SCARED, currentActData.bgmSadScaredFile.seek);
-            AdaptLightingByEmotion(currentActData.sadScaredLighting);
+            if (adaptLighting) AdaptLightingByEmotion(currentActData.sadScaredLighting);
         }
         else if (MUSIC_SURPRISED_ANGRY.Contains(emotion))
         {
             PlayBgm(currentActData.bgmAngrySurprisedClip, MUSIC_SURPRISED_ANGRY,
                 currentActData.bgmAngrySurprisedFile.seek);
-            AdaptLightingByEmotion(currentActData.angrySurprisedLighting);
+            if (adaptLighting) AdaptLightingByEmotion(currentActData.angrySurprisedLighting);
         }
     }
 
