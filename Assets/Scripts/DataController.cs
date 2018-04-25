@@ -210,9 +210,9 @@ public class DataController : MonoBehaviour
 
         if (currentActData.useBgmLevels)
         {
-            for (int i = 0; i < currentActData.bgmLevels.Length; i++)
+            foreach (var bgmLevel in currentActData.bgmLevels)
             {
-                currentActData.bgmLevelClips.Add(LoadAudioFile(currentActData.bgmLevels[i].fileName));
+                currentActData.bgmLevelClips.Add(LoadAudioFile(bgmLevel.fileName));
             }
         }
     }
