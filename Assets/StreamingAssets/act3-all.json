@@ -935,6 +935,11 @@
         "colorB": 255,
         "colorA": 255
       },
+      "playCustomBgm": true,
+      "bgm": {
+        "fileName": "audio/bgm/Level3_4p1",
+        "seek": 4.1
+      },
       "effects": [
         {
           "type": "motionBlur",
