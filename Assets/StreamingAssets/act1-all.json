@@ -47,6 +47,11 @@
   "showGun": false,
   "sequence": [
     {
+      "sequenceType": "dialog",
+      "filePath": "audio/SoundEffects/metalic_door_slam_softer",
+      "subtitleText": ""
+    },
+    {
       "sequenceType": "timeline"
     },
     {
@@ -766,6 +771,12 @@
       "filePath": "audio/Act1/Sentences/S15_1_so_that",
       "subtitleText": "I just hope we can figure out this case together, so that poor girl’s parents can get some closure. I’ll see you in a bit!",
       "animationNo": 17
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/SoundEffects/metalic_door_slam_short",
+      "fadeScreenToBlack": true,
+      "subtitleText": ""
     }
   ]
 }

@@ -22,6 +22,34 @@
       "seek": 7.9
     }
   ],
+  "happyLighting": {
+    "intensity": 1,
+    "colorR": 254,
+    "colorG": 255,
+    "colorB": 203,
+    "colorA": 255
+  },
+  "sadScaredLighting": {
+    "intensity": 1,
+    "colorR": 171,
+    "colorG": 255,
+    "colorB": 231,
+    "colorA": 255
+  },
+  "neutralLighting": {
+    "intensity": 1,
+    "colorR": 255,
+    "colorG": 255,
+    "colorB": 255,
+    "colorA": 255
+  },
+  "angrySurprisedLighting": {
+    "intensity": 1,
+    "colorR": 225,
+    "colorG": 169,
+    "colorB": 169,
+    "colorA": 255
+  },
   "showGun": true,
   "responsesPath": "detective_responses_act3.json",
   "bgmHappyFile": {
@@ -970,7 +998,14 @@
       "animationNo": 23
     },
     {
+      "sequenceType": "dialog",
+      "filePath": "audio/SoundEffects/metalic_door_slam_long",
+      "fadeScreenToBlack": true,
+      "subtitleText": ""
+    }
+    {
       "sequenceType": "endingDecision",
+      "fadeScreenToTransparent": true,
       "questions": [
         {
           "questionDesc": "Kill Yourself?",

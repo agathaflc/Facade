@@ -22,6 +22,34 @@
       "seek": 7.9
     }
   ],
+  "happyLighting": {
+    "intensity": 1,
+    "colorR": 254,
+    "colorG": 255,
+    "colorB": 203,
+    "colorA": 255
+  },
+  "sadScaredLighting": {
+    "intensity": 1,
+    "colorR": 171,
+    "colorG": 255,
+    "colorB": 231,
+    "colorA": 255
+  },
+  "neutralLighting": {
+    "intensity": 1,
+    "colorR": 255,
+    "colorG": 255,
+    "colorB": 255,
+    "colorA": 255
+  },
+  "angrySurprisedLighting": {
+    "intensity": 1,
+    "colorR": 225,
+    "colorG": 169,
+    "colorB": 169,
+    "colorA": 255
+  },
   "showGun": true,
   "responsesPath": "detective_responses_act3.json",
   "bgmHappyFile": {
@@ -42,10 +70,177 @@
   },
   "sequence": [
     {
+      "sequenceType": "dialog",
+      "filePath": "audio/silence_splitsecond",
+      "subtitleText": "",
+      "effects": [
+        {
+          "type": "bloom",
+          "intensity": 8
+        }
+      ]
+    },
+    {
       "sequenceType": "timeline"
     },
     {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S2_We_ve_had_a_long_day",
+      "subtitleText": "We’ve all had a long day, right? Don’t you wanna get back home?",
+      "effects": [
+        {
+          "type": "bloom",
+          "intensity": 0
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/VC3/youCouldn'tEvenLookher",
+      "subtitleText": "You couldn’t even look her in the eyes, you coward."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/silence_splitsecond",
+      "subtitleText": "",
+      "animationNo": 98
+    },
+    {
+      "sequenceType": "question",
+      "questions": [
+        {
+          "questionDesc": "Player Kill Reason",
+          "questionId": "34",
+          "expressionWeight": 1,
+          "consistencyWeight": 0,
+          "considersEmotion": true,
+          "considersFact": false,
+          "filePath": "audio/Act3/Question/q10",
+          "questionText": "Why did you kill Lianne?!",
+          "answers": [
+            {
+              "answerId": "340",
+              "answerText": "She deserved it!",
+              "expectedExpressions": [
+                "angry",
+                "happy",
+                "neutral"
+              ]
+            },
+            {
+              "answerId": "341",
+              "answerText": "I didn’t kill her!",
+              "expectedExpressions": [
+                "scared",
+                "surprised"
+              ]
+            },
+            {
+              "answerId": "342",
+              "answerText": "My alibi did it! Not me!",
+              "expectedExpressions": [
+                "scared",
+                "surprised",
+                "sad",
+                "angry"
+              ]
+            },
+            {
+              "answerId": "343",
+              "answerText": "I don’t know why I did it!",
+              "expectedExpressions": [
+                "scared",
+                "surprised",
+                "sad"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/silence_splitsecond",
+      "subtitleText": "",
+      "hasLightingEffect": true,
+      "lighting": {
+        "intensity": 1,
+        "colorR": 255,
+        "colorG": 255,
+        "colorB": 255,
+        "colorA": 255
+      },
+      "effects": [
+        {
+          "type": "motionBlur",
+          "status": "off"
+        },
+        {
+          "type": "vignette",
+          "intensity": 0,
+          "colorR": 81,
+          "colorG": 39,
+          "colorB": 0,
+          "colorA": 245,
+          "smoothness": 0.9,
+          "roundness": 0.5
+        },
+        {
+          "type": "bloom",
+          "intensity": 0
+        }
+      ]
+    },
+    {
+      "sequenceType": "timeline"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/silence_splitsecond",
+      "subtitleText": "",
+      "ending": true,
+      "animationNo": 22
+    },
+    {
+      "sequenceType": "question",
+      "questions": [
+        {
+          "questionDesc": "Detective Dream Exit",
+          "questionId": "35",
+          "expressionWeight": 0,
+          "consistencyWeight": 1,
+          "considersEmotion": false,
+          "considersFact": true,
+          "filePath": "audio/Act3/Question/Q11_Do_you_think_hadn_t_shoot_myself",
+          "questionText": "Do you think if I didn’t shoot myself in my dream, would I still be trapped in that hell hole right now?",
+          "answers": [
+            {
+              "answerId": "350",
+              "answerText": "Yes"
+            },
+            {
+              "answerId": "351",
+              "answerText": "No"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/S31_I_guess_only_one_way",
+      "subtitleText": "I guess only one way to find out.",
+      "animationNo": 23
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/SoundEffects/metalic_door_slam_long",
+      "fadeScreenToBlack": true,
+      "subtitleText": ""
+    },
+    {
       "sequenceType": "endingDecision",
+      "fadeScreenToTransparent": true,
       "questions": [
         {
           "questionDesc": "Kill Yourself?",

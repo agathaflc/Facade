@@ -22,6 +22,9 @@ public class SequenceData
     public SpecialEffect[] effects;
     public bool hasLightingEffect;
     public bool usemaxBgm;
+    public bool turnOffAdaptiveLighting;
+    public bool fadeScreenToBlack;
+    public bool fadeScreenToTransparent;
     public bool turnOnSpotlight;
     public LightingEffect lighting = null;
 }

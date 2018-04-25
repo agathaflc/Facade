@@ -16,6 +16,34 @@
     "fileName": "audio/bgm/Act2_Angry_Surprised_40",
     "seek": 40
   },
+  "happyLighting": {
+    "intensity": 1,
+    "colorR": 254,
+    "colorG": 255,
+    "colorB": 203,
+    "colorA": 255
+  },
+  "sadScaredLighting": {
+    "intensity": 1,
+    "colorR": 171,
+    "colorG": 255,
+    "colorB": 231,
+    "colorA": 255
+  },
+  "neutralLighting": {
+    "intensity": 1,
+    "colorR": 255,
+    "colorG": 255,
+    "colorB": 255,
+    "colorA": 255
+  },
+  "angrySurprisedLighting": {
+    "intensity": 1,
+    "colorR": 225,
+    "colorG": 169,
+    "colorB": 169,
+    "colorA": 255
+  },
   "sequence": [
     {
       "sequenceType": "dialog",
@@ -579,6 +607,7 @@
       "filePath": "audio/BadCop/SENTENCES/S8 - YOU MUST HAVE HAD",
       "subtitleText": "You must have had a really bad relationship with the victim huh? You seem like the kinda guy who'd get rid of someone they didn't like..",
       "animationNo": 15,
+      "turnOffAdaptiveLighting": true,
       "animatorLayer": 1,
       "effects": [
         {

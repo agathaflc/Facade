@@ -142,6 +142,7 @@ public class GameController : MonoBehaviour
     private const float MAX_COLOR_TIMER = 1f;
 
     private bool isMusicAdaptive;
+    private bool isLightingAdaptive;
     private bool isTimerActive;
     private bool isEndingTimerActive;
     private bool isEventDone;
@@ -233,6 +234,7 @@ public class GameController : MonoBehaviour
         currentTimelineNo = 0;
 
         isMusicAdaptive = true;
+        isLightingAdaptive = true;
         isTimerActive = false;
         isEndingTimerActive = false;
         isClarifying = false;
@@ -325,6 +327,16 @@ public class GameController : MonoBehaviour
 
         currentSequence = currentActData.sequence[sequenceIndex];
 
+        if (currentSequence.fadeScreenToBlack)
+        {
+            BlackScreenDisplay.CrossFadeAlpha(1, 1f, true);
+        }
+
+        if (currentSequence.fadeScreenToTransparent)
+        {
+            BlackScreenDisplay.CrossFadeAlpha(0, 1f, true);
+        }
+        
         if (currentSequence.ending) // only for the animation when standing up
         {
             detectiveObject.GetComponent<Animator>().runtimeAnimatorController = kiraStandUpController;
@@ -413,6 +425,11 @@ public class GameController : MonoBehaviour
                 isMusicAdaptive = false;
                 PlayBgm(currentActData.bgmLevelClips[currentActData.bgmLevels.Length - 1], "level",
                     currentActData.bgmLevels[currentBgmLevel].seek);
+            }
+
+            if (currentSequence.turnOffAdaptiveLighting)
+            {
+                isLightingAdaptive = false;
             }
 
             if (currentDetectiveAnimator != null)
@@ -721,9 +738,9 @@ public class GameController : MonoBehaviour
         activeCamera.GetComponent<PostProcessingBehaviour>().profile = vignetteEffect;
     }
 
-    private void LightingChanges(LightingEffect lightingEffect)
+    private void AdaptLightingByEmotion(LightingEffect lightingEffect)
     {
-        StartCoroutine(LightingChanges(
+        if (isLightingAdaptive) StartCoroutine(LightingChanges(
             new Color32(lightingEffect.colorR, lightingEffect.colorG, lightingEffect.colorB, lightingEffect.colorA),
             lightingEffect.intensity));
     }
@@ -1208,7 +1225,7 @@ public class GameController : MonoBehaviour
                         PlayBgm(currentActData.bgmAngrySurprisedClip, MUSIC_SURPRISED_ANGRY,
                             currentActData.bgmAngrySurprisedFile.seek);
                         
-                        LightingChanges(currentActData.angrySurprisedLighting);
+                        AdaptLightingByEmotion(currentActData.angrySurprisedLighting);
                     }
 
                     return;
@@ -1237,7 +1254,7 @@ public class GameController : MonoBehaviour
                     PlayBgm(currentActData.bgmSadScaredClip, MUSIC_SAD_SCARED,
                         currentActData.bgmSadScaredFile.seek);
                     
-                    LightingChanges(currentActData.sadScaredLighting);
+                    AdaptLightingByEmotion(currentActData.sadScaredLighting);
                 }
 
                 return;
@@ -1264,23 +1281,23 @@ public class GameController : MonoBehaviour
         if (MUSIC_HAPPY.Contains(emotion))
         {
             PlayBgm(currentActData.bgmHappyClip, MUSIC_HAPPY, currentActData.bgmHappyFile.seek);
-            LightingChanges(currentActData.happyLighting);
+            AdaptLightingByEmotion(currentActData.happyLighting);
         }
         else if (MUSIC_NEUTRAL.Contains(emotion))
         {
             PlayBgm(currentActData.bgmNeutralClip, MUSIC_NEUTRAL, currentActData.bgmNeutralFile.seek);
-            LightingChanges(currentActData.neutralLighting);
+            AdaptLightingByEmotion(currentActData.neutralLighting);
         }
         else if (MUSIC_SAD_SCARED.Contains(emotion))
         {
             PlayBgm(currentActData.bgmSadScaredClip, MUSIC_SAD_SCARED, currentActData.bgmSadScaredFile.seek);
-            LightingChanges(currentActData.sadScaredLighting);
+            AdaptLightingByEmotion(currentActData.sadScaredLighting);
         }
         else if (MUSIC_SURPRISED_ANGRY.Contains(emotion))
         {
             PlayBgm(currentActData.bgmAngrySurprisedClip, MUSIC_SURPRISED_ANGRY,
                 currentActData.bgmAngrySurprisedFile.seek);
-            LightingChanges(currentActData.angrySurprisedLighting);
+            AdaptLightingByEmotion(currentActData.angrySurprisedLighting);
         }
     }
 

@@ -9,13 +9,69 @@
     "seek": 0
   },
   "bgmNeutralFile": {
-    "fileName": "audio/bgm/Level5_7p9",
+    "fileName": "audio/bgm/Act1_Original_0",
     "seek": 0
   },
   "bgmAngrySurprisedFile": {
     "fileName": "audio/bgm/Act1_Angry_Surprised_0",
     "seek": 0
   },
+  "happyLighting": {
+    "intensity": 1,
+    "colorR": 254,
+    "colorG": 255,
+    "colorB": 203,
+    "colorA": 255
+  },
+  "sadScaredLighting": {
+    "intensity": 1,
+    "colorR": 171,
+    "colorG": 255,
+    "colorB": 231,
+    "colorA": 255
+  },
+  "neutralLighting": {
+    "intensity": 1,
+    "colorR": 255,
+    "colorG": 255,
+    "colorB": 255,
+    "colorA": 255
+  },
+  "angrySurprisedLighting": {
+    "intensity": 1,
+    "colorR": 225,
+    "colorG": 169,
+    "colorB": 169,
+    "colorA": 255
+  },
   "showGun": false,
-  "sequence": []
+  "sequence": [
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/SoundEffects/metalic_door_slam_softer",
+      "subtitleText": ""
+    },
+    {
+      "sequenceType": "timeline"
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S1_1_thanks_a_lot",
+      "subtitleText": "Thanks a lot for coming in today.",
+      "animationNo": 40,
+      "animatorLayer": 1
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act1/Sentences/S15_1_so_that",
+      "subtitleText": "I just hope we can figure out this case together, so that poor girl’s parents can get some closure. I’ll see you in a bit!",
+      "animationNo": 17
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/SoundEffects/metalic_door_slam_long",
+      "fadeScreenToBlack": true,
+      "subtitleText": ""
+    }
+  ]
 }
