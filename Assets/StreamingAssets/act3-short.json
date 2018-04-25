@@ -84,13 +84,200 @@
       "sequenceType": "timeline"
     },
     {
+      "sequenceType": "question",
+      "questions": [
+        {
+          "questionDesc": "Player Karma Revenge",
+          "questionId": "33",
+          "expressionWeight": 1,
+          "consistencyWeight": 0,
+          "considersEmotion": true,
+          "considersFact": false,
+          "filePath": "audio/Act3/Question/Q9_Do_you_believe_Karma",
+          "questionText": "Do you think the universe and karma balances things? Or do we need to take matters into our own hands?",
+          "answers": [
+            {
+              "answerId": "330",
+              "answerText": "Karma will handle things",
+              "expectedExpressions": [
+                "neutral",
+                "angry"
+              ]
+            },
+            {
+              "answerId": "331",
+              "answerText": "It’s sometimes necessary",
+              "expectedExpressions": [
+                "angry"
+              ]
+            },
+            {
+              "answerId": "332",
+              "answerText": "I don’t know what you’re talking about",
+              "expectedExpressions": [
+                "scared",
+                "surprised"
+              ]
+            },
+            {
+              "answerId": "333",
+              "answerText": "Stop talking like that!",
+              "expectedExpressions": [
+                "scared",
+                "surprised"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "sequenceType": "dialog",
-      "filePath": "audio/Act3/Sentence/S2_We_ve_had_a_long_day",
-      "subtitleText": "We’ve all had a long day, right? Don’t you wanna get back home?",
+      "filePath": "audio/Act3/Sentence/VC3/S18_Hah_of_course R",
+      "subtitleText": "Hah... of course you would say that.",
+      "animationNo": 41,
+      "animatorLayer": 1,
       "effects": [
         {
+          "type": "motionBlur",
+          "status": "intensify"
+        },
+        {
+          "type": "vignette",
+          "intensity": 0.8,
+          "colorR": 81,
+          "colorG": 39,
+          "colorB": 0,
+          "colorA": 245,
+          "smoothness": 0.9,
+          "roundness": 0.5
+        },
+        {
           "type": "bloom",
-          "intensity": 0
+          "intensity": 7
+        }
+      ],
+      "usemaxBgm": true
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/VC3/YoureAPrideful",
+      "subtitleText": "You’re a prideful person, aren’t you?",
+      "effects": [
+        {
+          "type": "vignette",
+          "intensity": 0.6,
+          "colorR": 81,
+          "colorG": 39,
+          "colorB": 0,
+          "colorA": 245,
+          "smoothness": 0.9,
+          "roundness": 0.5
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/VC3/theKindaPersonWhoWouldnt",
+      "subtitleText": "The kind of person who wouldn’t be able to handle it if someone else was getting ahead of them...",
+      "effects": [
+        {
+          "type": "vignette",
+          "intensity": 0.8,
+          "colorR": 81,
+          "colorG": 39,
+          "colorB": 0,
+          "colorA": 245,
+          "smoothness": 0.9,
+          "roundness": 0.5
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/VC3/YouUsedToBeTheOne1",
+      "subtitleText": "You used to be the one everyone loved, until you and Lianne had that fight. And then everyone took her side over yours."
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/VC3/YouUsedToBeTheOne2",
+      "subtitleText": "You used to be the one everyone loved, until you and Lianne had that fight. And then everyone took her side over yours.",
+      "animationNo": 93,
+      "effects": [
+        {
+          "type": "vignette",
+          "intensity": 0.4,
+          "colorR": 81,
+          "colorG": 39,
+          "colorB": 0,
+          "colorA": 245,
+          "smoothness": 0.9,
+          "roundness": 0.5
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/VC3/YouUsedToBeTheOne3",
+      "subtitleText": "You used to be the one everyone loved, until you and Lianne had that fight. And then everyone took her side over yours.",
+      "animationNo": 94
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/VC3/S22_It_must_have_really_bothered R",
+      "subtitleText": "It must have really bothered you and I bet you couldn't handle it.",
+      "animationNo": 95
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/VC3/isThatWhyYouFOloowedher",
+      "subtitleText": "Is that why you followed her to the bathroom last night?",
+      "animationNo": 96,
+      "effects": [
+        {
+          "type": "vignette",
+          "intensity": 0.9,
+          "colorR": 81,
+          "colorG": 39,
+          "colorB": 0,
+          "colorA": 245,
+          "smoothness": 0.9,
+          "roundness": 0.5
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/VC3/andMadeSuretoTakeYourGun",
+      "subtitleText": "And made sure to take your gun with you?",
+      "effects": [
+        {
+          "type": "vignette",
+          "intensity": 0.7,
+          "colorR": 81,
+          "colorG": 39,
+          "colorB": 0,
+          "colorA": 245,
+          "smoothness": 0.9,
+          "roundness": 0.5
+        }
+      ]
+    },
+    {
+      "sequenceType": "dialog",
+      "filePath": "audio/Act3/Sentence/VC3/andWhyNooneCouldFindYOuwhen",
+      "subtitleText": "And why no one could find you when the gunshot was heard?",
+      "animationNo": 97,
+      "effects": [
+        {
+          "type": "vignette",
+          "intensity": 0.9,
+          "colorR": 81,
+          "colorG": 39,
+          "colorB": 0,
+          "colorA": 245,
+          "smoothness": 0.9,
+          "roundness": 0.5
         }
       ]
     },
@@ -169,6 +356,11 @@
         "colorG": 255,
         "colorB": 255,
         "colorA": 255
+      },
+      "playCustomBgm": true,
+      "bgm": {
+        "fileName": "audio/bgm/Level3_4p1",
+        "seek": 4.1
       },
       "effects": [
         {

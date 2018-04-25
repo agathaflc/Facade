@@ -422,6 +422,7 @@ public class GameController : MonoBehaviour
 
             if (currentSequence.usemaxBgm)
             {
+                Debug.Log("usemaxBgm");
                 isMusicAdaptive = false;
                 currentBgmLevel = currentActData.bgmLevelClips.Count - 1;
                 PlayBgm(currentActData.bgmLevelClips[currentBgmLevel], "level",
@@ -532,6 +533,7 @@ public class GameController : MonoBehaviour
 
     private IEnumerator SwitchTracks(AudioClip clip, float seek, float seconds = 4.0f)
     {
+        Debug.Log("switch tracks");
         var playA = !(Math.Abs(bgmAudioSourceB.volume) < 0.01);
 
         if (playA)

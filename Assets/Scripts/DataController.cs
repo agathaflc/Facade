@@ -210,6 +210,7 @@ public class DataController : MonoBehaviour
 
         if (currentActData.useBgmLevels)
         {
+            Debug.Log("load bgm levels");
             foreach (var bgmLevel in currentActData.bgmLevels)
             {
                 currentActData.bgmLevelClips.Add(LoadAudioFile(bgmLevel.fileName));
