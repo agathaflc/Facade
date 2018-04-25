@@ -423,7 +423,8 @@ public class GameController : MonoBehaviour
             if (currentSequence.usemaxBgm)
             {
                 isMusicAdaptive = false;
-                PlayBgm(currentActData.bgmLevelClips[currentActData.bgmLevels.Length - 1], "level",
+                currentBgmLevel = currentActData.bgmLevelClips.Count - 1;
+                PlayBgm(currentActData.bgmLevelClips[currentBgmLevel], "level",
                     currentActData.bgmLevels[currentBgmLevel].seek);
             }
 
