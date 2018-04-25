@@ -50,6 +50,7 @@ public static class ScoreCalculator
         {
             foreach (var emotionMapping in observedEmotionVector)
             {
+                Debug.Log("observed emotion: " + emotionMapping.type);
                 var expectedMapping = distanceMap.emotions.FirstOrDefault(e => e.type.Equals(expected[i]));
                 var currentDistance = ComputeDistanceBetweenTwoPoints(
                     emotionMapping.x,

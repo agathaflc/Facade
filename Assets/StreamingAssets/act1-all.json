@@ -620,7 +620,7 @@
       "sequenceType": "dialog",
       "filePath": "audio/Act1/Sentences/S11_1_her_name",
       "readExpression": true,
-      "scoreWeight": 3,
+      "scoreWeight": 2,
       "expectedExpressions": [
         "scared",
         "surprised",

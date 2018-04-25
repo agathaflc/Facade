@@ -87,7 +87,7 @@
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/S2_We_ve_had_a_long_day",
       "subtitleText": "We’ve all had a long day, right? Don’t you wanna get back home?",
-      "effects":[
+      "effects": [
         {
           "type": "bloom",
           "intensity": 0
@@ -494,7 +494,7 @@
         "colorB": 226,
         "colorA": 245
       },
-      "effects":[
+      "effects": [
         {
           "type": "vignette",
           "intensity": 0.4,
@@ -715,7 +715,7 @@
       "subtitleText": "Hah... of course you would say that.",
       "animationNo": 41,
       "animatorLayer": 1,
-      "effects":[
+      "effects": [
         {
           "type": "motionBlur",
           "status": "intensify"
@@ -935,7 +935,7 @@
         "colorB": 255,
         "colorA": 255
       },
-      "effects":[
+      "effects": [
         {
           "type": "motionBlur",
           "status": "off"
@@ -1002,7 +1002,7 @@
       "filePath": "audio/SoundEffects/metalic_door_slam_long",
       "fadeScreenToBlack": true,
       "subtitleText": ""
-    }
+    },
     {
       "sequenceType": "endingDecision",
       "fadeScreenToTransparent": true,
