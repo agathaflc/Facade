@@ -1,7 +1,3 @@
-# coding: utf-8
-# author: Akanksha Gupta
-# usage: to load or evaluate models
-
 import sys
 import args
 
@@ -27,14 +23,9 @@ from keras.models import model_from_json
 import glob
 import cv2
 from keras.preprocessing.image import ImageDataGenerator
-#import matplotlib.pyplot as plt
-#import matplotlib
-#import brewer2mpl
-#import pandas as pd
-
 
 def load_model(path_inputs="saved_models/multiclass_models/model.json", path_weights="saved_models/multiclass_models/model.h5"):
-    
+
     # load json and create model
     json_file = open(path_inputs, 'r')
     loadmodel = json_file.read()
@@ -43,14 +34,14 @@ def load_model(path_inputs="saved_models/multiclass_models/model.json", path_wei
 
     # load weights into new model
     model.load_weights(path_weights)
-    print("Loaded model from disk") 
+    print("Loaded model from disk")
 
     # compile model
     model.compile(loss='categorical_crossentropy',
                   optimizer='adam',
                   metrics=['accuracy'])
 
-    print("Compiled loaded model") 
+    print("Compiled loaded model")
     return model
 
 
