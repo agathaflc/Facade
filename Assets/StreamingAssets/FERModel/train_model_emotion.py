@@ -1,7 +1,3 @@
-# coding: utf-8
-# author: Akanksha Gupta
-# usage: to construct & train the CNN model (constructing layer by layer)
-
 import sys
 import args
 import h5py
@@ -60,10 +56,10 @@ def my_cnn(X_train, n_classes):
     model.add(Conv2D(64, (3, 3), padding='same', activation='relu'))
     model.add(Conv2D(64, (3, 3), activation='relu'))
     model.add(AveragePooling2D(pool_size=(2,2)))
-    
+
     model.add(Dropout(0.6))
     model.add(BatchNormalization())
-    
+
     model.add(Conv2D(128, (3, 3), padding='same', activation='relu'))
     model.add(Conv2D(128, (3, 3), activation='relu'))
     model.add(AveragePooling2D(pool_size=(2,2)))
@@ -77,7 +73,7 @@ def my_cnn(X_train, n_classes):
     return model
 
 def arriaga_mini_XCEPTION(input_shape, num_classes, l2_regularization=0.01):
-    
+
     regularization = l2(l2_regularization)
     # base
     img_input = Input(input_shape)
@@ -173,16 +169,16 @@ def arriaga_mini_XCEPTION(input_shape, num_classes, l2_regularization=0.01):
     return model
 
 def train_model(X_train, Y_train, X_test, Y_test, X_validate, Y_validate, n_classes):
-  
+
     # choose architecture
     model = my_cnn(X_train, n_classes)
     # model = arriaga_mini_XCEPTION((1, 48,48), n_classes)
-    
-    # compile model 
+
+    # compile model
     model.compile(loss='categorical_crossentropy',
                   optimizer='adam',
                   metrics=['accuracy'])
-    
+
     # Model Callbacks
     earlyStopping = EarlyStopping(monitor='val_loss', min_delta=0, patience=50, verbose=1, mode='auto')
  #   tensorBoard=TensorBoard(log_dir='./logs', histogram_freq=0, batch_size=32, write_graph=True, write_grads=False, write_images=True, embeddings_freq=0, embeddings_layer_names=None, embeddings_metadata=None)
@@ -191,7 +187,7 @@ def train_model(X_train, Y_train, X_test, Y_test, X_validate, Y_validate, n_clas
     model_checkpoint = ModelCheckpoint('saved_models/multiclass_models/best_weights.hd5', 'val_loss', verbose=1,
                                                     save_best_only=True)
     # Fit model on training data
-    model.fit(X_train, Y_train, validation_data=(X_validate, Y_validate), callbacks=[model_checkpoint,reduce_lr,earlyStopping], 
+    model.fit(X_train, Y_train, validation_data=(X_validate, Y_validate), callbacks=[model_checkpoint,reduce_lr,earlyStopping],
               batch_size=32, epochs=1000, shuffle=True, verbose=2)
 
     # serialize model to JSON
@@ -201,7 +197,7 @@ def train_model(X_train, Y_train, X_test, Y_test, X_validate, Y_validate, n_clas
 
     # serialize weights to HDF5
     model.save_weights("saved_models/multiclass_models/model.h5", overwrite=True)
-    
+
     print("Saved model to disk")
 #    K.clear_session()
     return model
@@ -213,4 +209,3 @@ def model_metrics(model, X_test, Y_test):
     yt = np.argmax(Y_test, axis=1) # Convert one-hot to index
     y_pred = model.predict_classes(X_test)
     print(classification_report(yt, y_pred))
-

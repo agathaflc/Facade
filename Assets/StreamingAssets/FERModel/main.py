@@ -1,9 +1,4 @@
-
-# coding: utf-8
-# author: Akanksha Gupta
-
 import matplotlib
-#matplotlib.use('Agg')
 import sys
 import args
 from train_model_emotion import train_model, model_metrics
@@ -17,7 +12,6 @@ import brewer2mpl
 import numpy as np
 import pandas as pd
 set3 = brewer2mpl.get_map('Set3', 'qualitative', 6).mpl_colors
-#%matplotlib inline
 
 def return_inputs(bool_val):
     print("\nRETURN INPUTS FUNCTION")
@@ -52,9 +46,9 @@ def plot_confusion_matrix(y_true, y_pred, cmap, labels):
     matplotlib.rcParams.update({'font.size': 16})
     ax  = fig.add_subplot(111)
     matrix = ax.imshow(cm, interpolation='nearest', cmap=cmap)
-    fig.colorbar(matrix) 
+    fig.colorbar(matrix)
     for i in range(0,6):
-        for j in range(0,6):  
+        for j in range(0,6):
             ax.text(j,i,cm[i,j],va='center', ha='center')
     # ax.set_title('Confusion Matrix')
     ticks = np.arange(len(labels))
@@ -67,10 +61,10 @@ def plot_confusion_matrix(y_true, y_pred, cmap, labels):
     plt.xlabel('Predicted label')
 
 if __name__=='__main__':
-    
+
     bool_val=False
     X_train, Y_train, X_test, Y_test, X_validate, Y_validate = return_inputs(bool_val)
-    
+
     compare=[]
     for i in range(1):
     	# model = create_model(X_train, Y_train, X_test, Y_test, X_validate, Y_validate, 6)
@@ -82,4 +76,3 @@ if __name__=='__main__':
         # plot_confusion_matrix(y_true, y_pred, plt.cm.YlGnBu, labels)
         predict_class(loadmodel, path='happy', label=3)
         #compare.append(eval)
-        
