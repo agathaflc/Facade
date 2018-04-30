@@ -159,6 +159,7 @@ public class GameController : MonoBehaviour
     private static SequenceData currentSequence;
     private static string currentBgm;
     private static int currentBgmLevel;
+    private static readonly object bgmLock = new object();
 
     // Use this for initialization
     private void Start()
@@ -562,7 +563,11 @@ public class GameController : MonoBehaviour
 
         currentBgm = musicType;
 
-        if (!bgmOff) StartCoroutine(SwitchTracks(clip, seek));
+        if (bgmOff) return;
+        lock (bgmLock)
+        {
+            StartCoroutine(SwitchTracks(clip, seek));
+        }
     }
 
     private void ConcludeEvent()
