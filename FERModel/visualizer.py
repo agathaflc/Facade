@@ -1,3 +1,4 @@
+# imports
 import numpy as np
 import matplotlib.cm as cm
 from mpl_toolkits.axes_grid1 import make_axes_locatable
@@ -7,6 +8,7 @@ import cv2
 from .inference import draw_text
 
 def make_mosaic(images, num_rows, num_cols, border=1, class_names=None):
+    
     num_images = len(images)
     image_shape = images.shape[1:]
     mosaic = ma.masked_all((num_rows * image_shape[0] + (num_rows - 1) * border,
@@ -21,10 +23,12 @@ def make_mosaic(images, num_rows, num_cols, border=1, class_names=None):
         image_shape = image.shape
         mosaic[row * paddedh:row * paddedh + image_shape[0],
                col * paddedw:col * paddedw + image_shape[1]] = image
+        
     return mosaic
 
 def make_mosaic_v2(images, num_mosaic_rows=None,
                 num_mosaic_cols=None, border=1):
+    
     images = np.squeeze(images)
     num_images, image_pixels_rows, image_pixels_cols = images.shape
     if num_mosaic_rows is None and num_mosaic_cols is None:
@@ -46,9 +50,11 @@ def make_mosaic_v2(images, num_mosaic_rows=None,
         image = images[image_arg]
         mosaic[y0:y1, x0:x1] = image
         mosaic_row_arg = mosaic_row_arg + 1
+        
     return mosaic
 
 def pretty_imshow(axis, data, vmin=None, vmax=None, cmap=None):
+    
     if cmap is None:
         cmap = cm.jet
     if vmin is None:
@@ -64,6 +70,7 @@ def pretty_imshow(axis, data, vmin=None, vmax=None, cmap=None):
 
 def normal_imshow(axis, data, vmin=None, vmax=None,
                         cmap=None, axis_off=True):
+    
     if cmap is None:
         cmap = cm.jet
     if vmin is None:
@@ -74,10 +81,12 @@ def normal_imshow(axis, data, vmin=None, vmax=None,
                         interpolation='nearest', cmap=cmap)
     if axis_off:
         plt.axis('off')
+        
     return image
 
 def display_image(face, class_vector=None,
                     class_decoder=None, pretty=False):
+    
     if class_vector is not None and class_decoder is None:
         raise Exception('Provide class decoder')
     face = np.squeeze(face)
@@ -121,6 +130,7 @@ def draw_mosaic(data, num_rows, num_cols, class_vectors=None,
     plt.tight_layout()
 
 if __name__ == '__main__':
+    
     #from utils.data_manager import DataManager
     from utils.utils import get_labels
     from keras.models import load_model
@@ -137,20 +147,6 @@ if __name__ == '__main__':
     pretty_imshow(plt.gca(), make_mosaic(faces[:4], 2, 2), cmap='gray')
     plt.show()
 
-    """
-    image_arg = 0
-    face = faces[image_arg:image_arg + 1]
-    emotion = emotions[image_arg:image_arg + 1]
-    display_image(face, emotion, class_decoder)
-    plt.show()
-
-    normal_imshow(plt.gca(), make_mosaic(faces[:4], 3, 3), cmap='gray')
-    plt.show()
-
-    draw_mosaic(faces, 2, 2, emotions, class_decoder)
-    plt.show()
-
-    """
     model = load_model('../trained_models/emotion_models/simple_CNN.985-0.66.hdf5')
     conv1_weights = model.layers[2].get_weights()
     kernel_conv1_weights = conv1_weights[0]
