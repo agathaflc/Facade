@@ -1,3 +1,4 @@
+# imports
 import numpy as np
 from random import shuffle
 from .preprocessor import preprocess_input
@@ -8,15 +9,7 @@ import scipy.ndimage as ndi
 import cv2
 
 class ImageGenerator(object):
-    """ Image generator with saturation, brightness, lighting, contrast,
-    horizontal flip and vertical flip transformations. It supports
-    bounding boxes coordinates.
-
-    TODO:
-        - Finish support for not using bounding_boxes
-            - Random crop
-            - Test other transformations
-    """
+    
     def __init__(self, ground_truth_data, batch_size, image_size,
                 train_keys, validation_keys,
                 ground_truth_transformer=None,
@@ -58,8 +51,7 @@ class ImageGenerator(object):
         self.translation_factor = translation_factor
 
     def _do_random_crop(self, image_array):
-        """IMPORTANT: random crop only works for classification since the
-        current implementation does no transform bounding boxes"""
+        
         height = image_array.shape[0]
         width = image_array.shape[1]
         x_offset = np.random.uniform(0, self.translation_factor * width)
@@ -77,11 +69,11 @@ class ImageGenerator(object):
 
         image_array = np.stack(image_channel, axis=0)
         image_array = np.rollaxis(image_array, 0, 3)
+        
         return image_array
 
     def do_random_rotation(self, image_array):
-        """IMPORTANT: random rotation only works for classification since the
-        current implementation does no transform bounding boxes"""
+        
         height = image_array.shape[0]
         width = image_array.shape[1]
         x_offset = np.random.uniform(0, self.translation_factor * width)
@@ -99,56 +91,70 @@ class ImageGenerator(object):
 
         image_array = np.stack(image_channel, axis=0)
         image_array = np.rollaxis(image_array, 0, 3)
+        
         return image_array
 
     def _gray_scale(self, image_array):
         return image_array.dot([0.299, 0.587, 0.114])
 
     def saturation(self, image_array):
+        
         gray_scale = self._gray_scale(image_array)
         alpha = 2.0 * np.random.random() * self.brightness_var
         alpha = alpha + 1 - self.saturation_var
         image_array = alpha * image_array + (1 - alpha) * gray_scale[:, :, None]
+        
         return np.clip(image_array, 0, 255)
 
     def brightness(self, image_array):
+        
         alpha = 2 * np.random.random() * self.brightness_var
         alpha = alpha + 1 - self.saturation_var
         image_array = alpha * image_array
+        
         return np.clip(image_array, 0, 255)
 
     def contrast(self, image_array):
+        
         gray_scale = (self._gray_scale(image_array).mean() *
                         np.ones_like(image_array))
         alpha = 2 * np.random.random() * self.contrast_var
         alpha = alpha + 1 - self.contrast_var
         image_array = image_array * alpha + (1 - alpha) * gray_scale
+        
         return np.clip(image_array, 0, 255)
 
     def lighting(self, image_array):
+        
         covariance_matrix = np.cov(image_array.reshape(-1,3) /
                                     255.0, rowvar=False)
         eigen_values, eigen_vectors = np.linalg.eigh(covariance_matrix)
         noise = np.random.randn(3) * self.lighting_std
         noise = eigen_vectors.dot(eigen_values * noise) * 255
         image_array = image_array + noise
+        
         return np.clip(image_array, 0 ,255)
 
     def horizontal_flip(self, image_array, box_corners=None):
+        
         if np.random.random() < self.horizontal_flip_probability:
             image_array = image_array[:, ::-1]
             if box_corners != None:
                 box_corners[:, [0, 2]] = 1 - box_corners[:, [2, 0]]
+                
         return image_array, box_corners
 
     def vertical_flip(self, image_array, box_corners=None):
+        
         if (np.random.random() < self.vertical_flip_probability):
             image_array = image_array[::-1]
             if box_corners != None:
                 box_corners[:, [1, 3]] = 1 - box_corners[:, [3, 1]]
+                
         return image_array, box_corners
 
     def transform(self, image_array, box_corners=None):
+        
         shuffle(self.color_jitter)
         for jitter in self.color_jitter:
             image_array = jitter(image_array)
@@ -163,12 +169,14 @@ class ImageGenerator(object):
         if self.vertical_flip_probability > 0:
             image_array, box_corners = self.vertical_flip(image_array,
                                                             box_corners)
+            
         return image_array, box_corners
 
     def preprocess_images(self, image_array):
         return preprocess_input(image_array)
 
     def flow(self, mode='train'):
+        
             while True:
                 if mode =='train':
                     shuffle(self.train_keys)
