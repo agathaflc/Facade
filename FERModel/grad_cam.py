@@ -1,3 +1,4 @@
+# imports
 import cv2
 import h5py
 import keras
@@ -13,6 +14,7 @@ from .preprocessor import preprocess_input
 
 
 def reset_optimizer_weights(model_filename):
+    
     model = h5py.File(model_filename, 'r+')
     del model['optimizer_weights']
     model.close()
@@ -27,35 +29,41 @@ def target_category_loss_output_shape(input_shape):
 
 
 def normalize(x):
-    # utility function to normalize a tensor by its L2 norm
     return x / (K.sqrt(K.mean(K.square(x))) + 1e-5)
 
 
 def load_image(image_array):
+    
     image_array = np.expand_dims(image_array, axis=0)
     image_array = preprocess_input(image_array)
+    
     return image_array
 
 
 def register_gradient():
+    
     if "GuidedBackProp" not in ops._gradient_registry._registry:
         @ops.RegisterGradient("GuidedBackProp")
         def _GuidedBackProp(op, gradient):
             dtype = op.inputs[0].dtype
             guided_gradient = (gradient * tf.cast(gradient > 0., dtype) *
                                tf.cast(op.inputs[0] > 0., dtype))
+            
             return guided_gradient
 
 
 def compile_saliency_function(model, activation_layer='conv2d_7'):
+    
     input_image = model.input
     layer_output = model.get_layer(activation_layer).output
     max_output = K.max(layer_output, axis=3)
     saliency = K.gradients(K.sum(max_output), input_image)[0]
+    
     return K.function([input_image, K.learning_phase()], [saliency])
 
 
 def modify_backprop(model, name, task):
+    
     graph = tf.get_default_graph()
     with graph.gradient_override_map({'Relu': name}):
 
@@ -76,13 +84,12 @@ def modify_backprop(model, name, task):
             # model_path = '../trained_models/fer2013_mini_XCEPTION.119-0.65.hdf5'
             # model_path = '../trained_models/fer2013_big_XCEPTION.54-0.66.hdf5'
         new_model = load_model(model_path, compile=False)
+        
     return new_model
 
 
 def deprocess_image(x):
-    """ Same normalization as in:
-    https://github.com/fchollet/keras/blob/master/examples/conv_filter_visualization.py
-    """
+    
     if np.ndim(x) > 3:
         x = np.squeeze(x)
     # normalize tensor: center on 0., ensure std is 0.1
@@ -99,9 +106,11 @@ def deprocess_image(x):
     if K.image_dim_ordering() == 'th':
         x = x.transpose((1, 2, 0))
     x = np.clip(x, 0, 255).astype('uint8')
+    
     return x
 
 def compile_gradient_function(input_model, category_index, layer_name):
+    
     model = Sequential()
     model.add(input_model)
 
@@ -115,9 +124,11 @@ def compile_gradient_function(input_model, category_index, layer_name):
     gradients = normalize(K.gradients(loss, conv_output)[0])
     gradient_function = K.function([model.layers[0].input, K.learning_phase()],
                                                     [conv_output, gradients])
+    
     return gradient_function
 
 def calculate_gradient_weighted_CAM(gradient_function, image):
+    
     output, evaluated_gradients = gradient_function([image, False])
     output, evaluated_gradients = output[0, :], evaluated_gradients[0, :, :, :]
     weights = np.mean(evaluated_gradients, axis = (0, 1))
@@ -136,18 +147,21 @@ def calculate_gradient_weighted_CAM(gradient_function, image):
     CAM = cv2.applyColorMap(np.uint8(255 * heatmap), cv2.COLORMAP_JET)
     CAM = np.float32(CAM) + np.float32(image)
     CAM = 255 * CAM / np.max(CAM)
+    
     return np.uint8(CAM), heatmap
 
 def calculate_guided_gradient_CAM(preprocessed_input, gradient_function, saliency_function):
+    
     CAM, heatmap = calculate_gradient_weighted_CAM(gradient_function, preprocessed_input)
     saliency = saliency_function([preprocessed_input, 0])
     gradCAM = saliency[0] * heatmap[..., np.newaxis]
     #return deprocess_image(gradCAM)
+    
     return deprocess_image(saliency[0])
-    #return saliency[0]
 
 def calculate_guided_gradient_CAM_v2(preprocessed_input, gradient_function,
                                     saliency_function, target_size=(128, 128)):
+    
     CAM, heatmap = calculate_gradient_weighted_CAM(gradient_function, preprocessed_input)
     heatmap = np.squeeze(heatmap)
     heatmap = cv2.resize(heatmap.astype('uint8'), target_size)
@@ -156,10 +170,12 @@ def calculate_guided_gradient_CAM_v2(preprocessed_input, gradient_function,
     saliency = cv2.resize(saliency.astype('uint8'), target_size)
     gradCAM = saliency * heatmap
     gradCAM =  deprocess_image(gradCAM)
+    
     return np.expand_dims(gradCAM, -1)
 
 
 if __name__ == '__main__':
+    
     import pickle
     faces = pickle.load(open('faces.pkl','rb'))
     face = faces[0]
