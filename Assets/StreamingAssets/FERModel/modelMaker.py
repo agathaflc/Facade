@@ -1,25 +1,15 @@
 
-# coding: utf-8
-
-# In[1]:
-
-
-# import 'em
-
+# imports
 import sys
 import args
-
 req_link = '/usr/local/lib/python2.7/site-packages/'
 sys.path.append(req_link)
-
 import os
-
 from keras import backend as K
 K.set_image_dim_ordering('th')
-
+from sklearn.metrics import classification_report
 import numpy as np
 np.random.seed(123)  # for reproducibility
-
 from keras import metrics
 from keras.callbacks import EarlyStopping, TensorBoard
 from keras.models import Sequential
@@ -35,16 +25,9 @@ import matplotlib.pyplot as plt
 import matplotlib
 import brewer2mpl
 import pandas as pd
-
+from pprint import pprint
 set3 = brewer2mpl.get_map('Set3', 'qualitative', 6).mpl_colors
-# get_ipython().magic(u'matplotlib inline')
-
 print("imports successful")
-
-# fer2013 dataset:
-# Training       28709
-# PrivateTest     3589
-# PublicTest      3589
 
 # emotion labels from FER2013:
 emotion_old = {'Angry': 0, 'Disgust': 1, 'Fear': 2, 'Happy': 3,
@@ -53,10 +36,6 @@ emotion_old = {'Angry': 0, 'Disgust': 1, 'Fear': 2, 'Happy': 3,
 # emotion labels reconstructed (absorbed disgust into anger):
 emotion_new = {'Neutral': 0, 'Anger': 1, 'Fear': 2, 'Happy': 3,
            'Sad': 4, 'Surprise': 5}
-
-
-# In[2]:
-
 
 def loadFER():
 
@@ -108,7 +87,6 @@ def loadFER():
                 X_train=np.append(X_train, image, axis=0)
                 Y_train=np.append(Y_train, label, axis=0)
                 print("training bingo")
-#                 print (X_train, Y_train)
             elif 'private' in purpose.lower():
                 X_test=np.append(X_test, image, axis=0)
                 print("testing x")
@@ -124,7 +102,6 @@ def loadFER():
             if purpose == 'Training':
                 X_train=np.array(image)
                 Y_train=np.array(label)
-#                 print (X_train, Y_train)
             elif 'private' in purpose.lower():
                 X_test=np.array(image)
                 Y_test=np.array(label)
@@ -134,7 +111,6 @@ def loadFER():
                 Y_validate=np.array(label)
 
     # Preprocess input data
-
     X_train = X_train.reshape(X_train.shape[0], 1, 48, 48)
     X_validate = X_validate.reshape(X_validate.shape[0], 1, 48, 48)
     X_test = X_test.reshape(X_test.shape[0], 1, 48, 48)
@@ -146,7 +122,6 @@ def loadFER():
     X_train /= 255
     X_validate /= 255
     X_test /= 255
-
     print ("Preprocessed input data")
 
     # Preprocess class labels
@@ -158,23 +133,9 @@ def loadFER():
 
     return (X_train, Y_train), (X_test, Y_test), (X_validate, Y_validate)
 
-
-# In[3]:
-
-
 (X_train, Y_train), (X_test, Y_test), (X_validate, Y_validate) = loadFER()
 
-
-# In[4]:
-
-
-# from tempfile import TemporaryFile
-# from ipykernel import kernelapp as app
-# import warnings
-# warnings.simplefilter(action='ignore', category=FutureWarning)
-
 def save_processed_data(name, data):
-#     outfile = TemporaryFile()
     np.save(name, data)
 
 def load_processed_data(outfile):
@@ -192,11 +153,8 @@ Y_test=load_processed_data("Y_test.npy")
 Y_validate=load_processed_data("Y_validate.npy")
 print("loaded")
 
-
-# In[5]:
-
-
 def hidden():
+           
     try:
         print(np.all(X_train==load_processed_data("X_train.npy")))
         print(np.all(X_validate==load_processed_data("X_validate.npy")))
@@ -227,10 +185,6 @@ def hidden():
         print(np.all(Y_train==load_processed_data("Y_train.npy")))
         print(np.all(Y_test==load_processed_data("Y_test.npy")))
         print(np.all(Y_validate==load_processed_data("Y_validate.npy")))
-
-
-# In[18]:
-
 
 def train_model(X_train, Y_train, X_test, Y_test):
 
@@ -284,15 +238,7 @@ def train_model(X_train, Y_train, X_test, Y_test):
     print ("hi")
     return model
 
-
-# In[ ]:
-
-
 train_model = train_model(X_train, Y_train, X_test, Y_test)
-
-
-# In[8]:
-
 
 def load_model():
 
@@ -312,6 +258,7 @@ def load_model():
                   metrics=['accuracy'])
 
     print("Compiled loaded model")
+
     return model
 
 def eval_model(model, X_test, Y_test):
@@ -322,63 +269,23 @@ def eval_model(model, X_test, Y_test):
     print score
     print('Test loss:', score[0])
     print('Test accuracy:', score[1])
+           
     return model
 
-
-# In[11]:
-
-
 model = load_model()
-
-
-# In[15]:
-
 
 print("eval_model")
 eval_model(model, X_test, Y_test)
 
-
-# In[13]:
-
-
 def processImage(path):
-#     import args
-#     cascade_fn = args.get('--cascade', '../../data/haarcascades/haarcascade_frontalface_alt.xml')
-#     nested_fn  = args.get('--nested-cascade', "../../data/haarcascades/haarcascade_eye.xml")
-
-#     cam = create_capture(video_src, fallback='synth:bg=../data/lena.jpg:noise=0.05')
-
-#     face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-#     eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
 
     x = cv2.imread(path)
     x = cv2.cvtColor(x, cv2.COLOR_BGR2GRAY)
-
-#     faces = face_cascade.detectMultiScale(x, 1.3, 5)
-#     #faces = face_cascade.detectMultiScale(gray)
-
-#     for (x,y,w,h) in faces:
-#         cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
-#         roi_gray = gray[y:y+h, x:x+w]
-#         roi_color = img[y:y+h, x:x+w]
-#         eyes = eye_cascade.detectMultiScale(roi_gray)
-#         for (ex,ey,ew,eh) in eyes:
-#             cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
-
-#     cv2.imshow('img',img)
-
-#     k = cv2.waitKey(0)
-#     if k == 27:         # wait for ESC key to exit
-#         cv2.destroyAllWindows()
-#     elif k == ord('s'): # wait for 's' key to save and exit
-#         cv2.imwrite('messigray.png',img)
-#         cv2.destroyAllWindows()
-
-
     x = cv2.resize(x,(48, 48))
     x = x.reshape(1, 1, 48, 48)
     x = x.astype('float32')
     x /= 255
+           
     return x
 
 
@@ -387,41 +294,31 @@ def getLabel(label):
     pattern = ([0]*label)+[1]+([0]*(5-label))
     print pattern
     label = np.array(pattern)
-
     label = label.reshape(1, 6)
+           
     return label
 
 def predict(image, label, model):
 
     label = getLabel(label)
-
     score = model.evaluate(image, label, verbose=0)
     pred_array = model.predict(image)
     pred_class = model.predict_classes(image)
-
     prediction = {"loss":score[0], "accuracy":score[1], "pred_array":pred_array, "pred_class": pred_class}
 
     return prediction
 
 def select(path):
+           
     try:
         x = processImage(str(path)+".png")
     except:
         x = processImage(str(path)+".jpeg")
+
     return x
 
-from pprint import pprint
-
 model = load_model()
-
 pprint (predict(select("happy"), 3, model))
-
-
-# In[16]:
-
-
-from sklearn.metrics import classification_report
-import numpy as np
 
 yt = np.argmax(Y_test, axis=1) # Convert one-hot to index
 y_pred = model.predict_classes(X_test)
