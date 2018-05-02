@@ -1,3 +1,4 @@
+# imports
 import pickle
 import urllib
 import json, base64, io
@@ -39,12 +40,15 @@ def new_predict():
     # Reconstruct image as an numpy array
     image = imread(io.BytesIO(buf))
     pred = new_predict_for_kate(image, loadmodel)
+    
     return jsonify(pred)
 
 @app.route('/model_1/predict/<string:prediction>', methods=['POST'])
 def predict(prediction):
+    
     pred = predict_for_kate(prediction, loadmodel)
     print (pred)
+    
     return jsonify(pred)
 
 
