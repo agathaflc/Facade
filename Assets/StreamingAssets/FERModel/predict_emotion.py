@@ -1,3 +1,4 @@
+# imports
 import sys
 import args
 import os
@@ -32,6 +33,7 @@ def processImage(path):
     image = image.reshape(1, 1, 48, 48)
     image = image.astype('float32')
     image /= 255
+    
     return image
 
 
@@ -40,27 +42,27 @@ def getLabel(label):
     pattern = ([0]*label)+[1]+([0]*(5-label))
     print (pattern)
     label = np.array(pattern)
-
     label = label.reshape(1, 6)
+    
     return label
 
 def predict(image, label, model):
 
     label = getLabel(label)
-
     score = model.evaluate(image, label, verbose=0)
     pred_array = model.predict(image)
     pred_class = model.predict_classes(image)
-
     prediction = {"loss":score[0], "accuracy":score[1], "pred_array":pred_array, "pred_class": pred_class}
 
     return prediction
 
 def select(path):
+    
     try:
         x = processImage(str(path)+".png")
     except:
         x = processImage(str(path)+".jpeg")
+        
     return x
 
 def predict_emotion(image, model):
@@ -70,6 +72,7 @@ def predict_emotion(image, model):
 
     prediction = {"pred_array":pred_array, "pred_class": pred_class}
     print (prediction)
+    
     return prediction
 
 
@@ -181,4 +184,5 @@ def new_predict_for_kate(image_or, model):
         face_array.append(prediction)
 
     print (face_array)
+    
     return face_array
