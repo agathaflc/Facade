@@ -1,9 +1,8 @@
+# imports
 import sys
 import args
-
 import os
 import numpy as np
-
 import glob
 import cv2
 import matplotlib.pyplot as plt
@@ -12,8 +11,6 @@ import brewer2mpl
 import pandas as pd
 from utils.inference import detect_faces, apply_offsets, load_detection_model
 from keras.utils import np_utils
-# get_ipython().magic(u'matplotlib inline')
-
 print("imports successful")
 
 # fer2013 dataset:
