@@ -1,15 +1,15 @@
+# imports
 import cv2
 import numpy as np
 import operator
 import time
 import json
 import os
-
 from load_model_emotion import load_model
-
 from inference import detect_faces, draw_text, draw_bounding_box, apply_offsets, load_detection_model
 
 def preprocess_input(x, v2=True):
+    
     x = np.resize(x, (48,48))
     x = x.reshape(1, 1, 48, 48)
     x = x.astype('float32')
@@ -17,6 +17,7 @@ def preprocess_input(x, v2=True):
     if v2:
         x = x - 0.5
         x = x * 2.0
+        
     return x
 
 # parameters for loading data and images
@@ -29,8 +30,8 @@ emotion_labels = {0:'neutral',1:'anger',2:'fear',3:'happy',4:'sad',5:'surprise'}
 face_detection = load_detection_model(detection_model_path)
 emotion_classifier = load_model(path_inputs=path_inputs, path_weights=path_weights)
 
-
 def read_expression():
+    
     global emotion_labels
     # hyper-parameters for bounding boxes shape
     frame_window = 5
@@ -52,16 +53,6 @@ def read_expression():
     emotion_confidences = {'neutral': 0.0, 'anger': 0.0, 'fear': 0.0, 'happy': 0.0, 'sad': 0.0, 'surprise': 0.0}
     c = 0
     while True:
-
-        # try:
-        #     with open('flag.txt', 'r') as fp:
-        #         lines = fp.readlines()
-        #         print(lines)
-        #         print("FILE HAS BEEN READ")
-        # except:
-        #     print("FLAG.TXT DOESN'T EXIST")
-        #     continue
-
         if time.time() > timeout:
             break
 
@@ -180,7 +171,7 @@ def check_trigger():
     try:
         with open(os.path.join('..', 'flag.txt'), 'r') as fp:
             if (fp.read()) == "record":
-                print("YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYYYYYYYYYYYYYYYYYYYYY")
+                print("RECORDING")
                 return True
             else:
                 return False
@@ -193,8 +184,6 @@ def main():
     while True:
         if check_trigger():
             read_expression()
-        # else:
-        #     print("Trigger is deactivated, sleeping for 0.2 seconds...")
 
         time.sleep(0.2) # checks every 0.2 seconds
 
