@@ -1,12 +1,15 @@
+# imports
 import requests, json
 from pprint import pprint
 
 def using_predict():
+    
     url ="http://127.0.0.1:5000/model_1/predict/happy.jpeg"
     response = requests.post(url)
     pprint (response.json())
 
 def using_new_predict():
+    
     url ="http://127.0.0.1:5000/model_1/emotion_detection"
     data = {
         "data" : {
@@ -16,7 +19,6 @@ def using_new_predict():
     }
 
     response = requests.post(url=url, json=data)
-
     pprint (response.json())
 
 using_predict()
