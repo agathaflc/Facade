@@ -1,3 +1,4 @@
+# imports
 import matplotlib
 import sys
 import args
@@ -14,32 +15,40 @@ import pandas as pd
 set3 = brewer2mpl.get_map('Set3', 'qualitative', 6).mpl_colors
 
 def return_inputs(bool_val):
+    
     print("\nRETURN INPUTS FUNCTION")
     (X_train, Y_train), (X_test, Y_test), (X_validate, Y_validate) = load_save_inputs(bool_val, saved_inputs='saved_inputs', filename="../../fer2013/fer2013.csv")
     return X_train, Y_train, X_test, Y_test, X_validate, Y_validate
 
 def create_model(X_train, Y_train, X_test, Y_test, X_validate, Y_validate, n_classes):
+    
     print("\nCREATE MODEL FUNCTION")
     model = train_model(X_train, Y_train, X_test, Y_test, X_validate, Y_validate, n_classes)
     model_metrics(model, X_test, Y_test)
+    
     return model
 
 def get_model(path_inputs="saved_models/multiclass_models/model.json", path_weights="saved_models/multiclass_models/model.h5"):
+    
     print("\nLOAD N GET MODEL FUNCTION")
     model = load_model(path_inputs, path_weights)
+    
     return model
 
 def evaluate_model(model, X_train, Y_train, X_test, Y_test, X_validate, Y_validate):
+    
     print("\nEVALUATE MODEL FUNCTION")
     return eval_model(model, X_test, Y_test)
 
 def predict_class(model, path='happy', label=3):
+    
     print("\nPREDICT CLASS FUNTION FOR: " + str(select(path)))
     pprint (predict(select(path), label, model))
 
 labels = ['angry', 'fear', 'happy', 'sad', 'surprise', 'neutral']
 
 def plot_confusion_matrix(y_true, y_pred, cmap, labels):
+    
     cm = confusion_matrix(y_true, y_pred)
     print(cm)
     fig = plt.figure(figsize=(6,6))
