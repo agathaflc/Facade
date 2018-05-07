@@ -1484,6 +1484,7 @@ public class GameController : MonoBehaviour
     {
         if (shoot)
         {
+            LockCursor();
             isEndingTimerActive = false;
             if (!skipPostActReport) GeneratePostReport(2);
             BlackScreenDisplay.CrossFadeAlpha(1, 2f, true);

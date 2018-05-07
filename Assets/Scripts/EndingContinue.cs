@@ -6,6 +6,11 @@ public class EndingContinue : MonoBehaviour {
 	public GameObject endreport;
 	public GameObject report;
 
+	private void Start()
+	{
+		Cursor.lockState = CursorLockMode.None;
+	}
+
 	public void StartScreen(){
 		DataController.ResetPlayerData();
 		Initiate.Fade ("MenuScreen", Color.black, 0.8f);
