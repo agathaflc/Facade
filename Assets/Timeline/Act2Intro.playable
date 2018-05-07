@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Script: {fileID: -1977359656, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: c3ba74efe6b76884cbb96cae143ded79, type: 3}
+  m_Clip: {fileID: 8300000, guid: 8bf7d50c9ce7baa40b653cacb9bc24cc, type: 3}
   m_Loop: 0
   m_bufferingTime: 0.1
 --- !u!114 &114661973165452172
@@ -516,7 +516,7 @@ MonoBehaviour:
   m_Script: {fileID: -1977359656, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: 307601107908d644aa8fbdf4ec1dae23, type: 3}
+  m_Clip: {fileID: 8300000, guid: 50d0b6b98fb31734f93ff9d1c1cb9e6d, type: 3}
   m_Loop: 0
   m_bufferingTime: 0.1
 --- !u!114 &114736485744151970
@@ -733,19 +733,7 @@ MonoBehaviour:
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 2
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
