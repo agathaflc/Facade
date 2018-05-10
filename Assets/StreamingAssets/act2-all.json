@@ -17,28 +17,28 @@
     "seek": 40
   },
   "happyLighting": {
-    "intensity": 1,
+    "intensity": 0.6,
     "colorR": 254,
     "colorG": 255,
     "colorB": 203,
     "colorA": 255
   },
   "sadScaredLighting": {
-    "intensity": 1,
+    "intensity": 0.6,
     "colorR": 171,
     "colorG": 255,
     "colorB": 231,
     "colorA": 255
   },
   "neutralLighting": {
-    "intensity": 1,
+    "intensity": 0.6,
     "colorR": 255,
     "colorG": 255,
     "colorB": 255,
     "colorA": 255
   },
   "angrySurprisedLighting": {
-    "intensity": 1,
+    "intensity": 0.6,
     "colorR": 225,
     "colorG": 169,
     "colorB": 169,
@@ -694,7 +694,7 @@
       ],
       "hasLightingEffect": true,
       "lighting": {
-        "intensity": 1,
+        "intensity": 0.6,
         "colorR": 72,
         "colorG": 0,
         "colorB": 0,
@@ -761,7 +761,7 @@
       "animationNo": 2,
       "hasLightingEffect": true,
       "lighting": {
-        "intensity": 1,
+        "intensity": 0.6,
         "colorR": 183,
         "colorG": 0,
         "colorB": 0,
