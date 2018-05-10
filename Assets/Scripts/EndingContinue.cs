@@ -9,6 +9,7 @@ public class EndingContinue : MonoBehaviour {
 	private void Start()
 	{
 		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
 	}
 
 	public void StartScreen(){
