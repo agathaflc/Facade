@@ -76,7 +76,7 @@
       "effects": [
         {
           "type": "bloom",
-          "intensity": 8
+          "intensity": 6
         }
       ]
     },
@@ -86,13 +86,7 @@
     {
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/S2_We_ve_had_a_long_day",
-      "subtitleText": "We’ve all had a long day, right? Don’t you wanna get back home?",
-      "effects": [
-        {
-          "type": "bloom",
-          "intensity": 0
-        }
-      ]
+      "subtitleText": "We’ve all had a long day, right? Don’t you wanna get back home?"
     },
     {
       "sequenceType": "dialog",
@@ -103,7 +97,13 @@
       "sequenceType": "dialog",
       "filePath": "audio/Act3/Sentence/S4_I_mean_the_perpetrator",
       "subtitleText": "I mean... the perpetrator, is locked up.",
-      "animationNo": 1
+      "animationNo": 1,
+      "effects": [
+        {
+          "type": "bloom",
+          "intensity": 0
+        }
+      ]
     },
     {
       "sequenceType": "dialog",
@@ -515,7 +515,7 @@
       "effects": [
         {
           "type": "bloom",
-          "intensity": 8
+          "intensity": 6
         }
       ]
     },
@@ -732,7 +732,7 @@
         },
         {
           "type": "bloom",
-          "intensity": 7
+          "intensity": 4
         }
       ],
       "usemaxBgm": true
@@ -1010,29 +1010,7 @@
     },
     {
       "sequenceType": "endingDecision",
-      "fadeScreenToTransparent": true,
-      "questions": [
-        {
-          "questionDesc": "Kill Yourself?",
-          "questionId": "36",
-          "expressionWeight": 0,
-          "consistencyWeight": 1,
-          "considersEmotion": false,
-          "considersFact": true,
-          "filePath": "audio/SoundEffects/door_close_1",
-          "questionText": "Will you kill yourself?",
-          "answers": [
-            {
-              "answerId": "360",
-              "answerText": "Yes"
-            },
-            {
-              "answerId": "361",
-              "answerText": "No"
-            }
-          ]
-        }
-      ]
+      "fadeScreenToTransparent": true
     }
   ]
 }
