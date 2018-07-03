@@ -135,10 +135,9 @@ public class GameController : MonoBehaviour
 
     private AudioSource currentBgmAudioSource;
 
-    private DataController dataController;
+    private static DataController dataController;
     private ActData currentActData;
     private QuestionData[] questionPool;
-    private List<QuestionData> allQuestions = new List<QuestionData>();
 
     private float lightingColorTimer;
     private const float MAX_COLOR_TIMER = 1f;
@@ -583,8 +582,9 @@ public class GameController : MonoBehaviour
         isEventDone = true;
     }
 
-    private void SaveQuestion(QuestionData question)
+    private static void SaveQuestion(QuestionData question)
     {
+        var allQuestions = DataController.GetAllQuestions();
         allQuestions.Add(question);
     }
 
@@ -1439,10 +1439,20 @@ public class GameController : MonoBehaviour
         //postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
     }
 
-    private string GetAnswer(int i)
+    private static string GetAnswer(int i)
     {
-        string answerIndex = dataController.GetAnswerIdByQuestionId(allQuestions[i].questionId);
-        string answer = allQuestions[i].answers.First(a => a.answerId.Equals(answerIndex)).answerText;
+        string answer = "NOT_FOUND";
+        try
+        {
+            var allQuestions = DataController.GetAllQuestions();
+            string answerIndex = dataController.GetAnswerIdByQuestionId(allQuestions[i].questionId);
+            answer = allQuestions[i].answers.First(a => a.answerId.Equals(answerIndex)).answerText;
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+            Debug.LogError("answer no. " + i + " not found");
+        }
+
         answer = "<b>" + answer + "</b>";
         return answer;
     }
