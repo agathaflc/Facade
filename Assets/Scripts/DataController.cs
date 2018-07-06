@@ -25,6 +25,7 @@ public class DataController : MonoBehaviour
     private DistanceData distanceMap;
     
     private static Dictionary<string, string> questionIdToAnswerIdMap = new Dictionary<string, string>();
+    public static List<QuestionData> allQuestions = new List<QuestionData>();
     private static float actualOverallScore = 0;
 
     private PlayerProgress playerProgress;
@@ -35,6 +36,7 @@ public class DataController : MonoBehaviour
     public static void ResetPlayerData()
     {
         questionIdToAnswerIdMap = new Dictionary<string, string>();
+        allQuestions = new List<QuestionData>();
         actualOverallScore = 0;
         
         currentActNo = 0;
@@ -43,6 +45,10 @@ public class DataController : MonoBehaviour
         LoadRoundData(actFiles[currentActNo]);
     }
 
+    public static List<QuestionData> GetAllQuestions()
+    {
+        return allQuestions;
+    }
     // Use this for initialization
     private void Start()
     {

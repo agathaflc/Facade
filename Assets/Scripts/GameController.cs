@@ -41,6 +41,8 @@ public class GameController : MonoBehaviour
     private const float MOTION_BLUR_SHUTTER_ANGLE_STEP = 10f;
     private const float MOTION_BLUR_DEFAULT_SHUTTER_ANGLE = 210f;
 
+    private const float BLOOM_WAIT_TIME = 0.01f;
+
     private const float FER_RECORDING_TIME = 4f;
     private const float ENDING_DECISION_TIME_LIMIT = 25f;
 
@@ -133,10 +135,9 @@ public class GameController : MonoBehaviour
 
     private AudioSource currentBgmAudioSource;
 
-    private DataController dataController;
+    private static DataController dataController;
     private ActData currentActData;
     private QuestionData[] questionPool;
-    private List<QuestionData> allQuestions = new List<QuestionData>();
 
     private float lightingColorTimer;
     private const float MAX_COLOR_TIMER = 1f;
@@ -215,6 +216,11 @@ public class GameController : MonoBehaviour
             // deactivate the collider until ending decision is shown
             tableGun.GetComponent<Collider>().enabled = false;
         }
+
+        var defaultLighting = currentActData.neutralLighting;
+        mainLight.intensity = defaultLighting.intensity;
+        mainLight.color = new Color32(defaultLighting.colorR, defaultLighting.colorG, defaultLighting.colorB,
+            defaultLighting.colorA);
 
         var detectiveAudioSources = detectiveObject.GetComponents<AudioSource>();
         detectiveVoice = detectiveAudioSources[0];
@@ -298,7 +304,7 @@ public class GameController : MonoBehaviour
             {
                 BlackScreenDisplay.CrossFadeAlpha(1, 2.5f, true);
                 crossFaded = true;
-                yield return new WaitForSecondsRealtime(6.5f);
+                yield return new WaitForSecondsRealtime(5f);
                 EndRound();
             }
 
@@ -337,7 +343,7 @@ public class GameController : MonoBehaviour
         {
             BlackScreenDisplay.CrossFadeAlpha(0, 1f, true);
         }
-        
+
         if (currentSequence.ending) // only for the animation when standing up
         {
             detectiveObject.GetComponent<Animator>().runtimeAnimatorController = kiraStandUpController;
@@ -485,6 +491,7 @@ public class GameController : MonoBehaviour
         {
             isEventDone = false;
 
+            LockCursor();
             if (BlackScreenDisplay.color.a > 0 && !currentSequence.earlyFade)
             {
                 BlackScreenDisplay.CrossFadeAlpha(0, 1f, true);
@@ -534,22 +541,25 @@ public class GameController : MonoBehaviour
 
     private IEnumerator SwitchTracks(AudioClip clip, float seek, float seconds = 4.0f)
     {
-        Debug.Log("switch tracks");
-        var playA = !(Math.Abs(bgmAudioSourceB.volume) < 0.01);
+        lock (bgmLock)
+        {
+            Debug.Log("switch tracks");
+            var playA = !(Math.Abs(bgmAudioSourceB.volume) < 0.01);
 
-        if (playA)
-        {
-            bgmAudioSourceA.clip = clip;
-            bgmAudioSourceA.loop = true;
-            bgmAudioSourceA.time = seek;
-            yield return StartCoroutine(CrossFade(bgmAudioSourceB, bgmAudioSourceA, seconds));
-        }
-        else
-        {
-            bgmAudioSourceB.clip = clip;
-            bgmAudioSourceB.loop = true;
-            bgmAudioSourceB.time = seek;
-            yield return StartCoroutine(CrossFade(bgmAudioSourceA, bgmAudioSourceB, seconds));
+            if (playA)
+            {
+                bgmAudioSourceA.clip = clip;
+                bgmAudioSourceA.loop = true;
+                bgmAudioSourceA.time = seek;
+                yield return StartCoroutine(CrossFade(bgmAudioSourceB, bgmAudioSourceA, seconds));
+            }
+            else
+            {
+                bgmAudioSourceB.clip = clip;
+                bgmAudioSourceB.loop = true;
+                bgmAudioSourceB.time = seek;
+                yield return StartCoroutine(CrossFade(bgmAudioSourceA, bgmAudioSourceB, seconds));
+            }
         }
     }
 
@@ -564,10 +574,7 @@ public class GameController : MonoBehaviour
         currentBgm = musicType;
 
         if (bgmOff) return;
-        lock (bgmLock)
-        {
-            StartCoroutine(SwitchTracks(clip, seek));
-        }
+        StartCoroutine(SwitchTracks(clip, seek));
     }
 
     private void ConcludeEvent()
@@ -575,8 +582,9 @@ public class GameController : MonoBehaviour
         isEventDone = true;
     }
 
-    private void SaveQuestion(QuestionData question)
+    private static void SaveQuestion(QuestionData question)
     {
+        var allQuestions = DataController.GetAllQuestions();
         allQuestions.Add(question);
     }
 
@@ -697,7 +705,7 @@ public class GameController : MonoBehaviour
             {
                 settings.bloom.intensity += BLOOM_INTENSITY_STEP;
                 postProcessingBehaviour.profile.bloom.settings = settings;
-                yield return new WaitForSecondsRealtime(0.25f);
+                yield return new WaitForSecondsRealtime(BLOOM_WAIT_TIME);
             }
         }
         else
@@ -706,7 +714,7 @@ public class GameController : MonoBehaviour
             {
                 settings.bloom.intensity -= BLOOM_INTENSITY_STEP;
                 postProcessingBehaviour.profile.bloom.settings = settings;
-                yield return new WaitForSecondsRealtime(0.25f);
+                yield return new WaitForSecondsRealtime(BLOOM_WAIT_TIME);
             }
         }
     }
@@ -749,9 +757,10 @@ public class GameController : MonoBehaviour
 
     private void AdaptLightingByEmotion(LightingEffect lightingEffect)
     {
-        if (isLightingAdaptive) StartCoroutine(LightingChanges(
-            new Color32(lightingEffect.colorR, lightingEffect.colorG, lightingEffect.colorB, lightingEffect.colorA),
-            lightingEffect.intensity));
+        if (isLightingAdaptive)
+            StartCoroutine(LightingChanges(
+                new Color32(lightingEffect.colorR, lightingEffect.colorG, lightingEffect.colorB, lightingEffect.colorA),
+                lightingEffect.intensity));
     }
 
     private IEnumerator LightingChanges(Color32 newColor, float newIntensity = 1)
@@ -1237,7 +1246,7 @@ public class GameController : MonoBehaviour
                     {
                         PlayBgm(currentActData.bgmAngrySurprisedClip, MUSIC_SURPRISED_ANGRY,
                             currentActData.bgmAngrySurprisedFile.seek);
-                        
+
                         if (adaptLighting) AdaptLightingByEmotion(currentActData.angrySurprisedLighting);
                     }
 
@@ -1266,7 +1275,7 @@ public class GameController : MonoBehaviour
                 {
                     PlayBgm(currentActData.bgmSadScaredClip, MUSIC_SAD_SCARED,
                         currentActData.bgmSadScaredFile.seek);
-                    
+
                     if (adaptLighting) AdaptLightingByEmotion(currentActData.sadScaredLighting);
                 }
 
@@ -1430,10 +1439,20 @@ public class GameController : MonoBehaviour
         //postReport.transform.Find("ScrollView/Viewport/Content/Report").gameObject.GetComponent<Text>().text = report;
     }
 
-    private string GetAnswer(int i)
+    private static string GetAnswer(int i)
     {
-        string answerIndex = dataController.GetAnswerIdByQuestionId(allQuestions[i].questionId);
-        string answer = allQuestions[i].answers.First(a => a.answerId.Equals(answerIndex)).answerText;
+        string answer = "NOT_FOUND";
+        try
+        {
+            var allQuestions = DataController.GetAllQuestions();
+            string answerIndex = dataController.GetAnswerIdByQuestionId(allQuestions[i].questionId);
+            answer = allQuestions[i].answers.First(a => a.answerId.Equals(answerIndex)).answerText;
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+            Debug.LogError("answer no. " + i + " not found");
+        }
+
         answer = "<b>" + answer + "</b>";
         return answer;
     }
