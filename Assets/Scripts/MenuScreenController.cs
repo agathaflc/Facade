@@ -26,43 +26,15 @@ public class MenuScreenController : MonoBehaviour
 
     private IEnumerator HideMainShowHelp()
     {
-        StartCoroutine(GraduallyChangeCanvasGroupAlpha(mainPanel, 0, false, 0.05f, 0.05f));
+        StartCoroutine(UIUtils.GraduallyChangeCanvasGroupAlpha(mainPanel, 0, false, 0.05f, 0.05f, menuLock));
         yield return new WaitForSecondsRealtime(1f);
-        StartCoroutine(GraduallyChangeCanvasGroupAlpha(helpPanel, 1, true, 0.05f, 0.05f));
+        StartCoroutine(UIUtils.GraduallyChangeCanvasGroupAlpha(helpPanel, 1, true, 0.05f, 0.05f, menuLock));
     }
     
     private IEnumerator HideHelpShowMain()
     {
-        StartCoroutine(GraduallyChangeCanvasGroupAlpha(helpPanel, 0, false, 0.05f, 0.05f));
+        StartCoroutine(UIUtils.GraduallyChangeCanvasGroupAlpha(helpPanel, 0, false, 0.05f, 0.05f, menuLock));
         yield return new WaitForSecondsRealtime(1f);
-        StartCoroutine(GraduallyChangeCanvasGroupAlpha(mainPanel, 1, true, 0.05f, 0.05f));
-    }
-
-    private static IEnumerator GraduallyChangeCanvasGroupAlpha(CanvasGroup canvas, float targetAlpha, bool increase,
-        float step, float waitTimeInSeconds)
-    {
-        lock (menuLock)
-        {
-            if (increase)
-            {
-                canvas.blocksRaycasts = true;
-
-                while (canvas.alpha + step < targetAlpha)
-                {
-                    canvas.alpha += step;
-                    yield return new WaitForSecondsRealtime(waitTimeInSeconds);
-                }
-            }
-            else
-            {
-                while (canvas.alpha - step > targetAlpha)
-                {
-                    canvas.alpha -= step;
-                    yield return new WaitForSecondsRealtime(waitTimeInSeconds);
-                }
-
-                canvas.blocksRaycasts = false;
-            }
-        }
+        StartCoroutine(UIUtils.GraduallyChangeCanvasGroupAlpha(mainPanel, 1, true, 0.05f, 0.05f, menuLock));
     }
 }
