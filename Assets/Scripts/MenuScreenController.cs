@@ -6,7 +6,9 @@ public class MenuScreenController : MonoBehaviour
 {
     public CanvasGroup helpPanel;
     public CanvasGroup mainPanel;
+    public CanvasGroup areYouSurePanel;
     private static readonly object menuLock = new object();
+    private static readonly object areYouSureLock = new object();
 
     public void StartGame()
     {
@@ -24,6 +26,20 @@ public class MenuScreenController : MonoBehaviour
         StartCoroutine(HideHelpShowMain());
     }
 
+    public void QuitGame()
+    {
+        StartCoroutine(UIUtils.GraduallyChangeCanvasGroupAlpha(areYouSurePanel, 1, true, 0.05f, 0.025f, areYouSureLock));
+    }
+
+    public void CancelQuit()
+    {
+        StartCoroutine(UIUtils.GraduallyChangeCanvasGroupAlpha(areYouSurePanel, 0, false, 0.05f, 0.025f, areYouSureLock));
+    }
+
+    public void ConfirmQuit()
+    {
+        Application.Quit();
+    }
     private IEnumerator HideMainShowHelp()
     {
         StartCoroutine(UIUtils.GraduallyChangeCanvasGroupAlpha(mainPanel, 0, false, 0.05f, 0.05f, menuLock));

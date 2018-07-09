@@ -545,25 +545,32 @@ public class GameController : MonoBehaviour
 
     private IEnumerator SwitchTracks(AudioClip clip, float seek, float seconds = 4.0f)
     {
-        lock (bgmLock)
+        if (clip != null)
         {
-            Debug.Log("switch tracks");
-            var playA = !(Math.Abs(bgmAudioSourceB.volume) < 0.01);
+            lock (bgmLock)
+            {
+                Debug.Log("switch tracks");
+                var playA = !(Math.Abs(bgmAudioSourceB.volume) < 0.01);
 
-            if (playA)
-            {
-                bgmAudioSourceA.clip = clip;
-                bgmAudioSourceA.loop = true;
-                bgmAudioSourceA.time = seek;
-                yield return StartCoroutine(CrossFade(bgmAudioSourceB, bgmAudioSourceA, seconds));
+                if (playA)
+                {
+                    bgmAudioSourceA.clip = clip;
+                    bgmAudioSourceA.loop = true;
+                    bgmAudioSourceA.time = seek;
+                    yield return StartCoroutine(CrossFade(bgmAudioSourceB, bgmAudioSourceA, seconds));
+                }
+                else
+                {
+                    bgmAudioSourceB.clip = clip;
+                    bgmAudioSourceB.loop = true;
+                    bgmAudioSourceB.time = seek;
+                    yield return StartCoroutine(CrossFade(bgmAudioSourceA, bgmAudioSourceB, seconds));
+                }
             }
-            else
-            {
-                bgmAudioSourceB.clip = clip;
-                bgmAudioSourceB.loop = true;
-                bgmAudioSourceB.time = seek;
-                yield return StartCoroutine(CrossFade(bgmAudioSourceA, bgmAudioSourceB, seconds));
-            }
+        }
+        else
+        {
+            Debug.LogError("SwitchTracks: audio clip is null");
         }
     }
 
