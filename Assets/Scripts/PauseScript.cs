@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class PauseScript : MonoBehaviour
 {
+    private string BACK_TO_MAIN_MENU = "MAIN_MENU";
+    private string QUIT_GAME = "QUIT_GAME";
+    
     public bool paused;
     public CanvasGroup pauseScreen;
+    public CanvasGroup areYouSureScreen;
 
     private CursorLockMode originalCursorLockMode;
+    private string menuOrQuit;
     private static readonly object pauseLock = new Object();
+    private static readonly object areYouSureLock = new Object();
 
     // Use this for initialization
     void Start()
@@ -23,6 +29,30 @@ public class PauseScript : MonoBehaviour
         {
             TogglePause();
         }
+    }
+
+    public void BackToMainMenu()
+    {
+        menuOrQuit = BACK_TO_MAIN_MENU;
+        StartCoroutine(UIUtils.GraduallyChangeCanvasGroupAlpha(areYouSureScreen, 1, true, 0.05f, 0.025f, areYouSureLock));
+    }
+
+    public void QuitGame()
+    {
+        menuOrQuit = QUIT_GAME;
+        StartCoroutine(UIUtils.GraduallyChangeCanvasGroupAlpha(areYouSureScreen, 1, true, 0.05f, 0.025f, areYouSureLock));
+    }
+
+    public void CancelQuit()
+    {
+        StartCoroutine(UIUtils.GraduallyChangeCanvasGroupAlpha(areYouSureScreen, 0, false, 0.05f, 0.025f, areYouSureLock));
+    }
+
+    public void ConfirmQuit()
+    {
+        Time.timeScale = 1;
+        if (menuOrQuit.Equals(BACK_TO_MAIN_MENU)) Initiate.Fade("MenuScreen", Color.black, 0.8f);
+        else if (menuOrQuit.Equals(QUIT_GAME)) Application.Quit();
     }
 
     public void TogglePause()

@@ -774,8 +774,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: BackFromHelp
+      - m_Target: {fileID: 900620159}
+        m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2346,7 +2346,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: No, back to game
+  m_Text: Cancel
 --- !u!222 &245585809
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3904,7 +3904,7 @@ GameObject:
   - component: {fileID: 480799455}
   - component: {fileID: 480799454}
   m_Layer: 5
-  m_Name: YesButton
+  m_Name: OkButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3924,10 +3924,10 @@ RectTransform:
   m_Father: {fileID: 211674195}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.23, y: 0.3}
-  m_AnchorMax: {x: 0.223, y: 0.3}
+  m_AnchorMin: {x: 0.32, y: 0.3}
+  m_AnchorMax: {x: 0.32, y: 0.3}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 35}
+  m_SizeDelta: {x: 140, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &480799454
 MonoBehaviour:
@@ -3982,8 +3982,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: BackFromHelp
+      - m_Target: {fileID: 900620159}
+        m_MethodName: ConfirmQuit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7275,6 +7275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   paused: 0
   pauseScreen: {fileID: 891772696}
+  areYouSureScreen: {fileID: 211674196}
 --- !u!4 &900620160
 Transform:
   m_ObjectHideFlags: 0
@@ -7965,7 +7966,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Yes
+  m_Text: Okay
 --- !u!222 &1044428122
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8337,8 +8338,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: BackFromHelp
+      - m_Target: {fileID: 900620159}
+        m_MethodName: TogglePause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11080,7 +11081,7 @@ GameObject:
   - component: {fileID: 1654081666}
   - component: {fileID: 1654081665}
   m_Layer: 5
-  m_Name: NoButton
+  m_Name: CancelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11100,10 +11101,10 @@ RectTransform:
   m_Father: {fileID: 211674195}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.65, y: 0.3}
-  m_AnchorMax: {x: 0.65, y: 0.3}
+  m_AnchorMin: {x: 0.68, y: 0.3}
+  m_AnchorMax: {x: 0.68, y: 0.3}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 35}
+  m_SizeDelta: {x: 140, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1654081665
 MonoBehaviour:
@@ -11158,8 +11159,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: BackFromHelp
+      - m_Target: {fileID: 900620159}
+        m_MethodName: CancelQuit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13472,8 +13473,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: BackFromHelp
+      - m_Target: {fileID: 900620159}
+        m_MethodName: BackToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
