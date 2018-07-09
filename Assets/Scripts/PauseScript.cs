@@ -5,8 +5,10 @@ using UnityEngine;
 public class PauseScript : MonoBehaviour
 {
     public bool paused;
-    public CanvasGroup pauseMenu;
-    private static object pauseLock;
+    public CanvasGroup pauseScreen;
+
+    private CursorLockMode originalCursorLockMode;
+    private static readonly object pauseLock = new Object();
 
     // Use this for initialization
     void Start()
@@ -23,8 +25,9 @@ public class PauseScript : MonoBehaviour
         }
     }
 
-    private void TogglePause()
+    public void TogglePause()
     {
+        originalCursorLockMode = Cursor.lockState;
         paused = !paused;
         if (paused)
         {
@@ -40,11 +43,20 @@ public class PauseScript : MonoBehaviour
 
     private void ShowPauseScreen()
     {
-        StartCoroutine(UIUtils.GraduallyChangeCanvasGroupAlpha(pauseMenu, 1, false, 0.05f, 0.05f, pauseLock));
+        if (originalCursorLockMode == CursorLockMode.Locked)
+        {
+            UIUtils.UnlockCursor();
+        }
+
+        StartCoroutine(UIUtils.GraduallyChangeCanvasGroupAlpha(pauseScreen, 1, true, 0.05f, 0.025f, pauseLock));
     }
 
     private void HidePauseScreen()
     {
-        StartCoroutine(UIUtils.GraduallyChangeCanvasGroupAlpha(pauseMenu, 0, false, 0.05f, 0.05f, pauseLock));
+        StartCoroutine(UIUtils.GraduallyChangeCanvasGroupAlpha(pauseScreen, 0, false, 0.05f, 0.025f, pauseLock));
+        if (originalCursorLockMode == CursorLockMode.Locked)
+        {
+            UIUtils.LockCursor();
+        }
     }
 }

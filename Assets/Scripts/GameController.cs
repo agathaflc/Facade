@@ -325,6 +325,10 @@ public class GameController : MonoBehaviour
      **/
     private IEnumerator RunSequence()
     {
+        if (Time.timeScale <= 0)
+        {
+            yield break;
+        }
         if (sequenceIndex >= currentActData.sequence.Length)
         {
             isEventDone = true;
@@ -352,7 +356,7 @@ public class GameController : MonoBehaviour
 
         if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_ENDING))
         {
-            UnlockCursor();
+            UIUtils.UnlockCursor();
             detectiveObject.SetActive(false);
             ApplyEndingSettings();
             endingDecisionDisplay.SetActive(true);
@@ -391,7 +395,7 @@ public class GameController : MonoBehaviour
         }
         else if (currentSequence.sequenceType.Equals(SEQUENCE_TYPE_DIALOG))
         {
-            LockCursor();
+            UIUtils.LockCursor();
             isEventDone = false;
 
             if (currentSequence.turnOnSpotlight)
@@ -491,7 +495,7 @@ public class GameController : MonoBehaviour
         {
             isEventDone = false;
 
-            LockCursor();
+            UIUtils.LockCursor();
             if (BlackScreenDisplay.color.a > 0 && !currentSequence.earlyFade)
             {
                 BlackScreenDisplay.CrossFadeAlpha(0, 1f, true);
@@ -853,21 +857,9 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void LockCursor()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
-    private static void UnlockCursor()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
-
     private void BeginQuestions()
     {
-        UnlockCursor();
+        UIUtils.UnlockCursor();
         ShowQuestion();
     }
 
@@ -1369,7 +1361,7 @@ public class GameController : MonoBehaviour
 
         if (endnum == 0)
         {
-            if (Cursor.lockState.Equals(CursorLockMode.Locked)) UnlockCursor();
+            if (Cursor.lockState.Equals(CursorLockMode.Locked)) UIUtils.UnlockCursor();
             playerCamera.GetComponent<PlayerLook>().enabled = false;
             postReport.SetActive(true);
             report = "Investigation case #160418(HO4)" +
@@ -1505,7 +1497,7 @@ public class GameController : MonoBehaviour
     {
         if (shoot)
         {
-            LockCursor();
+            UIUtils.LockCursor();
             isEndingTimerActive = false;
             if (!skipPostActReport) GeneratePostReport(2);
             BlackScreenDisplay.CrossFadeAlpha(1, 2f, true);
