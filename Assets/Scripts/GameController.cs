@@ -89,7 +89,6 @@ public class GameController : MonoBehaviour
     public Light spotLight1;
     public Light spotLight2;
     public Color32 oldLightingColor;
-    public Color32 newLightingColor;
 
     public Image FERIndicator;
     public Image FERCorrectness;
@@ -101,7 +100,6 @@ public class GameController : MonoBehaviour
     public Camera finalCamera;
     private Camera activeCamera;
 
-    public GameObject room;
     public PostProcessingProfile motionBlurEffect;
     public PostProcessingProfile vignetteEffect;
     public PostProcessingProfile bloomEffect;
@@ -133,7 +131,7 @@ public class GameController : MonoBehaviour
     private AudioSource bgmAudioSourceA;
     private AudioSource bgmAudioSourceB;
 
-    private AudioSource currentBgmAudioSource;
+    private bool currentlyPlayingA;
 
     private static DataController dataController;
     private ActData currentActData;
@@ -161,6 +159,7 @@ public class GameController : MonoBehaviour
     private static string currentBgm;
     private static int currentBgmLevel;
     private static readonly object bgmLock = new object();
+    private static readonly object crossFadeLock = new object();
 
     // Use this for initialization
     private void Start()
@@ -230,7 +229,6 @@ public class GameController : MonoBehaviour
         bgmAudioSourceB = player.AddComponent<AudioSource>();
         bgmAudioSourceA.volume = musicVolume;
         bgmAudioSourceB.volume = 0.0f;
-        currentBgmAudioSource = bgmAudioSourceA;
 
         PlayBgm(currentActData.bgmNeutralClip, MUSIC_NEUTRAL,
             currentActData.bgmNeutralFile.seek); // always start off with the base clip 
@@ -329,6 +327,7 @@ public class GameController : MonoBehaviour
         {
             yield break;
         }
+
         if (sequenceIndex >= currentActData.sequence.Length)
         {
             isEventDone = true;
@@ -522,25 +521,28 @@ public class GameController : MonoBehaviour
         return currentDetectiveAnimator;
     }
 
-    private IEnumerator CrossFade(AudioSource a, AudioSource b, float seconds)
+    private IEnumerator CrossFade(AudioSource toBeStopped, AudioSource toBePlayed, float seconds)
     {
-        // calculate the duration for each step
-        var stepInterval = seconds / 20.0f;
-        var volumeInterval = musicVolume / 20.0f;
-
-        b.Play();
-
-        // fade between the two, taking A to 0 volume and B to musicVolume
-        for (var i = 0; i < 20; i++)
+        lock (crossFadeLock)
         {
-            a.volume -= volumeInterval;
-            b.volume += volumeInterval;
+            // calculate the duration for each step
+            var stepInterval = seconds / 20.0f;
+            var volumeInterval = musicVolume / 20.0f;
 
-            // wait for one interval then continue the loop
-            yield return new WaitForSecondsRealtime(stepInterval);
+            toBePlayed.Play();
+
+            // fade between the two, taking A to 0 volume and B to musicVolume
+            for (var i = 0; i < 20; i++)
+            {
+                toBeStopped.volume -= volumeInterval;
+                toBePlayed.volume += volumeInterval;
+
+                // wait for one interval then continue the loop
+                yield return new WaitForSecondsRealtime(stepInterval);
+            }
+
+            if (toBeStopped.isPlaying) toBeStopped.Stop();
         }
-
-        if (a.isPlaying) a.Stop();
     }
 
     private IEnumerator SwitchTracks(AudioClip clip, float seek, float seconds = 4.0f)
@@ -550,21 +552,25 @@ public class GameController : MonoBehaviour
             lock (bgmLock)
             {
                 Debug.Log("switch tracks");
-                var playA = !(Math.Abs(bgmAudioSourceB.volume) < 0.01);
+                var playA = !currentlyPlayingA;
 
                 if (playA)
                 {
+                    Debug.Log("Play bgmA, stop bgmB");
                     bgmAudioSourceA.clip = clip;
                     bgmAudioSourceA.loop = true;
                     bgmAudioSourceA.time = seek;
                     yield return StartCoroutine(CrossFade(bgmAudioSourceB, bgmAudioSourceA, seconds));
+                    currentlyPlayingA = true;
                 }
                 else
                 {
+                    Debug.Log("Play bgmB, stop bgmA");
                     bgmAudioSourceB.clip = clip;
                     bgmAudioSourceB.loop = true;
                     bgmAudioSourceB.time = seek;
                     yield return StartCoroutine(CrossFade(bgmAudioSourceA, bgmAudioSourceB, seconds));
+                    currentlyPlayingA = false;
                 }
             }
         }
@@ -779,7 +785,6 @@ public class GameController : MonoBehaviour
         Debug.Log("LightingChanges");
 
         oldLightingColor = mainLight.color;
-        newLightingColor = newColor;
 
         StartCoroutine(GraduallyChangeLightIntensity(newIntensity));
 

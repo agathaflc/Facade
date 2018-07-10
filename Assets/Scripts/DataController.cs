@@ -62,6 +62,18 @@ public class DataController : MonoBehaviour
         SceneManager.LoadScene(MENU_SCREEN);
     }
 
+    public static void EraseFlagDataAndQuit()
+    {
+        var filePath = Path.Combine(Application.streamingAssetsPath, FER_FLAG_FILE_NAME);
+
+        if (File.Exists(filePath))
+            File.Delete(filePath);
+        else
+            Debug.LogError("Flag data file doesn't exist");
+        
+        Application.Quit();
+    }
+
     public int GetCurrentActNo()
     {
         return currentActNo;

@@ -28,25 +28,28 @@ public class MenuScreenController : MonoBehaviour
 
     public void QuitGame()
     {
-        StartCoroutine(UIUtils.GraduallyChangeCanvasGroupAlpha(areYouSurePanel, 1, true, 0.05f, 0.025f, areYouSureLock));
+        StartCoroutine(
+            UIUtils.GraduallyChangeCanvasGroupAlpha(areYouSurePanel, 1, true, 0.05f, 0.025f, areYouSureLock));
     }
 
     public void CancelQuit()
     {
-        StartCoroutine(UIUtils.GraduallyChangeCanvasGroupAlpha(areYouSurePanel, 0, false, 0.05f, 0.025f, areYouSureLock));
+        StartCoroutine(
+            UIUtils.GraduallyChangeCanvasGroupAlpha(areYouSurePanel, 0, false, 0.05f, 0.025f, areYouSureLock));
     }
 
     public void ConfirmQuit()
     {
-        Application.Quit();
+        DataController.EraseFlagDataAndQuit();
     }
+
     private IEnumerator HideMainShowHelp()
     {
         StartCoroutine(UIUtils.GraduallyChangeCanvasGroupAlpha(mainPanel, 0, false, 0.05f, 0.05f, menuLock));
         yield return new WaitForSecondsRealtime(1f);
         StartCoroutine(UIUtils.GraduallyChangeCanvasGroupAlpha(helpPanel, 1, true, 0.05f, 0.05f, menuLock));
     }
-    
+
     private IEnumerator HideHelpShowMain()
     {
         StartCoroutine(UIUtils.GraduallyChangeCanvasGroupAlpha(helpPanel, 0, false, 0.05f, 0.05f, menuLock));

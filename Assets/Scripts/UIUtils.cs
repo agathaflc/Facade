@@ -30,7 +30,7 @@ public static class UIUtils
             }
         }
     }
-    
+
     public static void LockCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
