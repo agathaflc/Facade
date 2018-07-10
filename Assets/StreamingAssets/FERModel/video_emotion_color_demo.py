@@ -181,6 +181,7 @@ def check_trigger():
         exit(1)
 
 def main():
+    open(os.path.join('..', 'flag.txt'), 'w').close()
     while True:
         if check_trigger():
             read_expression()
