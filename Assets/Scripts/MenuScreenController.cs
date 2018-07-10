@@ -10,6 +10,11 @@ public class MenuScreenController : MonoBehaviour
     private static readonly object menuLock = new object();
     private static readonly object areYouSureLock = new object();
 
+    private void Start()
+    {
+        UIUtils.UnlockCursor();
+    }
+
     public void StartGame()
     {
         Initiate.Fade("GameScene", Color.black, 0.8f);
