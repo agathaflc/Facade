@@ -1,6 +1,8 @@
 # Facade
 _Facade_ is a game we develop to explore a new way of achieving high level of immersion: emotion detection. By reading player's facial expression during the game, the in-game characters will use the facial expression reading to communicate better with the player.
 
+[Watch the trailer here.](https://drive.google.com/file/d/1_XctATAfUMNWdXP_xzDFiulR1oVrbaqS/view?usp=sharing)
+
 ## Facial Expression Recognition (FER)
 The requirements to use FER in this game are:
 * Laptop camera (duh)
